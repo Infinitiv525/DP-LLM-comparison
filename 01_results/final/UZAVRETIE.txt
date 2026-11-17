@@ -1,0 +1,97 @@
+UZAVRETIE HLAVNÉHO 2D PINN EXPERIMENTU — 08.11.2026
+
+Hlavné plánované výpočty sú hotové: 395/395 úspešných tréningov a finálne
+hodnotenie 155/155 sietí na všetkých 200 odložených prípadoch. Máme 31 000
+dvojíc sieť/prípad a 6 200 000 surových meraní času. Dodatočná CPU kontrola
+prešla 2 665 kontrolami bez nálezu. Ďalší GPU tréning sa nespúšťal.
+
+ČO EXPERIMENT POROVNÁVAL
+Štyri lokálne LLM (Qwen3-8B, Ministral3-8B, Phi4-mini, Granite3.3-8B)
+navrhovali konfigurácie spoločného PINN. Porovnali sa s náhodným hľadaním,
+TPE a pevnou základnou konfiguráciou. Každá vyhľadávacia metóda mala
+5 hľadaní po 8 kandidátoch vrátane spoločného východiskového kandidáta.
+Každá vybraná konfigurácia sa znovu natrénovala na 5 finálnych seedoch.
+LLM sa nemenili; trénovali sa siete PINN. Ich architektúra má 134 922 parametrov.
+
+Dataset: FlowBench, ustálené 2D prúdenie v štvorcovej dutine s pohybujúcim sa
+horným vekom a vnútornou prekážkou. Vstup: Reynoldsovo číslo a geometria.
+Výstup: celé pole u/v/p, 512 x 512. TRAIN/VAL/TEST: 640/160/200 prípadov.
+Ide o predikciu ustáleného poľa, časový vývoj sa v tomto experimente netestoval.
+
+HLAVNÝ ČÍSELNÝ VÝSLEDOK
+Primárna metrika: priemerná nevážená MSE celého poľa u/v/p; nižšie je lepšie.
+
+Metóda          Priemerná TEST MSE      Najhoršie p99 celého poľa
+Qwen3-8B        0.000294354             3.016 ms
+Ministral3-8B   0.000284692             2.919 ms
+Phi4-mini       0.000294354             2.946 ms
+Granite3.3-8B   0.000294354             2.917 ms
+Random          0.000263917             2.960 ms
+TPE             0.000243079             2.920 ms
+Fixed           0.000294354             2.916 ms
+
+TPE dosiahlo najnižšiu primárnu MSE. LLM metódy mali oproti nemu MSE vyššiu
+približne o 17,1 % (Ministral3) až 21,1 % (ostatné tri). Všetky štyri vopred
+určené rozdiely LLM mínus TPE majú približný Bonferroniho 98,75 % interval
+nad nulou. Použil sa presne postup uzamknutý pred otvorením TEST.
+
+Ministral3 zlepšilo bodový priemer MSE oproti pevnej konfigurácii približne
+o 3,3 %, stále však zaostalo za TPE. Qwen, Phi a Granite vo všetkých piatich
+hľadaniach vybrali tú istú konfiguráciu ako fixed; pri rovnakých tréningových
+seedoch sú preto ich výsledky takmer zhodné. Doklady nezávisle vykonaných
+tréningov zostali zachované. Zo 155 checkpointov má 75 odlišný presný obsah
+parametrov a bufferov siete. Toto číslo nepredstavuje počet nezávislých hľadaní.
+
+TPE je najlepšie podľa primárnej MSE. Jednotlivé ďalšie metriky majú odlišné
+poradie: napríklad priemernú relatívnu chybu rýchlosti má najnižšiu random
+(asi 2,23 %), kým TPE má asi 2,46 %. Tlak má TPE približne 7,98 % a fixed
+8,60 %. Fyzikálne rezíduá aj chyby stien zostávajú nenulové. Úplné čísla
+sú zachované, vrátane metrík, v ktorých TPE nevyhralo.
+
+RÝCHLOSŤ A SKUTOČNÁ SPOTREBA
+Všetkých 31 000 dvojíc splnilo p99 <= 5 ms. Najvyššie p99: 3.015770531 ms.
+Spoločné p50/p95/p99 zo všetkých meraní: 2.882880 / 2.899872 / 2.905440 ms.
+Štyri jednotlivé merania zo 6,2 milióna prekročili 5 ms, maximum 12.611776 ms.
+Splnenie p99 teda nie je zárukou, že každé jednotlivé volanie trvá pod 5 ms.
+Ide o CUDA meranie celého GPU výpočtu s pripravenými vstupmi na GPU,
+bez prenosu do PC a vykreslenia. Geometria sa spracuje pri každej predikcii.
+Finálna úloha 145677: COMPLETED/0:0, 4 H200, čas 5 620 s, skutočne
+alokovaných 22 480 GPU-sekúnd, teda približne 6,24 GPU-h. Zberač 145678
+tiež skončil úspešne a zachoval účtovanie pred vypršaním histórie Perunu.
+
+OBMEDZENIA INTERPRETÁCIE
+Máme 5 nezávislých hľadaní na metódu. Päť finálnych seedov sa pred štatistikou
+priemerovalo; nejde o 25 nezávislých hľadaní. Bootstrap páruje hľadania a
+85 geometrických zhlukov; pri takom malom počte hľadaní je pokrytie intervalov
+približné. TRAIN a TEST zdieľajú geometrie. Záver sa vzťahuje na tieto štyri
+modely, daný prompt/protokol, rozpočet kandidátov a túto úlohu. Formálne
+znenie hypotéz a širšia interpretácia zostávajú na písanie dizertácie.
+
+KDE SÚ PODKLADY
+../finalny_test_20261108_v49/report/case_metrics.csv — všetkých 31 000 riadkov
+../finalny_test_20261108_v49/report/method_metrics.csv — súhrn 7 metód
+../finalny_test_20261108_v49/report/summary.json — rozdiely a intervaly
+model_metrics.csv — prehľad 155 sietí, seedov a vybraných konfigurácií
+summary.json, checks.json, artifact_hashes.json — dodatočný audit
+timing_summary.json — surové časy zhrnuté vrátane ojedinelých výkyvov
+final_test_overview_v50b.png/.svg — finálny graf porovnania
+
+Pôvodný CPU kontrolný doplnok V50 sa zastavil na presnej rovnosti percentilu
+počítaného v float32 a pôvodného percentilu v float64. Rozdiel bol iba
+0.0000000953674316 ms. Doplnok V50a obnovil pôvodnú float64 aritmetiku
+z rovnakých uložených časov a všetky kontroly prešli. Pôvodný evaluator,
+váhy, TEST výsledky ani surové časy sa nemenili. Prvý log aj zdroj sa zachovali.
+
+Veľké dáta a váhy ostávajú na Perune. Úplná záloha je už publikovaná aj
+v privátnom GitHub Release: 18 archívnych častí, spolu približne 2,23 GB,
+a samostatný súborový manifest. Všetkých 19 publikovaných súborov má
+potvrdený rovnaký SHA256 na GitHube ako pri príprave na Perune.
+https://github.com/Infinitiv525/DP/releases/tag/ldc-pinn-final-20261108-1794103280
+Prenos prebehol priamo SSH prúdom bez uloženia archívu v PC. Doklad:
+github_release_receipt.json. backup_index.json zachováva stav pri zostavení
+archívu; uskutočnené publikovanie potvrdzuje práve prenosový doklad.
+Postup obnovy a výber podstatného 120 MB balíka: OBNOVA_ZALOHY.txt.
+Hlavné plánované výpočty, ich kontrola a záloha sú uzavreté; zostáva
+interpretácia výsledkov a ich zapracovanie do dizertácie.
+Rozpracovaný 3D článok a koreňový dokument s poznámkami iného chatu sa
+neodosielajú. Staršie 3D výsledky majú svoju samostatnú pôvodnú GitHub zálohu.
