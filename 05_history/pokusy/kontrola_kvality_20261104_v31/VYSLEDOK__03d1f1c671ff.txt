@@ -1,0 +1,98 @@
+VÝSLEDOK AUDITU PRED VEĽKÝM LLM TESTOM — 04.11.2026
+
+Záver
+Odporúčam prejsť ku kontrolovanému porovnaniu konfigurácií LLM.
+Základný spoločný PINN je funkčný a rýchlosť je potvrdená na celej VAL.
+Má merateľné nedostatky v tlaku, fyzike a na okrajoch, ktoré sa budú
+ďalej uvádzať a porovnávať. Presné splnenie všetkých rovníc a stien
+nebolo preukázané. Audit neurčil spätne nový prah úspešnosti presnosti.
+
+Čo prebehlo
+Uložený model z epochy 390 sa nemenil ani ďalej neučil. Overený SHA váh,
+zmrazené zdroje a dátové odtlačky. Všetkých 160 VAL prípadov, pri každom
+30 zahrievacích a 200 meraných predikcií celého natívneho poľa 512 × 512.
+Pri každom aj steny, prekážka a porovnanie derivácií. TEST (200) uzavretý.
+Výpočtové kontroly 5/5, nezávislé kontroly malých záznamov 487/487,
+dve analytické kontroly derivácií prešli. Kontrola archívov: SHA a CRC.
+
+Rýchlosť
+Najvyššie p99 zo všetkých 160 prípadov: 2.909860 ms.
+P99 zo všetkých 32 000 meraní dohromady: 2.899616 ms.
+Najdlhšia jednotlivá predikcia: 3.829088 ms.
+Počet meraní nad 5 ms: 0.
+Merané na H200, FP32, vstupy na GPU. Zahrnuté spracovanie geometrie,
+sieť, interpolácia, rýchlosť, tlak, tlaková kalibrácia a maska. Prenos
+medzi PC/GPU a vykresľovanie mimo. Nie je to univerzálna hardvérová záruka.
+
+Presnosť sa reprodukovala
+Priemer relatívnej L2 chyby rýchlosti 2.465 %,
+tlaku 8.875 %. Najhorší prípad rýchlosti
+6.290 %, tlaku 16.566 %.
+Ide o VAL používanú na výber modelu, nie záverečný nezávislý TEST.
+
+Steny a prekážka
+RMS veľkosti chyby rýchlosti na matematickej stene, normalizované
+rýchlosťou horného veka (preto percentá nie sú relatívnou chybou voči
+nulovej rýchlosti stojacej steny):
+horná: priemer 2.168 %, najvyšší prípad 6.673 %;
+dolná: priemer 0.373 %;
+ľavá: priemer 2.016 %;
+pravá: priemer 1.929 %;
+prekážka: priemer 1.543 %, najvyšší prípad 2.607 %.
+Rohy s nespojitou rýchlosťou vynechané. Povrch prekážky aproximovaný
+plochami natívnej masky, rovnako ako v tréningu. Nejde o presnú hladkú
+CAD geometriu. Samostatne uložené chyby voči referencii v krajných
+bunkách — ich stredy neležia priamo na matematickej stene.
+
+Tréningový výpočet a fyzika
+Najvyšší relatívny rozdiel rýchlosti medzi vzorkovaným tréningovým
+stencilom a natívnym výstupom: 0.001139 %.
+Vopred daná tolerancia prešla pri všetkých prípadoch. Porovnanie
+neodhalilo zásadný nesúlad medzi týmito dvoma výpočtovými cestami.
+Rozdiel kontinuálnej rýchlosti (autograd) a mriežkovej rýchlosti má
+priemerne 0.0507 % relatívne L2,
+v najhoršom prípade 0.1962 %.
+
+Na rovnakých 512 náhodných vnútorných bodoch každého prípadu je
+priemer momentum RMS cez autograd 0.248518,
+cez mriežkové derivácie 0.25257.
+RMS ich rozdielu má priemer 0.0347743.
+Hodnoty sa nesmú zamieňať s výpočtom na celej vnútornej mriežke:
+tam zostáva priemer modelu 0.800666
+oproti referencii 0.100106.
+Riedke vzorkovanie nezaručuje zachytenie úzkych oblastí veľkého rezídua.
+Nízka divergencia je podporená konštrukciou siete a sama nie je dôkaz
+správnej hybnosti. Fyzikálne rezíduá musia zostať v hlavnom hodnotení.
+
+Obrazová kontrola
+Prezretých všetkých 11 obrázkov: prehľad, 5 polí u/v/p a 5 doplňujúcich
+tlakových obrázkov. Prípady 341 (prvý VAL), 283 (najnižšie Re a najhorší
+tlak), 424 (najvyššie Re), 396 (medián chyby rýchlosti), 956 (najhoršia
+rýchlosť). Voľba podľa už známej VAL tabuľky bola zapísaná pred auditom.
+Model zachytáva hlavný tvar polí. Viditeľné zostávajú lokálne zvlnenia
+rýchlosti a rozdiely tlakových kontúr, najmä pri vyšších Re a prekážke.
+Nejde o chýbajúci prípad či prázdny výstup. Tlakové extrémy v rohoch
+prekrývajú jemnejšiu štruktúru v lineárnej škále; doplnená označená
+symetrická logaritmická škála, bez orezania hodnôt alebo zmeny polí.
+Referencia a predikcia zdieľajú rozsah farieb, rozdiel má vlastný rozsah.
+
+Kde výsledok pozrieť
+zaznamy/images/overview.png — prehľad presnosti, okrajov a rýchlosti.
+zaznamy/images/case_956.png — najhorší prípad rýchlosti, referencia/model/rozdiel.
+zaznamy/pressure_detail/pressure_283.png — najhorší tlak s čitateľnejšou škálou.
+zaznamy/summary.json — všetkých 160 tabuliek a všetky jednotlivé časy.
+zaznamy/scientific_review.json — záver a jeho obmedzenia.
+zaznamy/local_receipt_review.json — nezávislá kontrola percentilov a údajov.
+Veľké dátové polia a váhy zostali iba na Perune. Žiadne .pt/.npy/.npz
+sa lokálne nekopírovali. Malé archívy spolu približne 3,19 MB.
+
+Výpočtové úlohy a ďalší krok
+143299 COMPLETED 0:0, 170 s na 1 GPU / 4 CPU = 0,04722 GPU h,
+0,18889 core h; následné účtovanie 143300 skončilo. Doplňujúca tlaková
+grafika 143307 COMPLETED 0:0, 31 s na 1 CPU, bez GPU.
+Momentálne nič naše nebeží. Hlavný veľký LLM test ešte nezačal.
+Nasleduje uzamknutie hlavného rozsahu opakovaní a pravidiel a produkčný
+spúšťač: 4 LLM proti random/TPE a pevnému základu, rovnaký rozpočet,
+nové tréningy od začiatku a viac seedov. V26 je vývojový pilot;
+finálny pevný základ sa znovu učí cez rovnakú cestu ako ostatné metódy.
+Technický dvojepochový spúšťač sa nevydáva za produkčný experiment.

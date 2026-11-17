@@ -1,0 +1,59 @@
+DLHSIA VSTUPNA HISTORIA SPOLOCNEHO PINN – V22,03.11.2026
+STAV:142894FAILEDpredtreningom naGPUsourcecomparison,9GPUsekund.
+Ziadneoptimalizacneaktualizacie. Opravena samostatnaV23,142897.
+Aktualnyludskycitatelnyopis:../dlhsia_historia_20261103_v23/PRECITAJ_MA.txt.
+
+Co robime
+Posledna kontrolovana skuska spolocnej siete. Porovname dve rovnakeNN:
+kontrola dostane2poslednepozorovania, novaNN20pozorovani. Kazda vetva
+ma jedny spolocne vahy pre69trenovacichsimulacii. Overujeme6inychsimulacii.
+
+Rovnaky ciel pre obe vetvy
+Obe zacinaju voriginalnejsnimke21 a predpovedaju22..241:220snimok,
+cele zostavajuce dostupne obdobie. Kontrolapozna20,21,dlhsihistoria2..21.
+Originalne0,1 stalevynechane. Dlhyvstupobsahuje0.95bezrozmernejcasovej
+jednotky,predikciaje0.05..11.0jednotky. Nijaky limit na5vystupnychsnimok.
+5msjecielrychlostivypoctujednehoceloplosnehovystupu,nie fyzikalnykrok.
+Vysledky porovnavat medzitymitovetvami,niestarym238ramcovymheadline.
+
+Co sa meni
+Nas vlastnyV21PINN zachova priestorovymapovy kontext, fyzikalnestraty,
+priamycasovydotaz a hardpociatocnystav. CNNdostane54novychkanalov:
+18starsich u/v/p pozorovani relativne kposlednemustavu; posledne2suv
+povodnomobs/deltavstupe. Vkontrole starsiekanalynulove. ObeNNmaju
+rovnake parametre,novekolonkynastartuju nanule ->rovnakypociatocnyvystup.
+Historia sa pri kazdommeranomquery znovu priestorovospracuje;
+nepouziva sa skryta cache uzvypocitanych znakov novejsimulacie.
+
+Co dostane model a co je iba hodnotenie
+Vnovomprotokole su preVALexplicitneznameprve20povoleneramce2..21.
+ZiadnyVALramec22..241nevstupujenamodel ani dooptimalizacie;suibanascore.
+TRAINmozevyuzitcelepriebehyna datovustratu. Nejdeotreningibaz2snimok.
+Povodnycache2,3ani starezdroje/vahysanenahradzaju. HlavnyTESTuzavrety.
+
+Trening a kontroly
+Zdroj: V21ucenypriestorovykontextbest20k,140kpredchadzajucichaktualizacii.
+Obevetvypotom60kaktualizacii,freshAdam1e-4,klesaniena5e-6,rovnakyseed,
+69TRAIN(869/870aktualizaciinapripad),vsetky220cielovnavstivene.
+Rovnakadata+ADNavierStokes+prekazkaBC+FDmomentumstrata.
+Nasepovodnebrany: kazdy6VALU<=10%,p<=20%,hmotapodlapovodnehopravidla,
+p99full1024x256query<=5ms. Bezclipovaniapredikcii/novychstiennavyreze.
+Vybercheckpointu0/kazdych10k/koniec;vzdycely220ramec6VAL.
+Ulozitajrovnaky60kkoniec,nieibavybranenajlepsiecheckpointy.
+
+Predplnymtreningom:5novychCPUtestov+5V21testov,nativnyH200benchmark
+1TRAIN/1VALpri220casochkazdavarianta,zhodazdroja/hardIC/sparse-grid,
+potom3aktualizacie obochvetiev1TRAIN/1VAL. Plnybehazkedvsetkoprejde.
+OprotiV21vynechanysamostatnybodovyV18audit; zostavacelopriebehovaFD
+hybnost/divergencia,referencnenumerickereziduum a ADstratavtreningovomlogu.
+NeslubujemeodstranenieAD/FDnesuladu. Priemercez5ramcovniejehlavnymtestom.
+
+Ako rozhodneme
+Akpooverenitohtoparovehotestuanijedenspolocnymodelnesplnivsetkybrany,
+pouzivatelsuhlasi sprechodomnasamostatnyPINNprejednusimulaciu.
+NebudemepokracovatvnekonecnomladeniuniverzalnehoNN. Predprechodom
+skontrolovatvysledky,zaznamenatrozdielvedeckejulohy apripravitLLMtest.
+Primalomzlepseni,kedmodelstaleniepresny,nebudemehooznacovatzahotovy.
+
+Velkedata/vahyzostavajuPerun. ZiadnenoveCFD/data/download/externesablony.
+Stavpri vytvoreni:CPUtestyOK,zdrojepripravene,GPUpokusesteneodoslany.

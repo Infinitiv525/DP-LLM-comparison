@@ -1,0 +1,330 @@
+{
+  "status": "LDC_DATA_READY",
+  "revision": "937c672604d4c9f39aceedf1fa2f0a603695264b",
+  "family": "harmonics",
+  "cases": 1000,
+  "split_counts": {
+    "train": 640,
+    "validation": 160,
+    "test": 200
+  },
+  "native_resolution": [
+    512,
+    512
+  ],
+  "input_channels": {
+    "reynolds_channel": 0,
+    "binary_channel": 2,
+    "sdf_channel": 1,
+    "sdf_orientation": 1.0
+  },
+  "output_fields": [
+    "u",
+    "v",
+    "p"
+  ],
+  "unused_output_channel": "PackedCd/Cl, excludedfromfieldmodel",
+  "geometry_count": 100,
+  "geometry_overlaps": {
+    "train_validation": 82,
+    "train_test": 85,
+    "validation_test": 67
+  },
+  "split_meaning": "Standard random flowcase split; not geometry-disjoint generalization",
+  "physical_domain": [
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      2
+    ]
+  ],
+  "model_coordinates": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1
+    ]
+  ],
+  "coordinates": "Cell centres; xi=xphysical/2; physicalnu2/Re correspondsnormalizednu1/Re",
+  "median_relative_ns_residual": 0.01628742163701293,
+  "median_inferred_viscosity_multiplier": 0.9834262015571889,
+  "physics_audit": [
+    {
+      "sample": 928,
+      "reynolds": 384.0,
+      "momentum_rms": 0.01962540903629447,
+      "momentum_relative": 0.013058814004057695,
+      "inferred_viscosity_multiplier": 0.9840595788031339,
+      "divergence_rms": 0.010793388328380704,
+      "interior_points": 202472
+    },
+    {
+      "sample": 455,
+      "reynolds": 675.0,
+      "momentum_rms": 0.012655739610143268,
+      "momentum_relative": 0.011323449276545624,
+      "inferred_viscosity_multiplier": 0.9881328205762518,
+      "divergence_rms": 0.0108897885023216,
+      "interior_points": 214548
+    },
+    {
+      "sample": 795,
+      "reynolds": 88.0,
+      "momentum_rms": 0.07451595156113301,
+      "momentum_relative": 0.018602205969855044,
+      "inferred_viscosity_multiplier": 0.9795219926161257,
+      "divergence_rms": 0.009940479183702323,
+      "interior_points": 225233
+    },
+    {
+      "sample": 335,
+      "reynolds": 989.0,
+      "momentum_rms": 0.018099304158675687,
+      "momentum_relative": 0.019347086635585303,
+      "inferred_viscosity_multiplier": 0.9907584059482707,
+      "divergence_rms": 0.01111269444722587,
+      "interior_points": 221997
+    },
+    {
+      "sample": 496,
+      "reynolds": 72.0,
+      "momentum_rms": 0.09157069645427349,
+      "momentum_relative": 0.019194961547057517,
+      "inferred_viscosity_multiplier": 0.9794422174593292,
+      "divergence_rms": 0.009939944575686633,
+      "interior_points": 225953
+    },
+    {
+      "sample": 933,
+      "reynolds": 19.0,
+      "momentum_rms": 0.3564936199646898,
+      "momentum_relative": 0.020398540979768506,
+      "inferred_viscosity_multiplier": 0.9790297570347679,
+      "divergence_rms": 0.010324666851111618,
+      "interior_points": 204968
+    },
+    {
+      "sample": 587,
+      "reynolds": 901.0,
+      "momentum_rms": 0.01060376960609025,
+      "momentum_relative": 0.01076967667293301,
+      "inferred_viscosity_multiplier": 0.9905304544224758,
+      "divergence_rms": 0.01097062551149428,
+      "interior_points": 222075
+    },
+    {
+      "sample": 814,
+      "reynolds": 767.0,
+      "momentum_rms": 0.011682008482328324,
+      "momentum_relative": 0.011068747817226547,
+      "inferred_viscosity_multiplier": 0.9892095523655952,
+      "divergence_rms": 0.010937775445340787,
+      "interior_points": 217972
+    },
+    {
+      "sample": 59,
+      "reynolds": 23.0,
+      "momentum_rms": 0.28404301774177254,
+      "momentum_relative": 0.020313113652807427,
+      "inferred_viscosity_multiplier": 0.9790241994159993,
+      "divergence_rms": 0.009958860806620038,
+      "interior_points": 221010
+    },
+    {
+      "sample": 208,
+      "reynolds": 454.0,
+      "momentum_rms": 0.016590085020534332,
+      "momentum_relative": 0.012456869248886244,
+      "inferred_viscosity_multiplier": 0.9852106285233643,
+      "divergence_rms": 0.010518251964909502,
+      "interior_points": 217813
+    },
+    {
+      "sample": 178,
+      "reynolds": 73.0,
+      "momentum_rms": 0.09087435338764786,
+      "momentum_relative": 0.018927302717720973,
+      "inferred_viscosity_multiplier": 0.9793286936062691,
+      "divergence_rms": 0.010101368864306631,
+      "interior_points": 216571
+    },
+    {
+      "sample": 784,
+      "reynolds": 876.0,
+      "momentum_rms": 0.010735405821473854,
+      "momentum_relative": 0.010865082969151046,
+      "inferred_viscosity_multiplier": 0.9903174590319065,
+      "divergence_rms": 0.010893842870041049,
+      "interior_points": 225293
+    },
+    {
+      "sample": 573,
+      "reynolds": 805.0,
+      "momentum_rms": 0.011140041569805364,
+      "momentum_relative": 0.010940775472706577,
+      "inferred_viscosity_multiplier": 0.9896393556408343,
+      "divergence_rms": 0.010760285492863706,
+      "interior_points": 227457
+    },
+    {
+      "sample": 484,
+      "reynolds": 30.0,
+      "momentum_rms": 0.217234573362744,
+      "momentum_relative": 0.020138113493242737,
+      "inferred_viscosity_multiplier": 0.9790098340619926,
+      "divergence_rms": 0.009929188049839825,
+      "interior_points": 222443
+    },
+    {
+      "sample": 480,
+      "reynolds": 302.0,
+      "momentum_rms": 0.023056227292908283,
+      "momentum_relative": 0.013972637304170813,
+      "inferred_viscosity_multiplier": 0.9827928243112439,
+      "divergence_rms": 0.010203938705530857,
+      "interior_points": 222443
+    },
+    {
+      "sample": 40,
+      "reynolds": 84.0,
+      "momentum_rms": 0.07776666430752945,
+      "momentum_relative": 0.018675980694456237,
+      "inferred_viscosity_multiplier": 0.9794540490305147,
+      "divergence_rms": 0.009919700780497283,
+      "interior_points": 225936
+    }
+  ],
+  "boundary_audit": [
+    {
+      "sample": 928,
+      "top_u": 0.9778667092323303,
+      "bottom_u": -0.0018200796330347657,
+      "left_u": -0.0003805120359174907,
+      "right_u": -8.778249321039766e-05
+    },
+    {
+      "sample": 455,
+      "top_u": 0.9742163419723511,
+      "bottom_u": -0.0016749476781114936,
+      "left_u": -0.000332072377204895,
+      "right_u": -0.00010345562623115256
+    },
+    {
+      "sample": 795,
+      "top_u": 0.9827106595039368,
+      "bottom_u": -0.0013365061022341251,
+      "left_u": -0.0004657783138100058,
+      "right_u": -6.863536691525951e-05
+    },
+    {
+      "sample": 335,
+      "top_u": 0.9704174995422363,
+      "bottom_u": -0.0009643704397603869,
+      "left_u": -0.0003010591317433864,
+      "right_u": -0.00011740068293875083
+    },
+    {
+      "sample": 496,
+      "top_u": 0.9827682375907898,
+      "bottom_u": -0.0014744473155587912,
+      "left_u": -0.0004715374961961061,
+      "right_u": -6.759257666999474e-05
+    },
+    {
+      "sample": 933,
+      "top_u": 0.9825117588043213,
+      "bottom_u": -0.0014991116477176547,
+      "left_u": -0.0004921926883980632,
+      "right_u": -6.43145976937376e-05
+    },
+    {
+      "sample": 587,
+      "top_u": 0.9715850353240967,
+      "bottom_u": -0.0015617692843079567,
+      "left_u": -0.0003071841492783278,
+      "right_u": -0.0001136773353209719
+    },
+    {
+      "sample": 814,
+      "top_u": 0.9731428027153015,
+      "bottom_u": -0.0013877651654183865,
+      "left_u": -0.0003256435738876462,
+      "right_u": -0.00010778936120914295
+    },
+    {
+      "sample": 59,
+      "top_u": 0.9830883145332336,
+      "bottom_u": -0.0013276406098157167,
+      "left_u": -0.0004914892488159239,
+      "right_u": -6.454699177993461e-05
+    },
+    {
+      "sample": 208,
+      "top_u": 0.9771403670310974,
+      "bottom_u": -0.001715110964141786,
+      "left_u": -0.00036664126673713326,
+      "right_u": -9.184906230075285e-05
+    },
+    {
+      "sample": 178,
+      "top_u": 0.9825245141983032,
+      "bottom_u": -0.0014665652997791767,
+      "left_u": -0.00046918902080506086,
+      "right_u": -6.76542695146054e-05
+    },
+    {
+      "sample": 784,
+      "top_u": 0.9718790650367737,
+      "bottom_u": -0.0013762743910774589,
+      "left_u": -0.0003077264700550586,
+      "right_u": -0.0001126119022956118
+    },
+    {
+      "sample": 573,
+      "top_u": 0.972768247127533,
+      "bottom_u": -0.0013921493664383888,
+      "left_u": -0.0003267000720370561,
+      "right_u": -0.00010949759598588571
+    },
+    {
+      "sample": 484,
+      "top_u": 0.9831780195236206,
+      "bottom_u": -0.0013147431891411543,
+      "left_u": -0.0004899189807474613,
+      "right_u": -6.496490095742047e-05
+    },
+    {
+      "sample": 480,
+      "top_u": 0.9794489145278931,
+      "bottom_u": -0.0014204666949808598,
+      "left_u": -0.0004025540838483721,
+      "right_u": -8.274876745417714e-05
+    },
+    {
+      "sample": 40,
+      "top_u": 0.9828222990036011,
+      "bottom_u": -0.0012048168573528528,
+      "left_u": -0.00046481683966703713,
+      "right_u": -6.837528781034052e-05
+    }
+  ],
+  "top_u_median": 0.9786578118801117,
+  "bottom_u_median": -0.0014063080307096243,
+  "physics_ready": true,
+  "test_target_samples_read": 0,
+  "train_label_samples_read": 640,
+  "validation_label_samples_read": 160,
+  "no_time_dimension": true,
+  "shared_model_required": true,
+  "new_CFD": false,
+  "main_test_opened": false,
+  "training_started": false,
+  "cache": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_pinn_prepare_20261104_v25/cache",
+  "rawtest_targets_sealed_in": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_pinn_prepare_20261104_v25/raw/Y_original.npy"
+}

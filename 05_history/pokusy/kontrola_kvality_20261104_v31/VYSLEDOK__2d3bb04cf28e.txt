@@ -1,0 +1,28 @@
+AUDIT ULOŽENÉHO SPOLOČNÉHO PINN — 04.11.2026
+LDC_BASELINE_QUALITY_AUDIT_COMPLETE
+
+Bez ďalšieho učenia, všetkých 160 VAL prípadov. TEST zostal uzavretý.
+Každý prípad: 30 zahrievacích + 200 natívnych meraní celého poľa.
+Najvyššie p99 medzi prípadmi: 2.9099 ms.
+
+Chyba rýchlosti na stenách, v jednotkách rýchlosti horného veka:
+bottom: priemer RMS 0.00372985, najvyššie RMS 0.00936541
+top: priemer RMS 0.0216805, najvyššie RMS 0.0667348
+left: priemer RMS 0.0201581, najvyššie RMS 0.0421615
+right: priemer RMS 0.0192863, najvyššie RMS 0.0293357
+obstacle: priemer RMS 0.0154266, najvyššie RMS 0.026067
+
+Kontroly:
+exact_160_validation_cases: True
+checkpoint_unchanged: True
+native_grid_stencil_consistent: True
+previous_validation_reproduced: True
+p99_all_cases_within_5ms: True
+
+Číselné údaje: summary.json; raw_ms obsahuje všetky merania.
+Obrázky: images/overview.png a case_*.png. Zobrazené u/v/p, referencia, model a rozdiel.
+Obrázky ukazujú ustálené polia, nie časový vývoj.
+Nízka divergencia neznamená automaticky správnu hybnosť. Žiadny nový prah presnosti nebol zavedený.
+AD a FD sa porovnávajú na rovnakých 512 vnútorných bodoch každého prípadu.
+Povrch prekážky je aproximovaný plochami masky ako pri tréningu.
+Obrazové posúdenie a záver o vhodnosti pre hlavné porovnanie sa zaznamenajú samostatne.

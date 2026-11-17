@@ -1,0 +1,25 @@
+{
+  "seed": 20261030,
+  "width": 96,
+  "depth": 4,
+  "latent": 32,
+  "frequencies": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0
+  ],
+  "lr": 0.001,
+  "steps": 300000,
+  "batch": 2048,
+  "collocation": 256,
+  "validate_every": 5000,
+  "warmup": 6000,
+  "ramp": 24000,
+  "pde_weight": 0.01,
+  "bc_weight": 0.1,
+  "ic_weight": 0.2,
+  "name": "prefix_conditioned",
+  "state_conditioning": true
+}

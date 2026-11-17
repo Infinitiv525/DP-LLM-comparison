@@ -1,0 +1,125 @@
+[
+  {
+    "update": 1,
+    "data": 0.9642432928085327,
+    "pde": 0.20664143562316895,
+    "pde_parts": [
+      0.04270075634121895,
+      0.16363085806369781,
+      0.0003098273300565779
+    ],
+    "boundary": 0.01642223820090294,
+    "assessment": {
+      "score": 0.9295666899429325,
+      "cases": [
+        {
+          "failure": false,
+          "predicted_frames": 238,
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "scope": "validation",
+          "mean_errors": {
+            "velocity_relative_l2": 0.7574134637177817,
+            "pressure_relative_l2": 1.1017199161680833
+          },
+          "score": 0.9295666899429325,
+          "persistence_mean_errors": {
+            "velocity_relative_l2": 0.7575628273851636,
+            "pressure_relative_l2": 1.1019513357435289
+          },
+          "interior_div_rms": 0.012282966076545105,
+          "prefix_div_rms": 0.012262583710253239,
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": true,
+          "direct_query_gpu_ms": {
+            "p50": 3.41211199760437,
+            "p95": 3.4927775502204894,
+            "p99": 3.6012892079353334
+          },
+          "causal_step_latency": false,
+          "mean_fd_momentum_loss": 1.4313865123676652,
+          "mean_reference_fd_momentum_loss": 0.005376385450519684,
+          "accuracy_pass": false,
+          "latency_pass": true
+        }
+      ]
+    },
+    "elapsed_seconds": 12.129284173999622
+  },
+  {
+    "update": 3,
+    "data": 1.0796966552734375,
+    "pde": 0.3059264123439789,
+    "pde_parts": [
+      0.061089277267456055,
+      0.24460503458976746,
+      0.00023210863582789898
+    ],
+    "boundary": 0.0177823044359684,
+    "assessment": {
+      "score": 0.9292876987505045,
+      "cases": [
+        {
+          "failure": false,
+          "predicted_frames": 238,
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "scope": "validation",
+          "mean_errors": {
+            "velocity_relative_l2": 0.7572001601689166,
+            "pressure_relative_l2": 1.1013752373320926
+          },
+          "score": 0.9292876987505045,
+          "persistence_mean_errors": {
+            "velocity_relative_l2": 0.7575628273851636,
+            "pressure_relative_l2": 1.1019513357435289
+          },
+          "interior_div_rms": 0.012440533306794007,
+          "prefix_div_rms": 0.012262583710253239,
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": true,
+          "direct_query_gpu_ms": {
+            "p50": 3.413583993911743,
+            "p95": 3.495728075504303,
+            "p99": 3.5275152039527895
+          },
+          "causal_step_latency": false,
+          "mean_fd_momentum_loss": 1.4289484209373218,
+          "mean_reference_fd_momentum_loss": 0.005376385450519684,
+          "accuracy_pass": false,
+          "latency_pass": true
+        }
+      ]
+    },
+    "elapsed_seconds": 23.404733569997916,
+    "train_fit_monitor": [
+      {
+        "failure": false,
+        "predicted_frames": 238,
+        "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+        "scope": "train",
+        "mean_errors": {
+          "velocity_relative_l2": 0.5695530876757828,
+          "pressure_relative_l2": 0.9740632609763025
+        },
+        "score": 0.7718081743260427,
+        "persistence_mean_errors": {
+          "velocity_relative_l2": 0.5698721496859207,
+          "pressure_relative_l2": 0.9745848419801173
+        },
+        "interior_div_rms": 0.014197478403470345,
+        "prefix_div_rms": 0.014042905531823635,
+        "mass_limit": 0.04353891288570392,
+        "mass_pass": true,
+        "direct_query_gpu_ms": {
+          "p50": 3.4077279567718506,
+          "p95": 3.4802111387252808,
+          "p99": 3.5149705147743227
+        },
+        "causal_step_latency": false,
+        "mean_fd_momentum_loss": 1.7594749812318498,
+        "mean_reference_fd_momentum_loss": 0.006401343275049404,
+        "accuracy_pass": false,
+        "latency_pass": true
+      }
+    ]
+  }
+]

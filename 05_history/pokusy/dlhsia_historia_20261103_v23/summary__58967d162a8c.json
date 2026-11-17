@@ -1,0 +1,87 @@
+{
+  "status": "KNOWN_HISTORY_READINESS_EVALUATED",
+  "results": [
+    {
+      "name": "last2_control",
+      "cases": [
+        {
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "query_gpu_ms": {
+            "p50": 3.1656960248947144,
+            "p95": 3.173742389678955,
+            "p99": 3.177641975879669
+          }
+        },
+        {
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "query_gpu_ms": {
+            "p50": 3.163856029510498,
+            "p95": 3.172104012966156,
+            "p99": 3.175755491256714
+          }
+        }
+      ],
+      "numerical": null,
+      "p99_pass": true
+    },
+    {
+      "name": "history20",
+      "cases": [
+        {
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "query_gpu_ms": {
+            "p50": 3.156448006629944,
+            "p95": 3.164641547203064,
+            "p99": 3.167409188747406
+          }
+        },
+        {
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "query_gpu_ms": {
+            "p50": 3.161280035972595,
+            "p95": 3.1703440070152284,
+            "p99": 3.1727378582954406
+          }
+        }
+      ],
+      "numerical": {
+        "nonzero_temporal_weight": 0.01,
+        "max_abs_sparse_grid_error": 1.9297003746032715e-05,
+        "tolerance": 0.0005
+      },
+      "p99_pass": true
+    }
+  ],
+  "readiness_pass": true,
+  "prefix_frames": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "target_frames": [
+    22,
+    241
+  ],
+  "initial_fields_gpu": true,
+  "includes_history_spatial_pooling_and_encoder": true,
+  "cached": "Only input-independent coordinate interpolation matrices; no case-dependent features cached",
+  "excludes": "CPUtransfer/rendering,30warmup,static coordinate stencil setup",
+  "source_checkpoint_sha256": "23846e649c997ca3f6a0c1bab09ec7b2969c5d7d8950c6ad8324dde7692a7b7e"
+}

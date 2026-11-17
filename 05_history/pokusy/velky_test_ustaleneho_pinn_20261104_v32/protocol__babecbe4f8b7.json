@@ -1,0 +1,209 @@
+{
+  "version": 32,
+  "task": "One shared steady geometry/Re to u,v,p PINN, native512, own frozen V26 architecture",
+  "models": [
+    {
+      "label": "qwen3_8b",
+      "repo": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "license": "apache-2.0",
+      "loader": "causal",
+      "disable_thinking": true
+    },
+    {
+      "label": "ministral3_8b",
+      "repo": "mistralai/Ministral-3-8B-Instruct-2512",
+      "revision": "5b26027e7b19eeb4b7352e1fed3926375dd2cb4d",
+      "license": "apache-2.0",
+      "loader": "mistral3_dequantize_fp8"
+    },
+    {
+      "label": "phi4_mini",
+      "repo": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "license": "mit",
+      "loader": "causal"
+    },
+    {
+      "label": "granite33_8b",
+      "repo": "ibm-granite/granite-3.3-8b-instruct",
+      "revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+      "license": "apache-2.0",
+      "loader": "causal",
+      "disable_thinking": true
+    }
+  ],
+  "preparation": "/mnt/project/perun2601449/dp_llm_cfd/results/llm_feasibility/prepare_123299",
+  "prepared_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_pinn_prepare_20261104_v25/prepared.json",
+  "split_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_pinn_prepare_20261104_v25/split.json",
+  "base_model": {
+    "width": 192,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "seed": 20261104,
+    "epochs": 400,
+    "batch_cases": 4,
+    "lr": 0.001,
+    "data_points": 2048,
+    "physics_points": 64,
+    "wall_points_per_side": 16,
+    "body_points": 64,
+    "physics_weight": 0.001,
+    "bc_weight": 0.01,
+    "warmup": 2000,
+    "ramp": 2000,
+    "assess_epochs": 10
+  },
+  "llm_runtime": {
+    "torch": "2.12.0+cu130",
+    "transformers": "5.20.2",
+    "accelerate": "1.15.0",
+    "huggingface_hub": "2.2.0",
+    "mistral-common": "1.12.0",
+    "optuna": "5.0.0",
+    "lm-format-enforcer": "0.11.3",
+    "interegular": "0.3.3"
+  },
+  "generation": {
+    "max_input_tokens": 8192,
+    "max_new_tokens": 512,
+    "max_time_seconds": 120,
+    "max_repairs": 1,
+    "do_sample": true,
+    "temperature": 0.6,
+    "top_p": 0.9,
+    "top_k": 40,
+    "repetition_penalty": 1.1,
+    "seed_policy": "120001+100*run+candidate for main;350001+candidate for integration"
+  },
+  "phases": {
+    "integration": {
+      "epochs": 2,
+      "runs": 1,
+      "candidates": 3,
+      "retrains": 1,
+      "total_trainings": 25,
+      "batch_seconds": 3600,
+      "trial_timeout_seconds": 900,
+      "speed_cases": 2
+    },
+    "main": {
+      "epochs": 400,
+      "runs": 5,
+      "candidates": 8,
+      "retrains": 5,
+      "total_trainings": 395,
+      "batch_seconds": 129600,
+      "trial_timeout_seconds": 21600,
+      "speed_cases": 160
+    }
+  },
+  "methods": [
+    "qwen3_8b",
+    "ministral3_8b",
+    "phi4_mini",
+    "granite33_8b",
+    "random",
+    "tpe"
+  ],
+  "baseline_parameters": {
+    "learning_rate": 0.001,
+    "pressure_weight": 1.0,
+    "physics_weight": 0.001,
+    "bc_weight": 0.01,
+    "warmup_fraction": 0.03125
+  },
+  "search_space": {
+    "learning_rate": {
+      "min": 0.0001,
+      "max": 0.002,
+      "log": true
+    },
+    "categories": {
+      "pressure_weight": [
+        0.5,
+        1.0,
+        2.0
+      ],
+      "physics_weight": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01
+      ],
+      "bc_weight": [
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1
+      ],
+      "warmup_fraction": [
+        0.0,
+        0.03125,
+        0.0625
+      ]
+    }
+  },
+  "prompts": {
+    "integration": {
+      "text": "Configure ONE shared steady 2D FlowBench LDC PINN: geometry/Re -> u,v,p. This is integration: 2 full TRAIN epochs per candidate, 3 total candidates including the supplied fixed start. Choose the next configuration using ONLY the supplied actual history; no TEST data. Minimize mean unweighted validation all-cell u/v/p MSE. Velocity/pressure L2, steady NS residual, divergence and boundary error are additional measured diagnostics. Loss: TRAIN-std-normalized data MSE (pressure_weight on p), plus physics_weight times steady incompressible Navier-Stokes loss with viscosity 1/Re, plus bc_weight times no-slip BC loss. Fixed own architecture,640TRAIN/160VAL,native512,batch4,2048data/64PDE/128BC points per case; Adam/cosine,gradient clip1. warmup_fraction delays PDE, then fixed0.03125-fraction ramp. The 5ms full-field GPU p99 requirement concerns inference, NOT training time or physical error. Failed attempts have null measured metrics and consume a candidate. Duplicate settings also consume a complete fresh training; explore a change when useful, but no forced change or manual replacement. Return ONE complete JSON object, no Markdown or commentary. Exactly parameters,reason,evidence_ids,expected_effect,risk. parameters exactly: learning_rate number[0.0001,0.002]; pressure_weight in[0.5,1,2]; physics_weight in[0.0001,0.0003,0.001,0.003,0.01]; bc_weight in[0.001,0.003,0.01,0.03,0.1]; warmup_fraction in[0,0.03125,0.0625]. Each parameter ONE NUMBER, not a range. reason,expected_effect,risk: each one short public statement of1..120characters. evidence_ids contains latest_required_id. Identical schema guidance for every model constrains syntax and routes the evidence label; it does not prove understanding. No tools,code,internet or invented results.",
+      "sha256": "54c90b5388f79193ab7ab264ee9649b624a238e8ee29262350bb8da11ec9285a"
+    },
+    "main": {
+      "text": "Configure ONE shared steady 2D FlowBench LDC PINN: geometry/Re -> u,v,p. This is main: 400 full TRAIN epochs per candidate, 8 total candidates including the supplied fixed start. Choose the next configuration using ONLY the supplied actual history; no TEST data. Minimize mean unweighted validation all-cell u/v/p MSE. Velocity/pressure L2, steady NS residual, divergence and boundary error are additional measured diagnostics. Loss: TRAIN-std-normalized data MSE (pressure_weight on p), plus physics_weight times steady incompressible Navier-Stokes loss with viscosity 1/Re, plus bc_weight times no-slip BC loss. Fixed own architecture,640TRAIN/160VAL,native512,batch4,2048data/64PDE/128BC points per case; Adam/cosine,gradient clip1. warmup_fraction delays PDE, then fixed0.03125-fraction ramp. The 5ms full-field GPU p99 requirement concerns inference, NOT training time or physical error. Failed attempts have null measured metrics and consume a candidate. Duplicate settings also consume a complete fresh training; explore a change when useful, but no forced change or manual replacement. Return ONE complete JSON object, no Markdown or commentary. Exactly parameters,reason,evidence_ids,expected_effect,risk. parameters exactly: learning_rate number[0.0001,0.002]; pressure_weight in[0.5,1,2]; physics_weight in[0.0001,0.0003,0.001,0.003,0.01]; bc_weight in[0.001,0.003,0.01,0.03,0.1]; warmup_fraction in[0,0.03125,0.0625]. Each parameter ONE NUMBER, not a range. reason,expected_effect,risk: each one short public statement of1..120characters. evidence_ids contains latest_required_id. Identical schema guidance for every model constrains syntax and routes the evidence label; it does not prove understanding. No tools,code,internet or invented results.",
+      "sha256": "b69447175134ef86e1770b95814da8eca0b23640f8854c4bdc3e677956192548"
+    }
+  },
+  "design": "Main:6methods x5independent searches x(8candidates+5fresh retrains) +5fixed baseline=395planned trainings. Candidate0 is the same baseline, freshly executed/charged for each method/search;7adaptive proposals. No pilot checkpoints or technical scores transferred.",
+  "training": "Every main candidate/retrain:400fullTRAINepochs,64000updates,640TRAIN/160VAL,noTEST. Same fixed architecture/optimizer/samples/points,Adamcosine/gradientclip1,TRAIN-only std. Independently seeded order/data/PDE/BC streams;PDE points consumed during warmup too. Checkpoints selected by frozen unweighted all-cell u/v/p VAL MSE every10epochs/end.",
+  "seeds": {
+    "search_training": [
+      140001,
+      140002,
+      140003,
+      140004,
+      140005
+    ],
+    "final_training": [
+      150001,
+      150002,
+      150003,
+      150004,
+      150005
+    ],
+    "search_sampler": [
+      130001,
+      130002,
+      130003,
+      130004,
+      130005
+    ],
+    "llm_generation": "120001+100*run+candidate; same across families",
+    "integration": "search320001,final330001,sampler340001,generation350001+candidate"
+  },
+  "pairing": "Same training seed within a search across methods/candidates. Same5fresh final seeds across all selected configurations and fixed baseline. Final runs nested within search;25rows per method are not25independent search replicates. Never select the best final seed.",
+  "selection": "Minimum valid measured VAL MSE among8attempts, ties choose earliest candidate;freeze selection before retrains. Every selected configuration receives all5fresh seeds. Keep failed attempts and all outcomes, not only best seeds.",
+  "feedback": "Only own previously completed attempts, ordered, with real VAL MSE,U/p L2,NS/divergence,mean BC error and time. Failure metrics null, never fabricated. Boundary error is mean of5surface RMS values averaged across160VAL. TEST absent from allowed keys/API.",
+  "proposal": "Identical main/integration phase-aware prompt and JSON schema across4local families. One model-generated repair maximum.120character public explanations,raw prompts/replies/resources saved. Evidence ID grammar-routed,not proof of reasoning. No manual parameter repair/clamping.",
+  "failure_policy": "Invalid model response consumes one of8candidate slots,zero fabricated metrics,no replacement draw. Nonfinite optimization or uniform6htrain budget failure consumes candidate. TPE uses separately labelled1e6operational objective for failed valid settings,not as measured MSE. Other runtime/integrity/infrastructure failures halt new claims for review;never silently retry or invent a result. Duplicated settings get full fresh training and full charge.",
+  "controls": "Random and OptunaTPE identical parameter space/budget/start. TPE n_startup_trials1 uses completed baseline. Seeded samplers replay ask/tell history and check exact previous parameters,so restart never resets optimization history.",
+  "execution": "8parallel independently assigned H200,4CPU/GPU,one fresh subprocess per proposal/train. Persistent flock-protected dependency queue prevents double claims and respects sequential feedback.36hmain batches drain before remaining6h15m;unfinished tasks persist for next registered batch. Stale RUNNING/ATTENTION tasks require explicit recovery review;no automatic hidden retries. Main starts only after all25actual integration tasks and provenance checks pass.",
+  "timing": "Initial gate30warmup200repeat1TRAIN1VAL. Selected main model30warmup200repeatall160VAL;p99<=5ms each. Includes native pooling,encoder,MLP,interpolation,curl,gauge,mask;inputsGPU,excludestransfer/rendering/staticstencilsetup. Integration selected-speed2VAL only;all160error/BC diagnostics unchanged.",
+  "physics": "Exact same V26 true steady NS autograd viscosity1/Re,streamfunction velocity,positivePDE and no-slip penalties. Retain full-grid NS/divergence and BC errors;baseline does not exactly satisfy equations or walls. No new numerical accuracy acceptance threshold.",
+  "resources": "All proposal/load/schema/token/repair/wall/CPU/RAM/VRAM and training times saved;actual scheduler allocatedGPU/core seconds after each batch includes idle tails. No estimate substituted for actual allocation.",
+  "model_policy": "Pinned local checkpoints with full compute-node SHA checks before use; no network/API. Qwen/Granite thinking disabled. Ministral published FP8 is dequantized to BF16; not recovered original BF16. Public brief explanation is logged, not a hidden reasoning trace.",
+  "test_policy": "200TESTtargets sealed during all search,selection and training. Later one final evaluation of every frozen selected/fixed seed checkpoint,no TESTfeedback or configuration changes. Final TEST evaluator/analysis is separate future stage,not silently included in this training launch.",
+  "storage": "Large arrays,weights,optimizer states onlyPerun. Local smallmetadata/source/log/plots only.",
+  "main_search_protocol_frozen": true,
+  "main_test_opened": false,
+  "main_experiment_started_at_freeze": false
+}

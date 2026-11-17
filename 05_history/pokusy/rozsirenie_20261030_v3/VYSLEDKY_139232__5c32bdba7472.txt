@@ -1,0 +1,56 @@
+VYSLEDKY ROZSIRENEJ SADY A SIRKY SIETE - 30. 10. 2026
+
+139231 priprava aj 139232 trening dokoncene uspesne, exit 0:0.
+Vsetkych 75 scenarov je pripravenych: 69 train na 36 geometriach,
+6 validation na 3 inych geometriach. Hlavny test nebol otvoreny.
+
+Priemer plnomriezkovych chyb cez 240 snimkov kazdeho zo 6 val scenarov,
+potom rovnaky priemer cez scenare:
+
+                           Rychlost U     Tlak p       Max GPU p99
+Sirka 96, 300 000 krokov      49,27 %      75,95 %         1,094 ms
+Sirka 192, 300 000 krokov     51,57 %      73,80 %         3,020 ms
+
+Oba vybrali checkpoint v kroku 10 000. Neskorsi trening zhorsoval
+pouzitu validaciu. Sirka 192 nie je v oboch chybach lepsia nez 96.
+Obe siete splnaju definovane 5 ms GPU meranie, ale nesplnaju ciel
+presnosti 10 % rychlost / 20 % tlak pre kazdy val scenar.
+Nie su pripravene na hlavne LLM porovnanie ani na tvrdenie o presnom
+modelovani nevidenych geometrii. Ziadne statisticke zavery z jedneho
+seedu a troch val geometrii nevyslovujeme.
+
+Skutocne zdroje podla uchovanych scheduler zaznamov:
+139231: 3037 s na 2 CPU = 6074 core*s, 0 GPU*s.
+139232: 6265 s na 4 CPU a 1 GPU = 25060 core*s a 6265 GPU*s,
+priblizne 1,740 GPU*h za oba modely a ich vyhodnotenie spolu.
+Su to skutocne hodnoty, nie odhady.
+
+Dolezite zistenie pri kontrole formulacie
+Autorsky archivovany DataPrep/fpo2d.py vyslovne opisuje vstup ako
+skorsie stavy prudenia a vystup ako neskorsie stavy. Funkcia ma
+oddeleny interval vstupnych a vystupnych snimkov; vystup ma zacat az
+po konci vstupneho intervalu. Zdrojovy subor sam obsahuje syntakticke
+a implementacne chyby, preto ho nespustame. Je dokazom zamyslaneho
+usporiadania ulohy, nie nasim spustitelnym datovym adapterom.
+
+Povodny spolocny model v2/v3 nedostaval znamy stav prudenia, iba
+geometriu, Re a cas. Tato formulacia neodpovida beznemu zadaniu
+predikcie buducnosti z daneho stavu. To bol nedostatok mojho navrhu.
+Nie je vsak dokazany ako jedina pricina nameranych velkych chyb.
+Ani nova formulacia nema vopred zaruceny uspech.
+
+Nasleduje oddelena etapa v4: prve dve PONECHANE snimky 2 a 3 su
+zname vstupy, hodnotia sa iba neskorsie indexy 4 az 241, teda 238
+buducich snimkov. V4 vysledky sa nebudu vydavat za nezmenene zadanie
+v2/v3. Stare vysledky, vahy a hashe zostavaju zachovane.
+Presny novy protokol je v ../pociatocny_stav_20261030_v4/.
+
+Oficialny povod ulozenia:
+https://github.com/baskargroup/flowbench-tools/blob/6877099b8883232138c73b2b6056ff01f7d3697b/DataPrep/fpo2d.py
+Archiv na Perune:
+results/fpo_pinn_pilot_20261030_v1/deep_audit/repository/DataPrep/fpo2d.py
+
+Originalne male vystupy su v conditional_w96_300000/ a
+conditional_w192_300000/: summary, history, per_frame_accuracy,
+config a normalization JSON. Scheduler/ obsahuje skutocne uctovanie.
+Velke referencie ani checkpointy sa do PC nestahovali.

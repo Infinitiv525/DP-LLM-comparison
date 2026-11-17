@@ -1,0 +1,51 @@
+ČO TERAZ BEŽÍ A ČO PREDCHÁDZA HLAVNÉMU LLM POROVNANIU — 04.11.2026
+
+Overený aktuálny stav
+143115 RUNNING48:52,gpu12,H200,1GPU. Účtovanie143116čakánaafterany.
+Beží prvý400epochový spoločný ustálenýPINN na640TRAIN/160VAL.
+Hotové posledné hodnotenie90epoch=14400/64000aktualizácií,22,5%plánu.
+Priemer160VAL:relatívna chyba rýchlosti0,07265770 (7,266%),tlaku
+0,25942979 (25,943%),MSE0,001513286. Pri80epochách bol tlak42,891%,
+takže kvalita kolíše a nejde o finálny výsledok. Pri90epochách mean
+FDNSmomentumRMS4,227135,divergencia7,631e-7. Nízka divergencia sama
+nedokazuje splnenie rovníc hybnosti. Po400epochách sa vyberá checkpoint
+podľa najnižšejVALMSE,nie automaticky posledný. ZáverečnýTESTzostáva
+uzavretý. Úvodné p99celéhopoľa~2,9ms,finálne sa musí znovu premerať.
+
+Čo sa dá robiť súbežne už počas tohto pilota
+Pripraviť konfigurátor a dátový kontrakt pre nový ustálenýPINN:
+povolené parametre/rozsahy,rovnaký prompt pre4LLM,typy a kontrola
+konfigurácie,zdôvodnenie,logovanie,reálne náklady,seedy a pracovný
+poradovník nezávislých tréningov. Starý konfigurátor patril3DFNO a
+nemôžeme ho len bez zmeny názvov použiť na fyzikálne váhy2DPINN.
+Vytvoriť a otestovať prideľovanie jednej GPU každému nezávislému tréningu
+v multiGPU úlohe. Overiť technické formátovanie návrhov modelov na novej
+úlohe možno tiež samostatne; plné hľadania sa začnú až po kontrolezákladu.
+To nevyžaduje spustenie stovák tréningov ani zmenu práve bežiacehoV26.
+Pri tomto statusovom vysvetlení sa nový adaptér ešte nevydáva za hotový
+ani odskúšaný. Žiadna nová GPUúloha nebola odoslaná.
+
+Čo má nadviazať na dokončený pilot
+1. Audit najlepšieho checkpointu naVAL:chyby rýchlosti/tlaku,NSrovnice
+   ajokraje oproti referencii,nevyhovujúce prípady,obrázky reference/predikcia
+   a ich rozdiel;opakované natívne celé512x512časovaniep50/p95/p99.
+   Presnosť sa neodvodí iba z malej tréningovej straty alebo divergencie.
+   Porovnať kontinuálnuPINNfyziku a konečné mriežkové výstupy,v prípade
+   významného nesúladu preveriť pred masovým porovnaním. TESTneotvárať.
+2. Dokončiť a zmraziť nové pravidlá konfigurátora a férového porovnania:
+   tá istá architektúra,dáta,rozpočet,bodovanie,seedy a prípustné zmeny
+   preLLM/random/TPE. Základ sa po začiatku hlavného porovnania ručne
+   neprelaďuje podľa priebežného poradia metód.
+3. Krátke end-to-end skúšky všetkých4lokálnychLLM na novomPINNkontrakte:
+   návrh -> kontrola -> krátkytréning -> validácia -> spätnáväzba ->
+   ďalší návrh. Uložiť ajchyby/opravovanie/zdôvodnenie/spotrebu.
+   Tieto skúšky sa môžu vykonať súbežne a nejde o hlavný výsledok kvality.
+4. Až pri funkčnom celom reťazci odoslať veľké opakované porovnanie,
+   odporúčane s8GPU na rôzne nezávislé tréningy. Počet nezávislých hľadaní
+   a finálnych seedov uzamknúť v hlavnom protokole; oba predbežné rozsahy
+   sú zatiaľ vysvetlené vPARALELIZACIA_A_CAS.txt.
+
+Súčasný jednotlivýtréning nie je séria nezávislých úloh; pridať muGPU
+uprostred by vyžadovalo inú implementáciu a menilo podmienky pilota.
+Paralelizácia nasledujúcej série využije nezávislosť rôznych konfigurácií,
+LLMrodín a opakovaní;preto nie je nutné meniť architektúruPINN.

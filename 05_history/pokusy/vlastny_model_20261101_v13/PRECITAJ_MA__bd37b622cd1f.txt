@@ -1,0 +1,74 @@
+VLASTNÝ PODMIENENÝ PINN V13 –01.11.2026
+
+AKTUÁLNE PO KONTROLE02.11.2026
+140676COMPLETED0:0,všetky4bunkydokončené. Pôvodný3TRAINmodel
+meanU1.81%/p4.08%,vlastný2.22%/5.16%. Novýmodelnepomohol,
+pôvodnýpresnejšíarýchlejší. Všetkymodelyfitaccuracy/5ms splnili,
+žiadnymassgatesplnený. Nievalidácia aleboLLMready. Podrobnosti:
+VYSLEDKY_140676.txt. Frontaprázdna,novýtréningnespustený.
+Nižšie zachovaný pôvodnýplán a záznamspustenia.
+
+Používateľ odsúhlasil ďalšívývoj s požiadavkou vlastnéhoriešenia,
+bez miešania ďalšíchpredlôh. GPU140676,účtovanie140677.
+
+ČO SA MENÍ
+Vlastný PyTorchkód nad doterajšímStatePINN. Známyprefix2,3,geometria,
+Re a relatívnyčas stále jedinévstupy. CNNkontextzväčšený32→64.
+V pôvodnomMLP bol kontext pridaný iba navstupe. V našejnovejverzii
+riadi každéz3reziduálnychblokov cez ohraničené násobenie a posun
+príznakov. Každýblok2lineárnevrstvy,Tanh,reziduálnaprepojka;
+šírka128,primárnyvýstupuvp,rovnakýhardIC/frame3 a Fourier1..16.
+NieprevzatýJAX-PI/DeepXDE/DeepONet/PirateNets kód. Nejde o tvrdenie
+svetovej novosti architektúry; vlastnáimplementácia bežnýchmechanizmov
+podmienenia/reziduálnehospojenia. JAX-PIzostal metodickou referenciou.
+
+ČO POROVNÁVAME
+Štyrikontrolnébunky: pôvodnýmodel192x4/latent32 a nový128x3bloky/
+latent64, každýna1TRAIN a3TRAINprípadoch. Rovnakýseed20261101,
+rovnakédáta/poradievzorkovania/loss/Adam/budgetna prípad.
+Početparametrov/layerov niejerovnaký, zmeny súarchitektonickýbalík,
+nieizolovanýdôkazjednéhobloku. Smerzlepšenia zostáva hypotézou.
+
+PRÍPADY A TRÉNING
+1case:harmonics/1/Re382.3cases:tenistý+nurbs/11/Re107+
+skelenton/57/Re168. Všetky pôvodnýTRAIN. ŽiadnyVAL/test sa nenačítava.
+50kaktualizáciíkaždémuprípadu na kandidáta, teda50kpre1case/150kpre3.
+Spolu4bunky400kupdate. Vyváženécase/framecykly,238cieľov4..241,
+data/trainStd,PDE.01,BC.01,warm1000+ramp1000,Adam3e-4cosine,
+gradclip1. Rovnaká zmrazenánormalizácia69TRAIN,nieVALstats.
+Zachované obe úvodnésnímky; neskoršieTRAINpoliaiba cieľloss.
+Nevyvíjame teraz novúCFD/dataset ani novébalíkyvprostredí.
+
+HODNOTENIE
+Najlepšícheckpoint podľa meanEu/Ep na týchISTÝCHTRAINprípadoch,
+full238grid každých5kupdates/case a na konci. VýslovneTRAINfit,
+nievalidácia,generalizácia aleboštatistickyvýznamnýLLMexperiment.
+Rovnaképrahy každého fittedcase:U10%,p20%,massgrowthscreen,
+directqueryp99<=5msH2001024x256. Primárneuvp s mäkkou fyzikou,
+preto saprechodfyzikou automatickynepredpokladá. Niecausalstep.
+Iba ak sa naučí kvalitnýspoločnýTRAINfit, riešiťznovu69/6;
+veľkýbeh sanespúšťaautomaticky. Žiadnytestset/LLMmainotvorený.
+
+KONTROLY A UCHOVANIE
+3novétesty:hardIC a cached/bicubiczhoda, finiteNSgradienty doCNN
+akaždéhopodmienenéhobloku, zmenakontextumeníbudúcnosťnieinitial.
+CPUtesty3/3OK0.636s. PriASTpreflight zachytenáasyntaktickádrobnosť
+vinitkonfigurácii, opravenápredfreeze/submission, potomAST/bash-nOK.
+V12freezeoverený; novésource/protokol/receiptzmrazené predrelease.
+GPU9pôvodnýchunit+3nové, then own3case3update/PDE/hardIC/full238
+funkčnáskúška, potomvšetky4bunky. Best/last/histories/perframe/
+coverage/casecounts/timing aaccountingzachované. Veľkéváhy/polia
+ibaPerun. Starézmrazenévýsledky aarchívybezozmeny.
+Perun:/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_own_conditioning_20261101_v13
+Presnosťnovejarchitektúry zatiaľneznáma.
+
+POTVRDENIE ŠTARTU
+140676RUNNINGgpu20.9pôvodnýchkontrolprešlo1.920s,3nové0.829s.
+Krátkytréningnovéhomodeluna3TRAINcases dokončil3finiteupdates,
+hardICassert a238fitquerieskaždéhocase priupdate1aj3 bezguardfail.
+Skúšobnýdirectqueryp99najviac4.233ms, bezrenderingu. To je kontrola
+funkčnosti/rýchlosti nenaučenéhomodelu, nie dôkazpožadovanejpresnosti.
+Úloha dokončí záverečnémonitory skúšky a automatickyspustí4plnébunky.
+Maléprotocol/freeze/prepared/submission lokálne vzaznamy/.
+Následne potvrdenéSMOKE_COMPLETE a FULL_STARTED=True; plnéporovnanie
+začalo. SkúšobnýsummaryJSON tiežlokálne vzaznamy/.

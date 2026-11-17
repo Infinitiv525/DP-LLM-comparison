@@ -1,0 +1,2103 @@
+{
+  "status": "READONLY_STRUCTURE_AUDIT_COMPLETE",
+  "rows": [
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 3,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.2175992876291275,
+            "gradient_norm": 2.002924919128418,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0009792075725272298,
+            "gradient_norm": 0.008260391652584076,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.0001777278957888484,
+            "gradient_norm": 5.136317668075208e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.06410909444093704,
+            "gradient_norm": 0.6200494766235352,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015527392679359764,
+            "gradient_norm": 9.795370764509315e-11,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.9168500304222107,
+          "data__momentum": 0.957910418510437,
+          "boundary__data": -0.06386595219373703,
+          "boundary__pde": -0.08413168042898178,
+          "boundary__momentum": -0.08378464728593826,
+          "boundary__continuity": 0.2637878954410553,
+          "momentum__pde": 0.9638444781303406,
+          "continuity__data": -0.5397340059280396,
+          "continuity__pde": -0.5663484930992126,
+          "continuity__momentum": -0.577149510383606
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00019771239021793008,
+          2.4094581021927297e-05,
+          2.8252149064655896e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006058970000594854,
+          "continuity": 0.001555160153657198
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.015478323776110522,
+          "pressure_relative_l2": 0.01378250113894405
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.1387001276016235,
+            "error": {
+              "velocity_relative_l2": 0.015478336834491813,
+              "pressure_relative_l2": 0.013782480433580224
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.1362513303756714,
+            "error": {
+              "velocity_relative_l2": 0.015478465606148923,
+              "pressure_relative_l2": 0.013782570798900344
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.137100100517273,
+            "error": {
+              "velocity_relative_l2": 0.015492865403388092,
+              "pressure_relative_l2": 0.01383686108818387
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 37,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.5548545718193054,
+            "gradient_norm": 2.3359107971191406,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.001334848115220666,
+            "gradient_norm": 0.004341453313827515,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00016954440798144788,
+            "gradient_norm": 7.538129011663841e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.13717013597488403,
+            "gradient_norm": 0.4426252543926239,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00018060026923194528,
+            "gradient_norm": 8.452356869970146e-11,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.5710726380348206,
+          "data__momentum": 0.5920310020446777,
+          "boundary__data": 0.14982588589191437,
+          "boundary__pde": 0.23752132058143616,
+          "boundary__momentum": 0.20906434953212738,
+          "boundary__continuity": -0.715425431728363,
+          "momentum__pde": 0.9656350016593933,
+          "continuity__data": 0.0031213765032589436,
+          "continuity__pde": 0.014738887548446655,
+          "continuity__momentum": 0.010146290995180607
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          8.47805495141074e-05,
+          5.348222657630686e-06,
+          5.3171312686117744e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006167181301862001,
+          "continuity": 0.0017784984083846211
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.02271372290209348,
+          "pressure_relative_l2": 0.037621544894554604
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0005698204040527,
+            "error": {
+              "velocity_relative_l2": 0.022713719342682945,
+              "pressure_relative_l2": 0.037621543237095656
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0006259679794312,
+            "error": {
+              "velocity_relative_l2": 0.02271392425186849,
+              "pressure_relative_l2": 0.03762174679284456
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0005669593811035,
+            "error": {
+              "velocity_relative_l2": 0.022720657014448833,
+              "pressure_relative_l2": 0.0376441164862891
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 71,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.5161898136138916,
+            "gradient_norm": 3.875018358230591,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0013977900380268693,
+            "gradient_norm": 0.008272464387118816,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 9.29998277570121e-05,
+            "gradient_norm": 3.851754627248738e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.125829815864563,
+            "gradient_norm": 0.6380748152732849,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001657872344367206,
+            "gradient_norm": 2.600729354096387e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.5097867250442505,
+          "data__momentum": 0.5369388461112976,
+          "boundary__data": -0.17539876699447632,
+          "boundary__pde": -0.31945955753326416,
+          "boundary__momentum": -0.32488885521888733,
+          "boundary__continuity": 0.9320395588874817,
+          "momentum__pde": 0.967074990272522,
+          "continuity__data": -0.058151163160800934,
+          "continuity__pde": -0.13274575769901276,
+          "continuity__momentum": -0.11575132608413696
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00018789122987072915,
+          9.126378245127853e-06,
+          4.350459548163599e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.008033733814954758,
+          "continuity": 0.001647947821766138
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.021710082233059615,
+          "pressure_relative_l2": 0.03706272253238295
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0253033638000488,
+            "error": {
+              "velocity_relative_l2": 0.021710074262554793,
+              "pressure_relative_l2": 0.03706275246067772
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0249290466308594,
+            "error": {
+              "velocity_relative_l2": 0.021710317247789733,
+              "pressure_relative_l2": 0.03706272810213105
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0250431299209595,
+            "error": {
+              "velocity_relative_l2": 0.021716964149375198,
+              "pressure_relative_l2": 0.03708617029309146
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 105,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.33951833844184875,
+            "gradient_norm": 3.4930508136749268,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0010539490031078458,
+            "gradient_norm": 0.008127044886350632,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.0001674474769970402,
+            "gradient_norm": 3.7321922263799934e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.0948466807603836,
+            "gradient_norm": 0.7706616520881653,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00014826326514594257,
+            "gradient_norm": 1.9909740522905395e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.6908837556838989,
+          "data__momentum": 0.7060831785202026,
+          "boundary__data": -0.12170923501253128,
+          "boundary__pde": -0.15304450690746307,
+          "boundary__momentum": -0.13873063027858734,
+          "boundary__continuity": 0.5500544309616089,
+          "momentum__pde": 0.9592954516410828,
+          "continuity__data": 0.24177710711956024,
+          "continuity__pde": 0.3271406888961792,
+          "continuity__momentum": 0.35280975699424744
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00016224212595261633,
+          7.591400844830787e-06,
+          4.427304034493318e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.005691158585250378,
+          "continuity": 0.0014873994514346123
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.018893165379566763,
+          "pressure_relative_l2": 0.02197723331829912
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0822837352752686,
+            "error": {
+              "velocity_relative_l2": 0.018893173396346122,
+              "pressure_relative_l2": 0.021977229869881043
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0805188417434692,
+            "error": {
+              "velocity_relative_l2": 0.018893177145603356,
+              "pressure_relative_l2": 0.021977803583799308
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0827908515930176,
+            "error": {
+              "velocity_relative_l2": 0.018904146561407865,
+              "pressure_relative_l2": 0.022017778058279064
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 139,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.5206738114356995,
+            "gradient_norm": 2.530834197998047,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0016786004416644573,
+            "gradient_norm": 0.006871278863400221,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00026742476620711386,
+            "gradient_norm": 1.659631925576832e-05,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.1342691034078598,
+            "gradient_norm": 0.5322247743606567,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001576602808199823,
+            "gradient_norm": 2.696877166030731e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.6500566601753235,
+          "data__momentum": 0.6954391598701477,
+          "boundary__data": 0.0536465160548687,
+          "boundary__pde": -0.05544152110815048,
+          "boundary__momentum": 0.05028228834271431,
+          "boundary__continuity": 0.951495885848999,
+          "momentum__pde": 0.9512450695037842,
+          "continuity__data": -0.008276299573481083,
+          "continuity__pde": -0.15200525522232056,
+          "continuity__momentum": -0.03379521518945694
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00013031486014369875,
+          7.470163836842403e-06,
+          5.146969073166474e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.0050278534181416035,
+          "continuity": 0.0015698261559009552
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.022554238309959,
+          "pressure_relative_l2": 0.03375054967992853
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0127969980239868,
+            "error": {
+              "velocity_relative_l2": 0.02255423700762349,
+              "pressure_relative_l2": 0.03375058685513704
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.013138771057129,
+            "error": {
+              "velocity_relative_l2": 0.022554399156013073,
+              "pressure_relative_l2": 0.03375097956673229
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0124965906143188,
+            "error": {
+              "velocity_relative_l2": 0.02256087456551562,
+              "pressure_relative_l2": 0.03377524828065955
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 173,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.3183007538318634,
+            "gradient_norm": 3.1507670879364014,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.001873911009170115,
+            "gradient_norm": 0.013846799731254578,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 8.537827670807019e-05,
+            "gradient_norm": 3.1421520816365955e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.08832105249166489,
+            "gradient_norm": 0.7943171262741089,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001749162474879995,
+            "gradient_norm": 1.819148581772012e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.7841140627861023,
+          "data__momentum": 0.7780848145484924,
+          "boundary__data": 0.06157643720507622,
+          "boundary__pde": 0.11535435169935226,
+          "boundary__momentum": 0.03715328872203827,
+          "boundary__continuity": -0.4298616945743561,
+          "momentum__pde": 0.9694972634315491,
+          "continuity__data": -0.3998487889766693,
+          "continuity__pde": -0.547511875629425,
+          "continuity__momentum": -0.49841007590293884
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00024924305034801364,
+          1.2689357390627265e-05,
+          2.8083977809956195e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.0076756649650633335,
+          "continuity": 0.001742626423947513
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.018255951576425587,
+          "pressure_relative_l2": 0.021102216782448703
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.1261215209960938,
+            "error": {
+              "velocity_relative_l2": 0.018255958435271526,
+              "pressure_relative_l2": 0.021102212360287354
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.1252175569534302,
+            "error": {
+              "velocity_relative_l2": 0.018256061704694383,
+              "pressure_relative_l2": 0.0211024399948404
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.1247419118881226,
+            "error": {
+              "velocity_relative_l2": 0.018267950032864126,
+              "pressure_relative_l2": 0.021136252582461122
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 207,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.7158466577529907,
+            "gradient_norm": 2.43916392326355,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.00258951005525887,
+            "gradient_norm": 0.007703987415879965,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.0001260286953765899,
+            "gradient_norm": 6.146941814222373e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.18086643517017365,
+            "gradient_norm": 0.5693792104721069,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001776831632014364,
+            "gradient_norm": 5.977984773863909e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.70253586769104,
+          "data__momentum": 0.7224780917167664,
+          "boundary__data": 0.08181239664554596,
+          "boundary__pde": 0.23563136160373688,
+          "boundary__momentum": 0.07876244187355042,
+          "boundary__continuity": 0.965282678604126,
+          "momentum__pde": 0.9694492816925049,
+          "continuity__data": 0.13013198971748352,
+          "continuity__pde": 0.28911587595939636,
+          "continuity__momentum": 0.14032486081123352
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          8.815486944513395e-05,
+          5.243646228336729e-06,
+          6.020805898288017e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006653415039181709,
+          "continuity": 0.0018009733175858855
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.026101476569799185,
+          "pressure_relative_l2": 0.04169730035250249
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.00103759765625,
+            "error": {
+              "velocity_relative_l2": 0.026101488097717822,
+              "pressure_relative_l2": 0.04169729445075259
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0007561445236206,
+            "error": {
+              "velocity_relative_l2": 0.02610155152328017,
+              "pressure_relative_l2": 0.04169774076579456
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0005851984024048,
+            "error": {
+              "velocity_relative_l2": 0.02610749960837843,
+              "pressure_relative_l2": 0.04171464415093054
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 239,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.6365943551063538,
+            "gradient_norm": 2.735954761505127,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.001836370793171227,
+            "gradient_norm": 0.007322005927562714,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00026946913567371666,
+            "gradient_norm": 1.463004264223855e-05,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.16638492047786713,
+            "gradient_norm": 0.6381822824478149,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015175584121607244,
+            "gradient_norm": 9.239123355264667e-11,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.7262154817581177,
+          "data__momentum": 0.7479003071784973,
+          "boundary__data": 0.01484003197401762,
+          "boundary__pde": -0.02653234638273716,
+          "boundary__momentum": 0.00917985662817955,
+          "boundary__continuity": 0.31375938653945923,
+          "momentum__pde": 0.97288578748703,
+          "continuity__data": -0.26134711503982544,
+          "continuity__pde": -0.3732101619243622,
+          "continuity__momentum": -0.36181965470314026
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00012626028910744935,
+          6.478723207692383e-06,
+          5.061713537202195e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006014058832079172,
+          "continuity": 0.0015376462833955884
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.02492057607302331,
+          "pressure_relative_l2": 0.03557341486214905
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0084518194198608,
+            "error": {
+              "velocity_relative_l2": 0.02492056482649102,
+              "pressure_relative_l2": 0.035573412898271164
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0086338520050049,
+            "error": {
+              "velocity_relative_l2": 0.024920511835338468,
+              "pressure_relative_l2": 0.03557356143281691
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.008374810218811,
+            "error": {
+              "velocity_relative_l2": 0.0249277261872151,
+              "pressure_relative_l2": 0.03559124040218096
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "OWN_ROLLOUT_STATE",
+      "predicted_offset": 1,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.2175992876291275,
+            "gradient_norm": 2.002924919128418,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0007241844432428479,
+            "gradient_norm": 0.006911248434334993,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00023509233142249286,
+            "gradient_norm": 6.126826519903261e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.06410909444093704,
+            "gradient_norm": 0.6200494766235352,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015527392679359764,
+            "gradient_norm": 9.795370764509315e-11,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.9194140434265137,
+          "data__momentum": 0.957910418510437,
+          "boundary__data": -0.0425969697535038,
+          "boundary__pde": -0.013278519734740257,
+          "boundary__momentum": -0.06058043986558914,
+          "boundary__continuity": 0.2412816882133484,
+          "momentum__pde": 0.9526426196098328,
+          "continuity__data": -0.5397340059280396,
+          "continuity__pde": -0.49152711033821106,
+          "continuity__momentum": -0.577149510383606
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00019749712373595685,
+          8.71656447998248e-06,
+          2.533050036390705e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006058970000594854,
+          "continuity": 0.001555160153657198
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.015478323776110522,
+          "pressure_relative_l2": 0.01378250113894405
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.1364811658859253,
+            "error": {
+              "velocity_relative_l2": 0.015478332369024465,
+              "pressure_relative_l2": 0.013782525757418668
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.1369643211364746,
+            "error": {
+              "velocity_relative_l2": 0.01547845764103073,
+              "pressure_relative_l2": 0.013783316272961713
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.137951135635376,
+            "error": {
+              "velocity_relative_l2": 0.015493940946140762,
+              "pressure_relative_l2": 0.01384138963435374
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "OWN_ROLLOUT_STATE",
+      "predicted_offset": 32,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 179.7723388671875,
+            "gradient_norm": 21.61299705505371,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.10838770866394043,
+            "gradient_norm": 1.2903088331222534,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00021508592180907726,
+            "gradient_norm": 6.475158443208784e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 2.2866926193237305,
+            "gradient_norm": 7.252158164978027,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015527392679359764,
+            "gradient_norm": 1.8394658019005306e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": -0.6955018639564514,
+          "data__momentum": -0.3501273989677429,
+          "boundary__data": -0.26701250672340393,
+          "boundary__pde": 0.1806420087814331,
+          "boundary__momentum": 0.0779809057712555,
+          "boundary__continuity": -0.6748179793357849,
+          "momentum__pde": 0.16058701276779175,
+          "continuity__data": 0.43011152744293213,
+          "continuity__pde": -0.21193347871303558,
+          "continuity__momentum": -0.2097765952348709
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.0001887241960503161,
+          0.002835266524925828,
+          4.317407231724246e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006480167154222727,
+          "continuity": 0.0018525597406551242
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.4449991700232487,
+          "pressure_relative_l2": 0.40570911197413945
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.046229362487793,
+            "error": {
+              "velocity_relative_l2": 0.4449991878218037,
+              "pressure_relative_l2": 0.4057091308524548
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0462117195129395,
+            "error": {
+              "velocity_relative_l2": 0.44499923340485126,
+              "pressure_relative_l2": 0.4057091863908731
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0461143255233765,
+            "error": {
+              "velocity_relative_l2": 0.44499984909598644,
+              "pressure_relative_l2": 0.4057116538959362
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "OWN_ROLLOUT_STATE",
+      "predicted_offset": 120,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 257.098388671875,
+            "gradient_norm": 11.5932035446167,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.010334387421607971,
+            "gradient_norm": 0.00715141324326396,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.0001723062596283853,
+            "gradient_norm": 1.2355189028312452e-05,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.9456034898757935,
+            "gradient_norm": 0.5493009090423584,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015527398500125855,
+            "gradient_norm": 6.378758077296709e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.12766069173812866,
+          "data__momentum": -0.012638727203011513,
+          "boundary__data": 0.09745479375123978,
+          "boundary__pde": 0.07223041355609894,
+          "boundary__momentum": 0.11315681040287018,
+          "boundary__continuity": -0.9782600998878479,
+          "momentum__pde": 0.4637066125869751,
+          "continuity__data": -0.12749934196472168,
+          "continuity__pde": -0.1414201259613037,
+          "continuity__momentum": -0.0918557196855545
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          9.324968414148316e-05,
+          4.109243036509724e-06,
+          5.2166040376278033e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006662217900156975,
+          "continuity": 0.0018193136202171445
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.5058365614427189,
+          "pressure_relative_l2": 0.7086974794638086
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.000176191329956,
+            "error": {
+              "velocity_relative_l2": 0.5058365677830159,
+              "pressure_relative_l2": 0.7086975024494402
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0001564025878906,
+            "error": {
+              "velocity_relative_l2": 0.5058364884695747,
+              "pressure_relative_l2": 0.7086975306803825
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0000053644180298,
+            "error": {
+              "velocity_relative_l2": 0.505836733565373,
+              "pressure_relative_l2": 0.7087012842220146
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_08/best.pt",
+      "role": "OWN_ROLLOUT_STATE",
+      "predicted_offset": 238,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 279.185302734375,
+            "gradient_norm": 17.88636589050293,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0145054766908288,
+            "gradient_norm": 0.014914027415215969,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.0002801331283990294,
+            "gradient_norm": 6.107430635893252e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 1.500854730606079,
+            "gradient_norm": 0.8990263342857361,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001552752364659682,
+            "gradient_norm": 6.750415504352958e-11,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.2280917465686798,
+          "data__momentum": 0.3234889507293701,
+          "boundary__data": 0.16068468987941742,
+          "boundary__pde": -0.1891203373670578,
+          "boundary__momentum": -0.2601788640022278,
+          "boundary__continuity": -0.4227876663208008,
+          "momentum__pde": 0.9307845830917358,
+          "continuity__data": -0.45776766538619995,
+          "continuity__pde": -0.4281235337257385,
+          "continuity__momentum": -0.4375634491443634
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00015898878336884081,
+          2.045219298452139e-05,
+          4.64437128755435e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006441710516810417,
+          "continuity": 0.0015698089264333248
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.5115534234216512,
+          "pressure_relative_l2": 0.7645108739406522
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0002424716949463,
+            "error": {
+              "velocity_relative_l2": 0.511553418877619,
+              "pressure_relative_l2": 0.7645108724289025
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0004208087921143,
+            "error": {
+              "velocity_relative_l2": 0.5115533059221776,
+              "pressure_relative_l2": 0.7645108216601134
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0002697706222534,
+            "error": {
+              "velocity_relative_l2": 0.5115551869947949,
+              "pressure_relative_l2": 0.7645129845434926
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 3,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.21649114787578583,
+            "gradient_norm": 1.9985355138778687,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0009665372781455517,
+            "gradient_norm": 0.008265886455774307,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00017772323917597532,
+            "gradient_norm": 5.0036260290653445e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.0630783960223198,
+            "gradient_norm": 0.6166089773178101,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001552739122416824,
+            "gradient_norm": 1.0388221532986464e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.9390816688537598,
+          "data__momentum": 0.9585525393486023,
+          "boundary__data": -0.09954806417226791,
+          "boundary__pde": -0.11033162474632263,
+          "boundary__momentum": -0.11765787750482559,
+          "boundary__continuity": -0.12459002435207367,
+          "momentum__pde": 0.9666543006896973,
+          "continuity__data": 0.5210230946540833,
+          "continuity__pde": 0.49367713928222656,
+          "continuity__momentum": 0.5481081008911133
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00020019574731122702,
+          2.3961001716088504e-05,
+          2.2395456156232285e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006058970000594854,
+          "continuity": 0.001555160153657198
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.015356138772461845,
+          "pressure_relative_l2": 0.014640647848147321
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.1385914087295532,
+            "error": {
+              "velocity_relative_l2": 0.015356151630845949,
+              "pressure_relative_l2": 0.014640623462161204
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.136164665222168,
+            "error": {
+              "velocity_relative_l2": 0.015356281393660404,
+              "pressure_relative_l2": 0.01464083773913869
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.136992335319519,
+            "error": {
+              "velocity_relative_l2": 0.015370848153982302,
+              "pressure_relative_l2": 0.01469138063582563
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 37,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.5457381010055542,
+            "gradient_norm": 2.2960572242736816,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.001320886891335249,
+            "gradient_norm": 0.00430705351755023,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00016952960868366063,
+            "gradient_norm": 7.468968306056922e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.13562773168087006,
+            "gradient_norm": 0.44037139415740967,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00018060016736853868,
+            "gradient_norm": 7.93157040046566e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.5867850184440613,
+          "data__momentum": 0.6095172166824341,
+          "boundary__data": 0.15411588549613953,
+          "boundary__pde": 0.24244488775730133,
+          "boundary__momentum": 0.21745352447032928,
+          "boundary__continuity": -0.9830175638198853,
+          "momentum__pde": 0.9662843942642212,
+          "continuity__data": -0.1705056130886078,
+          "continuity__pde": -0.2796599864959717,
+          "continuity__momentum": -0.24294570088386536
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          8.144565799739212e-05,
+          5.292877176543698e-06,
+          5.269172476118911e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006167181301862001,
+          "continuity": 0.0017784984083846211
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.0225872714464771,
+          "pressure_relative_l2": 0.036975956210905374
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0006812810897827,
+            "error": {
+              "velocity_relative_l2": 0.022587267759634808,
+              "pressure_relative_l2": 0.03697595315920927
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0006787776947021,
+            "error": {
+              "velocity_relative_l2": 0.022587474600448822,
+              "pressure_relative_l2": 0.03697615993713954
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0006650686264038,
+            "error": {
+              "velocity_relative_l2": 0.022594246927810636,
+              "pressure_relative_l2": 0.03699882378848518
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 71,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.5004915595054626,
+            "gradient_norm": 3.6596145629882812,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0013674261281266809,
+            "gradient_norm": 0.00819449219852686,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 9.298817894887179e-05,
+            "gradient_norm": 3.79132802663662e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.12378378212451935,
+            "gradient_norm": 0.6381656527519226,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001657872780924663,
+            "gradient_norm": 5.426146754139438e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.5489137768745422,
+          "data__momentum": 0.5760189890861511,
+          "boundary__data": -0.18425531685352325,
+          "boundary__pde": -0.30788731575012207,
+          "boundary__momentum": -0.31215420365333557,
+          "boundary__continuity": -0.9769269824028015,
+          "momentum__pde": 0.9686320424079895,
+          "continuity__data": 0.184828981757164,
+          "continuity__pde": 0.320626437664032,
+          "continuity__momentum": 0.3111145794391632
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00018563155026640743,
+          8.978059668152127e-06,
+          4.0781056753758094e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.008033733814954758,
+          "continuity": 0.001647947821766138
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.021535529795309535,
+          "pressure_relative_l2": 0.035606210107495706
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0254369974136353,
+            "error": {
+              "velocity_relative_l2": 0.021535522124123622,
+              "pressure_relative_l2": 0.03560624108196141
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0250188112258911,
+            "error": {
+              "velocity_relative_l2": 0.021535765914146143,
+              "pressure_relative_l2": 0.035606231394582445
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.025099754333496,
+            "error": {
+              "velocity_relative_l2": 0.02154245570270313,
+              "pressure_relative_l2": 0.03563047777291147
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 105,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.336380273103714,
+            "gradient_norm": 3.093611478805542,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0010575036285445094,
+            "gradient_norm": 0.008080710656940937,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00016743942978791893,
+            "gradient_norm": 3.658510195236886e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.09481868892908096,
+            "gradient_norm": 0.760232150554657,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00014826322149019688,
+            "gradient_norm": 1.582348141404566e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.7691884636878967,
+          "data__momentum": 0.7889531850814819,
+          "boundary__data": -0.13740237057209015,
+          "boundary__pde": -0.1691063493490219,
+          "boundary__momentum": -0.1525316834449768,
+          "boundary__continuity": -0.4457215666770935,
+          "momentum__pde": 0.9588797092437744,
+          "continuity__data": 0.08502083271741867,
+          "continuity__pde": 0.04073367640376091,
+          "continuity__momentum": 0.09134067595005035
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.0001518145581940189,
+          7.505364465032471e-06,
+          3.8167382143683426e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.005691158585250378,
+          "continuity": 0.0014873994514346123
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.01889635321056463,
+          "pressure_relative_l2": 0.021118336482895125
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.078667163848877,
+            "error": {
+              "velocity_relative_l2": 0.01889636136571562,
+              "pressure_relative_l2": 0.02111833189250452
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.076859712600708,
+            "error": {
+              "velocity_relative_l2": 0.018896367338663435,
+              "pressure_relative_l2": 0.02111895541986076
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0790780782699585,
+            "error": {
+              "velocity_relative_l2": 0.01890724597087096,
+              "pressure_relative_l2": 0.02116015448592302
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 139,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.5098188519477844,
+            "gradient_norm": 2.523707866668701,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.001652238890528679,
+            "gradient_norm": 0.006882320623844862,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.0002673852723091841,
+            "gradient_norm": 1.6368236174457707e-05,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.13210122287273407,
+            "gradient_norm": 0.5356754660606384,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015766022261232138,
+            "gradient_norm": 4.464305869422702e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.6637586355209351,
+          "data__momentum": 0.7084375619888306,
+          "boundary__data": 0.056483037769794464,
+          "boundary__pde": -0.041604794561862946,
+          "boundary__momentum": 0.060127899050712585,
+          "boundary__continuity": -0.9764577746391296,
+          "momentum__pde": 0.9517436027526855,
+          "continuity__data": -0.06636331975460052,
+          "continuity__pde": 0.03325207903981209,
+          "continuity__momentum": -0.07582244277000427
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00012534706911537796,
+          7.7241948019946e-06,
+          5.0452079847218556e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.0050278534181416035,
+          "continuity": 0.0015698261559009552
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.02237371382037732,
+          "pressure_relative_l2": 0.03303294970572742
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0133473873138428,
+            "error": {
+              "velocity_relative_l2": 0.0223737124047669,
+              "pressure_relative_l2": 0.03303298289772197
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0136914253234863,
+            "error": {
+              "velocity_relative_l2": 0.022373874627921488,
+              "pressure_relative_l2": 0.03303340126885238
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0130271911621094,
+            "error": {
+              "velocity_relative_l2": 0.02238042569363811,
+              "pressure_relative_l2": 0.03305814785315737
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 173,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.31881994009017944,
+            "gradient_norm": 3.0356013774871826,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0018892078660428524,
+            "gradient_norm": 0.013677855022251606,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 8.538771362509578e-05,
+            "gradient_norm": 3.067361376452027e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.08874604105949402,
+            "gradient_norm": 0.7918096780776978,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00017491617472842336,
+            "gradient_norm": 2.3346055644246633e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.8067612051963806,
+          "data__momentum": 0.8042327165603638,
+          "boundary__data": 0.01988990791141987,
+          "boundary__pde": 0.08140452951192856,
+          "boundary__momentum": 0.005073577165603638,
+          "boundary__continuity": -0.7617916464805603,
+          "momentum__pde": 0.9715477228164673,
+          "continuity__data": -0.15851004421710968,
+          "continuity__pde": -0.24537652730941772,
+          "continuity__momentum": -0.16752536594867706
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.0002506962919142097,
+          1.2574250831676181e-05,
+          1.90876985328714e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.0076756649650633335,
+          "continuity": 0.001742626423947513
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.018300961532399726,
+          "pressure_relative_l2": 0.020876691532672128
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.1223353147506714,
+            "error": {
+              "velocity_relative_l2": 0.018300969030342836,
+              "pressure_relative_l2": 0.020876692314307728
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.1213291883468628,
+            "error": {
+              "velocity_relative_l2": 0.018301076958232132,
+              "pressure_relative_l2": 0.02087688022257659
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.120952844619751,
+            "error": {
+              "velocity_relative_l2": 0.018312872361801746,
+              "pressure_relative_l2": 0.020911128791896536
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 207,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.710604190826416,
+            "gradient_norm": 2.3715381622314453,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0025800177827477455,
+            "gradient_norm": 0.007535343989729881,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.0001260203425772488,
+            "gradient_norm": 6.085298991820309e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.18075643479824066,
+            "gradient_norm": 0.5549226999282837,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00017768317775335163,
+            "gradient_norm": 2.3160405537847595e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.7105321288108826,
+          "data__momentum": 0.7303692698478699,
+          "boundary__data": 0.10131345689296722,
+          "boundary__pde": 0.2588194012641907,
+          "boundary__momentum": 0.10480627417564392,
+          "boundary__continuity": -0.79377281665802,
+          "momentum__pde": 0.9709322452545166,
+          "continuity__data": -0.39481639862060547,
+          "continuity__pde": -0.6045154929161072,
+          "continuity__momentum": -0.5016502141952515
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          8.166104817064479e-05,
+          5.089421847515041e-06,
+          5.48631220453899e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006653415039181709,
+          "continuity": 0.0018009733175858855
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.026096231182566626,
+          "pressure_relative_l2": 0.04098841700862031
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.000726580619812,
+            "error": {
+              "velocity_relative_l2": 0.02609624262603356,
+              "pressure_relative_l2": 0.040988413039541094
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0004386901855469,
+            "error": {
+              "velocity_relative_l2": 0.026096307463889107,
+              "pressure_relative_l2": 0.04098886196632053
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0003209114074707,
+            "error": {
+              "velocity_relative_l2": 0.02610226974154928,
+              "pressure_relative_l2": 0.041005883519503454
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "TRUE_TRAIN_WINDOW",
+      "current_frame": 239,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.6259675621986389,
+            "gradient_norm": 2.5619986057281494,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0018157506128773093,
+            "gradient_norm": 0.007230165880173445,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.0002694124705158174,
+            "gradient_norm": 1.4486548025161028e-05,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.16480490565299988,
+            "gradient_norm": 0.6350104808807373,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015175573935266584,
+            "gradient_norm": 6.959878506851425e-11,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.7808699011802673,
+          "data__momentum": 0.7999630570411682,
+          "boundary__data": 0.02022991143167019,
+          "boundary__pde": -0.007619564421474934,
+          "boundary__momentum": 0.025180893018841743,
+          "boundary__continuity": -0.4392554461956024,
+          "momentum__pde": 0.9758673906326294,
+          "continuity__data": 0.07855556905269623,
+          "continuity__pde": 0.10147032886743546,
+          "continuity__momentum": 0.10931523144245148
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00011467596050351858,
+          6.40305552224163e-06,
+          4.662295793878002e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006014058832079172,
+          "continuity": 0.0015376462833955884
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.024804886938753316,
+          "pressure_relative_l2": 0.03467644422958937
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0085890293121338,
+            "error": {
+              "velocity_relative_l2": 0.024804875998394003,
+              "pressure_relative_l2": 0.03467644051330341
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0087989568710327,
+            "error": {
+              "velocity_relative_l2": 0.024804823810327576,
+              "pressure_relative_l2": 0.03467661737882684
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.008497714996338,
+            "error": {
+              "velocity_relative_l2": 0.02481207625174904,
+              "pressure_relative_l2": 0.03469446065597351
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "OWN_ROLLOUT_STATE",
+      "predicted_offset": 1,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 0.21649114787578583,
+            "gradient_norm": 1.9985355138778687,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.0007145602721720934,
+            "gradient_norm": 0.006739083677530289,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00023509602760896087,
+            "gradient_norm": 5.984867129882332e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.0630783960223198,
+            "gradient_norm": 0.6166089773178101,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001552739122416824,
+            "gradient_norm": 1.0388221532986464e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.9190499782562256,
+          "data__momentum": 0.9585525393486023,
+          "boundary__data": -0.07967866957187653,
+          "boundary__pde": -0.05626484006643295,
+          "boundary__momentum": -0.09648367762565613,
+          "boundary__continuity": -0.1074371188879013,
+          "momentum__pde": 0.9583090543746948,
+          "continuity__data": 0.5210230946540833,
+          "continuity__pde": 0.5305942893028259,
+          "continuity__momentum": 0.5481081008911133
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.000199832022190094,
+          8.487512786814477e-06,
+          2.372002860795419e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006058970000594854,
+          "continuity": 0.001555160153657198
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.015356138772461845,
+          "pressure_relative_l2": 0.014640647848147321
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.1363799571990967,
+            "error": {
+              "velocity_relative_l2": 0.0153561487162285,
+              "pressure_relative_l2": 0.014640688059262871
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.1368451118469238,
+            "error": {
+              "velocity_relative_l2": 0.015356265626961891,
+              "pressure_relative_l2": 0.014641486791703979
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.137887954711914,
+            "error": {
+              "velocity_relative_l2": 0.015371837169098951,
+              "pressure_relative_l2": 0.01469624118632494
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "OWN_ROLLOUT_STATE",
+      "predicted_offset": 32,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 176.32162475585938,
+            "gradient_norm": 18.907331466674805,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.11777661740779877,
+            "gradient_norm": 1.520262360572815,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00021468322665896267,
+            "gradient_norm": 6.377764293574728e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 2.755251884460449,
+            "gradient_norm": 9.825125694274902,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015527402865700424,
+            "gradient_norm": 1.71273231708291e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": -0.5856298208236694,
+          "data__momentum": -0.3227089047431946,
+          "boundary__data": -0.23691269755363464,
+          "boundary__pde": 0.16039997339248657,
+          "boundary__momentum": 0.14536599814891815,
+          "boundary__continuity": -0.08195790648460388,
+          "momentum__pde": 0.5489229559898376,
+          "continuity__data": -0.6453459858894348,
+          "continuity__pde": 0.8109251260757446,
+          "continuity__momentum": 0.6079778075218201
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.0001755106495693326,
+          0.0025508967228233814,
+          3.918473368003106e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006480167154222727,
+          "continuity": 0.0018525597406551242
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.44074574898686153,
+          "pressure_relative_l2": 0.4028294190385905
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.048033595085144,
+            "error": {
+              "velocity_relative_l2": 0.4407457638511845,
+              "pressure_relative_l2": 0.4028294351519002
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0480015277862549,
+            "error": {
+              "velocity_relative_l2": 0.4407457988427992,
+              "pressure_relative_l2": 0.4028295145281053
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0478394031524658,
+            "error": {
+              "velocity_relative_l2": 0.44074600140140213,
+              "pressure_relative_l2": 0.40283255176440824
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "OWN_ROLLOUT_STATE",
+      "predicted_offset": 120,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 250.4202117919922,
+            "gradient_norm": 11.430893898010254,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.007737110834568739,
+            "gradient_norm": 0.004857018124312162,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00017471595492679626,
+            "gradient_norm": 1.2792206689482555e-05,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 0.777421772480011,
+            "gradient_norm": 0.4672655761241913,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.00015527506184298545,
+            "gradient_norm": 1.1812074929284933e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.06735754013061523,
+          "data__momentum": -0.018365537747740746,
+          "boundary__data": 0.08201009035110474,
+          "boundary__pde": 0.18687546253204346,
+          "boundary__momentum": 0.07611721754074097,
+          "boundary__continuity": 0.9411885738372803,
+          "momentum__pde": 0.7104888558387756,
+          "continuity__data": 0.10286662727594376,
+          "continuity__pde": 0.17397235333919525,
+          "continuity__momentum": 0.013174290768802166
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          8.387600973946974e-05,
+          4.5726401367574e-06,
+          5.0956309394223354e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006662217900156975,
+          "continuity": 0.0018193136202171445
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.4981738237089256,
+          "pressure_relative_l2": 0.7066660999602379
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0002602338790894,
+            "error": {
+              "velocity_relative_l2": 0.49817383022263223,
+              "pressure_relative_l2": 0.7066661237315719
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0002222061157227,
+            "error": {
+              "velocity_relative_l2": 0.4981737569100294,
+              "pressure_relative_l2": 0.7066661596725237
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0000993013381958,
+            "error": {
+              "velocity_relative_l2": 0.49817401442243736,
+              "pressure_relative_l2": 0.7066698890808496
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    },
+    {
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+      "role": "OWN_ROLLOUT_STATE",
+      "predicted_offset": 238,
+      "diagnostic": {
+        "terms": {
+          "data": {
+            "weighted_loss": 270.1817932128906,
+            "gradient_norm": 16.37551498413086,
+            "finite_gradient": true
+          },
+          "pde": {
+            "weighted_loss": 0.012063197791576385,
+            "gradient_norm": 0.010960579849779606,
+            "finite_gradient": true
+          },
+          "boundary": {
+            "weighted_loss": 0.00027966179186478257,
+            "gradient_norm": 4.391722541186027e-06,
+            "finite_gradient": true
+          },
+          "momentum": {
+            "weighted_loss": 1.1786258220672607,
+            "gradient_norm": 0.6787006258964539,
+            "finite_gradient": true
+          },
+          "continuity": {
+            "weighted_loss": 0.0001552752946736291,
+            "gradient_norm": 1.9437638998365259e-10,
+            "finite_gradient": true
+          }
+        },
+        "gradient_cosines": {
+          "data__pde": 0.26829516887664795,
+          "data__momentum": 0.3649163842201233,
+          "boundary__data": 0.122328981757164,
+          "boundary__pde": -0.27997303009033203,
+          "boundary__momentum": -0.31930509209632874,
+          "boundary__continuity": -0.7681670784950256,
+          "momentum__pde": 0.8967065811157227,
+          "continuity__data": -0.22960405051708221,
+          "continuity__pde": 0.07090343534946442,
+          "continuity__momentum": 0.17247894406318665
+        },
+        "continuous_vs_grid_std_normalized_rms": [
+          0.00012188034452265128,
+          2.6415014872327447e-05,
+          4.5417298366601244e-08
+        ],
+        "continuous_vs_grid_note": "Same physical cell centers at localdt; velocity compares analytic curl versus gridFD curl. Pressure difference centered on sampled points.",
+        "reference_fd_floor": {
+          "momentum": 0.006441710516810417,
+          "continuity": 0.0015698089264333248
+        },
+        "model_error": {
+          "velocity_relative_l2": 0.5036829325532636,
+          "pressure_relative_l2": 0.7509689413102755
+        },
+        "perturbations": [
+          {
+            "relative_noise": 1e-05,
+            "normalized_gain": 1.0001859664916992,
+            "error": {
+              "velocity_relative_l2": 0.5036829283438884,
+              "pressure_relative_l2": 0.7509689395882776
+            }
+          },
+          {
+            "relative_noise": 0.0001,
+            "normalized_gain": 1.0003303289413452,
+            "error": {
+              "velocity_relative_l2": 0.5036828219703593,
+              "pressure_relative_l2": 0.7509688883893951
+            }
+          },
+          {
+            "relative_noise": 0.001,
+            "normalized_gain": 1.0002819299697876,
+            "error": {
+              "velocity_relative_l2": 0.5036846069859897,
+              "pressure_relative_l2": 0.7509710255580258
+            }
+          }
+        ],
+        "perturbation_note": "Same random noise on previous/current keeps their difference unchanged; may introduce nonphysical divergence. Diagnostic sensitivity, not proof of illposedness."
+      }
+    }
+  ],
+  "optimizer_used": false,
+  "main_test_opened": false,
+  "independent_validation": false,
+  "limitations": [
+    "Known TRAIN case only; later true states used ONLY in explicitly labeled training-window diagnostics",
+    "Own rollout never uses reference future as predictor input",
+    "Gradient conflict at sampled states does not alone prove cause or select a loss coefficient",
+    "Analytic-versus-FD discrepancy can reflect grid interpolation/discretization; not automatically a coding bug",
+    "Noise response does not establish generalization, instability theorem or inadequate inputs"
+  ]
+}

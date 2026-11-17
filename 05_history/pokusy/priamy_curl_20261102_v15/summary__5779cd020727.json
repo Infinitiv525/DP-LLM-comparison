@@ -1,0 +1,190 @@
+{
+  "status": "DIRECT_CURL_TRAIN_FIT_EVALUATED",
+  "config": {
+    "name": "direct_curl",
+    "representation": "curl",
+    "train_count": 3,
+    "state_conditioning": true,
+    "width": 192,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "seed": 20261102,
+    "updates": 150000,
+    "lr": 0.0003,
+    "warmup": 1000,
+    "batch": 2048,
+    "collocation": 256,
+    "assess_every": 15000
+  },
+  "accuracy": [
+    {
+      "score": 0.027298007698433574,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.016038054808450133,
+        "pressure_relative_l2": 0.03855796058841702
+      },
+      "interior_div_rms": 0.014042903360042,
+      "direct_query_gpu_ms": {
+        "p50": 3.4911680221557617,
+        "p95": 3.503827226161957,
+        "p99": 3.529223656654358
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": true,
+      "mean_fd_momentum_loss": 0.10781510994464409,
+      "mean_reference_fd_momentum_loss": 0.00640134365462205
+    },
+    {
+      "score": 0.01979598479489425,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.007814864670940645,
+        "pressure_relative_l2": 0.03177710491884785
+      },
+      "interior_div_rms": 0.005440164791780109,
+      "direct_query_gpu_ms": {
+        "p50": 3.486656069755554,
+        "p95": 3.503679966926575,
+        "p99": 3.5256134724617003
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "mass_limit": 0.016320491675287485,
+      "mass_pass": true,
+      "mean_fd_momentum_loss": 0.019147765869666048,
+      "mean_reference_fd_momentum_loss": 0.002707435834581549
+    },
+    {
+      "score": 0.019336439275868963,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.009614189301302891,
+        "pressure_relative_l2": 0.029058689250435032
+      },
+      "interior_div_rms": 0.009336896440280336,
+      "direct_query_gpu_ms": {
+        "p50": 3.495952010154724,
+        "p95": 3.5085487604141234,
+        "p99": 3.5186790895462035
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "mass_limit": 0.02801069151610136,
+      "mass_pass": true,
+      "mean_fd_momentum_loss": 0.03440628556080726,
+      "mean_reference_fd_momentum_loss": 0.0036672904232454276
+    }
+  ],
+  "training_monitor": [
+    {
+      "score": 0.027298007698433574,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.016038054808450133,
+        "pressure_relative_l2": 0.03855796058841702
+      },
+      "interior_div_rms": 0.014042903360042,
+      "direct_query_gpu_ms": {
+        "p50": 3.490895986557007,
+        "p95": 3.504219174385071,
+        "p99": 3.51048538684845
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": true,
+      "mean_fd_momentum_loss": 0.10781510994464409,
+      "mean_reference_fd_momentum_loss": 0.00640134365462205
+    },
+    {
+      "score": 0.01979598479489425,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.007814864670940645,
+        "pressure_relative_l2": 0.03177710491884785
+      },
+      "interior_div_rms": 0.005440164791780109,
+      "direct_query_gpu_ms": {
+        "p50": 3.4829920530319214,
+        "p95": 3.499118435382843,
+        "p99": 3.5048262524604796
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "mass_limit": 0.016320491675287485,
+      "mass_pass": true,
+      "mean_fd_momentum_loss": 0.019147765869666048,
+      "mean_reference_fd_momentum_loss": 0.002707435834581549
+    },
+    {
+      "score": 0.019336439275868963,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.009614189301302891,
+        "pressure_relative_l2": 0.029058689250435032
+      },
+      "interior_div_rms": 0.009336896440280336,
+      "direct_query_gpu_ms": {
+        "p50": 3.4937920570373535,
+        "p95": 3.5070431232452393,
+        "p99": 3.5219059371948243
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "mass_limit": 0.02801069151610136,
+      "mass_pass": true,
+      "mean_fd_momentum_loss": 0.03440628556080726,
+      "mean_reference_fd_momentum_loss": 0.0036672904232454276
+    }
+  ],
+  "selected_update": 150000,
+  "all238_training_frames_visited": true,
+  "training_seconds": 14587.283742097992,
+  "peak_cuda_allocated_bytes": 2873887232,
+  "checkpoint_sha256": "0c94f69edbee4ad2cc046a4da911ef333b7022e98e1d30f96becbc953fda1987",
+  "independent_validation": false,
+  "causal_stepper": false,
+  "llm_ready": false,
+  "train_scenarios": 3,
+  "validation_scenarios": 0,
+  "train_selection_scenarios": 3,
+  "training_case_updates": [
+    50000,
+    50000,
+    50000
+  ],
+  "working_gate": {
+    "accuracy_pass": true,
+    "mass_pass": true,
+    "direct_query_latency_pass": true
+  },
+  "limitations": [
+    "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+    "Same trunk/CNN but final primitive3 versus streamfunction-pressure2 head differs",
+    "Curl increment preserves initial discrete div only on eroded fluid interior after masking",
+    "Absolute time query, no recurrent own states; not directly comparable causal latency",
+    "Direct time query, continuous-autograd PDE versus matching FD-data/grid output"
+  ]
+}

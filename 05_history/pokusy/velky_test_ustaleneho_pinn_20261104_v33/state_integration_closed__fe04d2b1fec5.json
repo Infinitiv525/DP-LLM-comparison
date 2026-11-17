@@ -1,0 +1,1426 @@
+{
+  "tasks": {
+    "qwen3_8b_r00_c00": {
+      "status": "DONE",
+      "task": {
+        "id": "qwen3_8b_r00_c00",
+        "kind": "search",
+        "method": "qwen3_8b",
+        "run": 0,
+        "candidate": 0,
+        "seed": 320001,
+        "dependencies": []
+      },
+      "worker": 2,
+      "job": "143328",
+      "claimed_unix": 1793805037.9722648,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "qwen3_8b_r00_c00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02228318402559943,
+          "velocity_error": 0.3274537134870334,
+          "pressure_error": 1.7376420014635598,
+          "momentum_rms": 1.6400328766169536,
+          "divergence_rms": 6.723535431679191e-07,
+          "boundary_error": 0.11626645046087165,
+          "training_seconds": 100.92213506100234,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "0454146883bced840e371eb590607bcc8808ccc479a25d3fe6658c401a4a4082",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/qwen3_8b_r00_c00/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 149.36470953500248,
+            "child_cpu_seconds": 109.206149
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805187.355217
+    },
+    "ministral3_8b_r00_c00": {
+      "status": "DONE",
+      "task": {
+        "id": "ministral3_8b_r00_c00",
+        "kind": "search",
+        "method": "ministral3_8b",
+        "run": 0,
+        "candidate": 0,
+        "seed": 320001,
+        "dependencies": []
+      },
+      "worker": 4,
+      "job": "143328",
+      "claimed_unix": 1793805037.9813995,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "ministral3_8b_r00_c00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02228318402559943,
+          "velocity_error": 0.3274537134870334,
+          "pressure_error": 1.7376420014635598,
+          "momentum_rms": 1.6400328766169536,
+          "divergence_rms": 6.723535431679191e-07,
+          "boundary_error": 0.11626645046087165,
+          "training_seconds": 103.08444458099257,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "cdb6b016b96786e439caa18e2cc309bb875221b4021dba99929e58d46ea5caae",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/ministral3_8b_r00_c00/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 151.51583517300605,
+            "child_cpu_seconds": 111.203155
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805189.515641
+    },
+    "phi4_mini_r00_c00": {
+      "status": "DONE",
+      "task": {
+        "id": "phi4_mini_r00_c00",
+        "kind": "search",
+        "method": "phi4_mini",
+        "run": 0,
+        "candidate": 0,
+        "seed": 320001,
+        "dependencies": []
+      },
+      "worker": 3,
+      "job": "143328",
+      "claimed_unix": 1793805037.9847262,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "phi4_mini_r00_c00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.022283184034716595,
+          "velocity_error": 0.3274537142685767,
+          "pressure_error": 1.7376420015308,
+          "momentum_rms": 1.64003225640336,
+          "divergence_rms": 6.723226683018546e-07,
+          "boundary_error": 0.11626645046087165,
+          "training_seconds": 104.03395921899937,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "12854ee9badb78edc14f1b485931af0c4d6a68bfab58197b202819f3e038d98e",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/phi4_mini_r00_c00/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 152.45960833900608,
+            "child_cpu_seconds": 112.51422
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805190.460952
+    },
+    "granite33_8b_r00_c00": {
+      "status": "DONE",
+      "task": {
+        "id": "granite33_8b_r00_c00",
+        "kind": "search",
+        "method": "granite33_8b",
+        "run": 0,
+        "candidate": 0,
+        "seed": 320001,
+        "dependencies": []
+      },
+      "worker": 0,
+      "job": "143328",
+      "claimed_unix": 1793805037.9875853,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "granite33_8b_r00_c00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02228318402559943,
+          "velocity_error": 0.3274537134870334,
+          "pressure_error": 1.7376420014635598,
+          "momentum_rms": 1.6400328766169536,
+          "divergence_rms": 6.723535431679191e-07,
+          "boundary_error": 0.11626645046087165,
+          "training_seconds": 99.55694882299576,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "e6649bc488474611e33658f28ad7870d48a1c8a34c6fe9523b4b72d75847a2e4",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/granite33_8b_r00_c00/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 158.205451471993,
+            "child_cpu_seconds": 108.00607500000001
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805196.2104943
+    },
+    "random_r00_c00": {
+      "status": "DONE",
+      "task": {
+        "id": "random_r00_c00",
+        "kind": "search",
+        "method": "random",
+        "run": 0,
+        "candidate": 0,
+        "seed": 320001,
+        "dependencies": []
+      },
+      "worker": 7,
+      "job": "143328",
+      "claimed_unix": 1793805037.991587,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "random_r00_c00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02228318403761185,
+          "velocity_error": 0.3274537145257749,
+          "pressure_error": 1.7376420014949496,
+          "momentum_rms": 1.6400323353502135,
+          "divergence_rms": 6.723226683018546e-07,
+          "boundary_error": 0.11626645046087165,
+          "training_seconds": 101.5456970850064,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "3d3e8d7c17a3f36f9b4787555235a80f011d4a389401ae34047b1a708d1c813c",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/random_r00_c00/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 150.00676988800114,
+            "child_cpu_seconds": 110.00160199999999
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805188.0118785
+    },
+    "tpe_r00_c00": {
+      "status": "DONE",
+      "task": {
+        "id": "tpe_r00_c00",
+        "kind": "search",
+        "method": "tpe",
+        "run": 0,
+        "candidate": 0,
+        "seed": 320001,
+        "dependencies": []
+      },
+      "worker": 6,
+      "job": "143328",
+      "claimed_unix": 1793805037.9944048,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "tpe_r00_c00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02228318402559943,
+          "velocity_error": 0.3274537134870334,
+          "pressure_error": 1.7376420014635598,
+          "momentum_rms": 1.6400328766169536,
+          "divergence_rms": 6.723535431679191e-07,
+          "boundary_error": 0.11626645046087165,
+          "training_seconds": 104.35921785900427,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "57ebcd827dfe65e03fc72fbd5d5541a81605d894f27e121603dee91e3fc26b1a",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/tpe_r00_c00/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 152.81746374700742,
+            "child_cpu_seconds": 112.63836199999999
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805190.830733
+    },
+    "qwen3_8b_r00_c01": {
+      "status": "DONE",
+      "task": {
+        "id": "qwen3_8b_r00_c01",
+        "kind": "search",
+        "method": "qwen3_8b",
+        "run": 0,
+        "candidate": 1,
+        "seed": 320001,
+        "dependencies": [
+          "qwen3_8b_r00_c00"
+        ]
+      },
+      "worker": 2,
+      "job": "143328",
+      "claimed_unix": 1793805187.3980265,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "qwen3_8b_r00_c01",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.003,
+            "bc_weight": 0.03,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.022621840990690322,
+          "velocity_error": 0.3456703551491865,
+          "pressure_error": 1.5430553855835345,
+          "momentum_rms": 1.3140703882028488,
+          "divergence_rms": 6.856178866360802e-07,
+          "boundary_error": 0.1167671071464518,
+          "training_seconds": 101.22201824099466,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "d6b6111e8eeaa356291a9356d6dcae9a8472e4978ab5e4e4c70aa9507389b621",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/qwen3_8b_r00_c01/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "proposal": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 54.40316413399705,
+            "child_cpu_seconds": 55.50060599999999
+          },
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 108.9607026050071,
+            "child_cpu_seconds": 107.40279999999998
+          }
+        },
+        "proposal_summary_sha256": "38d4e20cadd12f3dc0485a72c9439ce8ff3c664f4572a44003a93bc035219170"
+      },
+      "finished_unix": 1793805359.2166946
+    },
+    "ministral3_8b_r00_c01": {
+      "status": "DONE",
+      "task": {
+        "id": "ministral3_8b_r00_c01",
+        "kind": "search",
+        "method": "ministral3_8b",
+        "run": 0,
+        "candidate": 1,
+        "seed": 320001,
+        "dependencies": [
+          "ministral3_8b_r00_c00"
+        ]
+      },
+      "worker": 4,
+      "job": "143328",
+      "claimed_unix": 1793805189.5582292,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "ministral3_8b_r00_c01",
+          "parameters": {
+            "learning_rate": 0.0005,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.003,
+            "bc_weight": 0.003,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.0244238632142652,
+          "velocity_error": 0.4395539457252141,
+          "pressure_error": 1.5200833295955987,
+          "momentum_rms": 1.528083469607807,
+          "divergence_rms": 6.394696771518127e-07,
+          "boundary_error": 0.18122370901241627,
+          "training_seconds": 103.24143463799555,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "50bcf4ecd69a2cf90ac9b501c717ccc62d613eb01385e9b1bcc8dec673c6353d",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/ministral3_8b_r00_c01/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "proposal": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 60.91344037299859,
+            "child_cpu_seconds": 63.03993199999999
+          },
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 110.95660381299967,
+            "child_cpu_seconds": 109.39282799999998
+          }
+        },
+        "proposal_summary_sha256": "252ab2b349f12ec2b4bfde4a0e540d66e51a8eda46bb9dbb2f1c61204f873402"
+      },
+      "finished_unix": 1793805372.4561973
+    },
+    "phi4_mini_r00_c01": {
+      "status": "DONE",
+      "task": {
+        "id": "phi4_mini_r00_c01",
+        "kind": "search",
+        "method": "phi4_mini",
+        "run": 0,
+        "candidate": 1,
+        "seed": 320001,
+        "dependencies": [
+          "phi4_mini_r00_c00"
+        ]
+      },
+      "worker": 3,
+      "job": "143328",
+      "claimed_unix": 1793805190.5071952,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "phi4_mini_r00_c01",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02228318403266491,
+          "velocity_error": 0.32745371402266266,
+          "pressure_error": 1.7376420015000118,
+          "momentum_rms": 1.6400321102576627,
+          "divergence_rms": 6.723226683018546e-07,
+          "boundary_error": 0.11626645046087165,
+          "training_seconds": 104.76068322900392,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "4609e1839037600e319955d1ceabbe81e1169a568acfb9782946c32f8e2b3030",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/phi4_mini_r00_c01/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "proposal": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 50.94413372699637,
+            "child_cpu_seconds": 50.47841500000002
+          },
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 112.30039244200452,
+            "child_cpu_seconds": 110.86360699999999
+          }
+        },
+        "proposal_summary_sha256": "7b3fb8a02e64141b2d9e04eb58a97e84ae713b5a568509f34b6556544ba78953"
+      },
+      "finished_unix": 1793805357.8354826
+    },
+    "granite33_8b_r00_c01": {
+      "status": "DONE",
+      "task": {
+        "id": "granite33_8b_r00_c01",
+        "kind": "search",
+        "method": "granite33_8b",
+        "run": 0,
+        "candidate": 1,
+        "seed": 320001,
+        "dependencies": [
+          "granite33_8b_r00_c00"
+        ]
+      },
+      "worker": 0,
+      "job": "143328",
+      "claimed_unix": 1793805196.2709844,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "granite33_8b_r00_c01",
+          "parameters": {
+            "learning_rate": 0.0003,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.0001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.023917587558312636,
+          "velocity_error": 0.4096482949088971,
+          "pressure_error": 1.8200843909122184,
+          "momentum_rms": 3.5343468035618835,
+          "divergence_rms": 6.028662055333565e-07,
+          "boundary_error": 0.17335260891717927,
+          "training_seconds": 100.57145172799937,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "212fdd423b4be988b7ba744cc5c822b4177ad6e922816cebbae79d3bbb59ada2",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/granite33_8b_r00_c01/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "proposal": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 58.898706949999905,
+            "child_cpu_seconds": 60.83523399999999
+          },
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 107.93553313698794,
+            "child_cpu_seconds": 106.51748999999998
+          }
+        },
+        "proposal_summary_sha256": "3b54a6c8aa822875a22de17961fdd422a9dc00f6a80099003f391ca59944b823"
+      },
+      "finished_unix": 1793805371.7092679
+    },
+    "random_r00_c01": {
+      "status": "DONE",
+      "task": {
+        "id": "random_r00_c01",
+        "kind": "search",
+        "method": "random",
+        "run": 0,
+        "candidate": 1,
+        "seed": 320001,
+        "dependencies": [
+          "random_r00_c00"
+        ]
+      },
+      "worker": 7,
+      "job": "143328",
+      "claimed_unix": 1793805188.0561192,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "random_r00_c01",
+          "parameters": {
+            "learning_rate": 0.0009256665982717376,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.0003,
+            "bc_weight": 0.003,
+            "warmup_fraction": 0.0
+          },
+          "status": "COMPLETE",
+          "score": 0.02218508416625765,
+          "velocity_error": 0.3147884936561392,
+          "pressure_error": 1.905063577497844,
+          "momentum_rms": 2.143749744252046,
+          "divergence_rms": 6.564740164184734e-07,
+          "boundary_error": 0.11422855457629229,
+          "training_seconds": 102.84544281499984,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "f5c9ec63feda4841366298c9b3e6ce564948da61fb11c44d8e0cb0d3152a7279",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/random_r00_c01/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 111.10290216299472,
+            "child_cpu_seconds": 109.33158600000002
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805299.173708
+    },
+    "tpe_r00_c01": {
+      "status": "DONE",
+      "task": {
+        "id": "tpe_r00_c01",
+        "kind": "search",
+        "method": "tpe",
+        "run": 0,
+        "candidate": 1,
+        "seed": 320001,
+        "dependencies": [
+          "tpe_r00_c00"
+        ]
+      },
+      "worker": 6,
+      "job": "143328",
+      "claimed_unix": 1793805190.8732197,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "tpe_r00_c01",
+          "parameters": {
+            "learning_rate": 0.001883009751792279,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.001,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.020836323760740905,
+          "velocity_error": 0.2611074067207708,
+          "pressure_error": 1.8021371902957077,
+          "momentum_rms": 1.3203488020103464,
+          "divergence_rms": 7.324680747348609e-07,
+          "boundary_error": 0.06671666879803337,
+          "training_seconds": 104.1127073020034,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "6f4fe0ab37b98f8ac7baa0e5807ba57804cef230396099a8a239d66fbe93161b",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/tpe_r00_c01/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 111.70963384601055,
+            "child_cpu_seconds": 110.311056
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805302.8420634
+    },
+    "qwen3_8b_r00_c02": {
+      "status": "DONE",
+      "task": {
+        "id": "qwen3_8b_r00_c02",
+        "kind": "search",
+        "method": "qwen3_8b",
+        "run": 0,
+        "candidate": 2,
+        "seed": 320001,
+        "dependencies": [
+          "qwen3_8b_r00_c01"
+        ]
+      },
+      "worker": 2,
+      "job": "143328",
+      "claimed_unix": 1793805359.2613425,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "qwen3_8b_r00_c02",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.03,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.022145105558486086,
+          "velocity_error": 0.31623080172545853,
+          "pressure_error": 1.715412700478859,
+          "momentum_rms": 1.6300868812697,
+          "divergence_rms": 6.825378037215243e-07,
+          "boundary_error": 0.10182342884568067,
+          "training_seconds": 101.27601438299462,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "12024b69e21f5ea203963ad1049c06f20c59cfd0d2c425d84bf36adfb0bcbcc6",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/qwen3_8b_r00_c02/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "proposal": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 50.29829261600389,
+            "child_cpu_seconds": 51.24791500000003
+          },
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 108.70811484300066,
+            "child_cpu_seconds": 107.32816100000005
+          }
+        },
+        "proposal_summary_sha256": "37729ae4b7ab646c118ede8581f3198d0b05b93c53d1ad7f75c7f1f8cd06a046"
+      },
+      "finished_unix": 1793805518.2930639
+    },
+    "ministral3_8b_r00_c02": {
+      "status": "DONE",
+      "task": {
+        "id": "ministral3_8b_r00_c02",
+        "kind": "search",
+        "method": "ministral3_8b",
+        "run": 0,
+        "candidate": 2,
+        "seed": 320001,
+        "dependencies": [
+          "ministral3_8b_r00_c01"
+        ]
+      },
+      "worker": 4,
+      "job": "143328",
+      "claimed_unix": 1793805372.4995534,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "ministral3_8b_r00_c02",
+          "parameters": {
+            "learning_rate": 0.0005,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.003,
+            "bc_weight": 0.03,
+            "warmup_fraction": 0.0625
+          },
+          "status": "COMPLETE",
+          "score": 0.024948862119343024,
+          "velocity_error": 0.4317499057859445,
+          "pressure_error": 1.4286756636719016,
+          "momentum_rms": 1.6378944340284491,
+          "divergence_rms": 6.493313715745507e-07,
+          "boundary_error": 0.1707161153935412,
+          "training_seconds": 100.63100471800135,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "ebd320c0c0112e6ccb1f2fadafacddcdc30180b52230023492f5c515e3571b03",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/ministral3_8b_r00_c02/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "proposal": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 54.6480554209993,
+            "child_cpu_seconds": 56.228238000000026
+          },
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 108.0954943740071,
+            "child_cpu_seconds": 106.69999499999999
+          }
+        },
+        "proposal_summary_sha256": "23874697883eb95f3ea64125649a3fd79371104add54fb74356378e939e1577e"
+      },
+      "finished_unix": 1793805535.2684941
+    },
+    "phi4_mini_r00_c02": {
+      "status": "DONE",
+      "task": {
+        "id": "phi4_mini_r00_c02",
+        "kind": "search",
+        "method": "phi4_mini",
+        "run": 0,
+        "candidate": 2,
+        "seed": 320001,
+        "dependencies": [
+          "phi4_mini_r00_c01"
+        ]
+      },
+      "worker": 3,
+      "job": "143328",
+      "claimed_unix": 1793805357.8827899,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "phi4_mini_r00_c02",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02228318403425846,
+          "velocity_error": 0.32745371416628655,
+          "pressure_error": 1.7376420015013756,
+          "momentum_rms": 1.6400320889826503,
+          "divergence_rms": 6.723226683018546e-07,
+          "boundary_error": 0.11626645046087165,
+          "training_seconds": 103.92355749801209,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "226a0383d40f6aba21da6ad3acf25e92d61aa27c0fa9e5688ca3cda88038dc56",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/phi4_mini_r00_c02/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "proposal": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 50.89471623499412,
+            "child_cpu_seconds": 50.44197200000001
+          },
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 111.70178951699927,
+            "child_cpu_seconds": 110.219862
+          }
+        },
+        "proposal_summary_sha256": "07ab8711f64230381bcf2383ea6aaea7f49830c41bec5b11f86796f087bfe5b9"
+      },
+      "finished_unix": 1793805520.5039082
+    },
+    "granite33_8b_r00_c02": {
+      "status": "DONE",
+      "task": {
+        "id": "granite33_8b_r00_c02",
+        "kind": "search",
+        "method": "granite33_8b",
+        "run": 0,
+        "candidate": 2,
+        "seed": 320001,
+        "dependencies": [
+          "granite33_8b_r00_c01"
+        ]
+      },
+      "worker": 0,
+      "job": "143328",
+      "claimed_unix": 1793805371.7504392,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "granite33_8b_r00_c02",
+          "parameters": {
+            "learning_rate": 0.0003,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.0001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.023917587560463784,
+          "velocity_error": 0.40964829501639033,
+          "pressure_error": 1.8200843909763378,
+          "momentum_rms": 3.5343467717535817,
+          "divergence_rms": 6.028662055333565e-07,
+          "boundary_error": 0.17335260891717927,
+          "training_seconds": 100.10452542899293,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "a88b1277182abf05626d06ab9f0a97eac5b889d751df7713e98c17fa6743105e",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/granite33_8b_r00_c02/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "proposal": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 49.43950787199719,
+            "child_cpu_seconds": 50.648436000000004
+          },
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 107.66808324999874,
+            "child_cpu_seconds": 106.15831500000002
+          }
+        },
+        "proposal_summary_sha256": "c9a88b6013eaaa3769646c4000e6ad53daf3969c35b79f502b6896de24b03b23"
+      },
+      "finished_unix": 1793805528.8835151
+    },
+    "random_r00_c02": {
+      "status": "DONE",
+      "task": {
+        "id": "random_r00_c02",
+        "kind": "search",
+        "method": "random",
+        "run": 0,
+        "candidate": 2,
+        "seed": 320001,
+        "dependencies": [
+          "random_r00_c01"
+        ]
+      },
+      "worker": 7,
+      "job": "143328",
+      "claimed_unix": 1793805299.219006,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "random_r00_c02",
+          "parameters": {
+            "learning_rate": 0.00015883469854932426,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.01,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.0625
+          },
+          "status": "COMPLETE",
+          "score": 0.029001460462644717,
+          "velocity_error": 0.6238818042182761,
+          "pressure_error": 1.3667596157822757,
+          "momentum_rms": 1.2477269091209473,
+          "divergence_rms": 5.000195859601333e-07,
+          "boundary_error": 0.23478281257325614,
+          "training_seconds": 99.59502379500191,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "0f4bc2fc0844bca86905d4b3d6e0822919c2240debb8016f02c94241f8167564",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/random_r00_c02/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 107.39332805499726,
+            "child_cpu_seconds": 105.87777599999998
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805406.6285772
+    },
+    "tpe_r00_c02": {
+      "status": "DONE",
+      "task": {
+        "id": "tpe_r00_c02",
+        "kind": "search",
+        "method": "tpe",
+        "run": 0,
+        "candidate": 2,
+        "seed": 320001,
+        "dependencies": [
+          "tpe_r00_c01"
+        ]
+      },
+      "worker": 6,
+      "job": "143328",
+      "claimed_unix": 1793805302.885135,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "tpe_r00_c02",
+          "parameters": {
+            "learning_rate": 0.00040717198601586895,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.0003,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.023389517911721627,
+          "velocity_error": 0.36835086709803433,
+          "pressure_error": 1.7465527533054754,
+          "momentum_rms": 2.959766208890728,
+          "divergence_rms": 6.462726079129267e-07,
+          "boundary_error": 0.12057710702248048,
+          "training_seconds": 104.18349367700284,
+          "training_seed": 320001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "db9735c6fa30e62edeb27f61087aa33cb35b7f3c1872072bcb5d4661c54d170d",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/tpe_r00_c02/143328/training/summary.json",
+        "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+        "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 111.56227892500465,
+            "child_cpu_seconds": 110.21204900000001
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805414.4705417
+    },
+    "qwen3_8b_r00_k00": {
+      "status": "DONE",
+      "task": {
+        "id": "qwen3_8b_r00_k00",
+        "kind": "retrain",
+        "method": "qwen3_8b",
+        "run": 0,
+        "repeat": 0,
+        "seed": 330001,
+        "dependencies": [
+          "qwen3_8b_r00_c00",
+          "qwen3_8b_r00_c01",
+          "qwen3_8b_r00_c02"
+        ]
+      },
+      "worker": 2,
+      "job": "143328",
+      "claimed_unix": 1793805518.3385315,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "qwen3_8b_r00_k00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.03,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.022080011041596244,
+          "velocity_error": 0.3188748712150896,
+          "pressure_error": 1.683199312731507,
+          "momentum_rms": 1.5763227728030789,
+          "divergence_rms": 6.830090245613502e-07,
+          "boundary_error": 0.10152104889988087,
+          "training_seconds": 101.02919479600678,
+          "training_seed": 330001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "5164da6e39827235f15783ee9225ee836a9e66938bb6bd368af5e4c54975c412",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/qwen3_8b_r00_k00/143328/training/summary.json",
+        "initial_weight_sha256": "ca550c543f7f25f756aaa6254c2a1c2c6eff1f1273f2e051a4519ad9054989eb",
+        "sample_sha256": "d2556c686432c77778cc717f3d2a415dd9924f6de403153fe3648cbf8d6d722d",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 109.00653127899568,
+            "child_cpu_seconds": 107.29074799999991
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805627.3643417
+    },
+    "ministral3_8b_r00_k00": {
+      "status": "DONE",
+      "task": {
+        "id": "ministral3_8b_r00_k00",
+        "kind": "retrain",
+        "method": "ministral3_8b",
+        "run": 0,
+        "repeat": 0,
+        "seed": 330001,
+        "dependencies": [
+          "ministral3_8b_r00_c00",
+          "ministral3_8b_r00_c01",
+          "ministral3_8b_r00_c02"
+        ]
+      },
+      "worker": 4,
+      "job": "143328",
+      "claimed_unix": 1793805535.3173957,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "ministral3_8b_r00_k00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02223742791330357,
+          "velocity_error": 0.3268077618710201,
+          "pressure_error": 1.6681972683455109,
+          "momentum_rms": 1.6126932579432072,
+          "divergence_rms": 6.778312469041843e-07,
+          "boundary_error": 0.11367626162569541,
+          "training_seconds": 102.8716325360001,
+          "training_seed": 330001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "3617da090f9922eab715426206d18ff770f166c92f9d94c946573ce5a3c2d19b",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/ministral3_8b_r00_k00/143328/training/summary.json",
+        "initial_weight_sha256": "ca550c543f7f25f756aaa6254c2a1c2c6eff1f1273f2e051a4519ad9054989eb",
+        "sample_sha256": "d2556c686432c77778cc717f3d2a415dd9924f6de403153fe3648cbf8d6d722d",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 110.35536801799026,
+            "child_cpu_seconds": 108.83324900000002
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805645.687576
+    },
+    "phi4_mini_r00_k00": {
+      "status": "DONE",
+      "task": {
+        "id": "phi4_mini_r00_k00",
+        "kind": "retrain",
+        "method": "phi4_mini",
+        "run": 0,
+        "repeat": 0,
+        "seed": 330001,
+        "dependencies": [
+          "phi4_mini_r00_c00",
+          "phi4_mini_r00_c01",
+          "phi4_mini_r00_c02"
+        ]
+      },
+      "worker": 3,
+      "job": "143328",
+      "claimed_unix": 1793805520.551888,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "phi4_mini_r00_k00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.022237427923913,
+          "velocity_error": 0.3268077627958799,
+          "pressure_error": 1.6681972683631934,
+          "momentum_rms": 1.612693094740522,
+          "divergence_rms": 6.778799222641165e-07,
+          "boundary_error": 0.11367626162569541,
+          "training_seconds": 103.5548746400018,
+          "training_seed": 330001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "096a68a78fda22367dffb030a169904b62da49c5b73d804a29389f0040601c74",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/phi4_mini_r00_k00/143328/training/summary.json",
+        "initial_weight_sha256": "ca550c543f7f25f756aaa6254c2a1c2c6eff1f1273f2e051a4519ad9054989eb",
+        "sample_sha256": "d2556c686432c77778cc717f3d2a415dd9924f6de403153fe3648cbf8d6d722d",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 111.15248887499911,
+            "child_cpu_seconds": 109.75950300000011
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805631.7191186
+    },
+    "granite33_8b_r00_k00": {
+      "status": "DONE",
+      "task": {
+        "id": "granite33_8b_r00_k00",
+        "kind": "retrain",
+        "method": "granite33_8b",
+        "run": 0,
+        "repeat": 0,
+        "seed": 330001,
+        "dependencies": [
+          "granite33_8b_r00_c00",
+          "granite33_8b_r00_c01",
+          "granite33_8b_r00_c02"
+        ]
+      },
+      "worker": 0,
+      "job": "143328",
+      "claimed_unix": 1793805528.9273825,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "granite33_8b_r00_k00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02223742791330357,
+          "velocity_error": 0.3268077618710201,
+          "pressure_error": 1.6681972683455109,
+          "momentum_rms": 1.6126932579432072,
+          "divergence_rms": 6.778312469041843e-07,
+          "boundary_error": 0.11367626162569541,
+          "training_seconds": 101.16391190000286,
+          "training_seed": 330001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "a8b9013bcba26522bc07dc5d4a98701eeb97687a32c4d614622e3dbb44a2bfbf",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/granite33_8b_r00_k00/143328/training/summary.json",
+        "initial_weight_sha256": "ca550c543f7f25f756aaa6254c2a1c2c6eff1f1273f2e051a4519ad9054989eb",
+        "sample_sha256": "d2556c686432c77778cc717f3d2a415dd9924f6de403153fe3648cbf8d6d722d",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 108.5874186400033,
+            "child_cpu_seconds": 107.32584099999994
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805637.5332444
+    },
+    "random_r00_k00": {
+      "status": "DONE",
+      "task": {
+        "id": "random_r00_k00",
+        "kind": "retrain",
+        "method": "random",
+        "run": 0,
+        "repeat": 0,
+        "seed": 330001,
+        "dependencies": [
+          "random_r00_c00",
+          "random_r00_c01",
+          "random_r00_c02"
+        ]
+      },
+      "worker": 7,
+      "job": "143328",
+      "claimed_unix": 1793805406.676382,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "random_r00_k00",
+          "parameters": {
+            "learning_rate": 0.0009256665982717376,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.0003,
+            "bc_weight": 0.003,
+            "warmup_fraction": 0.0
+          },
+          "status": "COMPLETE",
+          "score": 0.022113222813432244,
+          "velocity_error": 0.31535648204860156,
+          "pressure_error": 1.7995455929793096,
+          "momentum_rms": 2.080839920668622,
+          "divergence_rms": 6.719060753081728e-07,
+          "boundary_error": 0.11448511203000025,
+          "training_seconds": 103.88768061500741,
+          "training_seed": 330001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "c8dc76bc244fe43393f61d08edb8fe836de24fa8860f2bdaa920e466331ca896",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/random_r00_k00/143328/training/summary.json",
+        "initial_weight_sha256": "ca550c543f7f25f756aaa6254c2a1c2c6eff1f1273f2e051a4519ad9054989eb",
+        "sample_sha256": "d2556c686432c77778cc717f3d2a415dd9924f6de403153fe3648cbf8d6d722d",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 112.05287544000021,
+            "child_cpu_seconds": 110.192811
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805518.7497406
+    },
+    "tpe_r00_k00": {
+      "status": "DONE",
+      "task": {
+        "id": "tpe_r00_k00",
+        "kind": "retrain",
+        "method": "tpe",
+        "run": 0,
+        "repeat": 0,
+        "seed": 330001,
+        "dependencies": [
+          "tpe_r00_c00",
+          "tpe_r00_c01",
+          "tpe_r00_c02"
+        ]
+      },
+      "worker": 6,
+      "job": "143328",
+      "claimed_unix": 1793805414.516232,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "tpe_r00_k00",
+          "parameters": {
+            "learning_rate": 0.001883009751792279,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.001,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02106343900647368,
+          "velocity_error": 0.26122428468280645,
+          "pressure_error": 1.701197094342969,
+          "momentum_rms": 1.4134447040029623,
+          "divergence_rms": 7.283457877932919e-07,
+          "boundary_error": 0.06971194782930093,
+          "training_seconds": 104.3516614179971,
+          "training_seed": 330001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "d545b3082bb351cd6fdd4ada6fe8b53e2866e9417ef0e02d784ce5327f64e343",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/tpe_r00_k00/143328/training/summary.json",
+        "initial_weight_sha256": "ca550c543f7f25f756aaa6254c2a1c2c6eff1f1273f2e051a4519ad9054989eb",
+        "sample_sha256": "d2556c686432c77778cc717f3d2a415dd9924f6de403153fe3648cbf8d6d722d",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 111.86124672100414,
+            "child_cpu_seconds": 110.43069799999998
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805526.3959115
+    },
+    "fixed_k00": {
+      "status": "DONE",
+      "task": {
+        "id": "fixed_k00",
+        "kind": "fixed",
+        "method": "fixed",
+        "repeat": 0,
+        "seed": 330001,
+        "dependencies": []
+      },
+      "worker": 1,
+      "job": "143328",
+      "claimed_unix": 1793805037.9982905,
+      "outcome": {
+        "status": "COMPLETE",
+        "history": {
+          "id": "fixed_k00",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "status": "COMPLETE",
+          "score": 0.02223742791330357,
+          "velocity_error": 0.3268077618710201,
+          "pressure_error": 1.6681972683455109,
+          "momentum_rms": 1.6126932579432072,
+          "divergence_rms": 6.778312469041843e-07,
+          "boundary_error": 0.11367626162569541,
+          "training_seconds": 105.20709841800272,
+          "training_seed": 330001,
+          "epochs": 2,
+          "error_codes": []
+        },
+        "trial_summary_sha256": "9cecd46e344d76ce24289701bafbb49e87b2b8a3baaea84bd6f2ad7a4b2c0365",
+        "trial_summary_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33/integration/executions/fixed_k00/143328/training/summary.json",
+        "initial_weight_sha256": "ca550c543f7f25f756aaa6254c2a1c2c6eff1f1273f2e051a4519ad9054989eb",
+        "sample_sha256": "d2556c686432c77778cc717f3d2a415dd9924f6de403153fe3648cbf8d6d722d",
+        "processes": {
+          "training": {
+            "exit_code": 0,
+            "timed_out": false,
+            "wall_seconds": 148.3046784420003,
+            "child_cpu_seconds": 112.109063
+          }
+        },
+        "proposal_summary_sha256": null
+      },
+      "finished_unix": 1793805186.3165035
+    }
+  },
+  "attention_required": false,
+  "events": []
+}

@@ -1,0 +1,77 @@
+V20 – AUDIT GEOMETRIE A ÚVODNÉHO STAVU, 03.11.2026
+
+DOKONČENÉ
+142743COMPLETED0:0,freezeOK,1080vyhodnotení/225latentov,žiadnytréning.
+Chyba nie je lenpri prekážke: pri gridNS96,04%UchybySSEvzóne>0.5,
+ktorá však tvorí aj96,33%tekutiny. GeoswapCNNzmenaU0,154%,
+globálneúvodnékanályneutral57,66%; nepriamageometriavprefixeostáva.
+Nie dôkazjedinejpríčiny/kapacitylatent32. PodrobnostiVYSLEDKY_142743.txt.
+V DALSI_TEST.txt návrhkontrolovanéhopriestorovéhokontextu bezvypnutiaPINN.
+MaléJSONvo vysledky_142743/, veľképolia/váhyibaPerun. Tréningnespustený.
+Nižšiehistorickápríprava/štart.
+
+PREČO POKRAČUJEME AUDITOM
+V19 zlepšil fyziku, ale validačná chyba rýchlosti zostala okolo39%.
+Teraz chceme zistiť, kde vzniká chyba a ako model používa informáciu
+o tvare prekážky a známom úvodnom prúdení. Žiadny tréning alebo zmena váh.
+
+ČO SME OVERILI V KÓDE
+Výpočet bodu dostáva súradnice/čas, Fourierovevstupy, globálnyCNNlatent32,
+Re a6lokálnychúvodnýchhodnôt. Samostatný lokálny údaj o geometrii alebo
+vzdialenosti od prekážky medzi týmito vstupmi nie je. Geometria však
+vstupuje cezCNN; známafluidnámaska obmedzuje výstup a pri tréningu boli
+geometrickéokrajovébody. Nie je teda pravda, že model geometriu vôbec
+nevidí. Kódovýfakt sám nedokazuje príčinu nepresnosti.
+
+ROZDELENIE CHÝB V PRIESTORE
+Z existujúcejbinárnejmasky odvodíme vzdialenosť k najbližšej pevnejbunke.
+Nie nováCFD, nie analyticky presnýpovrch. Cropokraje nie sústeny.
+Tekutinu rozdelíme na d<=0.125,0.125<d<=0.5,d>0.5 vjednotkáchsolvera.
+Pre každúzónu uložíme relatívnuL2chybu, absolútnuRMSE, referenčnúRMS,
+podielplochy a podielcelkovejštvorcovejchyby. Tak nebudeme zamieňať
+veľkúrelatívnuchybu pri malejrýchlosti pri stene za hlavnýzdrojcelejchyby.
+Tlak vycentrujeme vždy cez celútekutinu, ažpotom rozdelíme zóny.
+Samostatnécentrovanie každejzóny by mohlo skryť regionálneodchýlky.
+
+VSTUPNÁ INFORMÁCIA A CITLIVOSŤ
+Porovnáme3hotovécheckpointy:pôvodnýprimitiveV17best100k,
+curlV19controlbest0 a curlV19gridNSbest20k. Na rovnakých9prípadoch
+(3TRAINmonitory+6VAL),8časoch1/5/10/20/40/80/160/238 po známomúvode.
+Pôvodný kontext porovnáme s vynulovaním globálnejgeometrie, neutralizáciou
+globálnychúvodnýchkanálov naTRAINmean/delta0, nulovým latentom so
+zachovanýmRe a výmenouCNNgeometrie za inúTRAINgeometriu.
+Lokálnyúvodnýstav,Re a skutočnáfluidnámaska ostanú rovnaké.
+
+Tieto zásahy môžu vytvoriť fyzikálne nekonzistentné vstupy mimo pôvodného
+rozdelenia. Ich chyby oproti pôvodnejreferencii sú diagnostikacitlivosti,
+nie výsledky novýchCFDscenárov alebo dôkaz lepšiehomodelu.
+Nebudú použité na tréning ani vyhlásenie finálnejpresnosti.
+
+Globálne32prvkovévektory spočítame ajpre všetkých75existujúcichprefixov.
+Normalizácia ichvzdialeností iba zo69TRAIN,explicitnýRekanál vynechaný;
+úvodnéprúdenie však môže niesť informáciu oRe. Pre každýprípad najbližšie
+3TRAINinejgeometrie; ajpri TRAINvylúčime celú rovnakúgeometriu.
+Nie dôkaz informačnejkapacity siete alebo fyzikálnejpodobnosti prípadov.
+
+KONTROLY A ROZSAH
+Pôvodnápredikcia sa musí zhodovať so zmrazeným predchádzajúcim výpočtom
+aj uloženými poľovýmichybami v daných8časoch. Všetkyvarianty zachovajú
+známyúvod a explicitnýRe. TriCPUtesty prešli0.778s: rozdeleniezón,
+globálnatlakovágauge so zachovaním regionálnehoodstupu, aditivitaSSE.
+Geometrickápríprava overila ajvzdialenosťbezfalošnejcropsteny.
+AST/bash-nOK, rodičovskýV19freeze a checkpointy overené, V20zmrazený.
+
+NaGPU iba prefixy2,3 a geometria; budúcepolia9prípadov ibaCPUscorer.
+Žiadne novéCFD/downloady/mainTEST/externépredlohy. Audit8časov nie je
+náhrada238snímokV19 ani novýtest5ms. Veľképolia a váhy ostávajúPerun.
+Zdrojovémasky a odvodenévzdialenosti sa nemenia ani nesťahujú doPC.
+Perun:results/fpo_pinn_context_audit_20261103_v20.
+Novécommon20/context_audit20/tests20/audit20/init20/capture27/scripts224,225.
+OVERENÝ ŠTART
+GPUaudit142743, účtovanie142744afterany, IDregistrované predrelease.
+142743RUNNINGgpu02. Tri testy na výpočtovom uzle prešli0.106s.
+Prvé dva prípady pôvodného modelu už spracované cez8časov; kontrola
+zhody s predchádzajúcimi predikciami, hardIC aRe prešla. Ďalšie bežia.
+Zatiaľ bez vyhodnoteného záveru o príčine. Maléprotocol/freeze/prepared/
+geometry_notes/submission sú ajlokálne v zaznamy/. Vzdialenostnépolia
+a váhy ostávajú ibaPerun.

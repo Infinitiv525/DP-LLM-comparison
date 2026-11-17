@@ -1,0 +1,96 @@
+V19 – VÝSLEDKY DOPLNKOVEJ KONTROLY GRIDFYZIKY, 03.11.2026
+
+Úloha142615 COMPLETED0:0, účtovanie142616 uložené, fronta prázdna.
+Zmrazené zdroje a pôvodné váhy overené, obe vetvy úspešne dokončené.
+Rovnaký štart zoV17curlbest100k, rovnaký celý sampler, každá30000
+aktualizácií na69TRAIN (434/435na prípad), všetkých238snímok navštívených.
+Vstupy2,3 povinné;6VAL lenCPUscorer/selection. HlavnýTEST zostal zatvorený.
+
+HLAVNÝ ZÁVER
+Pridaný postih hybnosti skutočného gridvýstupu zlepšil fyzikálnu metriku,
+ale potrebnú presnosť prúdenia nevyriešil. Po rovnakých30000update je
+priemerná FDhybnostnáodchýlka na6VAL o26,28%nižšia než vkontrole.
+Chyba rýchlosti sa pritom mení iba z39,48%na39,20%. ŽiadnyVALprípad
+nesplnil obe brány presnostiU<=10%/p<=20%. Kontinuita ačas vyhovujú.
+Percento zlepšenia fyzikálnej metriky nemožno zamieňať so zlepšením
+presnosti rýchlosti/tlaku. Jeden seed a vývojováVAL nie sú finálny
+nezávislý štatistický výsledok.
+
+POROVNANIE PO ROVNAKÝCH30000 DODATOČNÝCHUPDATE, CEZ238SNÍMOK
+                             kontrola          pridanýgridNS
+Priemerná chybaU              39,480%             39,197%
+Priemerná chybap              55,407%             55,051%
+Priemer FDmomentumloss        11,68214365          8,61226776
+Pokles FDmomentumloss oproti kontrole:26,278361%.
+Toto je porovnanie posledných váh pri rovnakom tréningovom rozpočte.
+
+VYBRANÉCHECKPOINTY PODĽA PÔVODNÉHO SPOLOČNÉHO KRITÉRIA
+Kontrola vybrala update0 – ďalší tréning nezlepšil priemerU/p natoľko,
+aby prekonal pôvodný stav. Novávetva vybrala20000dodatočnýchupdate.
+Ide o rôzny vybranýupdate; nezamieňať s porovnaním30kvyššie.
+                             kontrola(best0)   gridNS(best20k)
+Priemerná chybaU              39,427%             39,161%
+Priemerná chybap              55,066%             54,981%
+Priemer FDmomentumloss        12,28724156          8,66199620
+Kontrola hmoty                6/6                 6/6
+Brány presnosti               0/6                 0/6
+Najvyšší queryp99             3,531ms             3,751ms
+SelectedFDmomentumloss pokles29,50% oproti pôvodnémuvybranémustavu;
+nemiešať s26,28% účinkom pri rovnakých30kaktualizáciách.
+
+POJEDNOTLIVÝCH6VAL, vybranéváhy, chybyU/p vpercentách
+                             kontrola            gridNS
+harmonics87/Re292             61,37 / 68,08       60,68 / 69,16
+harmonics87/Re838             67,72 / 82,88       66,57 / 81,29
+nurbs22/Re164                 11,73 / 26,79       11,42 / 25,69
+nurbs22/Re977                 59,58 / 73,79       59,95 / 74,19
+skelenton36/Re209             12,65 / 24,49       12,26 / 23,48
+skelenton36/Re867             23,52 / 54,38       24,09 / 56,06
+Zlepšenie nie je jednotné; napríklad poslednýprípad sa poľovo zhoršil.
+
+ČO UKÁZALA DOPLNKOVÁDIAGNOSTIKA
+Na8vybranýchčasoch/512vnútornýchbodoch6VAL po30k:
+autogradcentre momentumloss15,9102kontrola vs13,7818gridNS;
+FDinstantmomentumloss4,57014 vs3,87474;
+RMSrozdielAD-FDhybnosti0,86823 vs0,81145.
+Nesúlad sa zmenšil, ale nezmizol. ReferenčnýokamžitýFDfloor je0,01201;
+oba modely sú stále podstatne horšie. V17midpointmetrika a okamžitýFD
+majú odlišnú definíciu ačas vyhodnotenia, vJSON sú oddelené.
+Tieto8časové priemery nenahrádzajú výsledok všetkých238snímok.
+
+TRAIN3monitory na konci30k: kontrolaU9,592%/p22,015%,
+gridNSU9,550%/p21,754%. Tréningové3monitory sú lepšie než6VAL,
+ale nie je to audit všetkých69TRAIN. Prenos medzi prípadmi zostáva problém.
+
+ROZSAH A INTERPRETÁCIA
+Pôvodné autogradNS zostalo aktívne, architektúra aj predikčnývýpočet
+ostali rovnaké. Iba novávetva spätne prenášala doplnkovýFDmomentumloss.
+Nejde o dokázané úplné zosúladenie derivácií ani splnenie celýchNSrovníc.
+LambdaFD0.01 bola jedna vopred určená pilotnávoľba. Výsledok nevylučuje
+iné nastavenia, ale nepodporuje označenie tejtozmeny za riešeniepresnosti.
+Queryp99 je naH200 pre celé1024x256pole so vstupmiGPU, vrátanecontext/
+curl/gauge/mask, bezCPUprenosu/renderingu,20warm-up nezapočítaných.
+Rozdiel vmeranomčase nie je dôkaz novejpredikčnejréžie – kódinference
+sa nezmenil. Nie kauzálny krok alebo meniaca sa geometria počasbehu.
+Kontinuita len stenčenáfluidnámaska, nie kontrola celejhranice.
+
+OVERENIA A ULOŽENIE
+Matchedinitialstate/fullsamplingTrue. CelýsamplerSHA:
+2e9522aa1e13e969f009ac6ee189521adc961c4fdd16bbb54c88d99bea3d99f9
+Počtyupdate30000/candidate,69cases434/435,coverage238True.
+Oba best.ptSHA overené voči súhrnom; selected aj last238frameporadie4..241
+na6VAL overené. Straty sú uložené ako intervalovépriemery, nie lenbatch.
+Actual7994GPU*s(2,2206GPUhodiny),31976pridelenýchCPU*s(8,8822corehodiny).
+Vetvy vrátanehodnotenia/diagnostík3753,91s a3830,21s, niečistýčasoptimizeru.
+Malý archív344súborov3700089B, SHA256 po stiahnutí overený:
+bc8db92406d590ef787818dd4e27fa1930f5799ec416d1d98475c403d01ffb39
+Lokálne:vysledky_142615/. Kompaktnéčísla vreview_20261103/analysis.json,
+provenance.json aoutput_manifest.json. BodovéNPZ39582534B ibaPerun,
+rovnako všetky váhy a veľképolia. ŽiadnyCFD/download/mainTEST otvorenie.
+
+ČO NASLEDUJE
+Model zatiaľ nie je pripravený na hlavnýLLMexperiment. Ďalšíkontrolovaný
+test má cieliť na spracovanie geometrie aúvodnýchstavov pri prenose
+naodlišnéprípady; najprv preveriť, či model lokálne rozlišuje tvar
+prekážky dostatočne. Tentoexperiment túto hypotézu netestoval.
+Novýdlhýtréning ani ďalšíGPUaudit vtejto kontrole nespustený.

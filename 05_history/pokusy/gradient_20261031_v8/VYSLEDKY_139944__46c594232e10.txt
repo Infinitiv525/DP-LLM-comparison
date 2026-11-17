@@ -1,0 +1,67 @@
+VÝSLEDKY GRADIENT8vs32 –31.10.2026
+
+ZÁVER
+Obe vetvy sa dokončili pri overene zhodných plánovaných podmienkach.
+32krokový gradient priniesol iba malé zlepšenie, nie požadovanú presnosť.
+Nie je podložené, že samotné predĺženie gradientu vyrieši problém.
+Obe spĺňajú časový limit5ms a limit rastu vnútornej divergencie.
+Na hlavné porovnanieLLM model stále nie je pripravený.
+
+PRESNOSŤ ZA CELÝCH238VLASTNÝCH KROKOV
+Gradient8: Eu0.5257219568=52.5722%,Ep0.6687145814=66.8715%.
+Gradient32:Eu0.5187435483=51.8744%,Ep0.6680032425=66.8003%.
+Rozdiel32oproti8: -0.69784percentuálneho boduU,-0.07113bodup.
+Perzistencia:56.9872%U/97.4585%p. Prahy10%U/20%p neprešli.
+Ide o priemer relatívnychL2chýb jednotlivých snímok; tlak po odstránení
+konštanty. Jediný známy TRAIN harmonics/1/Re382, aj na výber váh.
+Nie nezávislá generalizácia, viacseedová štúdia alebo významnosť.
+Obe vybrali poslednýepoch200. Prvých10krokovU/p:
+8gradient8.3772%/11.9752%;32gradient8.3097%/12.6787%.
+Neskorých118krokovU/p:54.8439%/74.9137% vs54.0285%/74.7327%.
+Krátky dobrý úsek nenahrádza primárny238krokový cieľ.
+
+FYZIKA A ČAS
+MeaninteriorFDdivRMS8=0.0140428826,32=0.0140429004,
+limit0.0435389129. Obe vyhoveli. Nie záruka celej NS dynamiky.
+Actual238GPUkrokp99:8gradient1.934918ms,32gradient1.944255ms.
+Krok+vlastnýFDmonitorp99:2.407023ms vs2.415128ms.
+H200,1024x256,úvodné polia naGPU,bezrenderingu. Samostatný3x200warm
+benchmark aj všetky per-frame metriky uchované vpôvodnýchJSON.
+
+OVERENÁ ZHODA
+StatusKNOWN_CASE_MATCHED_GRADIENT_COMPLETE,matched_execution=True.
+RovnakýwarmstartSHA,architektúraD,dáta,normalizácia,seed,lossweights,
+fyzikálne vzorkovanie aj32stepupdatecadence. Obe200/200epochov,
+1600/1600updates,47600predikovaných tréningových krokov; bezgradientfail.
+ZhodnýúplnýsamplingtraceSHA256:
+c48a6d0e124e425b5b3f46f22373a767bedf857e11f9b480892afc60e4ee41c2.
+Jediný meniaci sa konfiguračný faktor je gradient8vs32.
+Oproti starémuV7 sa zmenila ajupdatecadence/LR, preto porovnávame
+predovšetkým dve NOVÉ vetvy medzi sebou. Prediktor nedostával neskoršie
+pravdivé stavy. Známy prefix2,3,ciele4..241,dt.05solverunit,nie SIsekundy.
+Žiadny novýCFD/download,hlavnýtest zostal zatvorený. V8freeze overený.
+
+SPOTREBA A INTEGRITA
+139944COMPLETED,exit0:0,účtovanie139945 bez chyby.
+Skutočnáalokácia2876GPU*s=0.798889GPU*h,11504core*s,vrátane skúšky/
+assessmentov/réžie. Pythontraining8=1388.0763s,32=1411.6983s.
+PeakCUDA16562499584B/16568197120B.
+BestcheckpointSHA8:
+955e0e6cfdc23b69c56ac2bf89ad5f706ddb3b5c9048f765677e0c04621d1888
+BestcheckpointSHA32:
+b6a8bd9f81acbc3ac504bcb6d3ffc189fe7a6c6a02e155e46e901d0b39cf0f9d
+
+ČO ĎALEJ
+Pred ďalším tréningom má nasledovať audit reprezentácie siete,
+dostupných vstupných informácií a vzájomných škál fyzikálnych/dátových
+strát. Nie iba ďalšie predĺženie tréningu alebo prechod kLLMladeniu.
+Výsledok neidentifikuje jednu definitívnu príčinu; väčší gradient
+nevyriešil požadovanú presnosť pri tejto konfigurácii a rozpočte.
+Nový audit/tréning vtomto kontrolnom kroku nespustený. Fronta prázdna.
+
+SÚBORY
+Perun:results/fpo_pinn_gradient_20261031_v8/training/139944/.
+Lokálne:vysledky_139944/ malé pôvodnésummary/config/history/sampling/
+selectedper_frame/logy/scheduler/protokol/freeze. Veľképolia a váhy
+ostali ibaPerun. Archív24súborov274510B, overenýSHA256
+8499472603dacea3a6cfc882ea99887c44ceb7b3b9b8d6889db7d03deb3a5339.

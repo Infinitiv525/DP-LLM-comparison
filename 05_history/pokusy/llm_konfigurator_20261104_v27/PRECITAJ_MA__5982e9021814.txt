@@ -1,0 +1,97 @@
+TENTO POKUS SKONČIL NEÚSPEŠNE NA SPÚŠŤANÍ PROCESOV — 04.11.2026
+
+143171 FAILED 1:0 po 228 s na 4 GPU a 16 CPU. Offline nastavenia sa
+nepreniesli cez srun; ochranná kontrola zastavila všetky LLM ešte pred
+generovaním. Spoločný dvojepochový tréning aj úplné SHA modelov prešli.
+Z toho sa nerobia závery o kvalite modelov. Spotreba 912 GPU s a 3648
+core s je započítaná a zachovaná. Malý archív má overený SHA256:
+c2d5e2dfbac946a050540104a5a6a66ab301b0c10355bfd7ac5cdf02c30e7a8e.
+Opravená skúška je v susednom priečinku llm_konfigurator_20261104_v28,
+úloha 143182. Pôvodné súbory a výsledky sa neprepisovali.
+
+PÔVODNÝ OPIS PRED POKUSOM
+KONFIGURÁTOR LLM PRE SPOLOČNÝ USTÁLENÝ PINN — V27 — 04.11.2026
+
+Účel
+Kým beží hlavný pilot V26, pripravujeme a skúšame celý postup s lokálnymi
+LLM. Toto je technická skúška prepojenia, nie finálne porovnanie presnosti.
+Žiadne zmeny práve bežiaceho pilota ani jeho zmrazených súborov.
+Úloha143171,účtovanie143172. Alokácia4GPU na jednomuzle,16CPU,320GBRAM,
+limit2hodiny. JednaGPUkaždému samostatnému workeru. Pôvodný pilot143115
+má vlastnúGPU. Počet odoslanýchúloh vrátane účtovaní zostáva najviac4.
+
+Čo LLM môže nastavovať
+Rýchlosť učenia: ako veľké zmeny robí učenie pri jednej aktualizácii,
+rozsah0,0001–0,002. Váha chyby tlaku:0,5/1/2. Váha fyzikálnej straty:
+0,0001/0,0003/0,001/0,003/0,01; vždy kladná, fyziku nemožno vypnúť.
+Váha stien a prekážky:0,001/0,003/0,01/0,03/0,1. Začiatok fyzikálnej
+straty:0/3,125/6,25%tréningu;potom pevný nábeh3,125%dĺžkytréningu.
+Architektúra,početepoch,dáta,početbodov,strata a hodnotenie sú inakpevné.
+Sieť má stále rovnaké vstupy geometria/Re a výstupy ustálenéu/v/p.
+
+Čo presne sa spustí
+Najprv jeden skutočný spoločný dvojepochový tréning základnej konfigurácie.
+Potom4LLMbežia súbežne:Qwen3-8B,Ministral3-8B,Phi4-mini,Granite3.3-8B.
+Každý dostane rovnaký prvý reálne nameraný výsledok základnej konfigurácie.
+Navrhne prvú konfiguráciu, tá sa od začiatku natrénuje a vyhodnotí.
+LLM potom dostane aj jej skutočný výsledok, navrhne druhú konfiguráciu
+a tá sa znovu od začiatku natrénuje. Druhý návrh musí odkázať aj na
+predchádzajúci vlastný pokus. Neprenášajú sa váhy PINN medzi pokusmi.
+LLM sa nedotrénovávajú, používajú svoje nemenné lokálne váhy.
+Dva workery navyše overia po jednom skutočnom ask/train/tell pokuse
+náhodného aTPEhľadania s úplne rovnakým priestorom parametrov.
+Celkom1spoločný+8LLM+2kontrolné dvojepochové tréningy.
+
+Dáta a fyzika
+Každý krátky tréning používa všetkých640TRAIN a160VAL prípadov pri
+natívnom512x512rozlíšení. Iba2epochy, teda320aktualizácií, kvôli technickej
+skúške. Nie je to zmenšená množina dát ani dôkaz konvergencie. Normalizácia
+iba zTRAIN,žiadne200TESTcieľovéhodnoty. NSrovnice cez autograd,kladnáPDEváha,
+kontrola podmienok na stenách. Pri krátkej dĺžke sa pomerne škáluje nábeh
+fyziky, aby sa naozaj precvičila: základ má10warmup+10rampaktualizácií.
+Pri400epochách by ten istý pomer dával pôvodných2000+2000aktualizácií.
+Časovanie vždy pred/po:celé512x512pole vrátane spracovania geometrie,
+30warmup+200meraní na1TRAIN+1VAL, p99<=5ms. Vstupy už naGPU.
+
+Férovosť a opakovateľnosť
+Všetky krátke pokusy majú rovnaký pevný tréningovýseed270001. Nejde
+preto o nezávislé štatistické opakovania. Osobitné generátory náhody pre
+poradieprípadov,dátovébody,PDEbody a stenovébody zachovávajú zhodné
+vzorkovanie aj pri rôznom začiatku fyzikálnej straty. Zhodu počiatočných
+váh a vzorkovania automaticky porovná záverečný audit cezSHA256.
+Týmto nesľubujeme bitovú zhodu s V26, ktorý mal iný spôsob vzorkovania.
+Výber modelu podľa najnižšejValMSE; samostatnechybyrýchlosti/tlaku,
+rezíduá rovníc a latencia. Nízka divergencia sama osebe nestačí.
+
+Lokálne LLM a záznamy
+Presné publikované revízie užstiahnutých4LLM sa pred použitím overia
+úplnýmSHA256 na výpočtovomuzle. Sťahovanie aniAPIvolania sa nerobia.
+Qwen/Granite majú vypnutéthinking;žiada sa stručné verejné zdôvodnenie.
+Ministral pochádza zFP8checkpointu a načíta sa dekvantizovaný doBF16;
+nejde o obnovu pôvodnej presnosti pred kvantizáciou.
+Pre rozmanité návrhy do_sampleTrue,temperature0,6,top_p0,9,top_k40,
+max768výstupnýchtokenov,90sna generovanie,jedna oprava neplatného formátu.
+Celý návrhovýproces najviac300s,krátkytréning600s. Parametre sa pri
+chybe neopravujú ručne;model môže dostať rovnaký povolený opravnýprompt.
+Ukladá sa celý prompt,odpoveď,deklarovaný dôvod,očekávanie/riziko,
+parametre,zdrojovéSHA,tokeny,časnávrhu/načítania/prvého tokenu,CPUčas,
+GPU/RAMpamäť,opravnépokusy,tréningováhistória,checkpointy a výsledky.
+Celá alokácia4GPU vrátane krátkeho čakania počas spoločnéhoštartu a
+čakania rýchlejšíchworkerov je zahrnutá do skutočnéhoSlurmúčtovania.
+
+Overenia pred odoslaním
+6CPUtestov kontraktu a kontrolnýchsamplerov prešlo za4,247s. Overujú
+zákazy neplatnýchparametrov/vypnutiaPDE,úplnosťJSON,duplicitykľúčov,
+zneužitieevidence,testovépolia,pomerovéskálovanienábehu a skutočnéTPEtell.
+AST/LF/bash-nvšetkýchnovýchsúborovOK. StarýfrozenV26znovuoverený.
+Novézdroje,úplnéimporty,protokol,dátovéodtlačky a modelovémetadáta
+zmrazené predsubmitom. VšetkyIDzapísané predreleaseheldGPUúlohy.
+
+Umiestnenie
+Perun:results/ldc_llm_preflight_20261104_v27. Veľképolia/váhyibaPerun.
+Lokálne maléprotokoly a výsledky v zaznamy/. Záverečnýreviewoverí8reálnych
+LLMtréningov,spätnúväzbu,párovanéštarty/vzorky,p99 a obekontrolnémetódy.
+Až audit plnéhoV26pilota a jeho fyziky umožní rozhodnúť o hlavnejLLMsérii.
+Novýprompt a kontrakt sú v test/llm/ldc_contract_v27.py;vlastnýparameterizovaný
+tréning v test/training/train_ldc_trial_v27.py. Pravidlá tejto krátkejskúšky
+sa nesmú potichu vydávať za zmrazenýprotokol hlavnéhoexperimentu.

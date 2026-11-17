@@ -1,0 +1,184 @@
+{
+  "status": "SMOKE_COMPLETE",
+  "results": [
+    {
+      "status": "OWN_MODEL_TRAIN_FIT_PROBE_EVALUATED",
+      "config": {
+        "name": "own_3train",
+        "model_kind": "own",
+        "train_count": 3,
+        "state_conditioning": true,
+        "width": 128,
+        "depth": 3,
+        "latent": 64,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261101,
+        "updates": 3,
+        "lr": 0.0003,
+        "warmup": 0,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 3
+      },
+      "accuracy": [
+        {
+          "score": 0.7794613917528437,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5657007942498066,
+            "pressure_relative_l2": 0.9932219892558808
+          },
+          "interior_div_rms": 0.3011686948104566,
+          "direct_query_gpu_ms": {
+            "p50": 4.173167943954468,
+            "p95": 4.188712072372437,
+            "p99": 4.1967424964904785
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        },
+        {
+          "score": 0.5060728856166489,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.3701192535252829,
+            "pressure_relative_l2": 0.6420265177080149
+          },
+          "interior_div_rms": 0.2999692095302734,
+          "direct_query_gpu_ms": {
+            "p50": 4.1667680740356445,
+            "p95": 4.19166419506073,
+            "p99": 4.220196647644043
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false
+        },
+        {
+          "score": 0.5389276053728262,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5034463182953856,
+            "pressure_relative_l2": 0.5744088924502669
+          },
+          "interior_div_rms": 0.3003591406511284,
+          "direct_query_gpu_ms": {
+            "p50": 4.168911933898926,
+            "p95": 4.182212853431702,
+            "p99": 4.192482433319092
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.7794613917528437,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5657007942498066,
+            "pressure_relative_l2": 0.9932219892558808
+          },
+          "interior_div_rms": 0.3011686948104566,
+          "direct_query_gpu_ms": {
+            "p50": 4.170495986938477,
+            "p95": 4.184856057167053,
+            "p99": 4.194938988685608
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        },
+        {
+          "score": 0.5060728856166489,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.3701192535252829,
+            "pressure_relative_l2": 0.6420265177080149
+          },
+          "interior_div_rms": 0.2999692095302734,
+          "direct_query_gpu_ms": {
+            "p50": 4.166272163391113,
+            "p95": 4.184265661239624,
+            "p99": 4.1962443399429326
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false
+        },
+        {
+          "score": 0.5389276053728262,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5034463182953856,
+            "pressure_relative_l2": 0.5744088924502669
+          },
+          "interior_div_rms": 0.3003591406511284,
+          "direct_query_gpu_ms": {
+            "p50": 4.190959930419922,
+            "p95": 4.211388802528381,
+            "p99": 4.21532931804657
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false
+        }
+      ],
+      "selected_update": 3,
+      "all238_training_frames_visited": false,
+      "training_seconds": 101.03290031664073,
+      "peak_cuda_allocated_bytes": 2933848064,
+      "checkpoint_sha256": "e6031cc6aaa4dac7acd98bc375c8da7e8afdca6ccb33db2eb9c296e2bf2a19ce",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 3,
+      "validation_scenarios": 0,
+      "train_selection_scenarios": 3,
+      "training_case_updates": [
+        1,
+        1,
+        1
+      ],
+      "working_gate": {
+        "accuracy_pass": false,
+        "mass_pass": false,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+        "Architecture bundle changes conditioning, latent and residual path; not pure parameter-matched ablation",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    }
+  ],
+  "causal_stepper": false,
+  "independent_validation": false
+}

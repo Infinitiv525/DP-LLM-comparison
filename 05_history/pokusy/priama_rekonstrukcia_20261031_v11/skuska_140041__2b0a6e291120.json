@@ -1,0 +1,115 @@
+{
+  "status": "SMOKE_COMPLETE",
+  "results": [
+    {
+      "status": "DIRECT_RECONSTRUCTION_PROBE_EVALUATED",
+      "config": {
+        "name": "direct_width_96",
+        "state_conditioning": true,
+        "width": 96,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261031,
+        "updates": 3,
+        "lr": 0.0003,
+        "warmup": 0,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 3
+      },
+      "accuracy": {
+        "score": 0.7718947015826182,
+        "failure": false,
+        "predicted_frames": 238,
+        "mean_errors": {
+          "velocity_relative_l2": 0.5689204016198778,
+          "pressure_relative_l2": 0.9748690015453586
+        },
+        "interior_div_rms": 0.06435064941707279,
+        "direct_query_gpu_ms": {
+          "p50": 1.4533600211143494,
+          "p95": 1.4616159915924072,
+          "p99": 1.4672422552108764
+        },
+        "causal_step_latency": false,
+        "scope": "KNOWN_TRAIN_RECONSTRUCTION_FROM_PREFIX_AND_TIME"
+      },
+      "selected_update": 3,
+      "all238_training_frames_visited": false,
+      "training_seconds": 2.561964929991518,
+      "peak_cuda_allocated_bytes": 1146053632,
+      "checkpoint_sha256": "ffbc096e884e8e9e93b55448025bf521b7b0f0b38b5f0ac4ebe4c31b586f7e4a",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "limitations": [
+        "Known trajectory used for training and selection; not heldout forecasting",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    },
+    {
+      "status": "DIRECT_RECONSTRUCTION_PROBE_EVALUATED",
+      "config": {
+        "name": "direct_width_192",
+        "state_conditioning": true,
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261031,
+        "updates": 3,
+        "lr": 0.0003,
+        "warmup": 0,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 3
+      },
+      "accuracy": {
+        "score": 0.7649328138600279,
+        "failure": false,
+        "predicted_frames": 238,
+        "mean_errors": {
+          "velocity_relative_l2": 0.5652104887354004,
+          "pressure_relative_l2": 0.9646551389846554
+        },
+        "interior_div_rms": 0.09158109256825528,
+        "direct_query_gpu_ms": {
+          "p50": 2.847472071647644,
+          "p95": 2.8579888582229613,
+          "p99": 2.862600555419922
+        },
+        "causal_step_latency": false,
+        "scope": "KNOWN_TRAIN_RECONSTRUCTION_FROM_PREFIX_AND_TIME"
+      },
+      "selected_update": 3,
+      "all238_training_frames_visited": false,
+      "training_seconds": 2.6898643060121685,
+      "peak_cuda_allocated_bytes": 1350241280,
+      "checkpoint_sha256": "173269f53166983fe8f1e721b1378664b434a87b40cdd529cb527a9fb9f52e4a",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "limitations": [
+        "Known trajectory used for training and selection; not heldout forecasting",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    }
+  ],
+  "causal_stepper": false,
+  "independent_validation": false
+}

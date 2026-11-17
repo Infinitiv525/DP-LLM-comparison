@@ -1,0 +1,28 @@
+{
+  "name": "control",
+  "representation": "curl",
+  "state_conditioning": true,
+  "width": 192,
+  "depth": 4,
+  "latent": 32,
+  "frequencies": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0
+  ],
+  "seed": 20261103,
+  "updates": 3,
+  "lr": 3e-05,
+  "batch": 2048,
+  "collocation": 256,
+  "assess_every": 3,
+  "monitor_every": 3,
+  "continuous_weight": 0.01,
+  "boundary_weight": 0.01,
+  "fd_weight": 0.0,
+  "fd_points": 128,
+  "fd_dt": 0.025,
+  "fd_ramp_updates": 1
+}

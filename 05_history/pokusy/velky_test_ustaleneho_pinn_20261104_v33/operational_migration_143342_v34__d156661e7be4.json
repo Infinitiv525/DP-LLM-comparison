@@ -1,0 +1,12 @@
+{
+  "gpu_job": "143342",
+  "replaced_pending_account_job": "143343",
+  "new_accounting_and_continuation_job": "143353",
+  "registered_before_release": true,
+  "scientific_freeze_sha256": "c61230aa43a09ae18ac2f7b79a53dac33934227c42746bc31dfb3499e8f24e6b",
+  "operational_manifest_sha256": "dfdc81da41d37837873a1c3f3e28b878d973ce5135c3278fd689a7309394c664",
+  "before_cancel_query": "JobId=143343 JobName=dp-ldc33-account-next UserId=lutoke823(507402392) GroupId=domain users(507400513) MCS_label=N/A Priority=908 Nice=0 Account=perun2601449 QOS=perun2601449 JobState=PENDING Reason=Dependency Dependency=afterany:143342(unfulfilled) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=00:03:00 TimeMin=N/A SubmitTime=2026-11-04T16:22:06 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-04T16:22:06 Scheduler=Main Partition=cpu_short AllocNode:Sid=login01:1345881 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=1,mem=512M,node=1,billing=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=1 MinMemoryNode=512M MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/project/perun2601449/dp_llm_cfd/test/scripts/255_ldc_main_continue_v33.sbatch SubmitLine=sbatch --parsable --dependency=afterany:143342 test/scripts/255_ldc_main_continue_v33.sbatch 143342 WorkDir=/mnt/project/perun2601449/dp_llm_cfd StdErr=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc33-account-next_143343.err StdIn=/dev/null StdOut=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc33-account-next_143343.out TresPerTask=cpu=1\n",
+  "unix": 1793806217.5430312,
+  "reason": "Historical job IDs purge from squeue; queue-snapshot continuation needed",
+  "status": "PENDING_CPU_DEPENDENCY_REPLACED_GPU_UNCHANGED"
+}

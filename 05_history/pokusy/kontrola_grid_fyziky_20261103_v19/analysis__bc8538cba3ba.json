@@ -1,0 +1,311 @@
+{
+  "results": [
+    {
+      "name": "control",
+      "selected_added_updates": 0,
+      "selected": {
+        "mean_errors": {
+          "velocity_relative_l2": 0.39427163084089756,
+          "pressure_relative_l2": 0.5506564604690921
+        },
+        "mean_fd_momentum_loss": 12.287241556407771,
+        "accuracy_pass_count": 0,
+        "mass_pass_count": 6,
+        "query_p99_max_ms": 3.5305696630477907
+      },
+      "end_30000": {
+        "mean_errors": {
+          "velocity_relative_l2": 0.3948014855936968,
+          "pressure_relative_l2": 0.5540737369180108
+        },
+        "mean_fd_momentum_loss": 11.682143650354208,
+        "accuracy_pass_count": 0,
+        "mass_pass_count": 6,
+        "query_p99_max_ms": 3.5250233578681947
+      },
+      "selected_train_monitors": {
+        "mean_errors": {
+          "velocity_relative_l2": 0.11932392988632612,
+          "pressure_relative_l2": 0.28173541175419164
+        },
+        "mean_fd_momentum_loss": 1.201233238180061,
+        "accuracy_pass_count": 0,
+        "mass_pass_count": 3,
+        "query_p99_max_ms": 3.5198380613327025
+      },
+      "end_train_monitors": {
+        "mean_errors": {
+          "velocity_relative_l2": 0.09591900604042113,
+          "pressure_relative_l2": 0.22014889400011192
+        },
+        "mean_fd_momentum_loss": 1.0185382988418683,
+        "accuracy_pass_count": 2,
+        "mass_pass_count": 3,
+        "query_p99_max_ms": 3.522060172557831
+      },
+      "selected_physics": {
+        "by_scope": {
+          "train": {
+            "case_time_count": 24,
+            "field_mean_errors": {
+              "velocity_relative_l2": 0.09152135247386028,
+              "pressure_relative_l2": 0.2179409098534668
+            },
+            "continuous_centre_momentum_loss": 6.943465776085676,
+            "continuous_jitter_momentum_loss": 2.9218182013791565,
+            "fine_fd_momentum_loss": 1.0591591467189014,
+            "coarse_fd_momentum_loss": 1.0596602541179179,
+            "fine_fd_ad_momentum_difference_rms": 0.630150042163829,
+            "fine_fd_ad_velocity_difference_rms": 0.00020013893117720727,
+            "reference_instantaneous_fd_momentum_loss": 0.00420020749950131,
+            "v17_midpoint_fd_momentum_loss_full_interior": 0.961563074340423,
+            "reference_midpoint_fd_momentum_loss_full_interior": 0.004290675967543696
+          },
+          "validation": {
+            "case_time_count": 48,
+            "field_mean_errors": {
+              "velocity_relative_l2": 0.26945487858732514,
+              "pressure_relative_l2": 0.3987633168986519
+            },
+            "continuous_centre_momentum_loss": 17.10152291592956,
+            "continuous_jitter_momentum_loss": 9.474728701269992,
+            "fine_fd_momentum_loss": 4.655656758902175,
+            "coarse_fd_momentum_loss": 4.655402944897652,
+            "fine_fd_ad_momentum_difference_rms": 0.9058604280774792,
+            "fine_fd_ad_velocity_difference_rms": 0.00043294787237376414,
+            "reference_instantaneous_fd_momentum_loss": 0.0120091868163453,
+            "v17_midpoint_fd_momentum_loss_full_interior": 10.291163981271287,
+            "reference_midpoint_fd_momentum_loss_full_interior": 0.013682578641843671
+          }
+        },
+        "sampled_times": [
+          1,
+          5,
+          10,
+          20,
+          40,
+          80,
+          160,
+          238
+        ],
+        "full_238frame_assessment": false
+      },
+      "end_physics": {
+        "by_scope": {
+          "train": {
+            "case_time_count": 24,
+            "field_mean_errors": {
+              "velocity_relative_l2": 0.07990911907392971,
+              "pressure_relative_l2": 0.176229835892278
+            },
+            "continuous_centre_momentum_loss": 6.287785511430748,
+            "continuous_jitter_momentum_loss": 2.614126424672135,
+            "fine_fd_momentum_loss": 0.9142918105299733,
+            "coarse_fd_momentum_loss": 0.914700271857491,
+            "fine_fd_ad_momentum_difference_rms": 0.6026983416328827,
+            "fine_fd_ad_velocity_difference_rms": 0.0001436149433970968,
+            "reference_instantaneous_fd_momentum_loss": 0.00420020749950131,
+            "v17_midpoint_fd_momentum_loss_full_interior": 0.8593533424039682,
+            "reference_midpoint_fd_momentum_loss_full_interior": 0.004290675967543696
+          },
+          "validation": {
+            "case_time_count": 48,
+            "field_mean_errors": {
+              "velocity_relative_l2": 0.2685621225506864,
+              "pressure_relative_l2": 0.3969655401127247
+            },
+            "continuous_centre_momentum_loss": 15.910214764489522,
+            "continuous_jitter_momentum_loss": 9.12658653060084,
+            "fine_fd_momentum_loss": 4.570143575719729,
+            "coarse_fd_momentum_loss": 4.569551871225872,
+            "fine_fd_ad_momentum_difference_rms": 0.8682328416034579,
+            "fine_fd_ad_velocity_difference_rms": 0.0003530017333635745,
+            "reference_instantaneous_fd_momentum_loss": 0.0120091868163453,
+            "v17_midpoint_fd_momentum_loss_full_interior": 9.366309653036296,
+            "reference_midpoint_fd_momentum_loss_full_interior": 0.013682578641843671
+          }
+        },
+        "sampled_times": [
+          1,
+          5,
+          10,
+          20,
+          40,
+          80,
+          160,
+          238
+        ],
+        "full_238frame_assessment": false
+      },
+      "selected_checkpoint_sha256": "233c6441230a95ed1fad9735c93c94d0bff13492038d8c4d800b3045a1498417",
+      "last_checkpoint_sha256": "73082cd244be74b5d482eeff7aa698cf2bad38b72a62032da4ae5c807e6be9fd",
+      "source_checkpoint_sha256": "fdc8c9b595f132496a87751a5947c22e48d9fe4a0a47bbad72b2e17d05960b59",
+      "initial_state_sha256": "f0a24786c6e6d389cd396441c24eef732a06020b343c85bada1d159e9c843191",
+      "full_sampling_sha256": "2e9522aa1e13e969f009ac6ee189521adc961c4fdd16bbb54c88d99bea3d99f9",
+      "case_frame_sha256": "241984bc31b8ab65f2df9745b308ee0a6a84a1ff68cdbd022d84abaee7a696f9"
+    },
+    {
+      "name": "added_grid_ns",
+      "selected_added_updates": 20000,
+      "selected": {
+        "mean_errors": {
+          "velocity_relative_l2": 0.3916085928756727,
+          "pressure_relative_l2": 0.5498091526342459
+        },
+        "mean_fd_momentum_loss": 8.661996203727748,
+        "accuracy_pass_count": 0,
+        "mass_pass_count": 6,
+        "query_p99_max_ms": 3.7507263231277466
+      },
+      "end_30000": {
+        "mean_errors": {
+          "velocity_relative_l2": 0.39196822705118833,
+          "pressure_relative_l2": 0.5505068289803532
+        },
+        "mean_fd_momentum_loss": 8.612267762297343,
+        "accuracy_pass_count": 0,
+        "mass_pass_count": 6,
+        "query_p99_max_ms": 3.9278226637840272
+      },
+      "selected_train_monitors": {
+        "mean_errors": {
+          "velocity_relative_l2": 0.0960580337276057,
+          "pressure_relative_l2": 0.21767818247164095
+        },
+        "mean_fd_momentum_loss": 0.8506113876398205,
+        "accuracy_pass_count": 2,
+        "mass_pass_count": 3,
+        "query_p99_max_ms": 3.7508640122413635
+      },
+      "end_train_monitors": {
+        "mean_errors": {
+          "velocity_relative_l2": 0.09550459509118431,
+          "pressure_relative_l2": 0.21754250008482381
+        },
+        "mean_fd_momentum_loss": 0.8375104183659833,
+        "accuracy_pass_count": 2,
+        "mass_pass_count": 3,
+        "query_p99_max_ms": 3.5380995368957517
+      },
+      "selected_physics": {
+        "by_scope": {
+          "train": {
+            "case_time_count": 24,
+            "field_mean_errors": {
+              "velocity_relative_l2": 0.07972308010467494,
+              "pressure_relative_l2": 0.17363428481349574
+            },
+            "continuous_centre_momentum_loss": 5.4458270461360065,
+            "continuous_jitter_momentum_loss": 2.2601908659973797,
+            "fine_fd_momentum_loss": 0.7695283216479005,
+            "coarse_fd_momentum_loss": 0.7695402457998654,
+            "fine_fd_ad_momentum_difference_rms": 0.564573518310984,
+            "fine_fd_ad_velocity_difference_rms": 0.0001283979532521092,
+            "reference_instantaneous_fd_momentum_loss": 0.00420020749950131,
+            "v17_midpoint_fd_momentum_loss_full_interior": 0.7268278539801637,
+            "reference_midpoint_fd_momentum_loss_full_interior": 0.004290675967543696
+          },
+          "validation": {
+            "case_time_count": 48,
+            "field_mean_errors": {
+              "velocity_relative_l2": 0.2664876447774543,
+              "pressure_relative_l2": 0.3940538758152841
+            },
+            "continuous_centre_momentum_loss": 13.902604027360361,
+            "continuous_jitter_momentum_loss": 7.790420773319421,
+            "fine_fd_momentum_loss": 3.897445880080752,
+            "coarse_fd_momentum_loss": 3.897976313572773,
+            "fine_fd_ad_momentum_difference_rms": 0.8152952389791608,
+            "fine_fd_ad_velocity_difference_rms": 0.00031032214063960356,
+            "reference_instantaneous_fd_momentum_loss": 0.0120091868163453,
+            "v17_midpoint_fd_momentum_loss_full_interior": 6.936651554269095,
+            "reference_midpoint_fd_momentum_loss_full_interior": 0.013682578641843671
+          }
+        },
+        "sampled_times": [
+          1,
+          5,
+          10,
+          20,
+          40,
+          80,
+          160,
+          238
+        ],
+        "full_238frame_assessment": false
+      },
+      "end_physics": {
+        "by_scope": {
+          "train": {
+            "case_time_count": 24,
+            "field_mean_errors": {
+              "velocity_relative_l2": 0.07961182884385198,
+              "pressure_relative_l2": 0.17321979033953538
+            },
+            "continuous_centre_momentum_loss": 5.492222908247807,
+            "continuous_jitter_momentum_loss": 2.254398705972272,
+            "fine_fd_momentum_loss": 0.7659874767123901,
+            "coarse_fd_momentum_loss": 0.765820983151098,
+            "fine_fd_ad_momentum_difference_rms": 0.5647927885875106,
+            "fine_fd_ad_velocity_difference_rms": 0.00012576090496925948,
+            "reference_instantaneous_fd_momentum_loss": 0.00420020749950131,
+            "v17_midpoint_fd_momentum_loss_full_interior": 0.718611161224544,
+            "reference_midpoint_fd_momentum_loss_full_interior": 0.004290675967543696
+          },
+          "validation": {
+            "case_time_count": 48,
+            "field_mean_errors": {
+              "velocity_relative_l2": 0.266800118339395,
+              "pressure_relative_l2": 0.3946608307834434
+            },
+            "continuous_centre_momentum_loss": 13.78175001746896,
+            "continuous_jitter_momentum_loss": 7.763023199389846,
+            "fine_fd_momentum_loss": 3.874741367414382,
+            "coarse_fd_momentum_loss": 3.8742519473708925,
+            "fine_fd_ad_momentum_difference_rms": 0.8114507583280405,
+            "fine_fd_ad_velocity_difference_rms": 0.00030183708782753155,
+            "reference_instantaneous_fd_momentum_loss": 0.0120091868163453,
+            "v17_midpoint_fd_momentum_loss_full_interior": 6.897442377482851,
+            "reference_midpoint_fd_momentum_loss_full_interior": 0.013682578641843671
+          }
+        },
+        "sampled_times": [
+          1,
+          5,
+          10,
+          20,
+          40,
+          80,
+          160,
+          238
+        ],
+        "full_238frame_assessment": false
+      },
+      "selected_checkpoint_sha256": "223cab8d4273c49a2d9161ede3fec25ff6fd618f797b3dfbcebfb58400ef1845",
+      "last_checkpoint_sha256": "0b5b9b5b1ea0580714b11ca91cefff6cda1f06a17c62a93db658079fc591524d",
+      "source_checkpoint_sha256": "fdc8c9b595f132496a87751a5947c22e48d9fe4a0a47bbad72b2e17d05960b59",
+      "initial_state_sha256": "f0a24786c6e6d389cd396441c24eef732a06020b343c85bada1d159e9c843191",
+      "full_sampling_sha256": "2e9522aa1e13e969f009ac6ee189521adc961c4fdd16bbb54c88d99bea3d99f9",
+      "case_frame_sha256": "241984bc31b8ab65f2df9745b308ee0a6a84a1ff68cdbd022d84abaee7a696f9"
+    }
+  ],
+  "selected_fd_momentum_reduction_percent": 29.504143269564562,
+  "equal_budget_30000_fd_momentum_reduction_percent": 26.278361060589983,
+  "actual_resources": {
+    "job": "142615",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "runtime_seconds": 7994,
+    "cpu_count": 4,
+    "gpu_count": 1,
+    "allocated_core_seconds": 31976,
+    "allocated_gpu_seconds": 7994,
+    "peak_memory_unknown": true,
+    "raw_query_sha256": "fda433919110f8dda6aadc7a6fe36e577376c37d1ac904efada947590162e94d"
+  },
+  "pointwise_npz_files_on_perun": 36,
+  "pointwise_npz_bytes_on_perun": 39582534,
+  "independent_final_test": false,
+  "main_test_opened": false,
+  "llm_ready": false
+}

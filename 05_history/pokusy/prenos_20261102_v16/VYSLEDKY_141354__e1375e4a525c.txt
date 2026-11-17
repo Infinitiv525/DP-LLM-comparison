@@ -1,0 +1,46 @@
+V16 – TEST PRENOSU SKONČIL, 02.11.2026
+
+141354 COMPLETED0:0, freezeOK, fronta prázdna. Oba checkpointyV15
+zostali nezmenené. Každý vyhodnotený na6VAL x238snímok4..241.
+Žiadny tréning alebo výbercheckpointu podľa týchto výsledkov.
+
+Priemerná relatívnaL2chyba po snímkach a potom po simuláciách:
+                        pôvodný u/v/p       nový psi/p
+Rýchlosť                  58,87 %              82,49 %
+Tlak                      77,79 %             104,52 %
+Kontrola hmoty             0/6                  6/6
+Najvyššie p99query         3,553ms              3,612ms
+Presnosť cez naše brány    0/6                  0/6
+
+Výsledky nového psi/p modelu U/p v percentách:
+harmonics87/Re292: 110,76 / 113,45
+harmonics87/Re838:  91,54 /  99,60
+nurbs22/Re164:      77,35 / 157,25
+nurbs22/Re977:      88,93 / 101,31
+skelenton36/Re209:  62,78 /  78,43
+skelenton36/Re867:  63,57 /  77,11
+
+ZÁVER
+Na odlišných geometriách sa priaznivá presnosť troch známych TRAIN
+simulácií nepotvrdila. Nový variant je v priemere menej presný než
+pôvodný; chyby rýchlosti sú pri všetkých6 prípadoch väčšie než pri
+jednoduchom ponechaní poslednej známej snímky (perzistencia).
+Prechod testom hmoty je očakávaný dôsledok konštrukcie curlprírastku,
+nie dôkaz správnej dynamiky. FDhybnosť je rádovo horšia než referencia.
+Ani jeden variant nie je pripravený pre hlavné porovnanie LLM.
+
+Trénovali sme iba3 prípady, takže tento test nevie určiť, či je
+architektúra nevhodná aj po širšom tréningu. Ďalší krok: oba varianty
+od začiatku na existujúcich69TRAIN, rovnaké nastavenia/počtyaktualizácií,
+6VAL iba hodnotenie/výbercheckpointu. HlavnýTEST zostáva zatvorený.
+Žiadna záruka, že samotné rozšírenie tréningu vyrieši generalizáciu.
+
+Časquery zahŕňa kontext, celé1024x256pole, curl/gauge/solidmask naH200,
+20warmupqueries nezapočítaných, vstupyGPU, bezCPUprenosu/renderingu.
+Nie meranie kauzálneho kroku ani reakcie na novú prekážku počas behu.
+VAL je opakovane používaná vývojová sada, nie finálny nezávislýtest.
+
+Skutočná spotreba:164GPUsekúnd,656pridelenýchCPUsekúnd.
+35malýchJSON/logov, archív301508B, SHA256overený:
+f3ce7b4c1d48b734cdfc84557f32f8a2e8abcd1bc4a124aa15079d15108259f1
+Lokálne:vysledky_141354/. Veľképolia a váhy ibaPerun.

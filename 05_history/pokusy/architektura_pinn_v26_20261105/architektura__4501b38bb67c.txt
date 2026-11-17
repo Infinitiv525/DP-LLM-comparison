@@ -1,0 +1,90 @@
+NAŠA PÔVODNÁ MALÁ PINN — ARCHITEKTÚRA OVERENÁ Z KÓDU V26
+05.11.2026
+
+Ide o jeden spoločný parametrický model pre ustálené 2D prúdenie.
+Vstupom je geometria prekážky (maska kvapaliny a podpísaná vzdialenosť
+od povrchu) a Reynoldsovo číslo. Výstupom je u, v, p na mriežke 512x512.
+Súradnice x,y určujú, v ktorom bode sa model pýtame na výsledok.
+Jedny naučené váhy sa používajú pre všetky prípady; čas t tu nevstupuje.
+
+STRUČNÁ BLOKOVÁ SCHÉMA
+Geometria512x512 -> pool64x64 ->2konvolúcie ->32globálnych+16lokálnych čŕt --+
+Bod(x,y) ->2súradnice+20sin/cos vlastností --------------------------------+->71vstupov
+Re ->1číselná vlastnosť --------------------------------------------------+
+
+71 ->192Tanh ->192Tanh ->192Tanh ->192Tanh ->[psi,p]
+                                              |
+                            derivácie psi ->[u,v] ->celé pole[u,v,p]512x512
+
+Pri učení: predikcia sa kontroluje voči dátam, fyzikálnym rovniciam a
+stenám. Ich chyby spätne upravujú váhy geometrickej aj súradnicovej vetvy.
+
+VEĽKOSŤ
+134 922 trénovateľných parametrov vrátane váh a biasov.
+Parametre nie sú počet neurónov ani počet buniek výslednej mriežky.
+Uložené best.pt má 547219 bajtov; samotné FP32 parametre 539688 bajtov.
+Normalizačné konštanty a pevné Fourierove frekvencie nie sú učené váhy.
+
+ČO ZNAMENÁ POČET VRSTIEV
+Hlavná súradnicová MLP má 4 SKRYTÉ vrstvy po192neurónov a1výstupnú.
+Okrem nej je geometrický enkóder s2konvolučnými vrstvami a1plnepojenou
+vrstvou globálneho zhrnutia. Celkovo teda8vrstiev s učenými parametrami:
+2konvolučné+1globálna plnepojená+4skrytéMLP+1výstupnáMLP.
+Poolovanie, aktivácie, Fourierove funkcie a derivácie váhy nepridávajú.
+Preto tvrdenie iba '4-vrstvová sieť' nevystihuje celý model.
+
+GEOMETRICKÁ VETVA
+Vstup:2kanály (maska,SDF),512x512.
+Priemerovanie8x8 ->2kanály64x64, súčasť meranej predikcie.
+Normalizácia z TRAIN štatistík.
+Konvolúcia3x3,2->8kanálov, padding1 ->Tanh ->AvgPool2x2.
+Konvolúcia3x3,8->16kanálov,padding1 ->Tanh ->AvgPool2x2.
+Vznikne mapa16kanálov na priestorovej mriežke16x16.
+
+Táto mapa sa použije dvoma spôsobmi:
+A) Globálne zhrnutie:AdaptiveAvgPool4x4 ->256čísel ->Linear256->32 ->Tanh.
+B) Lokálne zhrnutie:hladkáC4spline interpolácia mapy v bode(x,y) ->16čísel.
+
+VSTUP DO HLAVNEJ SÚRADNICOVEJ SIETE —71ČÍSEL PRE JEDEN BOD
+2 súradnice x,y (preškálované na[-1,1]);
+20 sin/cos vlastností z x,y a5pevných frekvencií1,2,4,8,16;
+32 globálnych vlastností geometrie;
+1 hodnota log(Re)/8;
+16 lokálnych interpolovaných vlastností geometrie.
+Spolu2+20+32+1+16=71.
+
+HLAVNÁ SIEŤ
+71 ->192Tanh ->192Tanh ->192Tanh ->192Tanh ->2lineárne výstupy.
+Dva výstupy sú prúdová funkcia psi a tlak p, s pevnými TRAIN škálami.
+Rýchlosť vznikne z prúdovej funkcie:
+u=d(psi)/dy, v=-d(psi)/dx.
+Pomocné pole psi umožní konštrukčne podporiť nestlačiteľnosť prúdenia.
+Pri výpočte fyzikálnej straty sa používajú automatické derivácie.
+Na výslednej mriežke sa rýchlosť počíta konečnými diferenciami; dátové
+vzorky pri tréningu používajú zodpovedajúci rovnaký stencil.
+Tlak sa upraví odčítaním predpovedaného priemeru v kvapaline a bunky
+pevnej prekážky sa nulujú podľa známej masky.
+
+PRESNÝ ROZPIS PARAMETROV
+Conv2->8:       (2*8*3*3)+8              =152
+Conv8->16:      (8*16*3*3)+16            =1168
+Global256->32:  (256*32)+32              =8224
+MLP71->192:     (71*192)+192             =13824
+MLP192->192:    (192*192)+192, tri razy   =111168
+MLP192->2:      (192*2)+2                =386
+Celkom:134922. Geometria9544, hlavnáMLP125378.
+
+PREČO JE TO FYZIKOU INFORMOVANÁ SIEŤ
+Pri učení minimalizujeme nesúlad s referenčnými u/v/p dátami, rezíduá
+ustálených Navierových-Stokesových rovníc s viskozitou1/Re a chybu
+okrajových podmienok na stenách a prekážke. Fyzika vstupuje do tréningu
+cez diferencovateľný postih a upravuje všetky učené časti siete.
+Fyzikálny postih nezaručuje presné splnenie všetkých rovníc.
+
+Po natrénovaní model priamo vytvorí ustálené pole; pri každej predikcii
+už nespúšťa ďalší optimalizačný tréning. Geometrický enkóder sa započítava
+do času každej predikcie. 5ms je výpočtový čas poľa, nie fyzikálny časový krok.
+
+Zdroje: test/training/ldc_shared_pinn_v26.py, ldc_store_v26.py,
+train_ldc_main_v33.py a zmrazené protocol.json hlavného experimentuV33.
+Samostatná väčšia sieťV39 mení šírku192->384, nie túto pôvodnú architektúru.

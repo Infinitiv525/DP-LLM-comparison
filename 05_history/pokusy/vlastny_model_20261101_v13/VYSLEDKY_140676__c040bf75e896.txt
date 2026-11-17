@@ -1,0 +1,67 @@
+V13 – VLASTNÉ PODMIEŇOVANIE, overené02.11.2026
+
+ZÁVER
+Obe architektúry presne fitovali jeden aj tri známeTRAINprípady.
+Nové podmieňovanie neprinieslo vtejto skúške výhodu: pôvodnýmodel
+bol pri3TRAINpresnejší a rýchlejší. Všetkyaccuracy/directqueryčasové
+práhy splnené, žiadna massgate splnená. Nie hotovýfyzikálnysimulátor.
+Výsledok nepodporuje nasadenie novejarchitektúry do veľkého69/6behu.
+
+CELÝCH238ČASOV, PRIEMERY RELATÍVNYCHL2CHÝB
+                             Uchyba      pchyba      maxp99query
+Pôvodnýmodel1TRAIN            3.0647%     4.9051%     3.3593ms
+Vlastnýmodel1TRAIN            3.0437%     5.0004%     4.2027ms
+Pôvodnýmodel3TRAIN(mean)      1.8126%     4.0826%     3.4011ms
+Vlastnýmodel3TRAIN(mean)      2.2219%     5.1630%     4.1902ms
+Tlak po odstráneníkonštanty. Pri3cases rovnaká váha každéhocase.
+ČasmeranýH200,1024x256,initialfieldsGPU,bezrenderingu, directquery,
+niecausalsimulačnýstep. Obe pod5ms aj sconditioningencoderom.
+
+3TRAIN PODROBNE, PÔVODNÝ VS VLASTNÝ MODEL – U/p
+harmonics/1/Re382:2.6651%/4.3982% vs3.0349%/4.9857%.
+nurbs/11/Re107:1.2991%/4.2843% vs1.7097%/5.8478%.
+skelenton/57/Re168:1.4735%/3.5654% vs1.9212%/4.6554%.
+Pôvodný model je vo všetkých3cases pri tejtoseed/konfigurácii presnejší.
+Jednaseed netvorí štatistickýdôkaz všeobecnejnadradenosti architektúry.
+
+FYZIKA
+Pôvodný3TRAIN meaninteriorFDdivRMS:har.103325,nurbs.046813,skel.057616.
+Vlastný3TRAIN:.115141/.054033/.068561.
+Limity:.043539/.016320/.028011, každýcasevoboch vetvách fail.
+Singlecase:.107230 vs.109297 prilimite.043539, obe fail.
+Nízka chyba polí teda sama nezaručuje požadovanú diferenciálnu fyziku.
+Nové podmieňovanie ani väčšílatent to automatickyneopravili.
+
+ČO BOLO FÉROVO OVERENÉ
+Všetky4bunky dokončené:1case50000updates,3cases150000updates,
+každému50k. Selectedvždy poslednýupdate. Rovnaképrípady,počty,
+train-onlynormalizer,seed20261101,data/frame/casesamplingalgoritmus,
+lossweights/optimizer/schedule. Architektonickýbundle sa líši aj
+paramcountom,šírkou/počtomvrstiev/latentom, nie čistásingle-factorablation.
+ŽiadnaVAL/testgeometria vtomtobehunačítaná. Kontrolnéfitcases sú
+totožné sTRAIN ajprecheckpointselection, nie validácia generalizácie.
+Obe knowninitial2,3 vždyvstup,targets4..241ibaTRAINloss,
+relatívnečasovéquerydt.05solverunit. NieSIstartup. Žiadnenovépredlohy,
+frameworky,datasety/CFD alebo hlavnýmtest. Starézdroje nezmenené.
+
+ČO SME SA NAUČILI PRE ĎALŠÍ POSTUP
+Pôvodnýmodel dokáže spoločnýfit aspoň3zvolenýchprípadov; tvrdenie,
+že obecne nedokáže spoločne reprezentovať viacprípadov, nieje podložené.
+Nedokazuje to kapacitu pre69cases a nevidenégeometrie.
+V12mal~8696updates/case,V13má50k/case a menšiu/manévrovatelnejšiu
+sadu; rolu rozsahu/rozpočtu nemožno zamieňať za dokázanú príčinu.
+Najlepšie podloženýzáklad zostáva pôvodnáarchitektúra, nieautomaticky
+novšia. Pred69/6treba na nej kontrolovane zlepšiť fyzikálnu konzistenciu
+pri zachovanípresnosti. Novýtréning vtomto kontrolnomkroku nespustený.
+Nie je dokázaná jedna definitívnapríčina predchádzajúcichzlyhaní.
+
+INTEGRITA/SPOTREBA
+140676COMPLETED0:0,140677accountingOK,V13freezeoverený,frontaprázdna.
+Skutočné15873GPU*s=4.409167GPU*h,63492core*s vrátane skúšky/
+assessmentov. Pythontrainingbaseline1=1789.0845s,own1=2119.0991s,
+baseline3=5444.4746s,own3=6379.3073s. ŽiadnepriebežnéGPUhodiny
+neodhadujeme.12GPUunit prešlo prištarte.
+Perun:results/fpo_pinn_own_conditioning_20261101_v13/training/140676/.
+Lokálne:vysledky_140676/,37malýchJSON/logov193261B, overenýSHAzip
+e472d44900a952d02eb5dc7203d7185b8bb9c53d10df1081ef635a29ade83d7e.
+Veľképolia/váhy a kompletnépriebežnéassessmenty zostávajúPerun.

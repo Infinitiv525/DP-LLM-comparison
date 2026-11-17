@@ -1,0 +1,597 @@
+[
+  {
+    "update": 1,
+    "data": 0.002144286409020424,
+    "pde": 0.026232119649648666,
+    "pde_parts": [
+      0.007917194627225399,
+      0.008771122433245182,
+      0.009543802589178085
+    ],
+    "weighted_pde": 0.026232119649648666,
+    "boundary": 0.006848728749901056,
+    "gradient_norm_before_clip": 0.6300238966941833,
+    "assessment": {
+      "score": 0.029556965565341625,
+      "cases": [
+        {
+          "score": 0.03535258299140637,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.026735345246559336,
+            "pressure_relative_l2": 0.04396982073625339
+          },
+          "interior_div_rms": 0.10316995450710299,
+          "direct_query_gpu_ms": {
+            "p50": 3.391759991645813,
+            "p95": 3.4061583161354063,
+            "p99": 3.412187786102295
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.15568392705015777,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.02803097342260251,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.013113352228832326,
+            "pressure_relative_l2": 0.04294859461637269
+          },
+          "interior_div_rms": 0.04681296107758369,
+          "direct_query_gpu_ms": {
+            "p50": 3.3868480920791626,
+            "p95": 3.4044880747795103,
+            "p99": 3.4095730423927306
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.03348933662749639,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.025287340282016,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.014814029081989826,
+            "pressure_relative_l2": 0.035760651482042174
+          },
+          "interior_div_rms": 0.0576147850203727,
+          "direct_query_gpu_ms": {
+            "p50": 3.390511989593506,
+            "p95": 3.4467455983161925,
+            "p99": 3.4680525159835813
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.05199788188358315,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ]
+    },
+    "elapsed_seconds": 50.87778985314071
+  },
+  {
+    "update": 5000,
+    "data": 0.0005786785623058677,
+    "pde": 0.004945053718984127,
+    "pde_parts": [
+      0.0013583600521087646,
+      0.0018673534505069256,
+      0.0017193402163684368
+    ],
+    "weighted_pde": 0.004945053718984127,
+    "boundary": 0.0016746311448514462,
+    "gradient_norm_before_clip": 0.1521437019109726,
+    "assessment": {
+      "score": 0.03770104261481714,
+      "cases": [
+        {
+          "score": 0.047798605506538944,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.03354377554358102,
+            "pressure_relative_l2": 0.06205343546949686
+          },
+          "interior_div_rms": 0.08355380075850657,
+          "direct_query_gpu_ms": {
+            "p50": 3.396239995956421,
+            "p95": 3.4108799934387206,
+            "p99": 3.4222259235382078
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.10970412348123158,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.03302084490063194,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.015891094014243087,
+            "pressure_relative_l2": 0.05015059578702078
+          },
+          "interior_div_rms": 0.04021438696233853,
+          "direct_query_gpu_ms": {
+            "p50": 3.391727924346924,
+            "p95": 3.40522723197937,
+            "p99": 3.4125583291053774
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.025312150225919837,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.03228367743728054,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.018370038121892477,
+            "pressure_relative_l2": 0.04619731675266861
+          },
+          "interior_div_rms": 0.048407077984962646,
+          "direct_query_gpu_ms": {
+            "p50": 3.3878719806671143,
+            "p95": 3.4056752204895018,
+            "p99": 3.417724850177765
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.03819204208699344,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ]
+    },
+    "elapsed_seconds": 254.04904058016837
+  },
+  {
+    "update": 10000,
+    "data": 0.003660655114799738,
+    "pde": 0.02196846902370453,
+    "pde_parts": [
+      0.005617209710180759,
+      0.00924788136035204,
+      0.007103378884494305
+    ],
+    "weighted_pde": 0.02196846902370453,
+    "boundary": 0.012333758175373077,
+    "gradient_norm_before_clip": 0.5809686779975891,
+    "assessment": {
+      "score": 0.03747962470067799,
+      "cases": [
+        {
+          "score": 0.04931599647818557,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.03406486287616768,
+            "pressure_relative_l2": 0.06456713008020346
+          },
+          "interior_div_rms": 0.07698687459459576,
+          "direct_query_gpu_ms": {
+            "p50": 3.398736000061035,
+            "p95": 3.437611138820648,
+            "p99": 3.4560502576828003
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.09572437587155014,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.03200517533465563,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.015540472697262253,
+            "pressure_relative_l2": 0.04846987797204901
+          },
+          "interior_div_rms": 0.03744459106242519,
+          "direct_query_gpu_ms": {
+            "p50": 3.39083194732666,
+            "p95": 3.404559922218323,
+            "p99": 3.4098847818374636
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.02259853438419454,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.031117702289192764,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.01817336784915661,
+            "pressure_relative_l2": 0.04406203672922892
+          },
+          "interior_div_rms": 0.04472424360305196,
+          "direct_query_gpu_ms": {
+            "p50": 3.403488039970398,
+            "p95": 3.4319328665733337,
+            "p99": 3.43591837644577
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.03384697575810827,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ]
+    },
+    "elapsed_seconds": 457.20401114039123
+  },
+  {
+    "update": 15000,
+    "data": 0.00317133660428226,
+    "pde": 0.015584651380777359,
+    "pde_parts": [
+      0.00582780409604311,
+      0.005458239000290632,
+      0.0042986078187823296
+    ],
+    "weighted_pde": 0.015584651380777359,
+    "boundary": 0.010264024138450623,
+    "gradient_norm_before_clip": 0.41694071888923645,
+    "assessment": {
+      "score": 0.03776192717983607,
+      "cases": [
+        {
+          "score": 0.049379417278506074,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.03436113068436198,
+            "pressure_relative_l2": 0.06439770387265017
+          },
+          "interior_div_rms": 0.07250237291162255,
+          "direct_query_gpu_ms": {
+            "p50": 3.3796639442443848,
+            "p95": 3.391929543018341,
+            "p99": 3.399754481315613
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.08777519636357031,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.03269421647822243,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.015704630733345742,
+            "pressure_relative_l2": 0.04968380222309912
+          },
+          "interior_div_rms": 0.03578540766533433,
+          "direct_query_gpu_ms": {
+            "p50": 3.3751360177993774,
+            "p95": 3.3922110915184023,
+            "p99": 3.4019497656822204
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.021035025099746318,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.03121214778277971,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.01830467794535202,
+            "pressure_relative_l2": 0.044119617620207406
+          },
+          "interior_div_rms": 0.04261254134173153,
+          "direct_query_gpu_ms": {
+            "p50": 3.3751039505004883,
+            "p95": 3.392799997329712,
+            "p99": 3.4048026394844055
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.03133038482276582,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ]
+    },
+    "elapsed_seconds": 660.3411309812218
+  },
+  {
+    "update": 20000,
+    "data": 0.0030988785438239574,
+    "pde": 0.016447579488158226,
+    "pde_parts": [
+      0.004419810138642788,
+      0.005230454728007317,
+      0.0067973146215081215
+    ],
+    "weighted_pde": 0.016447579488158226,
+    "boundary": 0.010520357638597488,
+    "gradient_norm_before_clip": 0.4755832850933075,
+    "assessment": {
+      "score": 0.03695657761818793,
+      "cases": [
+        {
+          "score": 0.048410420557842754,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.033908889323520104,
+            "pressure_relative_l2": 0.06291195179216541
+          },
+          "interior_div_rms": 0.07014747767732675,
+          "direct_query_gpu_ms": {
+            "p50": 3.3914880752563477,
+            "p95": 3.412019145488739,
+            "p99": 3.4154117488861084
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.0832548479886115,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.0319017877444867,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.015665757536320348,
+            "pressure_relative_l2": 0.04813781795265306
+          },
+          "interior_div_rms": 0.03483445897792317,
+          "direct_query_gpu_ms": {
+            "p50": 3.385024070739746,
+            "p95": 3.401131200790405,
+            "p99": 3.405408411026001
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.020121392171767328,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.03055752455223431,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.018248649928760064,
+            "pressure_relative_l2": 0.04286639917570855
+          },
+          "interior_div_rms": 0.04137910493970418,
+          "direct_query_gpu_ms": {
+            "p50": 3.3884799480438232,
+            "p95": 3.4063456535339354,
+            "p99": 3.412166736125946
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.030101214519881903,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ]
+    },
+    "elapsed_seconds": 863.6037908364087
+  },
+  {
+    "update": 25000,
+    "data": 0.0014515866059809923,
+    "pde": 0.004890702664852142,
+    "pde_parts": [
+      0.0014539596159011126,
+      0.0017870813608169556,
+      0.0016496616881340742
+    ],
+    "weighted_pde": 0.004890702664852142,
+    "boundary": 0.002997857518494129,
+    "gradient_norm_before_clip": 0.12163099646568298,
+    "assessment": {
+      "score": 0.03712890922728266,
+      "cases": [
+        {
+          "score": 0.04894142000914527,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.034132609851063075,
+            "pressure_relative_l2": 0.06375023016722746
+          },
+          "interior_div_rms": 0.06872857995957386,
+          "direct_query_gpu_ms": {
+            "p50": 3.370576024055481,
+            "p95": 3.38472158908844,
+            "p99": 3.391756491661072
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.08096294169228117,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.03186784212380431,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.01551341729368419,
+            "pressure_relative_l2": 0.04822226695392442
+          },
+          "interior_div_rms": 0.03436871384027876,
+          "direct_query_gpu_ms": {
+            "p50": 3.367759943008423,
+            "p95": 3.3814127683639525,
+            "p99": 3.395427725315094
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.01977904062295536,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.030577465548898397,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.01817887865106193,
+            "pressure_relative_l2": 0.042976052446734865
+          },
+          "interior_div_rms": 0.04083085233079536,
+          "direct_query_gpu_ms": {
+            "p50": 3.367456078529358,
+            "p95": 3.3790767431259154,
+            "p99": 3.3852969241142272
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.029250526362482238,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ]
+    },
+    "elapsed_seconds": 1066.7929952777922
+  },
+  {
+    "update": 30000,
+    "data": 0.0014700484462082386,
+    "pde": 0.004977472126483917,
+    "pde_parts": [
+      0.0017759522888809443,
+      0.0015585939399898052,
+      0.0016429258976131678
+    ],
+    "weighted_pde": 0.004977472126483917,
+    "boundary": 0.0038841955829411745,
+    "gradient_norm_before_clip": 0.10855544358491898,
+    "assessment": {
+      "score": 0.036908414782808874,
+      "cases": [
+        {
+          "score": 0.04851278896271918,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.033939327714902864,
+            "pressure_relative_l2": 0.0630862502105355
+          },
+          "interior_div_rms": 0.06827669702626828,
+          "direct_query_gpu_ms": {
+            "p50": 3.383616089820862,
+            "p95": 3.4125775933265685,
+            "p99": 3.4211107540130614
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.08024271377244917,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.03182556019050105,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.015507976034064659,
+            "pressure_relative_l2": 0.048143144346937436
+          },
+          "interior_div_rms": 0.03422846343219593,
+          "direct_query_gpu_ms": {
+            "p50": 3.388287901878357,
+            "p95": 3.402911901473999,
+            "p99": 3.4080346202850342
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.019607518701774983,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.030386895195206383,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.018082565553860452,
+            "pressure_relative_l2": 0.04269122483655231
+          },
+          "interior_div_rms": 0.04064017252902649,
+          "direct_query_gpu_ms": {
+            "p50": 3.3682719469070435,
+            "p95": 3.4020369052886963,
+            "p99": 3.4283100390434265
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false,
+          "mean_fd_momentum_loss": 0.02907817587726006,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ]
+    },
+    "elapsed_seconds": 1270.1212306525558
+  }
+]

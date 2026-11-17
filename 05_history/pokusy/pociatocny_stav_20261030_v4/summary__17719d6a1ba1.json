@@ -1,0 +1,454 @@
+{
+  "status": "PREFIX_CONDITIONED_DEVELOPMENT_EVALUATED",
+  "config": {
+    "seed": 20261030,
+    "width": 96,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "lr": 0.001,
+    "steps": 300000,
+    "batch": 2048,
+    "collocation": 256,
+    "validate_every": 5000,
+    "warmup": 6000,
+    "ramp": 24000,
+    "pde_weight": 0.01,
+    "bc_weight": 0.1,
+    "ic_weight": 0.2,
+    "name": "prefix_conditioned",
+    "state_conditioning": true
+  },
+  "selected_step": 150000,
+  "train_scenarios": 69,
+  "validation_scenarios": 6,
+  "input_frames": [
+    2,
+    3
+  ],
+  "target_frames": [
+    4,
+    241
+  ],
+  "targets_per_scenario": 238,
+  "accuracy": [
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+      "frames": 238,
+      "scores": {
+        "all_future": {
+          "model": {
+            "velocity_relative_l2": 0.47284946402901523,
+            "pressure_relative_l2": 0.6173674166606723
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.7575628273851636,
+            "pressure_relative_l2": 1.1019513357435289
+          }
+        },
+        "steps_1_10": {
+          "model": {
+            "velocity_relative_l2": 0.07712820474068545,
+            "pressure_relative_l2": 0.14375314126005495
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.1347465646867611,
+            "pressure_relative_l2": 0.20064237694320014
+          }
+        },
+        "steps_11_40": {
+          "model": {
+            "velocity_relative_l2": 0.2578230218320627,
+            "pressure_relative_l2": 0.43019504867252967
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.5613858531631656,
+            "pressure_relative_l2": 0.8178329912932505
+          }
+        },
+        "steps_41_120": {
+          "model": {
+            "velocity_relative_l2": 0.46772063086233934,
+            "pressure_relative_l2": 0.6850779240339782
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.9275970095452702,
+            "pressure_relative_l2": 1.3070399512787811
+          }
+        },
+        "steps_121_238": {
+          "model": {
+            "velocity_relative_l2": 0.5645300785385572,
+            "pressure_relative_l2": 0.6591849861842827
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.7449419568837689,
+            "pressure_relative_l2": 1.1115237991222695
+          }
+        }
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_838.npz",
+      "frames": 238,
+      "scores": {
+        "all_future": {
+          "model": {
+            "velocity_relative_l2": 0.7460295520652125,
+            "pressure_relative_l2": 0.8825883839416312
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.8546196386572068,
+            "pressure_relative_l2": 1.1425583735453868
+          }
+        },
+        "steps_1_10": {
+          "model": {
+            "velocity_relative_l2": 0.1332087855592009,
+            "pressure_relative_l2": 0.1799284342779396
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.17467807432543792,
+            "pressure_relative_l2": 0.2514499140771156
+          }
+        },
+        "steps_11_40": {
+          "model": {
+            "velocity_relative_l2": 0.4588018454373933,
+            "pressure_relative_l2": 0.6162709515035268
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.6496798486186448,
+            "pressure_relative_l2": 0.9316564417081482
+          }
+        },
+        "steps_41_120": {
+          "model": {
+            "velocity_relative_l2": 0.7571540411815121,
+            "pressure_relative_l2": 0.8737359754233605
+          },
+          "persistence": {
+            "velocity_relative_l2": 1.0613340872800519,
+            "pressure_relative_l2": 1.4048444608943522
+          }
+        },
+        "steps_121_238": {
+          "model": {
+            "velocity_relative_l2": 0.8634454820193711,
+            "pressure_relative_l2": 1.0158452920030017
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.8241997526796383,
+            "pressure_relative_l2": 1.0938740986460869
+          }
+        }
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/nurbs/22/Re_164.npz",
+      "frames": 238,
+      "scores": {
+        "all_future": {
+          "model": {
+            "velocity_relative_l2": 0.09774547569500731,
+            "pressure_relative_l2": 0.24691208971501752
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.39774380336238824,
+            "pressure_relative_l2": 0.48244725440268893
+          }
+        },
+        "steps_1_10": {
+          "model": {
+            "velocity_relative_l2": 0.034680167733443214,
+            "pressure_relative_l2": 0.08783074762521056
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.11833399338596447,
+            "pressure_relative_l2": 0.17262256120140257
+          }
+        },
+        "steps_11_40": {
+          "model": {
+            "velocity_relative_l2": 0.10670322308723344,
+            "pressure_relative_l2": 0.29285511686320054
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.4393901555168622,
+            "pressure_relative_l2": 0.5712855269520499
+          }
+        },
+        "steps_41_120": {
+          "model": {
+            "velocity_relative_l2": 0.09262015182849473,
+            "pressure_relative_l2": 0.22219816203921572
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.387777632948523,
+            "pressure_relative_l2": 0.4524860654358861
+          }
+        },
+        "steps_121_238": {
+          "model": {
+            "velocity_relative_l2": 0.10428739575576887,
+            "pressure_relative_l2": 0.2654683339566846
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.41759127088983944,
+            "pressure_relative_l2": 0.5064302533253692
+          }
+        }
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/nurbs/22/Re_977.npz",
+      "frames": 238,
+      "scores": {
+        "all_future": {
+          "model": {
+            "velocity_relative_l2": 0.5717875695332306,
+            "pressure_relative_l2": 0.7605712624752372
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.5923580855464712,
+            "pressure_relative_l2": 0.8554418855918431
+          }
+        },
+        "steps_1_10": {
+          "model": {
+            "velocity_relative_l2": 0.10321285034856253,
+            "pressure_relative_l2": 0.17198697066532642
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.18997094408452853,
+            "pressure_relative_l2": 0.2879829564944326
+          }
+        },
+        "steps_11_40": {
+          "model": {
+            "velocity_relative_l2": 0.3775991436951377,
+            "pressure_relative_l2": 0.6294507008891798
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.6224877876487338,
+            "pressure_relative_l2": 0.8339202216707401
+          }
+        },
+        "steps_41_120": {
+          "model": {
+            "velocity_relative_l2": 0.5409942396080237,
+            "pressure_relative_l2": 0.7877930614125519
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.6222417167564772,
+            "pressure_relative_l2": 0.8950524970061254
+          }
+        },
+        "steps_121_238": {
+          "model": {
+            "velocity_relative_l2": 0.6817440641180273,
+            "pressure_relative_l2": 0.8253315662946917
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.5985385080443616,
+            "pressure_relative_l2": 0.8821485830110348
+          }
+        }
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/skelenton/36/Re_209.npz",
+      "frames": 238,
+      "scores": {
+        "all_future": {
+          "model": {
+            "velocity_relative_l2": 0.1287346662030438,
+            "pressure_relative_l2": 0.28598551547164724
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.45345725583648183,
+            "pressure_relative_l2": 0.5109262183722189
+          }
+        },
+        "steps_1_10": {
+          "model": {
+            "velocity_relative_l2": 0.04556221785842174,
+            "pressure_relative_l2": 0.09927337943699029
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.13648960494827658,
+            "pressure_relative_l2": 0.18949704606292608
+          }
+        },
+        "steps_11_40": {
+          "model": {
+            "velocity_relative_l2": 0.1365665297503943,
+            "pressure_relative_l2": 0.3311584285154447
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.5048725625839122,
+            "pressure_relative_l2": 0.6006311509470625
+          }
+        },
+        "steps_41_120": {
+          "model": {
+            "velocity_relative_l2": 0.12283649053599832,
+            "pressure_relative_l2": 0.2609833302870446
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.43808372926160655,
+            "pressure_relative_l2": 0.4800262644558845
+          }
+        },
+        "steps_121_238": {
+          "model": {
+            "velocity_relative_l2": 0.13779079018939422,
+            "pressure_relative_l2": 0.30727457296148486
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.4776699628911358,
+            "pressure_relative_l2": 0.5363087612464084
+          }
+        }
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/skelenton/36/Re_867.npz",
+      "frames": 238,
+      "scores": {
+        "all_future": {
+          "model": {
+            "velocity_relative_l2": 0.3894798201708026,
+            "pressure_relative_l2": 0.6170522493481284
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.5633201696777478,
+            "pressure_relative_l2": 0.7755520197768302
+          }
+        },
+        "steps_1_10": {
+          "model": {
+            "velocity_relative_l2": 0.07440237143391758,
+            "pressure_relative_l2": 0.1638014429726869
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.18431480759743368,
+            "pressure_relative_l2": 0.3320797999201633
+          }
+        },
+        "steps_11_40": {
+          "model": {
+            "velocity_relative_l2": 0.19755354126353986,
+            "pressure_relative_l2": 0.471471731792028
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.6255307997930594,
+            "pressure_relative_l2": 0.88710137024203
+          }
+        },
+        "steps_41_120": {
+          "model": {
+            "velocity_relative_l2": 0.34632533604761456,
+            "pressure_relative_l2": 0.5902414418070313
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.5252432520456234,
+            "pressure_relative_l2": 0.741897951389283
+          }
+        },
+        "steps_121_238": {
+          "model": {
+            "velocity_relative_l2": 0.4942333929203093,
+            "pressure_relative_l2": 0.7106521492949524
+          },
+          "persistence": {
+            "velocity_relative_l2": 0.605437865677017,
+            "pressure_relative_l2": 0.8075907244854273
+          }
+        }
+      }
+    }
+  ],
+  "latency": {
+    "gpu_ms": {
+      "grid_prefix_features_cached": [
+        {
+          "p50": 1.1327040195465088,
+          "p95": 1.1369120121002196,
+          "p99": 1.1392002928256988
+        },
+        {
+          "p50": 1.1312479972839355,
+          "p95": 1.1350000262260438,
+          "p99": 1.138020465373993
+        },
+        {
+          "p50": 1.1317119598388672,
+          "p95": 1.1353376507759094,
+          "p99": 1.1376409721374512
+        }
+      ],
+      "bicubic_features_computed_each_query": [
+        {
+          "p50": 1.7483839988708496,
+          "p95": 1.7534768223762511,
+          "p99": 1.7572191774845123
+        },
+        {
+          "p50": 1.747376024723053,
+          "p95": 1.7533151924610137,
+          "p99": 1.76030149102211
+        },
+        {
+          "p50": 1.747983992099762,
+          "p95": 1.754059189558029,
+          "p99": 1.759236524105072
+        }
+      ]
+    },
+    "grid": [
+      1024,
+      256
+    ],
+    "samples_per_round": 200,
+    "context_gpu_ms": {
+      "p50": 0.1461142674088478,
+      "p99": 0.2709827385842801
+    },
+    "host_to_host_cached_grid_ms": {
+      "p50": 1.4211740344762802,
+      "p99": 1.496098767966032
+    },
+    "cold_samples": 30,
+    "rendering_included": false,
+    "prefix_preprocessing_included": false,
+    "encoder_and_prefix_tensors_already_on_gpu": true,
+    "causal_rollout": false
+  },
+  "training_seconds": 9564.520003121346,
+  "peak_cuda_allocated_bytes": 1292232704,
+  "gpu": "NVIDIA H200",
+  "checkpoint_sha256": "673f8e810b2562b4f7d575772191478eefd35cf0586bc3f85ef3adeb30878048",
+  "future_fields_in_model_input": false,
+  "main_test_opened": false,
+  "working_gate": {
+    "accuracy_pass": false,
+    "latency_pass": true,
+    "beats_persistence": true
+  },
+  "llm_comparison_ready": false,
+  "causal_rollout": false,
+  "interpretation": "direct future trajectory queries conditioned on two known prefix states; hard initial condition in state-aware variant",
+  "limitations": [
+    "Not a full-domain initial-boundary value solver: crop exterior data are unavailable",
+    "State-aware vs no-state comparison changes the conditioning and initial-condition enforcement together",
+    "New input protocol, not a retroactive reinterpretation of v2/v3 geometry-only results",
+    "No final test, multiple-seed confirmation or hypothesis significance claim"
+  ]
+}

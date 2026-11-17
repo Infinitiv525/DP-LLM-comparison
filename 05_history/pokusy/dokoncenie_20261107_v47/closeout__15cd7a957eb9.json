@@ -1,0 +1,197 @@
+{
+  "status": "PASS",
+  "at": "2026-11-07T18:41:13.218060+01:00",
+  "gpu_job": "145597",
+  "cpu_collector": "145596",
+  "existing_gpu_job": "145176",
+  "counts": {
+    "DONE": 355,
+    "RUNNING": 24,
+    "PENDING": 16
+  },
+  "new_tasks": [
+    {
+      "id": "tpe_r04_k01",
+      "task": {
+        "id": "tpe_r04_k01",
+        "kind": "retrain",
+        "method": "tpe",
+        "run": 4,
+        "repeat": 1,
+        "seed": 150002,
+        "dependencies": [
+          "tpe_r04_c00",
+          "tpe_r04_c01",
+          "tpe_r04_c02",
+          "tpe_r04_c03",
+          "tpe_r04_c04",
+          "tpe_r04_c05",
+          "tpe_r04_c06",
+          "tpe_r04_c07"
+        ]
+      },
+      "worker": 3
+    },
+    {
+      "id": "qwen3_8b_r04_k02",
+      "task": {
+        "id": "qwen3_8b_r04_k02",
+        "kind": "retrain",
+        "method": "qwen3_8b",
+        "run": 4,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "qwen3_8b_r04_c00",
+          "qwen3_8b_r04_c01",
+          "qwen3_8b_r04_c02",
+          "qwen3_8b_r04_c03",
+          "qwen3_8b_r04_c04",
+          "qwen3_8b_r04_c05",
+          "qwen3_8b_r04_c06",
+          "qwen3_8b_r04_c07"
+        ]
+      },
+      "worker": 7
+    },
+    {
+      "id": "ministral3_8b_r04_k02",
+      "task": {
+        "id": "ministral3_8b_r04_k02",
+        "kind": "retrain",
+        "method": "ministral3_8b",
+        "run": 4,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "ministral3_8b_r04_c00",
+          "ministral3_8b_r04_c01",
+          "ministral3_8b_r04_c02",
+          "ministral3_8b_r04_c03",
+          "ministral3_8b_r04_c04",
+          "ministral3_8b_r04_c05",
+          "ministral3_8b_r04_c06",
+          "ministral3_8b_r04_c07"
+        ]
+      },
+      "worker": 6
+    },
+    {
+      "id": "phi4_mini_r04_k02",
+      "task": {
+        "id": "phi4_mini_r04_k02",
+        "kind": "retrain",
+        "method": "phi4_mini",
+        "run": 4,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "phi4_mini_r04_c00",
+          "phi4_mini_r04_c01",
+          "phi4_mini_r04_c02",
+          "phi4_mini_r04_c03",
+          "phi4_mini_r04_c04",
+          "phi4_mini_r04_c05",
+          "phi4_mini_r04_c06",
+          "phi4_mini_r04_c07"
+        ]
+      },
+      "worker": 4
+    },
+    {
+      "id": "granite33_8b_r04_k02",
+      "task": {
+        "id": "granite33_8b_r04_k02",
+        "kind": "retrain",
+        "method": "granite33_8b",
+        "run": 4,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "granite33_8b_r04_c00",
+          "granite33_8b_r04_c01",
+          "granite33_8b_r04_c02",
+          "granite33_8b_r04_c03",
+          "granite33_8b_r04_c04",
+          "granite33_8b_r04_c05",
+          "granite33_8b_r04_c06",
+          "granite33_8b_r04_c07"
+        ]
+      },
+      "worker": 2
+    },
+    {
+      "id": "random_r04_k02",
+      "task": {
+        "id": "random_r04_k02",
+        "kind": "retrain",
+        "method": "random",
+        "run": 4,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "random_r04_c00",
+          "random_r04_c01",
+          "random_r04_c02",
+          "random_r04_c03",
+          "random_r04_c04",
+          "random_r04_c05",
+          "random_r04_c06",
+          "random_r04_c07"
+        ]
+      },
+      "worker": 1
+    },
+    {
+      "id": "tpe_r04_k02",
+      "task": {
+        "id": "tpe_r04_k02",
+        "kind": "retrain",
+        "method": "tpe",
+        "run": 4,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "tpe_r04_c00",
+          "tpe_r04_c01",
+          "tpe_r04_c02",
+          "tpe_r04_c03",
+          "tpe_r04_c04",
+          "tpe_r04_c05",
+          "tpe_r04_c06",
+          "tpe_r04_c07"
+        ]
+      },
+      "worker": 0
+    },
+    {
+      "id": "qwen3_8b_r04_k03",
+      "task": {
+        "id": "qwen3_8b_r04_k03",
+        "kind": "retrain",
+        "method": "qwen3_8b",
+        "run": 4,
+        "repeat": 3,
+        "seed": 150004,
+        "dependencies": [
+          "qwen3_8b_r04_c00",
+          "qwen3_8b_r04_c01",
+          "qwen3_8b_r04_c02",
+          "qwen3_8b_r04_c03",
+          "qwen3_8b_r04_c04",
+          "qwen3_8b_r04_c05",
+          "qwen3_8b_r04_c06",
+          "qwen3_8b_r04_c07"
+        ]
+      },
+      "worker": 5
+    }
+  ],
+  "distinct_H200": 24,
+  "max_attempts_per_new_worker": 1,
+  "new_scientific_attempts": 0,
+  "original_395_attempts_unchanged": true,
+  "original_sources_unchanged": true,
+  "TEST_opened": false,
+  "source_sha256": "bbb0d0ffb6832059b96f0d1b67c18492a39ce3bb45ba81ab60d528931fe6d0a5"
+}

@@ -1,0 +1,93 @@
+UZAVRETÉ — 03.11.2026
+Úloha 142777 skončila úspešne. Presnosť stále nestačí: pri rovnakých
+30k aktualizáciách U39,315 % vs38,119 %, tlak55,246 % vs55,252 %.
+Plný výsledok a overený archív sú vo VYSLEDKY_142777.txt.
+Nadväzuje skúška dlhšej histórie V23/142897.
+Nižšie zostáva pôvodný opis a priebežné historické záznamy.
+V21 – TEST PRIESTOROVÉHO KONTEXTU, 03.11.2026
+
+ČO CHCEME OVERIŤ
+Či poskytnutie informácie o okolí každého bodu zlepší prenos na odlišné
+simulácie. K doterajšiemu globálnemu32číselnému súhrnu a lokálnym6
+úvodnýmhodnotám pridáme16priestorovýchznakov z existujúcejCNNmapy.
+Mapa vzniká iba z úvodnýchsnímok2,3 a geometrie. Budúcepolia do nej
+nevstupujú. Zachovávame dátovo podporovanýPINN, psi/p, hardIC a curl.
+
+ČO SA MENÍ A ČO POROVNÁVAME
+Použijeme16kanálovCNN pred globálnym zbalením; pri plnomvstupe je to
+mapa8x32. Každýdotaz ju vzorkuje podľa fyzikálnychsúradníc. Vlastná
+kvintickáB-splineinterpolácia znakov je hladkáC4, takže umožňuje potrebné
+derivácie. Nemusí presneinterpolovať surové fyzikálne hodnoty – sú to
+naučenéznaky. Starábicubická cesta fyzikálnehoúvodu zostáva samostatná;
+nevyhlasujeme odstránenie celéhoAD-FDnesúladu.
+
+Dve vetvy s rovnakou rozšírenouvstupnouvrstvou72->88 a rovnakými váhami.
+Nových16stĺpcov váh začína na nule. Kontrola dostane16nulovýchznakov,
+skúšanávetva skutočnépriestorovéznaky. Počiatočné predikcie sa musia
+zhodovať navzájom aj numericky s pôvodným modelom. Početparametrov je
+rovnaký; využitákapacita a náklady sa môžu líšiť.
+ŠtartV19gridNSbest20k, ktorý nadväzuje naV17best100k; nejde o jeden
+súvislýoptimizerbeh. Obe vetvy majú novýAdam a rovnakýseed20261103.
+
+TRÉNING A VYHODNOTENIE
+Po úspešnom technickomoverení30000ďalšíchaktualizácií na každúvetvu,
+69TRAIN/6odlišnýchVAL,434/435aktualizácií naTRAINprípad. LR3e-5cosine
+1.5e-6,clip1,FP32,batch2048/PDE256/BC128/FD128. Rovnaký celýsampler.
+V OBOCH vetvách aktívne data/trainStd +.01ADNS +.01BC +.01FDmomentum,
+bez zmeny koeficientov alebo ich nábehu medzi vetvami. Rozdiel je iba
+priestorovývstup. Prenesená komentárováveta priFDbloku vtrainere pochádza
+zV19; rozhodujú konfigurácieV21, ktoré majúFDweight.01priobochvetvách.
+FDdt.025, úvod aj cieľovéčasovérozsahy ostávajú. HlavnýTEST zatvorený.
+
+Update0/každých5000/koniec: celých238snímok všetkých6VAL, rovnaký
+výberbest podľa priemeruU/p, môže zostať0. Počas tréningu sa nikdy
+nevraciame na best. TRAIN3monitory0/každých10000/koniec,nieaudit69.
+Na last ajselected známa diagnostikaV18:9prípadov/8časov/512bodov;
+nezamieňať jej priemery s238snímkami. Uložíme best/last/training_state,
+celýsamplerSHA,počty a pokrytie238snímok,intervalovéstraty a zdroje.
+Normalizácia zo69TRAIN nemenná, VALbudúcepolia ibaCPUscorer/výber.
+
+TECHNICKÉ OVERENIE PRED TRÉNINGOM
+5CPUtestov prešlo0.947s: partitionunity/konštanty/hladkéderivácie
+na splineuzloch, separovateľnýgrid oprotibodovémuvzorkovaniu,
+zachovaniepôvodnýchpredikcií/IC, nonzerospatial sparse/grid+cForward
+kontinuita a tretieNSderivácie so spätnýmprenosom do priestorovejCNN.
+AST/bash-nOK, rodičovskýV20freeze a zdrojovýcheckpoint overené,
+novéV21zdroje/protokol/prepared zmrazené predsubmission.
+
+NajprvH200benchmark1TRAIN/1VAL s238časovýmidotazmi/30warm-up preobevetvy.
+Query zahŕňaCNNmapu aj jejinterpoláciu, bodovúsieť,curl,gauge,masku.
+Nekešujú sa vstupnozávisléznaky. Kešujúsa iba konštantnématice
+interpolačnéhostencilu prepevnúmriežku, podobneako prepočítanýqgrid;
+ichprvézostavenie a warm-up nie sú vpercentiloch. Zmena geometrie na
+tejistejmriežke neumožní obísť meranývýpočet novejCNNmapy.
+GPUvstupy,bezCPUprenosu/renderingu. Nie kauzálnykrok ani výmena
+prekážky počasbehu. Všetkyreadinessp99 musia byť<=5ms, inak sa žiadny
+tréning nespustí. Čas ani presnostnébrány sa neuvoľňujú.
+
+Potommatched3updatefunkčnáskúška obochvetiev1TRAIN/1VAL sPDE/FD/238
+snímkami/IC a rovnakýmštartom/samplerom. Ažpoúspechu plný69/6test.
+Prínos novejarchitektúry je hypotéza, nie uždokázanývýsledok.
+
+Novécommon21/model21/test21/benchmark21/trainer21/init21/capture28,
+scripts226/227. Starézmrazenésúbory/váhy nemeníme, bezexternýchpredlôh.
+Perun:results/fpo_pinn_spatial_context_20261103_v21.
+Veľképolia/váhy/bodovéNPZ ibaPerun. Žiadne novéCFD/downloady/mainTEST.
+OVERENÝ ŠTART A RÝCHLOSTNÁ BRÁNA
+142777GPU,142778účtovanieafterany; IDregistrovanépredrelease.
+142777RUNNINGgpu02,5testov ajna výpočtovomuzleOK0.891s.
+ReadinessPASS: kontrolap99max3.000287ms, priestorovýkontext3.061553ms.
+1TRAIN/1VAL,238časov/variant,30warmup, CNN a mapainterpoláciavmeraní.
+GPUfloat32nonzerospatial kernelmaxrozdielsparse/grid0.0000253171
+pri vopredurčenejtolerancii0.0005;sourcefieldagreement/ICprešli.
+Nieaccuracyproof. Začala1TRAIN/1VALfunkčnáskúška obochvetiev;
+plný69/6beh automaticky ažpo matchedSMOKE_COMPLETE.
+Maléprotocol/freeze/prepared/sampling/diagnostic_protocol/submission
+ajlokálne v zaznamy/, readinessčíslavreadiness_142777.json.
+
+FUNKČNÁ SKÚŠKA DOKONČENÁ
+Obe vetvy3update vrátaneADNS/FDspätnéhoprenosu a238score prešli.
+SMOKE_COMPLETE, matched_initial_stateTrue, matched_full_samplingTrue.
+Žiadnyguardfail; následný plnýproces už načítava69TRAIN/6VAL.
+Malýsmokesummary uložený ajlokálne zaznamy/smoke_142777.json.
+To zatiaľnepotvrdzuje zlepšeniepresnosti na plnejvývojovejsade.

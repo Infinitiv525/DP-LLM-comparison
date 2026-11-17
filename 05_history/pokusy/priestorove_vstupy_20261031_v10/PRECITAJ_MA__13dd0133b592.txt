@@ -1,0 +1,53 @@
+PRIESTOROVÉ VSTUPY V10 –31.10.2026
+AKTUÁLNE:Dokončené139993COMPLETED0:0,matched_execution=True.
+KontrolaU51.58%/p65.66%,FDvstupyU49.08%/p64.49%. Mierne zlepšenie,
+ale presnosť10%/20% neprešla. Obe splnili massgate a5mslimit(p99~2.6ms).
+Úplné výsledky:VYSLEDKY_139993.txt. Frontaprázdna, novýtréningnespustený.
+Nižšie je zachovaný pôvodný plán a záznamštartu.
+GPU139993,účtovanie139994. Nový kontrolovaný vývojovýpilot po auditeV9.
+
+Dve vetvy rovnakého rozšírenéhoDmodelu:
+zeros:9nových vstupných kanálov nulových;
+fd:9kanálov z aktuálneho vlastného poľa: dx(u,v,p),dy(u,v,p),lap(u,v,p).
+Prvéderivácie škálujeme pevne0.1,druhé0.01, potom trainStd.
+Rovnaký väčší prvý lineárny layer voboch, staré váhy skopírované,
+nové stĺpce inicializované nulou. Počiatočné predikcie sa preto majú
+zhodovať s pôvodnýmV8D32; jednotkovýtest to overil preobe vetvy.
+Rozdiel je dostupnosť týchto9príznakov, nie celkový početparametrov.
+
+Všetko vypočítané iba z aktuálneho známeho/vlastného stavu, nie z
+budúcichreferencií. Rovnaké dáta,základnýmodel,warmstartV8D32best,
+gradient32/update32,seed,straty,lr,200epochov/1600updates akoV8.
+Začína z2,3, potomvlastné238krokovépriebehy. ZnámysingleTRAINcase,
+nie nezávislávalidácia alebo štatisticky významnýLLMexperiment.
+
+Fyzika aj samotnýkrok používajú novú reprezentáciu dôsledne.
+KontinuálnaPDE interpoluje aj FDpríznaky bicubic a derivuje ich
+priestorovú závislosť. Diskrétna inferencia generuje curlprírastok
+na mriežke. Jednostranné gradientystencily pri cropokrajoch neznamenajú
+stenu alebo periodicitu. Derivedlap=opakovanáprváderivácia, odlišná
+diskretizácia od5pointLapvo fyzikálnejstrate, explicitne zaznamenané.
+
+Celý238assessment/10%U/20%p/5ms a pôvodnýmassgate bez zmeny.
+Latencia zahŕňa výpočet nových príznakov. Samplingtrace/váhy/config
+overiteľné SHA; best/last/continuation/histories/per_frame zachované.
+Žiadny clippingpolí, výpadkyzaznamenané. Žiadny novýCFD/download/test.
+
+Testy pred freeze: prenesenie starých váh, počiatočné zhodné výstupy,
+finitePDEgradienty vrátane tretíchderivácií, nenulovýgradientnových
+stĺpcov iba voFDvetve, nulovývcontrol, analytickégradientové/lap polia.
+2novétestyOK0.781s; AST/bash-nOK. GPU najprv zopakuje20kontrol,
+potom46krokovú matchedskúšku obochvetiev, až potomplnýpilot.
+Úspech nieje zaručený; explicitnégradienty sú hypotéza po audite,
+ktorý nepreukázal jednu definitívnu príčinu.
+
+Perun:/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_20261031_v10
+Staré modely/výsledky nemeníme; veľképolia/váhy ibaPerun,
+lokálne maléprotokoly/JSON/textovézáznamy.
+
+POTVRDENÝ ŠTART
+139993RUNNINGgpu19,20kontrol naGPUprešlo. SMOKE_COMPLETE,
+matched_execution=True, obe46ownsteps/2finiteupdates, zhodnýsamplingSHA
+ee45fbb3afcd2ecba56936c28c97579ed4fd0a49ad3edfbeefb2ec940d2558ba.
+Initialscoreoboch0.5933733954 zodpovedá pôvodnémuV8D32. Plnýtréning
+vtraining/139993 začal; konečnápresnosť neznáma. MaléJSONvzaznamy/.

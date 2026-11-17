@@ -1,0 +1,81 @@
+DOKONČENÉ A OVERENÉ — 04.11.2026
+
+400 epoch je hotových. Vybraný model: VAL rýchlosť 2,465 %,
+tlak 8,875 %, opakované p99 najviac 2,895 ms na H200.
+Fyzikálne rezíduum hybnosti je vyššie než referencia.
+Výsledky a obmedzenia: VYSLEDOK.txt. TEST zostal uzavretý.
+
+HISTORICKÉ ZÁZNAMY — stav v čase ich zápisu
+
+OVERENÝ STAV PO SPUSTENÍ — 04.11.2026
+
+143115 beží na H200, uzol gpu12. Krátka skúška 8 TRAIN / 2 VAL úspešne
+skončila; 4 analytické a 3 dátové testy prešli aj na výpočtovom uzle.
+Po 3 skúšobných aktualizáciách p99 celého poľa 2,896 a 2,891 ms.
+Úvodné meranie nového hlavného modelu: p99 2,892 a 2,895 ms.
+V oboch meraniach sa počíta celé natívne pole vrátane geometrie.
+Tieto čísla zatiaľ potvrdzujú výpočtovú cestu, nie dosiahnutú presnosť.
+Hlavný spoločný tréning na všetkých 640 TRAIN prípadoch sa už začal.
+Úvodné skóre 160 VAL bolo zapísané, neskôr sa bude porovnávať zlepšenie.
+Zmrazenie zdrojov a odtlačky dát boli po spustení znovu úspešne overené.
+Malé potvrdenia: zaznamy/smoke_143115.json, native_rychlost_pred_treningom_143115.json.
+
+PODROBNÝ OPIS
+SPOLOČNÝ PINN PRE USTÁLENÉ PRÚDENIE — V26 — 04.11.2026
+
+Čo teraz robíme
+Učíme jednu sieť na celej tréningovej časti ustáleného FlowBench LDC.
+Vstup je tvar prekážky a Reynoldsovo číslo, výstup je celé pole rýchlosti
+a tlaku. Nie je tu čas ani sekvencia úvodných snímok. Rovnaké váhy siete
+slúžia všetkým prípadom, bez dotrénovania na konkrétnej novej simulácii.
+To je spoločný PINN: okrem referenčných dát sa pri učení kontrolujú aj
+Navierove–Stokesove rovnice, nestlačiteľnosť a podmienky na stenách.
+
+Dáta
+Rodina harmonics z LDC_NS_2D: 1000 prípadov, natívne 512 × 512 buniek.
+640 tréningových, 160 validačných, 200 zatiaľ uzavretých testovacích.
+Existuje 100 tvarov prekážky pri rôznych Re. Štandardné náhodné
+rozdelenie podľa autorov umožňuje rovnaký tvar vo viacerých množinách;
+preto nebudeme tvrdiť, že ide o test iba úplne nových geometrií.
+Presné indexy a štatistiky sú v susednom priečinku V25/zaznamy.
+
+Čo už prešlo kontrolou
+Príprava 143101 skončila úspešne. Archívy overené cez úplný SHA a CRC.
+Fyzikálny audit referencií potvrdil súradnice a viskozitu 1/Re:
+medián relatívneho NS rezídua 0,01629 a násobku viskozity 0,98343.
+Normovanie iba z tréningových dát. Testové cieľové polia sa nepoužili.
+Prešlo 7 nových CPU testov modelu a ochrany dát; príprava má ďalšie 4.
+Staré samostatné modely V24 sú zastavené, výsledky a účtovanie zachované.
+
+Tréningový pilot
+Úloha 143115; následné zaznamenanie skutočnej spotreby 143116.
+Najprv krátka skúška: 8 tréningových a 2 validačné prípady, 3 aktualizácie
+so zapnutou fyzikálnou stratou. Musí prejsť vrátane rýchlosti a konečných
+čísel. Potom sa začína nový čistý spoločný model pre 640/160 prípadov.
+Plán je 400 úplných návštev tréningovej množiny, 64 000 aktualizácií,
+4 prípady v aktualizácii. V každom sa vzorkujú body referenčného poľa,
+body kontroly rovníc a body na stenách. Presné nastavenia sú zmrazené
+v protocol.json. Validácia každých 10 návštev celej množiny a na konci.
+Najlepší model vyberá validačná MSE; test zostáva uzavretý.
+
+Rýchlosť
+Požiadavka p99 do 5 ms je na celé pole 512 × 512 na H200. Zahŕňa aj
+spracovanie geometrie, výpočet siete, rýchlosti, tlaku a známej masky.
+Nevylučujeme geometrický enkóder ani ho nenahrádzame uloženými prvkami.
+Vstupy už sú na GPU; prenos z PC a vykresľovanie sa merania netýkajú.
+30 zahrievacích opakovaní a 200 meraní na tréningovom i validačnom
+vstupe pred učením a po výbere najlepšieho modelu. Ak úvodná rýchlosť
+neprejde, hlavný tréning sa nespustí. Presnosť novej siete ešte nepoznáme.
+
+Výsledky a dokumentovanie
+Na Perune: results/ldc_shared_pinn_20261104_v26. Uchovávajú sa váhy,
+obnoviteľný stav učenia, história strát, všetky validačné chyby, fyzikálne
+rezíduá, časovanie a skutočná spotreba. Veľké dáta zostávajú na Perune.
+Lokálne sú iba malé záznamy v zaznamy/ a tento opis. Podstatné kroky sú
+aj v experiment_3d_llm_flow/dokumentacia.txt. Toto je vývojový pilot;
+úspešnosť a pripravenosť na porovnávanie LLM sa určia podľa výsledkov.
+PRVÁ PRIEBEŽNÁ VALIDÁCIA — NIE FINÁLNY VÝSLEDOK
+Po 10 epochách, teda 1600 aktualizáciách, priemerná relatívna chyba
+rýchlosti na 160 VAL prípadoch 10,185 %, tlaku 29,566 %.
+Učenie pokračuje; výber výsledného modelu a kontrola fyziky ešte len
+nasledujú. Čísla sa nesmú zamieňať so záverečným nezávislým testom.

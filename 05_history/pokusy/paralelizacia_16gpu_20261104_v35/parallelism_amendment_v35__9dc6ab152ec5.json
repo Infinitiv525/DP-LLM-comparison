@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-04",
+  "user_direction": "Increase concurrency to16GPUs",
+  "original_protocol_sha256": "454131bd73dca9b86ced7d2ef0d057072a7ed7a2f3fa4df596e4f382feb117cc",
+  "original_science_freeze_sha256": "c61230aa43a09ae18ac2f7b79a53dac33934227c42746bc31dfb3499e8f24e6b",
+  "total_planned_attempts": 395,
+  "epochs_per_training": 400,
+  "trial_parameters_or_seeds_changed": false,
+  "main_test_opened": false,
+  "execution": "Initial existing8GPUbatch continues unchanged plus one additional8GPUbatch. After both end, last callback starts combined16GPU batches across2nodes,with one accounting callback. Final<=8tasks may use8GPUs.",
+  "scheduler_constraint": "Four reserved nodes including pending callbacks;two initial GPU+two callbacks=4,combinedGPU2nodes+callback1node=3,rollover peaks4.",
+  "callback_policy": "Each batch accounted immediately. Early callback waits by exiting while otherGPUbatch runs. Last callback/elected later ID refills after peercallbacks finish. No duplicate claims;actual two-node NFS test passed.",
+  "caveat": "Initial8GPUbatches started at different times;first can finish earlier and its GPUs are released until both finish. No reserved idle GPU during that gap."
+}

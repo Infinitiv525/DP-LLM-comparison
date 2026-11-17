@@ -1,0 +1,17 @@
+{
+  "status": "PREPARED_BEFORE_CANCELLING_PENDING_CPU_ONLY",
+  "original_callbacks": [
+    {
+      "cpu": "143655",
+      "gpu": "143342",
+      "query": "JobId=143655 JobName=dp-ldc35-account-next UserId=lutoke823(507402392) GroupId=domain users(507400513) MCS_label=N/A Priority=908 Nice=0 Account=perun2601449 QOS=perun2601449 JobState=PENDING Reason=Dependency Dependency=afterany:143342(unfulfilled) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=00:05:00 TimeMin=N/A SubmitTime=2026-11-04T18:56:15 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-04T18:56:15 Scheduler=Main Partition=cpu_short AllocNode:Sid=login01:1863489 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=1,mem=512M,node=1,billing=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=1 MinMemoryNode=512M MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/project/perun2601449/dp_llm_cfd/test/scripts/258_ldc_parallel_continue_v35.sbatch SubmitLine=sbatch --hold --parsable --dependency=afterany:143342 test/scripts/258_ldc_parallel_continue_v35.sbatch 143342 WorkDir=/mnt/project/perun2601449/dp_llm_cfd StdErr=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc35-account-next_143655.err StdIn=/dev/null StdOut=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc35-account-next_143655.out TresPerTask=cpu=1"
+    },
+    {
+      "cpu": "143657",
+      "gpu": "143656",
+      "query": "JobId=143657 JobName=dp-ldc35-account-next UserId=lutoke823(507402392) GroupId=domain users(507400513) MCS_label=N/A Priority=908 Nice=0 Account=perun2601449 QOS=perun2601449 JobState=PENDING Reason=Dependency Dependency=afterany:143656(unfulfilled) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=00:05:00 TimeMin=N/A SubmitTime=2026-11-04T18:56:15 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-04T18:56:15 Scheduler=Main Partition=cpu_short AllocNode:Sid=login01:1863489 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=1,mem=512M,node=1,billing=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=1 MinMemoryNode=512M MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/project/perun2601449/dp_llm_cfd/test/scripts/258_ldc_parallel_continue_v35.sbatch SubmitLine=sbatch --parsable --dependency=afterany:143656 test/scripts/258_ldc_parallel_continue_v35.sbatch 143656 WorkDir=/mnt/project/perun2601449/dp_llm_cfd StdErr=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc35-account-next_143657.err StdIn=/dev/null StdOut=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc35-account-next_143657.out TresPerTask=cpu=1"
+    }
+  ],
+  "scientific_freeze_sha256": "c61230aa43a09ae18ac2f7b79a53dac33934227c42746bc31dfb3499e8f24e6b",
+  "unix": 1793816570.2250237
+}

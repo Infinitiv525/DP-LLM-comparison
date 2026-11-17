@@ -1,0 +1,27 @@
+{
+  "name": "learned_spatial_context",
+  "cases": [
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "query_gpu_ms": {
+        "p50": 3.048959970474243,
+        "p95": 3.0577744126319883,
+        "p99": 3.06155259847641
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+      "query_gpu_ms": {
+        "p50": 3.0490241050720215,
+        "p95": 3.057611274719238,
+        "p99": 3.061288318634033
+      }
+    }
+  ],
+  "numerical": {
+    "nonzero_spatial_weight": 0.01,
+    "max_abs_sparse_grid_error": 2.5317072868347168e-05,
+    "tolerance": 0.0005
+  },
+  "p99_pass": true
+}

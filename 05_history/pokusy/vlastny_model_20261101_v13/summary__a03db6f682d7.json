@@ -1,0 +1,551 @@
+{
+  "status": "OWN_MODEL_TRAIN_PROBES_COMPLETE",
+  "results": [
+    {
+      "status": "OWN_MODEL_TRAIN_FIT_PROBE_EVALUATED",
+      "config": {
+        "name": "baseline_1train",
+        "model_kind": "baseline",
+        "train_count": 1,
+        "state_conditioning": true,
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261101,
+        "updates": 50000,
+        "lr": 0.0003,
+        "warmup": 1000,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 5000
+      },
+      "accuracy": [
+        {
+          "score": 0.03984874873237525,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.030646542913063,
+            "pressure_relative_l2": 0.04905095455168749
+          },
+          "interior_div_rms": 0.1072296356124913,
+          "direct_query_gpu_ms": {
+            "p50": 3.324944019317627,
+            "p95": 3.342427134513855,
+            "p99": 3.3592985796928407
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.03984874873237525,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.030646542913063,
+            "pressure_relative_l2": 0.04905095455168749
+          },
+          "interior_div_rms": 0.1072296356124913,
+          "direct_query_gpu_ms": {
+            "p50": 3.3264000415802,
+            "p95": 3.3561903834342957,
+            "p99": 3.3763195848464966
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        }
+      ],
+      "selected_update": 50000,
+      "all238_training_frames_visited": true,
+      "training_seconds": 1789.0845323521644,
+      "peak_cuda_allocated_bytes": 2873887744,
+      "checkpoint_sha256": "558938ea1163239ee0bced43f9b6b7c5f5ab4f0d36c5a4d189a0fa4a4122d7f3",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 1,
+      "validation_scenarios": 0,
+      "train_selection_scenarios": 1,
+      "training_case_updates": [
+        50000
+      ],
+      "working_gate": {
+        "accuracy_pass": true,
+        "mass_pass": false,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+        "Architecture bundle changes conditioning, latent and residual path; not pure parameter-matched ablation",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    },
+    {
+      "status": "OWN_MODEL_TRAIN_FIT_PROBE_EVALUATED",
+      "config": {
+        "name": "own_1train",
+        "model_kind": "own",
+        "train_count": 1,
+        "state_conditioning": true,
+        "width": 128,
+        "depth": 3,
+        "latent": 64,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261101,
+        "updates": 50000,
+        "lr": 0.0003,
+        "warmup": 1000,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 5000
+      },
+      "accuracy": [
+        {
+          "score": 0.04022068015782648,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.030436885053599944,
+            "pressure_relative_l2": 0.050004475262053025
+          },
+          "interior_div_rms": 0.10929661986864164,
+          "direct_query_gpu_ms": {
+            "p50": 4.159055948257446,
+            "p95": 4.19239821434021,
+            "p99": 4.202688751220703
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.04022068015782648,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.030436885053599944,
+            "pressure_relative_l2": 0.050004475262053025
+          },
+          "interior_div_rms": 0.10929661986864164,
+          "direct_query_gpu_ms": {
+            "p50": 4.1536641120910645,
+            "p95": 4.169827389717102,
+            "p99": 4.18266921043396
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        }
+      ],
+      "selected_update": 50000,
+      "all238_training_frames_visited": true,
+      "training_seconds": 2119.0990612730384,
+      "peak_cuda_allocated_bytes": 2933848064,
+      "checkpoint_sha256": "2b732c20afc252cad4c0544002b95888950364a6f80af7a3fc198895715c692c",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 1,
+      "validation_scenarios": 0,
+      "train_selection_scenarios": 1,
+      "training_case_updates": [
+        50000
+      ],
+      "working_gate": {
+        "accuracy_pass": true,
+        "mass_pass": false,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+        "Architecture bundle changes conditioning, latent and residual path; not pure parameter-matched ablation",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    },
+    {
+      "status": "OWN_MODEL_TRAIN_FIT_PROBE_EVALUATED",
+      "config": {
+        "name": "baseline_3train",
+        "model_kind": "baseline",
+        "train_count": 3,
+        "state_conditioning": true,
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261101,
+        "updates": 150000,
+        "lr": 0.0003,
+        "warmup": 1000,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 15000
+      },
+      "accuracy": [
+        {
+          "score": 0.03531666215056177,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.0266511511615905,
+            "pressure_relative_l2": 0.04398217313953304
+          },
+          "interior_div_rms": 0.10332544759197645,
+          "direct_query_gpu_ms": {
+            "p50": 3.319200038909912,
+            "p95": 3.3612623333930967,
+            "p99": 3.4011282205581663
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        },
+        {
+          "score": 0.02791722327239293,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.012991318212994927,
+            "pressure_relative_l2": 0.04284312833179093
+          },
+          "interior_div_rms": 0.04681250441060284,
+          "direct_query_gpu_ms": {
+            "p50": 3.3262879848480225,
+            "p95": 3.3504928946495056,
+            "p99": 3.366268458366394
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false
+        },
+        {
+          "score": 0.025194477279156104,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.014735227834146573,
+            "pressure_relative_l2": 0.035653726724165634
+          },
+          "interior_div_rms": 0.05761577166272562,
+          "direct_query_gpu_ms": {
+            "p50": 3.3316320180892944,
+            "p95": 3.343878436088562,
+            "p99": 3.3552400064468384
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.03531666215056177,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.0266511511615905,
+            "pressure_relative_l2": 0.04398217313953304
+          },
+          "interior_div_rms": 0.10332544759197645,
+          "direct_query_gpu_ms": {
+            "p50": 3.3327200412750244,
+            "p95": 3.365683150291443,
+            "p99": 3.3719551372528076
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        },
+        {
+          "score": 0.02791722327239293,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.012991318212994927,
+            "pressure_relative_l2": 0.04284312833179093
+          },
+          "interior_div_rms": 0.04681250441060284,
+          "direct_query_gpu_ms": {
+            "p50": 3.332592010498047,
+            "p95": 3.359940731525421,
+            "p99": 3.3744015955924986
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false
+        },
+        {
+          "score": 0.025194477279156104,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.014735227834146573,
+            "pressure_relative_l2": 0.035653726724165634
+          },
+          "interior_div_rms": 0.05761577166272562,
+          "direct_query_gpu_ms": {
+            "p50": 3.332144021987915,
+            "p95": 3.3726447463035583,
+            "p99": 3.398826856613159
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false
+        }
+      ],
+      "selected_update": 150000,
+      "all238_training_frames_visited": true,
+      "training_seconds": 5444.474625812843,
+      "peak_cuda_allocated_bytes": 2873887744,
+      "checkpoint_sha256": "62123717b4e9cd1f9a06ef65a149bf1725a475abafa425c034f56e47ade4be24",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 3,
+      "validation_scenarios": 0,
+      "train_selection_scenarios": 3,
+      "training_case_updates": [
+        50000,
+        50000,
+        50000
+      ],
+      "working_gate": {
+        "accuracy_pass": true,
+        "mass_pass": false,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+        "Architecture bundle changes conditioning, latent and residual path; not pure parameter-matched ablation",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    },
+    {
+      "status": "OWN_MODEL_TRAIN_FIT_PROBE_EVALUATED",
+      "config": {
+        "name": "own_3train",
+        "model_kind": "own",
+        "train_count": 3,
+        "state_conditioning": true,
+        "width": 128,
+        "depth": 3,
+        "latent": 64,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261101,
+        "updates": 150000,
+        "lr": 0.0003,
+        "warmup": 1000,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 15000
+      },
+      "accuracy": [
+        {
+          "score": 0.04010278144561337,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.030348701066149324,
+            "pressure_relative_l2": 0.04985686182507742
+          },
+          "interior_div_rms": 0.11514073028033521,
+          "direct_query_gpu_ms": {
+            "p50": 4.148816108703613,
+            "p95": 4.173232054710388,
+            "p99": 4.190184783935547
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        },
+        {
+          "score": 0.037787454866246864,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.01709652586741777,
+            "pressure_relative_l2": 0.058478383865075964
+          },
+          "interior_div_rms": 0.0540326186612311,
+          "direct_query_gpu_ms": {
+            "p50": 4.150319814682007,
+            "p95": 4.167000007629395,
+            "p99": 4.174842386245728
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false
+        },
+        {
+          "score": 0.032882903794003576,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.019212094121693106,
+            "pressure_relative_l2": 0.046553713466314046
+          },
+          "interior_div_rms": 0.06856091109597508,
+          "direct_query_gpu_ms": {
+            "p50": 4.148032188415527,
+            "p95": 4.164056015014649,
+            "p99": 4.169641666412353
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.04010278144561337,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.030348701066149324,
+            "pressure_relative_l2": 0.04985686182507742
+          },
+          "interior_div_rms": 0.11514073028033521,
+          "direct_query_gpu_ms": {
+            "p50": 4.15228796005249,
+            "p95": 4.2361761093139645,
+            "p99": 4.341476473808289
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        },
+        {
+          "score": 0.037787454866246864,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.01709652586741777,
+            "pressure_relative_l2": 0.058478383865075964
+          },
+          "interior_div_rms": 0.0540326186612311,
+          "direct_query_gpu_ms": {
+            "p50": 4.15233588218689,
+            "p95": 4.1702831268310545,
+            "p99": 4.187307510375977
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false
+        },
+        {
+          "score": 0.032882903794003576,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.019212094121693106,
+            "pressure_relative_l2": 0.046553713466314046
+          },
+          "interior_div_rms": 0.06856091109597508,
+          "direct_query_gpu_ms": {
+            "p50": 4.149712085723877,
+            "p95": 4.162473726272583,
+            "p99": 4.175296506881714
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false
+        }
+      ],
+      "selected_update": 150000,
+      "all238_training_frames_visited": true,
+      "training_seconds": 6379.307339599356,
+      "peak_cuda_allocated_bytes": 2933848064,
+      "checkpoint_sha256": "5c4df0f79c0a5b2b3ab34b7b71b6eaff1a5f9e98c16c03a3af74f94efa1c07ce",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 3,
+      "validation_scenarios": 0,
+      "train_selection_scenarios": 3,
+      "training_case_updates": [
+        50000,
+        50000,
+        50000
+      ],
+      "working_gate": {
+        "accuracy_pass": true,
+        "mass_pass": false,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+        "Architecture bundle changes conditioning, latent and residual path; not pure parameter-matched ablation",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    }
+  ],
+  "causal_stepper": false,
+  "independent_validation": false
+}

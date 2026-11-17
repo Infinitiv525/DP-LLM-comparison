@@ -1,0 +1,23 @@
+{
+  "status": "TECHNICAL_DATA_ASSISTED_PINN_PILOT_COMPLETE",
+  "steps": 2000,
+  "best_validation_normalized_mse": 0.4574517011642456,
+  "elapsed_seconds": 13.091757573187351,
+  "gpu": "NVIDIA H200",
+  "latency_ms_gpu_resident_full_grid": {
+    "p50": 0.4998818039894104,
+    "p95": 0.5037933588027954,
+    "p99": 0.5071530863642693
+  },
+  "latency_samples": 50,
+  "grid": [
+    1024,
+    256
+  ],
+  "dt_assumption": 0.05,
+  "time_units": "solver-relative, not SIseconds",
+  "scope": "One case reconstruction; no independent generalization test, no LLM comparison",
+  "boundary_policy": "No wall imposed at crop edges; observed training data constrain reconstruction; not pure forward boundary-value solver",
+  "physical_startup_claim": false,
+  "final_scientific_result": false
+}

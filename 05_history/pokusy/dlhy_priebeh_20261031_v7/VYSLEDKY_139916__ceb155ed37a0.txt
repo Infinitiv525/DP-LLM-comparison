@@ -1,0 +1,95 @@
+VÝSLEDKY DLHÉHO VLASTNÉHO PRIEBEHU V7 – 31.10.2026
+
+ZÁVER
+Tréning oboch variantov sa dokončil celý. Presnosť sa oproti ich
+východiskovým modelom zlepšila, ale prahyU10%/p20% sme nesplnili.
+C je presnejšie v rýchlosti, D drží malú vnútornú divergenciu.
+Žiadny variant zatiaľ nespĺňa všetky požiadavky pripravenosti na LLM.
+Nejde o výsledok nezávislej validácie ani o štatistickú významnosť.
+
+ROZSAH A DOKONČENIE
+Jeden pôvodný TRAIN harmonics/1/Re382; známe snímky2,3, predikcie4..241,
+dt0.05solverových jednotiek. Žiadne budúce referencie ako vstupy.
+Horizonty32/64/128/238 mali v oboch ramenách dokončených50/50/75/125
+tréningových priebehov. Spolu300priebehov,5550/5550aktualizácií na rameno,
+44150predikovaných tréningových krokov na rameno. Pokryté všetky238ciele.
+Žiadne prerušenie tréningového priebehu guardom ani neplatný gradient
+v plnom tréningu. Guardfail niektorých skorších assessmentov zostáva
+zaznamenaný; konečný vybraný model oboch ramien dokončil všetkých238.
+Gradient sa prenášal po8krokoch; numerický vlastný stav pokračoval
+cez bloky bez dosadenia neskoršej pravdivej snímky. Nie full238BPTT.
+
+PRESNOSŤ ZA CELÝCH238KROKOV
+Priemer relatívnych L2 chýb po snímkach; tlak po odstránení konštanty.
+Obe ramená vybrali posledný checkpoint horizon238/epoch125.
+
+Variant                     Chyba U    Chyba p    Rast div.    p99GPU
+C – vlastné fyzikálne straty 36.70 %    68.01 %    nevyhovel    1.828ms
+D – prúdová funkcia          52.35 %    68.34 %    vyhovel      1.938ms
+Ponechanie úvodného stavu    56.99 %    97.46 %    nehodnotené  nemerané
+
+Oba sú na tomto konkrétnom známom prípade presnejšie než perzistencia.
+Východiskové POSLEDNÉ váhyV6, z ktorých učenie pokračovalo:
+C54.9626%U/131.8705%p; D6947.6786%U/550.3278%p.
+Ide o warmstart modely, NIE o V6 vybrané takmer nemenné checkpointy.
+Vo V6 vybranýC mal57.2696%/98.2086%, vybranýD57.0300%/98.1137%.
+Tieto rôzne porovnania sa nesmú zamieňať.
+
+ČASOVÉ ÚSEKY – U/p
+Prvých10krokov: C6.94%/14.48%; D8.78%/12.89%.
+Kroky11..40: C23.46%/48.97%; D36.72%/39.60%.
+Kroky41..120: C34.29%/66.71%; D60.21%/73.93%.
+Kroky121..238: C44.23%/78.26%; D54.68%/76.56%.
+Skorý úsek teda môže byť prijateľný, ale nenahrádza celý238krokový cieľ.
+
+FYZIKA A STABILITA
+Priemerná vnútorná FDdivRMS:C1.09221423,D0.014042904.
+Počiatočná0.014042904,referenčný priemer0.014512971,limit0.043538913.
+C limit prekračuje; D zachováva pôvodnú úroveň vnútornej divergencie.
+Malá divergencia nie je dôkaz správnej hybnosti, tlaku, fázy vírov
+alebo presnosti celého poľa. Úplnú fyzikálnu stabilitu preto netvrdíme.
+Posledný tréningový priebeh mal priemerný pomer energie rýchlosti
+oproti TRAINcieľu C0.85538,D0.96499. Sú to hodnoty pri meniacej sa
+váhe siete medzi blokmi, NIE presná charakteristika zmrazeného
+záverečného forecastu. Nepoužívame ich ako náhradu jeho chýb.
+
+RÝCHLOSŤ – H200,1024x256, POČIATOČNÉ POLIA NA GPU, BEZ RENDERINGU
+P99 celého kroku počas238trajektórie:C1.828439ms,D1.937994ms.
+S dodatočným vlastným FDmonitorom:C2.304650ms,D2.417605ms.
+Zahriaty3x200benchmark,maxp99:C1.353124ms,D1.452018ms;
+sFDmonitorom C1.776358ms,D1.875752ms. Uchovávame oba druhy merania.
+Časový prah5ms splnený; hlavnou prekážkou zostáva presnosť a priC fyzika.
+
+METODICKÉ OBMEDZENIA
+Ide o pozitívnu kontrolu na známom tréningovom prípade, ktorý slúžil
+aj na výber váh. Nie výkon na nevidenej geometrii. RozdielC/D nie je
+čistá ablačná štúdia: reprezentácia a východiskové váhy sa líšili.
+VýsledokC36.70% nemožno priamo porovnať so40.11% staréhoV4 zo6val
+prípadov ako dôkaz zlepšenia generalizácie: ide o iné hodnotené prípady.
+Žiadne nové CFD, downloady ani otvorenie hlavného testu. LLMmain nezačal.
+
+ĎALŠÍ TECHNICKÝ SMER
+Dlhé vlastné tréningové priebehy pomohli, ale samotné predĺženie
+číselného priebehu pri8krokovom gradiente nestačilo na požadovanú
+presnosť. V ďalšom ohraničenom pilote má zmysel oddeliť vplyv dĺžky
+gradientu, napríklad8oproti32krokom s rovnakými východiskovými váhami,
+dátami a hodnotením. Nie je to záruka úspechu ani už spustený tréning.
+Pri záverečnej kontrole bola fronta našich úloh prázdna.
+
+INTEGRITA, SPOTREBA A ULOŽENIE
+V7freeze overený bez zmeny zdrojov, protokolu alebo východiskových váh.
+Úloha139916COMPLETED,exit0:0; účtovanie139917 bez chyby.
+Skutočná alokácia2096GPU*s=0.582222GPU*h,8384core*s.
+PythontréningC667.3477s,D1343.4377s vrátane priebežných assessmentov;
+peakGPU C4894313984B,D4895315456B. Alokácia zahŕňa aj skúšku a réžiu.
+BestSHA256 C15b6e1e12bdb3ff1066c034aa6ebee4527b191d681e4132ecdade124e8944bc5
+D6d33eb1df6e7ba16fc88e917d0c357392240bf3de616feafa668f507f2a52b8c.
+
+Perun:results/fpo_pinn_long_rollout_20261031_v7/training/139916/.
+Na rameno36assessmentov + záverečnýselected_checkpoint, kompletné
+per-frame metriky,300tréningových záznamov, best/last/phase_last,
+continuation soptimizer/scheduler/RNG, config/normalization/summary.
+Lokálne malé pôvodnéJSON a logy vo vysledky_139916/.
+review_139916_small.zip:23súborov,136621B, overenýSHA256
+095fe34295b134764bc477b94e560d915b6ffe293887adeb4d4ecdaa92111b78.
+Veľké polia a váhy sa nesťahovali doPC. Staršie výsledky zachované.

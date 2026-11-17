@@ -1,0 +1,80 @@
+V17 – POROVNANIE NA 69TRAIN / 6VAL, 02.11.2026
+
+AKTUALIZÁCIA03.11.2026 – OBE ÚLOHY DOKONČENÉ
+141545/141546COMPLETED0:0,600kupdatekaždá,freezeOK,frontaprázdna.
+Selected100kobe: pôvodnýVALU37,11%/p55,12%, novýU39,43%/p55,07%.
+ŽiadnycaseaccuracyPass; novýmass6/6,p99max3,605ms, alehybnosťhoršia.
+TRAIN3monitoryďalejlepšie,VALpo100kstagnácia/miernehoršie.
+Nie hotovýLLMmodel; ďalšíkrokcielenýaudit,niepredĺženierovnakéhotréningu.
+PodrobnostiVYSLEDKY_141545_141546.txt; grafajčíslavlokálnomarchíve
+vysledky_141545_141546/. Nižšiehistorickýopisprípravy/štartu.
+
+PREČO
+V15 ukázal dobrú presnosť na troch známych simuláciách, ale V16
+nepotvrdil prenos na odlišné prípady: novýpsi/p U82,49%/p104,52%.
+Teraz kontrolujeme, čo sa stane po tréningu na všetkých existujúcich
+69TRAIN. Nesľubujeme, že širší tréning automaticky vyrieši presnosť.
+
+EXPERIMENT
+Dve samostatné GPUúlohy: pôvodný priamy u/v/p PINN a nový priamypsi/p
+PINN. Obe od začiatku, rovnakýseed20261102, rovnakýspoločnýtrunk/CNN,
+nulovývýstup na začiatku; žiadnepredtrénovanie na3TRAIN.
+192x4/CNNlatent32/FF1,2,4,8,16. Head3vs2 sa líši počtomparametrov.
+600000aktualizácií na variant,8695alebo8696 na každýTRAINcase;
+rovnakýpočet aktualizácií, nie rovnakýčas tréningu.
+Adam3e-4cosine1.5e-5, warm1000/ramp1000, data/trainStd,
+PDE.01/BC.01, batch2048/PDE256/BC128,gradientclip1,FP32.
+Vyvážené cykly prípadov a všetkých238cieľovýchsnímok; uložíme pokrytie,
+počtyaktualizácií/case a SHA postupnosticase/frame.
+
+ODDELENIE DÁT
+69TRAIN/36geometrií a6VAL/3odlišnýchgeometrií. Prefix2,3 je vždyvstup.
+Len TRAINbudúce4..241 vstupujú do tréningovejstraty/backprop.
+BudúceVALpolia zostávajú CPUscorer-only; predictor dostane známevstupy.
+Normalizácia z pôvodných69TRAIN je zmrazená; žiadneVALštatistiky.
+Krok.05 v jednotkáchsolvera,čas.05..11.9 odsnimky3,niepotvrdenéSI.
+Nie úplnýfyzikálnyštart: snímky0,1 vynechané podľa pravidla datasetu.
+
+VYHODNOTENIE
+Prvýupdate/každých50000/koniec: všetkých238snímok všetkých6VAL,
+výberbest podľa priemeruEu/Ep, rovnakýpreobevetvy. Fyzikálne ačasové
+brány osobitne, aby sa slabápresnosť neschovala zamasspass.
+Každých100000/koniec aj3TRAINmonitory (prvýprípad každejrodiny),
+bezvplyvunavýber. Na konci vybranýcheckpoint opäťVALaj3TRAINmonitory.
+TietotriTRAINmonitory nie sú úplný audit69TRAIN.
+Per-frameU/p/persistence/div/FDhybnosť/referenčnýFDfloor ostanúvJSON.
+5ms: p99 priamehovýpočtu celého1024x256poľa naH200, vstupyGPU,
+context/curl/gauge/mask zahrnuté, bezCPUprenosu/renderingu,20warm-up.
+Nie kauzálnykrok alebo reakcia nazmenugeometrie počasbehu.
+
+UCHOVANIE A OCHRANY
+Zachovámebest/last,history,config,latesttraining_state soptimizerom,
+schedulerom,RNG,poradímprípadov/snímok apokrytím. Automatickýresume
+zatiaľniejeimplementovaný; SHApostupnosti nenahrádza internýhashstav.
+Žiadne resetovanie tréningu na bestcheckpoint počasbehu.
+Curl zachová iba počiatočnúvnútornúFDdivergenciu, nie celúNSfyziku.
+Cropokraje nie sú steny/periodickéhranice, novéBC/tapernepridávame.
+KontinuálnaPDE cezautograd aFDgridvýstup súexplicitneodlíšené.
+
+Každávetva najprv technické3testy +3updatefunkčnáskúška1TRAIN/1VAL,
+saktívnouPDE,hardIC a238VALsnímkami; ažpotomautomaticky69/6.
+SyntaxPython/bash overená,3CPUtechnickétesty prešli0.841s,
+V16freezeoverený, novézdroje/protokol/receipt zmrazené predspustením.
+Starézdroje/weightsnemeníme, nemiešameexternépredlohy.
+Žiadne novéCFD/download/mainTEST. Nie finálnynezávislýštatistickýtest,
+LLMreadyFalse. Veľkéarrays/váhyibaPerun, lokálne maléJSON/texty.
+Perun:results/fpo_pinn_multicurl_20261102_v17.
+OVERENÝ ŠTART
+141545pôvodnýprimitive,141546novýcurl; účtovanie141547/141548afterany.
+ObeGPUúlohy registrovanéakoheld, všetky4IDuložené predrelease.
+ObeRUNNINGgpu03; existujúce3GPUtechnickétesty prešli0.922s/1.115s.
+Prebieha1TRAIN/1VALfunkčnáskúška. Plný69/6tréning začneautomaticky
+ažpojejúspechu pre príslušnúvetvu. Zatiaľžiadnyvýsledokpresnosti.
+Maléprotocol/freeze/prepared/submission ajlokálne vzaznamy/.
+
+FUNKČNÁ SKÚŠKA DOKONČENÁ
+Obe vetvy SMOKE_COMPLETE, úspešné3update sPDE a238VALsnímkami.
+Overené spätnénačítanie training_state.pt weights_onlyCPU: update3,
+counts[3], optimizerstate neprázdny,schedulerlast_epoch3 preobe.
+Niepresnostnýtest; teraz plnénačítanie69TRAIN/6VAL a600ktréning.
+Smokesummary ajlokálne zaznamy/smoke_141545.json a smoke_141546.json.

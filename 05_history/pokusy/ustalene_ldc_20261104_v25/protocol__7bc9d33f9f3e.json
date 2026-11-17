@@ -1,0 +1,33 @@
+{
+  "status": "SHARED_STEADY_LDC_DATA_PREPARATION_FROZEN",
+  "repository": "BGLab/FlowBench",
+  "revision": "937c672604d4c9f39aceedf1fa2f0a603695264b",
+  "files": {
+    "X": {
+      "path": "LDC_NS_2D/512x512/harmonics_lid_driven_cavity_X.npz",
+      "bytes": 1987897063,
+      "sha256": "dfa0cb187d31f9119463b29eb78a24b55b4fc529f00f2365323d543cbfe53086"
+    },
+    "Y": {
+      "path": "LDC_NS_2D/512x512/harmonics_lid_driven_cavity_Y.npz",
+      "bytes": 5302165295,
+      "sha256": "8cce9c0c7558d98f2a566095c971aaec40e00e6ae5aa787a1f0a04acecbff05d"
+    }
+  },
+  "task": "One shared data-assisted physics-informed coordinate model mapsgeometryandRe tosteadyu,v,p; no time evolution, no initialflowinputs, no per-caseNN.",
+  "user_direction": "Explicit stop ofV24 and change toshared steadyflow likeFlowBenchauthors;5msfullfieldtargetretained.",
+  "first_dataset": "Fullharmonicsfamily1000casesatnative512x512,not69FPOsamples or3Dcache. Laterfamilies can use samepipeline; no newCFD.",
+  "split": "Authorsstandard random80/20test andremaining80/20train/validation:640TRAIN160VAL200TEST,ownfixedseed20261104. Samegeometrymayoccuracrossroles;reportoverlap,do notclaimgeometry-disjointgeneralization.",
+  "channels": "HeaderX1000x3x512x512,Y1000x4x512x512float64. DataPrepcode saysRe,SDF,binarymask; detectactualbinarychannel1or2andvalidateSDFconsistency. Y0u1v2p;channel3packedCd/Clnotfieldoutput.",
+  "physics": "SteadyincompressibleNavierStokespluscontinuity. Physicalcavity[0,2]^2;sourcegeneratorusesRe_label/2. Candidate normalizedcoordinatesxi=x/2,eta=y/2 withnu1/Re_label. Check referenceNS and fittedviscosity on16TRAINcases beforephysics training.",
+  "readiness": "MedianrelativeNSresidual<=.35,medianviscositymultiplier.5..1.5,medianuupper>ulower+.5 as predeclaredscale/orientationscreen. Failingstopsphysics-trainingreadiness,not datasetrejection oraccuracyproof.",
+  "boundaries": "Movingupperlid,otherouterwallsandobstaclestationary;cornersdiscontinuous. Do notreuseFPOcropBC,initialprefix,timecoordinate or3Dschema.",
+  "preparation": "PinnedpublicarchivesdownloadPerunonly,fullLFS_SHAandZipCRCverify,rawarrayspreserved. Cacheonly640TRAINand160VALu/v/p numericlabels,per-samplefluidpressuregauge+solidszero. NormalizerTRAINonly.200TESTlabelsnotnumericallyinspected/cached/usedforstats.",
+  "outputs": "Geometrylow2x64x64,fullfluidmask/Re/geohash,TRAINandVALnativefields,split,TRAINnormalizer,physicsreferencefloor,source/cacheSHAreceipts. Rawtestlabelsremainsealed.",
+  "training": "NoGPUtraining in this preparation stage; sharedPINNrequires completeddataaudit. PINN means real steadyPDEloss; FNOalonewillnotbe renamedPINN.",
+  "metrics": "Reportauthors-styleMSE/relativeL2 andseparatevelocity/pressureerrors,physicsandfull512x512querylatency; no promiseofzeroerroror5msnewcaseincludingofflinefit.",
+  "main_test_opened": false,
+  "new_CFD": false,
+  "shared_model_required": true,
+  "old_experiments_resumed": false
+}

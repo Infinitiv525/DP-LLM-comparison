@@ -1,0 +1,153 @@
+[
+  {
+    "update": 0,
+    "assessment": {
+      "score": 0.6472139434059989,
+      "cases": [
+        {
+          "failure": false,
+          "predicted_frames": 238,
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "scope": "validation",
+          "mean_errors": {
+            "velocity_relative_l2": 0.6136567949449844,
+            "pressure_relative_l2": 0.6807710918670136
+          },
+          "score": 0.6472139434059989,
+          "persistence_mean_errors": {
+            "velocity_relative_l2": 0.7575628273851636,
+            "pressure_relative_l2": 1.1019513357435289
+          },
+          "interior_div_rms": 0.012262583749384439,
+          "prefix_div_rms": 0.012262583710253239,
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": true,
+          "direct_query_gpu_ms": {
+            "p50": 3.4090399742126465,
+            "p95": 3.431148719787598,
+            "p99": 3.4424451422691345
+          },
+          "causal_step_latency": false,
+          "mean_fd_momentum_loss": 6.485529330097327,
+          "mean_reference_fd_momentum_loss": 0.005376385450519684,
+          "accuracy_pass": false,
+          "latency_pass": true
+        }
+      ]
+    },
+    "elapsed_seconds": 11.361147906998667,
+    "lr": 3e-05,
+    "window_updates": 0,
+    "window_mean": null,
+    "train_fit_monitor": [
+      {
+        "failure": false,
+        "predicted_frames": 238,
+        "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+        "scope": "train",
+        "mean_errors": {
+          "velocity_relative_l2": 0.18306464076933135,
+          "pressure_relative_l2": 0.4187079523853201
+        },
+        "score": 0.30088629657732574,
+        "persistence_mean_errors": {
+          "velocity_relative_l2": 0.5698721496859207,
+          "pressure_relative_l2": 0.9745848419801173
+        },
+        "interior_div_rms": 0.014042903579176725,
+        "prefix_div_rms": 0.014042905531823635,
+        "mass_limit": 0.04353891288570392,
+        "mass_pass": true,
+        "direct_query_gpu_ms": {
+          "p50": 3.405216097831726,
+          "p95": 3.4270592093467713,
+          "p99": 3.436888313293457
+        },
+        "causal_step_latency": false,
+        "mean_fd_momentum_loss": 2.1857839713827905,
+        "mean_reference_fd_momentum_loss": 0.006401343275049404,
+        "accuracy_pass": false,
+        "latency_pass": true
+      }
+    ]
+  },
+  {
+    "update": 3,
+    "assessment": {
+      "score": 0.6470660057469084,
+      "cases": [
+        {
+          "failure": false,
+          "predicted_frames": 238,
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "scope": "validation",
+          "mean_errors": {
+            "velocity_relative_l2": 0.6141536258425115,
+            "pressure_relative_l2": 0.6799783856513054
+          },
+          "score": 0.6470660057469084,
+          "persistence_mean_errors": {
+            "velocity_relative_l2": 0.7575628273851636,
+            "pressure_relative_l2": 1.1019513357435289
+          },
+          "interior_div_rms": 0.012262583592859637,
+          "prefix_div_rms": 0.012262583710253239,
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": true,
+          "direct_query_gpu_ms": {
+            "p50": 3.4158400297164917,
+            "p95": 3.435503971576691,
+            "p99": 3.4464243412017823
+          },
+          "causal_step_latency": false,
+          "mean_fd_momentum_loss": 6.470558214588325,
+          "mean_reference_fd_momentum_loss": 0.005376385450519684,
+          "accuracy_pass": false,
+          "latency_pass": true
+        }
+      ]
+    },
+    "elapsed_seconds": 34.384689595000964,
+    "lr": 1.5e-06,
+    "window_updates": 3,
+    "window_mean": {
+      "data": 0.09464512765407562,
+      "continuous_ns": 0.5107125639915466,
+      "fd_momentum_normalized": 1.505845308303833,
+      "boundary": 0.06530827283859253,
+      "gradient_norm_before_clip": 1.8640286922454834,
+      "fd_coefficient": 0.009999999776482582
+    },
+    "train_fit_monitor": [
+      {
+        "failure": false,
+        "predicted_frames": 238,
+        "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+        "scope": "train",
+        "mean_errors": {
+          "velocity_relative_l2": 0.18061580308388656,
+          "pressure_relative_l2": 0.39974578400247207
+        },
+        "score": 0.2901807935431793,
+        "persistence_mean_errors": {
+          "velocity_relative_l2": 0.5698721496859207,
+          "pressure_relative_l2": 0.9745848419801173
+        },
+        "interior_div_rms": 0.014042903199604079,
+        "prefix_div_rms": 0.014042905531823635,
+        "mass_limit": 0.04353891288570392,
+        "mass_pass": true,
+        "direct_query_gpu_ms": {
+          "p50": 3.410304069519043,
+          "p95": 3.4324543714523315,
+          "p99": 3.4421254849433898
+        },
+        "causal_step_latency": false,
+        "mean_fd_momentum_loss": 2.1515256803827127,
+        "mean_reference_fd_momentum_loss": 0.006401343275049404,
+        "accuracy_pass": false,
+        "latency_pass": true
+      }
+    ]
+  }
+]

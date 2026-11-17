@@ -1,0 +1,76 @@
+Ďalší postup po kontrole V5a — 31.10.2026
+
+Máme overených 75 referenčných scenárov. Vývoj používa 69 tréningových
+a 6 validačných. Každý model dostáva rovnaké známe snímky 2 a 3; všetkých
+238 budúcich snímok 4 až 241 slúži pri validácii iba na hodnotenie.
+Máme funkčný tréning, fyzikálne straty, celopriebehové hodnotenie,
+meranie celého kroku a skutočnej spotreby. Vieme splniť 5 ms na H200.
+Presný dlhodobý model pre nové geometrie ešte nemáme.
+
+Diagnostika lokalizovala ďalší problém: na vybraných známych prípadoch
+má samostatný krok približne 0,11–0,54 % chybu rýchlosti a 0,18–0,78 %
+tlaku. Pri reťazení vlastných výstupov sa však odchýli aj na nich.
+Rastie porušenie nestlačiteľnosti a pri časti prípadov tlaková amplitúda
+i energia. Malá lokálna tréningová chyba nestačí ako dôkaz dobrého
+časového vývoja. Nedostatok dát alebo výkonu nie je dokázaná príčina.
+
+Nasledujúci ohraničený pilot:
+
+1. Porovnať stabilnejšiu aktualizáciu zo súčasného stavu s doterajšou
+   pevnou dvojstavovou extrapoláciou. Oba známe stavy zostanú vstupmi.
+   Osobitne preveriť aktualizáciu tlaku.
+
+2. Overiť reprezentáciu, ktorá konštrukciou nezvyšuje divergenciu
+   prírastku rýchlosti: v 2D cez prúdovú funkciu a jej derivácie.
+   Časť podmienky nestlačiteľnosti sa tak presunie zo slabej penalizácie
+   do výstupu siete. Treba otestovať spojité aj diskrétne derivácie
+   a vplyv prekážky. Konzervatívny prírastok nie je automatickou opravou
+   počiatočného poľa: resamplovaná referencia už má malú divergenciu.
+
+3. Začať na jednom známom scenári a hodnotiť všetkých 238 vlastných
+   krokov. Je to pozitívna kontrola učenia, nie dôkaz generalizácie.
+   Varianty musia mať rovnaký prípad, prefix, ciele, seed a vopred
+   zapísaný rozpočet. Presné nastavenia sa zmrazia pred spustením.
+   Rozdiely variantov aj skutočná spotreba sa uložia.
+
+4. Úspešný variant rozšíriť na rovnakú sadu 69/6. Opakovať celý priebeh,
+   kontrolu divergencie, tlaku a času. Horizont a pracovné ciele
+   10 % pre rýchlosť, 20 % pre tlak v každom validačnom scenári
+   a GPU p99 najviac 5 ms sa nemenia.
+
+5. Po kontrole fyziky a opakovateľnosti zmraziť jadro a spoločný
+   konfiguračný priestor pre manuálne a automatické baseline aj štyri
+   lokálne LLM. Potom porovnať ich návrhy, zaznamenávať zdôvodnenia,
+   náklady konfigurácie a tréningu. Hlavný test otvoriť až podľa
+   samostatného zmrazeného protokolu.
+
+Nový stabilizačný tréning v tomto kontrolnom kroku ešte nebol spustený.
+Diagnostiky 139757 a 139761 skončili; pri poslednej kontrole bola fronta
+našich úloh prázdna. Úspech novej reprezentácie nie je zaručený.
+
+Metodické opory, overené 31.10.2026:
+
+Autorský príklad PINNs používa u=psi_y a v=-psi_x na splnenie kontinuity.
+Je to opora pre reprezentáciu, nie dôkaz predikčnej presnosti nášho
+FlowBench modelu, použiteľnosti na ľubovoľnom výreze alebo času 5 ms.
+Autorský príklad rieši dátovú rekonštrukciu a identifikáciu rovníc.
+https://maziarraissi.github.io/PINNs/
+
+Učenie krátkeho evolučného operátora a jeho opakované použitie má
+publikovaný základ. Naša implementácia nereplikuje výsledky týchto prác
+a výrez FlowBench neobsahuje celé externé okrajové histórie.
+https://doi.org/10.1016/j.jcp.2022.111855
+https://doi.org/10.1016/j.cma.2024.116813
+Záznamy BibTeX: diagnostika_stability_20261031/zdroje.txt.
+
+Povinné úvodné stavy zostávajú vstupom všetkých porovnávaných modelov.
+Budúce validačné/testovacie polia sa na vstupy nepoužijú. Okraje výrezu
+sa nestanú stenami. Nevzniknú nové CFD referencie. Predikcie sa nebudú
+orezávať, zlyhania vynechávať ani presné krátke okno vydávať za celý
+úspešný priebeh.
+
+AKTUALIZÁCIA 31.10.2026 – po odsúhlasení stabilizácie
+Pripravený, otestovaný a odoslaný nový pilot V6: CPU 139783, GPU 139784.
+Predchádzajúca poznámka o prázdnej fronte patrí času dokončenia diagnostík.
+Podrobnosti štyroch variantov, limitov a kontrol sú v samostatnom
+stabilizacia_20261031_v6/PRECITAJ_MA.txt v nadradenom priečinku.

@@ -1,0 +1,47 @@
+DRUHA VYVOJOVA ETAPA PINN - 30. 10. 2026
+
+AKTUALIZACIA: oba treningy aj priprava su dokoncene. Presnost nesplnila
+ciele; vysledky a opravena formulacia su vo VYSLEDKY_139232.txt.
+Nasledujuci opis zachytava povodny plan tejto uz dokoncenej etapy.
+
+Predosla etapa je dokoncena. Podrobne cisla su vo vedlajsom priecinku
+rozsirenie_20261030_v2/VYSLEDKY_139135.txt.
+
+Co sme zistili
+Na jednej simulacii funguje nauceny priebeh s chybou priblizne 5 %
+v rychlosti a 8 % v tlaku a GPU p99 pod 1 ms. Spolocny model na
+nevidenych geometriach ma chyby ovela vacsie. Dlhsi trening na malej
+sade zlepsoval trening, ale zhorsoval nezavisle geometrie. Samotne
+predlzenie rovnakeho treningu preto nestaci ako dalsi postup.
+
+Co bezi teraz
+139231 pripravuje 69 treningovych scenarov na 36 geometriach.
+Validacia ostava na rovnakych 6 scenaroch na 3 inych geometriach.
+Vsetky su existujuce referencne simulacie z FlowBench; nove CFD nerobime.
+Povodnych 17 uz overenych referencii/cache sa znovu pouzije po kontrole
+hashov. Ostatne sa stiahnu a overia iba na Perune. Hlavne testovacie
+polia sa neotvaraju a zmrazeny kandidatny split 775/160/169 sa nemeni.
+
+Po uspesnej priprave 139232 automaticky porovna dve sirky siete,
+96 a 192 neuronov vo vrstve, obe so 4 vrstvami, rovnakym encoderom,
+rovnakymi stratami, seedom, datami a 300 000 krokmi treningu.
+Vyber checkpointu a plnomriezkove vyhodnotenie ostavaju rovnake.
+Aj pocte geometrickych prikladov primerane predlzujeme trening oproti
+v2. Porovnanie oboch novych sieti je kontrolovane; porovnanie v2/v3
+neizoluje iba mnozstvo dat, lebo meni aj dlzku/schedule treningu.
+
+Presnost ani zovseobecnenie nie su zarucene. Vysledky rozhodnu, ci
+dalsi problem spociva najma v datach, kapacite alebo formulacii modelu.
+Cielom ostava presny datami podporeny PINN, cely dodany casovy rozsah
+a najviac 5 ms GPU p99 na celu predikciu 1024x256. Nejde o causal
+rollout ani o potvrdene fyzikalne sekundy. Kontekst geometrie, prenosy
+a hranice merania vykazujeme samostatne.
+
+139233/139234 po skonceni archivuju skutocne CPU/GPU sekundy.
+Vsetky zdroje, manifest a protokol boli zmrazene pred spustenim.
+Pät analytickych testov aj syntax kontroly presli. Lokalne zostavaju
+iba male JSON a dokumentacia. Velke polia a vahy su v:
+/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_conditioned_20261030_v3
+
+LLM porovnanie sa este nespustilo. Plna sada 775 treningovych pripadov
+tiez este nie je pouzita. Toto je dalsi kontrolovany vyvojovy krok.

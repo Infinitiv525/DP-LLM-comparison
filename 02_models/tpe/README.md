@@ -1,0 +1,31 @@
+# TPE
+
+Každý riadok určuje konkrétny vybraný model a diel s jeho pôvodnými váhami. Po stiahnutí dielu vyber uvedenú cestu z archívu; nie je potrebné sťahovať ostatné diely. Úplné SHA sú v nadradenom manifeste. Obnovovacie a historické stavy nájdeš v indexe všetkých checkpointov.
+
+| Model | Seed | Cesta v archíve | Stiahnutie |
+|---|---:|---|---|
+| tpe_r00_k00 | 150001 | `models/final/tpe/tpe_r00_k00/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r00_k01 | 150002 | `models/final/tpe/tpe_r00_k01/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r00_k02 | 150003 | `models/final/tpe/tpe_r00_k02/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r00_k03 | 150004 | `models/final/tpe/tpe_r00_k03/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r00_k04 | 150005 | `models/final/tpe/tpe_r00_k04/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r01_k00 | 150001 | `models/final/tpe/tpe_r01_k00/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r01_k01 | 150002 | `models/final/tpe/tpe_r01_k01/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r01_k02 | 150003 | `models/final/tpe/tpe_r01_k02/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r01_k03 | 150004 | `models/final/tpe/tpe_r01_k03/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r01_k04 | 150005 | `models/final/tpe/tpe_r01_k04/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r02_k00 | 150001 | `models/final/tpe/tpe_r02_k00/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r02_k01 | 150002 | `models/final/tpe/tpe_r02_k01/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r02_k02 | 150003 | `models/final/tpe/tpe_r02_k02/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r02_k03 | 150004 | `models/final/tpe/tpe_r02_k03/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r02_k04 | 150005 | `models/final/tpe/tpe_r02_k04/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r03_k00 | 150001 | `models/final/tpe/tpe_r03_k00/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r03_k01 | 150002 | `models/final/tpe/tpe_r03_k01/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r03_k02 | 150003 | `models/final/tpe/tpe_r03_k02/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r03_k03 | 150004 | `models/final/tpe/tpe_r03_k03/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r03_k04 | 150005 | `models/final/tpe/tpe_r03_k04/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r04_k00 | 150001 | `models/final/tpe/tpe_r04_k00/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r04_k01 | 150002 | `models/final/tpe/tpe_r04_k01/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r04_k02 | 150003 | `models/final/tpe/tpe_r04_k02/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r04_k03 | 150004 | `models/final/tpe/tpe_r04_k03/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |
+| tpe_r04_k04 | 150005 | `models/final/tpe/tpe_r04_k04/best.pt` | [Diel archívu](https://github.com/Infinitiv525/DP-LLM-comparison/releases/download/research-artifacts-v1/llm-models-and-records-part01-of10.tar.gz) |

@@ -1,0 +1,100 @@
+NÁVRH MODELOV A OPAKOVANÍ PRE USTÁLENÝ LDC PINN — 04.11.2026
+Stav: návrh pre nasledujúcu fázu, nie zmrazený hlavný protokol.
+Prebiehajúci pilot V26 sa týmto nemení. Nové úlohy sa pri tomto návrhu
+nespúšťali. Starý 3D FNO experiment je samostatný a jeho konfigurácie
+ani poradie modelov sa nevydávajú za výsledok nového 2D PINN.
+
+Odporúčané modely
+1. Qwen/Qwen3-8B, Apache-2.0
+   revízia b968826d9c46dd6066d109eabc6255188de91218
+2. mistralai/Ministral-3-8B-Instruct-2512, Apache-2.0
+   revízia 5b26027e7b19eeb4b7352e1fed3926375dd2cb4d
+3. microsoft/Phi-4-mini-instruct, približne 3,8 miliardy parametrov, MIT
+   revízia cfbefacb99257ffa30c83adab238a50856ac3083
+4. ibm-granite/granite-3.3-8b-instruct, Apache-2.0
+   revízia 51dd4bc2ade4059a6bd87649d68aa11e4fb2529b
+
+Ide o štyri už pripravené rodiny, nie tvrdenie, že sú aktuálne najlepšie
+alebo rovnako veľké. Porovnávame tieto konkrétne modely a ich schopnosť
+konfigurovať PINN. Phi je menší; výsledok neizoluje samotný vplyv výrobcu
+od veľkosti, tréningu a ďalších rozdielov modelov. Qwen a Granite majú
+pre základné porovnanie vypnutý režim thinking. Všetkým sa vyžiada
+stručné zdôvodnenie vo výstupe; ide o deklarovaný dôvod, nie prístup
+k ich skutočnému vnútornému uvažovaniu.
+Ministral má pôvodný checkpoint FP8; existujúci loader ho dekvantizuje
+do BF16. To neobnovuje pôvodnú presnosť pred FP8. Presná cesta načítania
+a numerický formát sa zaznamenajú, nemožno tvrdiť identické BF16 pôvody.
+Všetky váhy sú lokálne na Perune; modely sa nevolajú cez platené API.
+
+Overenie pripravenosti
+Pri dnešnej kontrole existovali config, tokenizer a váhové súbory všetkých
+štyroch presných revízií v public_models/llm_feasibility. Záznam prípravy
+results/llm_feasibility/prepare_123299/summary.json má stav
+LOCAL_MODELS_DOWNLOAD_COMPLETE. Dnes sa kontrolovali metadáta, nie celé
+GB súbory hashovaním na prihlasovacom uzle. Pred novým použitím bude na
+výpočtovom uzle kontrola integrity a krátka skúška nového PINN kontraktu.
+Predošlé úspešné technické skúšky patrili staršej úlohe, nie tomuto PINN.
+
+Odporúčané opakovania
+Pre každý zo štyroch LLM päť nezávislých behov hľadania konfigurácie.
+V každom navrhujeme osem rovnako hodnotených kandidátskych konfigurácií
+vrátane prípadných spoločných štartov; presný počet a pravidlá sa zmrazia
+pred hlavným experimentom. Každý kandidát sa učí od začiatku. LLM smie
+vidieť povolený opis úlohy a tréningové/validačné výsledky zo svojho
+vlastného behu, potom môže navrhnúť ďalší pokus. História sa medzi
+nezávislými hľadaniami neprenáša.
+Z každého hľadania sa cez VAL vyberie jedna konfigurácia. Tú natrénujeme
+od začiatku s piatimi novými seedmi PINN, rovnakými naprieč metódami.
+Teda päť vybraných konfigurácií x päť tréningových opakovaní = 25
+záverečných tréningov PINN na jeden LLM, 100 pre všetky štyri LLM.
+To nezahŕňa kandidátske tréningy pri hľadaní (pri 8 pokusoch je ich
+4 x 5 x 8 = 160) ani kontrolné metódy. Modely LLM sa nedotrénovávajú.
+
+Prečo dve úrovne
+Prvá meria spoľahlivosť hľadania konfigurácie, druhá náhodnosť samotného
+učenia PINN. Dvadsaťpäť tréningov nie je 25 nezávislých návrhov LLM;
+poznáme päť skupín podľa hľadania. Aj vyhodnotenie musí túto závislosť
+rešpektovať. Päť opakovaní nie je záruka štatistickej významnosti.
+Pre odlišné návrhy LLM sa nastaví vzorkovanie s evidovanými seedmi a
+predom pevným režimom generovania. Staré technické nastavenie do_sample
+False nemožno len zopakovať s iným seedom a vyhlásiť za nezávislé
+stochastické hľadanie: rovnaký prompt môže vrátiť rovnaký návrh.
+
+Kontroly a férovosť
+Porovnáme aj pevnú základnú konfiguráciu a náhodné i TPE hľadanie.
+Random/TPE majú rovnakých päť hľadaní, rovnaký kandidátsky rozpočet,
+rovnaké spoločné štarty a rovnakých päť nových finálnych tréningových
+seedov ako LLM. Pevná konfigurácia sa opakuje na rovnakých piatich
+finálnych seedoch; nezapočítava sa päťkrát ako nové nezávislé hľadanie.
+Dátové rozdelenie, hodnotenie, povolené parametre, tréningový rozpočet,
+podmienky odmietnutia konfigurácie a opravovania formátu budú rovnaké.
+Návrhy sa nevyberajú ručne podľa dojmu. Zdrojové váhy LLM a prompty
+zostanú počas hlavného porovnania pevné. Prípadné neúspechy a duplicity
+sa zdokumentujú a riešia rovnakým predom stanoveným pravidlom.
+Pri návrhu rozpočtu zaznamenáme skutočný čas aj zdroje učenia i práce
+LLM; náklad konfigurátora sa neukryje v porovnaní.
+
+Pracovný priestor parametrov
+Pre hlavný experiment odporúčame zatiaľ fixovať architektúru spoločného
+PINN, aby sa dal oddeliť prínos nastavenia učenia a udržať limit 5 ms.
+LLM môže navrhovať napríklad rýchlosť učenia, váhy dátovej/PDE/BC straty,
+nábeh PDE straty a pomer bodov kontroly fyziky k dátovým bodom v rámci
+rovnakého rozpočtu. Rozsahy sa určia až po audite dokončeného pilota.
+Počet epoch nebude voľná cesta k väčšiemu výpočtu pre niektorý LLM.
+
+Hodnotenie
+Rovnaká validačná MSE vyberá konfigurácie a checkpointy. Samostatne
+sa sleduje chyba rýchlosti, tlaku, NS rezíduum, divergencia a natívne
+p99 celého poľa do 5 ms. Záverečných 200 TEST prípadov sa otvorí až po
+zmrazení všetkých konfigurácií a modelov. Ich skóre nesmie spätne meniť
+výber LLM, prompt, konfiguráciu ani víťazný model. Uvedieme aj výsledky
+jednotlivých hľadaní a tréningov, nielen najlepší úspech.
+Uloží sa každý prompt, surová odpoveď, navrhnutá konfigurácia a stručné
+zdôvodnenie, validácia formátu, čas, tokeny, pamäť, skutočná spotreba,
+prípadné opravy, tréningové výsledky, presné verzie a kontrolné súčty.
+
+Oficiálne zdroje overené 04.11.2026
+https://huggingface.co/Qwen/Qwen3-8B
+https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512
+https://huggingface.co/microsoft/Phi-4-mini-instruct
+https://huggingface.co/ibm-granite/granite-3.3-8b-instruct

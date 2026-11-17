@@ -1,0 +1,69 @@
+V15 – VÝSLEDKY KONTROLOVANEJ SKÚŠKY, 02.11.2026
+
+Úloha 140949 skončila COMPLETED, exit 0:0. Účtovanie 140950 uložené,
+fronta pri kontrole prázdna. Overenie zmrazených zdrojov prešlo.
+Funkčná skúška aj oba plné tréningy boli dokončené.
+
+ČO SME POROVNALI
+Pôvodný priamy časový PINN s výstupmi u/v/p a našu verziu s prúdovou
+funkciou psi a tlakom. Obe siete trénované od začiatku na rovnakých
+troch TRAIN simuláciách, po 150 000 aktualizácií (50 000 na simuláciu).
+Rovnaké vstupy – pôvodné snímky 2 a 3, rovnaká normalizácia a rozvrh
+tréningu. Výber najlepšieho checkpointu podľa chyby polí na týchto
+istých TRAIN simuláciách; v oboch prípadoch vybraný update 150 000.
+Všetkých 238 cieľových snímok bolo navštívených pri tréningu a overených
+pri vyhodnotení. Nie je to validačný ani nezávislý test.
+
+SÚHRN – priemer relatívnej L2 chyby po snímkach a potom po simuláciách
+                          pôvodný u/v/p       nový psi/p
+Chyba rýchlosti               1,792 %             1,116 %
+Chyba tlaku                  4,014 %             3,313 %
+Priemerná vnútorná div RMS    0,06871157          0,00960665
+Priemerný FD momentum loss   0,07659149          0,05378972
+Kontrola hmoty               0 z 3               3 z 3
+Najvyššie p99 query          3,527 ms            3,529 ms
+
+Výsledok psi/p po jednotlivých simuláciách (238 snímok na každú):
+harmonics/1/Re382: U 1,604 %, p 3,856 %, div 0,01404290,
+                  limit 0,04353891, FD momentum loss 0,10781511.
+nurbs/11/Re107:   U 0,781 %, p 3,178 %, div 0,00544016,
+                  limit 0,01632049, FD momentum loss 0,01914777.
+skelenton/57/Re168:U 0,961 %, p 2,906 %, div 0,00933690,
+                  limit 0,02801069, FD momentum loss 0,03440629.
+Najhoršia jednotlivá snímka nového modelu naprieč tromi simuláciami:
+U 2,815 %, p 7,462 %. Počet a poradie snímok 4..241 overené v JSON.
+
+INTERPRETÁCIA A HRANICE
+Tentoraz je nižšia chyba polí aj nižšia divergencia než pri súbežnej
+kontrole. Je to priaznivý vývojový výsledok, nie dôkaz štatistickej
+významnosti alebo prenosu na neznáme geometrie a Reynoldsove čísla.
+Nový výstup matematicky zachová počiatočnú diskrétnu divergenciu
+vo vnútorných bodoch tekutiny. Nezaručuje nulovú chybu hybnosti ani
+správne všetky okrajové podmienky. Referenčný FD momentum loss je
+0,00640134 / 0,00270744 / 0,00366729; predikcia je stále horšia.
+Kontrola hmoty používa vopred určený limit a stenčenú fluidnú masku.
+Nie je to kontrola celej hranice prekážky ani všetkých rovníc naraz.
+
+Čas je meraný na H200 pre výpočet celého poľa 1024x256 pri zadanom
+čase, so vstupmi už na GPU, bez zobrazovania a prenosu na CPU.
+Ide o priamy časový dotaz z úvodných snímok, nie o meranie kauzálneho
+postupu z predchádzajúceho predikovaného stavu. Nová sieť nepredpovedá
+zmenu geometrie počas behu. 5 ms je zatiaľ splnených v tomto rozsahu.
+
+SKUTOČNÉ ZDROJE A ARCHÍV
+Celá GPU úloha vrátane kontrol a vyhodnotení: 21 423 GPU sekúnd
+(5,951 GPU hodiny), 85 692 pridelených CPU sekúnd.
+Jednotlivé tréningové vetvy vrátane ich hodnotenia: 6 586,32 s a
+14 587,28 s; nový model sa teda trénoval dlhšie. Rovnaký bol počet
+aktualizácií, nie spotrebovaný čas. Parameter count hláv sa tiež líši.
+Váhy a veľké dáta zostávajú na Perune. Lokálne len 226 malých JSON/logov
+v archíve 2 388 639 B, SHA256 overený po stiahnutí:
+922b44f6d7dfcc9fb96fa6436b83925b6a8bf066221019b9ab7e22f7b27b4699
+Rozbalené výsledky: vysledky_140949/.
+
+ĎALŠÍ KROK
+Overiť prenos na odlišné simulácie a následne rozšíriť učenie na
+existujúcu vývojovú sadu 69 TRAIN / 6 VAL. Súčasné tri známe simulácie
+nestačia na vyhlásenie modelu za pripravený pre hlavný experiment LLM.
+Hlavný nezávislý TEST zostáva zatvorený. V tejto kontrole nebol
+spustený ďalší výpočet, generované CFD ani stiahnuté veľké polia.

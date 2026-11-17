@@ -1,0 +1,196 @@
+{
+  "name": "direct_curl",
+  "checkpoint_sha256": "0c94f69edbee4ad2cc046a4da911ef333b7022e98e1d30f96becbc953fda1987",
+  "checkpoint_update": 150000,
+  "cases": [
+    {
+      "failure": false,
+      "predicted_frames": 238,
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+      "scope": "validation",
+      "mean_errors": {
+        "velocity_relative_l2": 1.107561114119611,
+        "pressure_relative_l2": 1.1344558907302178
+      },
+      "score": 1.1210085024249143,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.7575628273851636,
+        "pressure_relative_l2": 1.1019513357435289
+      },
+      "interior_div_rms": 0.012262584027215964,
+      "prefix_div_rms": 0.012262583710253239,
+      "mass_limit": 0.036787751130759716,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 3.5693279504776,
+        "p95": 3.5888911485671997,
+        "p99": 3.5988335704803465
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 30.43806659874796,
+      "mean_reference_fd_momentum_loss": 0.005376385450519684,
+      "accuracy_pass": false,
+      "latency_pass": true
+    },
+    {
+      "failure": false,
+      "predicted_frames": 238,
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_838.npz",
+      "scope": "validation",
+      "mean_errors": {
+        "velocity_relative_l2": 0.9154093196815096,
+        "pressure_relative_l2": 0.9960233312440481
+      },
+      "score": 0.9557163254627788,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.8546196386572068,
+        "pressure_relative_l2": 1.1425583735453868
+      },
+      "interior_div_rms": 0.02583513832298898,
+      "prefix_div_rms": 0.02583513781428337,
+      "mass_limit": 0.07750541344285011,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 3.564192056655884,
+        "p95": 3.5875295042991637,
+        "p99": 3.5974076890945432
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 29.041697006265657,
+      "mean_reference_fd_momentum_loss": 0.025501074723335876,
+      "accuracy_pass": false,
+      "latency_pass": true
+    },
+    {
+      "failure": false,
+      "predicted_frames": 238,
+      "path": "FPO_NS_2D_1024x256/nurbs/22/Re_164.npz",
+      "scope": "validation",
+      "mean_errors": {
+        "velocity_relative_l2": 0.7734879952396148,
+        "pressure_relative_l2": 1.5725275856474814
+      },
+      "score": 1.173007790443548,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.39774380336238824,
+        "pressure_relative_l2": 0.48244725440268893
+      },
+      "interior_div_rms": 0.007316005838831433,
+      "prefix_div_rms": 0.007316005881875753,
+      "mass_limit": 0.02194801764562726,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 3.5559839010238647,
+        "p95": 3.5853728652000427,
+        "p99": 3.596144983768463
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 25.741602612142803,
+      "mean_reference_fd_momentum_loss": 0.0025439987334759297,
+      "accuracy_pass": false,
+      "latency_pass": true
+    },
+    {
+      "failure": false,
+      "predicted_frames": 238,
+      "path": "FPO_NS_2D_1024x256/nurbs/22/Re_977.npz",
+      "scope": "validation",
+      "mean_errors": {
+        "velocity_relative_l2": 0.8893010179108989,
+        "pressure_relative_l2": 1.0130661804498768
+      },
+      "score": 0.9511835991803879,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.5923580855464712,
+        "pressure_relative_l2": 0.8554418855918431
+      },
+      "interior_div_rms": 0.02217205092623955,
+      "prefix_div_rms": 0.022172050550580025,
+      "mass_limit": 0.06768260161945164,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 3.5587199926376343,
+        "p95": 3.5837135314941406,
+        "p99": 3.596665208339691
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 52.45521034513201,
+      "mean_reference_fd_momentum_loss": 0.02215080807658554,
+      "accuracy_pass": false,
+      "latency_pass": true
+    },
+    {
+      "failure": false,
+      "predicted_frames": 238,
+      "path": "FPO_NS_2D_1024x256/skelenton/36/Re_209.npz",
+      "scope": "validation",
+      "mean_errors": {
+        "velocity_relative_l2": 0.6278287308157481,
+        "pressure_relative_l2": 0.7843473527486662
+      },
+      "score": 0.7060880417822071,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.45345725583648183,
+        "pressure_relative_l2": 0.5109262183722189
+      },
+      "interior_div_rms": 0.009633297178925587,
+      "prefix_div_rms": 0.00963329803198576,
+      "mass_limit": 0.02889989409595728,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 3.5548479557037354,
+        "p95": 3.58217111825943,
+        "p99": 3.6122837829589844
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 6.70170951190115,
+      "mean_reference_fd_momentum_loss": 0.0034308653821808702,
+      "accuracy_pass": false,
+      "latency_pass": true
+    },
+    {
+      "failure": false,
+      "predicted_frames": 238,
+      "path": "FPO_NS_2D_1024x256/skelenton/36/Re_867.npz",
+      "scope": "validation",
+      "mean_errors": {
+        "velocity_relative_l2": 0.6356617771754193,
+        "pressure_relative_l2": 0.7710654307793331
+      },
+      "score": 0.7033636039773762,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.5633201696777478,
+        "pressure_relative_l2": 0.7755520197768302
+      },
+      "interior_div_rms": 0.02033260777717879,
+      "prefix_div_rms": 0.020332608371973038,
+      "mass_limit": 0.06294631617567345,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 3.5547200441360474,
+        "p95": 3.583995223045349,
+        "p99": 3.5958051657676697
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 5.977684796357355,
+      "mean_reference_fd_momentum_loss": 0.018723628135444988,
+      "accuracy_pass": false,
+      "latency_pass": true
+    }
+  ],
+  "optimizer_updates": 0,
+  "checkpoint_selected_on_validation": false,
+  "main_test_opened": false,
+  "independent_final_test": false,
+  "causal_stepper": false,
+  "llm_ready": false,
+  "mean_errors": {
+    "velocity_relative_l2": 0.8248749924904669,
+    "pressure_relative_l2": 1.0452476285999373
+  },
+  "gates": {
+    "accuracy_pass": false,
+    "mass_pass": true,
+    "latency_pass": true
+  }
+}

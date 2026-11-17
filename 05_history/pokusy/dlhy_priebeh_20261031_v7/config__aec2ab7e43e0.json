@@ -1,0 +1,48 @@
+{
+  "seed": 20261031,
+  "state_conditioning": true,
+  "width": 96,
+  "depth": 4,
+  "latent": 32,
+  "frequencies": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0
+  ],
+  "state_update": "first_order",
+  "collocation": 256,
+  "pde_weight": 0.01,
+  "bc_weight": 0.01,
+  "data_loss_scale": 0.05,
+  "own_momentum_weight": 0.1,
+  "own_divergence_weight": 0.1,
+  "divergence_limit": 1000.0,
+  "divergence_score_penalty": 1000000.0,
+  "name": "C_long_rollout",
+  "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_stabilization_20261031_v6/training/139784/C_first_order_own_physics/last.pt",
+  "warm_start_sha256": "6c5f4880e8d59cb515db00417ad43094a907b98e4219d178e28ebbe026c2f4fd",
+  "lr": 3e-05,
+  "gradient_clip": 0.25,
+  "chunk_length": 8,
+  "assess_every_epochs": 10,
+  "stages": [
+    {
+      "horizon": 32,
+      "epochs": 50
+    },
+    {
+      "horizon": 64,
+      "epochs": 50
+    },
+    {
+      "horizon": 128,
+      "epochs": 75
+    },
+    {
+      "horizon": 238,
+      "epochs": 125
+    }
+  ]
+}

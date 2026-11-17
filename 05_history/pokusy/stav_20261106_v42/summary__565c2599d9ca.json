@@ -1,0 +1,175 @@
+{
+  "observed_at": "2026-11-06T01:40:36.426499+01:00",
+  "audit": "PASS",
+  "frozen_main_and_capacity_sources": "PASS",
+  "state_sha256": "ae00ae8c229469f4802114845208b9824658847781115895748735223b7ecf4a",
+  "main_counts": {
+    "DONE": 183,
+    "RUNNING": 11,
+    "PENDING": 201
+  },
+  "main_done_outcomes": {
+    "COMPLETE": 183
+  },
+  "planned_attempts": 395,
+  "completed_attempt_percent": 46.32911392405063,
+  "by_method": {
+    "fixed": {
+      "PENDING": 5
+    },
+    "granite33_8b": {
+      "DONE": 29,
+      "RUNNING": 3,
+      "PENDING": 33
+    },
+    "ministral3_8b": {
+      "DONE": 31,
+      "RUNNING": 2,
+      "PENDING": 32
+    },
+    "phi4_mini": {
+      "DONE": 30,
+      "RUNNING": 2,
+      "PENDING": 33
+    },
+    "qwen3_8b": {
+      "DONE": 31,
+      "RUNNING": 2,
+      "PENDING": 32
+    },
+    "random": {
+      "DONE": 31,
+      "RUNNING": 1,
+      "PENDING": 33
+    },
+    "tpe": {
+      "DONE": 31,
+      "RUNNING": 1,
+      "PENDING": 33
+    }
+  },
+  "queue": [
+    "143684|dp-ldc36-main8|RUNNING|1-06:17:46|gpu17",
+    "143656|dp-ldc33-main|RUNNING|1-06:44:21|gpu10",
+    "143807|dp-ldc39-capacity|RUNNING|23:37:07|gpu23"
+  ],
+  "attention_required": false,
+  "hold_present": false,
+  "completed_main_job": {
+    "job": "143342",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "runtime_seconds": 114100,
+    "cpu_count": 32,
+    "gpu_count": 8,
+    "allocated_core_seconds": 3651200,
+    "allocated_gpu_seconds": 912800,
+    "peak_memory_unknown": true,
+    "raw_query_sha256": "1bd9f69796b678853708820592e48b2e2785a1760833d5fca301ea09e21e42b4"
+  },
+  "completed_batch_checks": {
+    "passed": 1787,
+    "total": 1787,
+    "status": "LDC_MAIN_BATCH_PARTIAL_PASS"
+  },
+  "collector": {
+    "group": "group_000",
+    "collector": "143807",
+    "accounted": [
+      "143342"
+    ],
+    "waiting": [
+      "143656",
+      "143684"
+    ],
+    "main_test_opened": false,
+    "unix": 1793925612.523881
+  },
+  "capacity_rows": [
+    {
+      "seed": 150001,
+      "width": 384,
+      "epochs": 400,
+      "physics_updates": 62000,
+      "selected_update": 62400,
+      "train_cases": 640,
+      "validation_cases": 160,
+      "velocity_relative_l2": 0.023677423556399266,
+      "pressure_relative_l2": 0.0818875378993174,
+      "validation_mse": 0.00037937962228408174,
+      "p99_ms_min": 6.8130330038070674,
+      "p99_ms_max": 6.8265243339538575,
+      "pass_5ms": false,
+      "training_seconds": 13509.137575159955,
+      "summary_sha256": "12a4602c9c8ab7c3ff134463ecf0c2fe407aca5f8c35f351ab0364dd2baf9c4f",
+      "checkpoint_sha256": "20f3532aa1242a4c845e5903f6dbdc46030ce455d62d6615adaa9d7b3bdd6627",
+      "initial_weight_sha256": "3e793b34e54a2c3a0c22ec29d60f59203792469748ccc9bc96919593cb7eba0d"
+    },
+    {
+      "seed": 150002,
+      "width": 384,
+      "epochs": 400,
+      "physics_updates": 62000,
+      "selected_update": 64000,
+      "train_cases": 640,
+      "validation_cases": 160,
+      "velocity_relative_l2": 0.0235030743392117,
+      "pressure_relative_l2": 0.0816067799450961,
+      "validation_mse": 0.0003594612777307873,
+      "p99_ms_min": 6.816648859977722,
+      "p99_ms_max": 6.834210572242736,
+      "pass_5ms": false,
+      "training_seconds": 13512.625780850998,
+      "summary_sha256": "a628cca40bbbe02c78eab330d88df9832adc477e07af8f89a695d6831aeb52aa",
+      "checkpoint_sha256": "409499199bf1be0cfb93224cc1978076a1e8df10e51b548affdd843b49f4df36",
+      "initial_weight_sha256": "3fad0c036cd0cc893fe439807a29bcddedb32f7802678fb1bdf1793b5cfa8597"
+    },
+    {
+      "seed": 150003,
+      "width": 384,
+      "epochs": 400,
+      "physics_updates": 62000,
+      "selected_update": 64000,
+      "train_cases": 640,
+      "validation_cases": 160,
+      "velocity_relative_l2": 0.024538167176700147,
+      "pressure_relative_l2": 0.08768435272475986,
+      "validation_mse": 0.00035765103343252054,
+      "p99_ms_min": 6.816414561271667,
+      "p99_ms_max": 6.830950140953064,
+      "pass_5ms": false,
+      "training_seconds": 13373.44726419996,
+      "summary_sha256": "3d4fdac671fa300f5c2db86917f1584613bcf58f417f40e03bcc90014aca878c",
+      "checkpoint_sha256": "f1803184d6bf4349951bc4575bdfdedc3cc0d21f71e247daa93ba334dfeca659",
+      "initial_weight_sha256": "ed0d5a6b141bf53a0943bce72ab0dbd59391e1d486cea8b55200f37683700960"
+    }
+  ],
+  "capacity_all_three_complete": true,
+  "fixed_final_status": {
+    "150001": {
+      "id": "fixed_k00",
+      "status": "PENDING"
+    },
+    "150002": {
+      "id": "fixed_k01",
+      "status": "PENDING"
+    },
+    "150003": {
+      "id": "fixed_k02",
+      "status": "PENDING"
+    },
+    "150004": {
+      "id": "fixed_k03",
+      "status": "PENDING"
+    },
+    "150005": {
+      "id": "fixed_k04",
+      "status": "PENDING"
+    }
+  },
+  "paired_capacity_comparison_ready": false,
+  "capacity_superiority_claim": false,
+  "main_test_opened": false,
+  "jobs_submitted": false,
+  "existing_training_modified": false
+}

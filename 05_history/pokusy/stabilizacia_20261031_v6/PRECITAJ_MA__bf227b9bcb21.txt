@@ -1,0 +1,87 @@
+STABILIZAČNÝ PILOT PINN – 31.10.2026
+
+AKTUÁLNE PO DOKONČENÍ
+Pilot139784 aj doplňujúca diagnostika139881 úspešne technicky skončili.
+Žiadne rameno nesplnilo presnosť celého238krokového priebehu. D udržalo
+malú vnútornú divergenciu, ale to nestačilo na presnú/stabilnú dynamiku.
+Rýchlosť pod5ms splnená. Vybraný D sa takmer nemení oproti perzistencii;
+nesmie sa prezentovať ako úspešný naučený simulátor. Model ešte nie je
+pripravený na LLM porovnanie. Úplný ľudský súhrn:VYSLEDKY_139784.txt.
+Pri poslednej kontrole bola fronta úloh prázdna. Nasledujúci text
+zachováva pôvodný plán a zápis štartu, nie aktuálne bežiaci tréning.
+
+PREČO FYZIKÁLNA KONTROLA NESTAČILA
+Pôvodný model mal fyzikálne rezíduá ako člen tréningovej chyby. Malá
+priemerná chyba v konečnom počte bodov nie je zárukou splnenia rovníc
+v každom bode ani po 238 vlastných krokoch. Pri učení dostával presné
+tréningové stavy; pri predikcii postupne dostával svoje vlastné chyby.
+Pevná dvojstavová extrapolácia mohla tieto odchýlky zosilňovať.
+Diagnostiky potvrdili rast porušenia nestlačiteľnosti aj na známych
+tréningových prípadoch. Nejde iba o problém nevidenej geometrie.
+
+ČO TERAZ POROVNÁVAME
+Jeden existujúci tréningový scenár harmonics/1/Re382. Vždy rovnaké
+známe snímky 2 a 3; potom všetkých 238 predikcií vlastnými stavmi.
+Žiadne nové CFD, sťahovanie datasetu ani otvorenie hlavného testu.
+
+A: doterajšia dvojstavová extrapolácia s naučenou korekciou a mäkkými
+   fyzikálnymi stratami – kontrolný variant.
+B: prírastok z aktuálneho stavu bez pevného pripočítania minulej zmeny.
+C: B plus rezíduá hybnosti a kontinuity aj na vlastných stavoch počas
+   osemkrokového tréningu.
+D: C s prírastkami rýchlosti odvodenými z prúdovej funkcie.
+
+V D sa diskrétne derivácie prírastkov rýchlosti rušia v rovnici
+kontinuity vo vnútorných fluidných bodoch. Nejde o záruku celej rovnice
+hybnosti ani presného splnenia podmienok tesne pri prekážke. Konečná
+maska prekážky môže narušiť túto vlastnosť v susedných bodoch; preto
+je tvrdenie obmedzené na vnútorné stenčované masky. Počiatočná
+diskretizačná divergencia CFD sa automaticky neodstráni. Tlak zostáva
+naučenou veličinou, nejde o presné riešenie tlakovej Poissonovej rovnice.
+Vonkajšie okraje výrezu sa nepovažujú za steny ani periodické hranice.
+
+FÉROVOSŤ A VYHODNOTENIE
+Rovnaký seed, dáta, postup výberu tréningových okien, hlavná sieť a počet
+aktualizácií: 12 000 jednokrokových a 3 000 osemkrokových. Výpočtová
+náročnosť nie je úplne rovnaká; D má aj iný počet výstupov a geometrické
+váhovanie. C proti D preto hodnotí celý tento balík zmien.
+
+Kontrolujeme celý priebeh aj skoré a neskoré úseky, chybu rýchlosti
+a tlaku, vlastné fyzikálne rezíduá a rast divergencie. Výber checkpointu
+uprednostní splnenie vopred určeného limitu rastu divergencie, potom
+chybu polí. Ak nevyhovie žiadny, zachová sa najlepší nevyhovujúci.
+Orientačný technický cieľ: priemerná relatívna chyba U <= 10 %, p <= 20 %,
+limit rastu divergencie a p99 celého GPU kroku <= 5 ms. Nejde o tvrdenie
+štatistickej významnosti. Čas kroku s dodatočným fyzikálnym monitorom
+sa zmeria osobitne. Žiadne orezávanie zlých predikcií na prijateľné hodnoty.
+
+Tento pilot používa známy tréningový prípad aj na výber checkpointu:
+je pozitívnou kontrolou, NIE nezávislou validáciou alebo LLM porovnaním.
+Ak uspeje, nasleduje overenie na 69 tréningových / 6 validačných scenároch.
+Hlavný test ostáva zatvorený. Ak neuspeje, zaznamenáme aj tento výsledok
+a podľa rozdielov A–D upravíme ďalší vývojový krok.
+
+TECHNICKÝ STAV PRI ODOSLANÍ
+Deväť kontrol jadra prešlo: známe fyzikálne riešenia, gradienty,
+diskrétna kontinuita, zhoda riedkej a plnej predikcie vrátane okrajov,
+presné úvodné stavy a zákaz čítania budúcich referencií prediktorom.
+Zdrojové súbory a protokol boli zafixované kontrolnými súčtami.
+CPU príprava: 139783. GPU pilot: 139784.
+Účtovacie úlohy: 139785, 139786. GPU úloha najprv zopakuje testy
+a krátku funkčnú skúšku všetkých štyroch variantov; až potom plný pilot.
+Výsledná presnosť zatiaľ nie je známa.
+
+OVERENIE PO ŠTARTE
+CPU príprava 139783 úspešne skončila: 8 s, 16 pridelených core*s.
+Deväť kontrol prešlo aj na GPU uzle. Funkčná skúška skončila stavom
+SMOKE_COMPLETE pre všetky štyri ramená; každé dokončilo 238 predikcií.
+D udržalo vnútornú divergenciu približne na počiatočnej úrovni
+0.01404, teda prešlo limitom jej rastu. A/B/C v tejto krátkej skúške
+limitom neprešli. Po 3+2 aktualizáciách nemožno hodnotiť presnosť
+natrenovaných modelov. Plný tréning 139784 už začal ramenom A;
+ďalšie ramená sa v tej istej úlohe vykonajú postupne.
+Malé pôvodné súhrny skúšky a CPU účtovania sú v zaznamy/.
+
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_stabilization_20261031_v6
+Lokálne sa uchovajú malé JSON a textové záznamy; polia a váhy ostávajú
+na Perune. Pôvodné výsledky V4/V5a ani 3D publikácia sa nemenia.

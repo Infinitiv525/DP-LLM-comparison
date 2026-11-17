@@ -1,0 +1,109 @@
+OVERENÉ PREDLOHY PINN A AUDIT NAŠEJ ÚLOHY –01.11.2026
+
+HLAVNÝ ZÁVER
+Áno, existujú autorské predlohy vhodnejšie ako východisko pre ďalší
+vývoj. Najrelevantnejšia pre nestacionárne Navier–Stokes je JAX-PI,
+examples/ns_unsteady_cylinder. Nie je to však hotový model pre náš
+FlowBench69/6problém. Potvrdili sme to čítaním zdrojového kódu, nie
+iba obrázkom alebo názvom článku. Žiadnu úspešnú reprodukciu na našich
+dátach týmto auditom netvrdíme. NovýGPUtréning nebol spustený.
+
+ČO UŽ MÁME LOKÁLNE
+VlastnýsinglecasePINNpilot a jeho vylepšenia; V11prefix-conditioned
+reconstruction~2.94%U/4.79%p na známejtrajektórii. Tieto výsledky
+potvrdzujú schopnosť fitovať jeden priebeh, nie generalizáciu.
+V12StatePINNwidth192:69TRAIN/6VAL,600kupdates, vysokéchyby a fyzikafail.
+V12nie je priama implementácia publikovanejJAX-PIpredlohy:
+obyčajnýtanhMLP,konkatenovanýCNNlatent32+lokálnyprefix6,pevnéaxisFourier,
+fixnéváhystrát. Nesmieme ho prezentovať ako reprodukciu referenčného
+článku alebo zamietnutiePINNako metódy.
+
+JAX-PI – NAJRELEVANTNEJŠÍ FYZIKÁLNY ZÁKLAD
+Repo:https://github.com/PredictiveIntelligenceLab/jaxpi
+Overenýcommit:f944a0cd03c7f35a239955505d83bbdc5a07f831
+Autorský príklad explicitne rieši nestacionárne2Dprúdenie pri valci.
+default.py:ModifiedMlp4x256,gelu,Fourierembedding256(scale1),random
+weightfactorization,Adam1e-3 exponential. grad_normadaptívne váhy,
+update1000,momentum.9,causal_tol1,num_chunks16,10timewindows,
+200ksteps/window. sota.py5x256 a odlišnéinitweights.
+Nie je zaručené, že táto256sieť alebo tieto počty spĺňajú našich5ms.
+Ani číslo nízkejchyby z iného benchmarku sa nesmie prevziať naFlowBench.
+
+Čo kód skutočne robí:
+neural_net(params,t,x,y), nie predictor(geometry,prefix,Re,time).
+Re/coords/inflow_fn sú vlastnosti konkrétneho prípadu. Má známy
+parabolickýinflow, outflowrezíduá, wall+cylindernoslip a initialfield.
+Trénuje každýčasovýwindow osobitne a vlastnýpredikovanýkoncovýstav
+posúva do ďalšiehowindow; nejde o univerzálny pretrainedmodel, ktorý
+bez učenia rieši novúgeometriu z2snímok. Causalweighting vrezíduách
+nie je nášV8truncatedgradient8/32; ide o odlišný tréningovýmechanizmus.
+
+Licenciauložená spolu skódom: neziskovévýskumnépoužitie s podmienkami
+Penn, zachovanieoznámení, obmedzenieďalšiehošírenia. NieMIT/Apache.
+Kópie ponechané interne spolu s pôvodnýmLICENSE,ničpublikované.
+
+DEEPXDE – ZROZUMITEĽNÁ REFERENCIA PRE ROVNICE/DÁTOVÝ PINN
+https://github.com/lululxvi/deepxde/blob/master/examples/pinn_inverse/Navier_Stokes_inverse.py
+Overenýcommit99b6620386d18cefb1549dddb7b7fe468cfad607.
+Príklad sRe100číta cylinder_nektar_wake.mat, učí rekonštrukciu a
+neznáme koeficientyC1/C2. Nie riešenie nášho69/6futureforecastu.
+V našejúlohe jeReznáme, koeficient1/Re sa nesmie omylom začať
+identifikovať akoďalší neznámyparameter pri adaptáciiinversepríkladu.
+Uložený súbor aLICENSE(LGPL2.1text). Dáta .mat sa nesťahovali.
+
+PHYSICSNEMO – FRAMEWORK/PYTORCH REFERENCIA
+https://docs.nvidia.com/physicsnemo/26.05/user-guide/pinns-tutorials/index.html
+https://docs.nvidia.com/physicsnemo/latest/user-guide/pinns-tutorials/lid_driven_cavity_flow.html
+Oficiálne runnablePINN príklady sPhysicsInformer/PDE rezíduami.
+LidDrivenCavitypríklad jeSTEADY dutina, nie náš nestacionárnywake
+snovými geometriami. Je vhodný preframeworkkontrolu, nie ako
+hotovýFlowBenchbenchmark. Žiadneinštalácie/modifikáciePerunenv.
+
+PI-DEEPONET – ZÁKLAD PRE INÝ TYP ÚLOHY
+https://arxiv.org/abs/2103.10974
+https://github.com/PredictiveIntelligenceLab/Physics-informed-DeepONets
+Repooverenýcommit77e7c747d653b34e79e43df7d88bad87de5c27d8.
+Metóda učí fyzikálneinformovanýoperátor pre rodinu vstupnýchfunkcií.
+To je bližšie požiadavke meniť úvodnépolia než klasickýPINN jednéhocase.
+Základnýrepo máadvection/Burger/diffusion atď., nie hotový69/6
+Navier–Stokes sľub. RootLICENSE na overenomcommite nenájdený;
+archivovanýibaREADME/proveniencia, neprevzatáimplementácia.
+PI-DeepONetje operátorováarchitektúra, nie automaticky totožnýklasický
+PINN. Neprejdeme naň potichu, nepremenujeme ho na užhotovýPINN.
+NašeCNN+concatenationMLP nieje presnábranch–trunkdotproductDeepONet.
+
+ČO TREBA NAPRAVIŤ V POSTUPE
+1. Oddeliť singlecasefit, spoločnýfitviacerýchTRAINcases a skutočný
+   vývojovýforecastnevidenejgeometrie. Každý má vlastnývýsledok.
+2. Ako autorskýfyzikálnyzáklad zvoliťJAX-PI a zachovať jeho licenciu,
+   presnýcommit a zoznamzmien. Prenos techník do nášhoPyTorchkódu
+   označiť zaadaptáciu, niebitovo presnúreprodukciu.
+3. Pred600k/69sweep overiť matchedsinglecase a3TRAINcases, bezVAL
+   backprop. AdaptovanáModifiedMLP oproti baseline, rovnaké vstupy,
+   data/pde/BC arozpočet, oddelenétestovanie architektúry aweighting.
+   Pri nevyhovujúcomspoločnomTRAINfite nerozširovať na69/6.
+4. Na našomFlowBenchcrop nepreberaťparabolickýinflow,outflow alebo
+   vonkajšiesteny. Cropnemáznámeexteriorboundaryhistory. Zachovať
+   dátovoasistovanú úlohu; neurčitosťčistéhoIBVPpriznať. Neskoršie
+   VALboundarylabels nesmú byť novým vstupom bez zmenyprotokolu.
+5. Fyzikálne rezíduá štandardnýchNS zodpovedajú našejrovnici,
+   no naše aktuálnefixnélossweights/net/tréningniepredloha. Prevziať
+   normalizáciu/škálovaniea diagnostiku gradientov, causalweighting
+   nedávať naraz s novouarchitektúrou bezsamostatnejkontroly.
+6. Geometrickýkontext32 je silná kompresia, nie dôkazchyby. Hypotézu
+   overiť spoločnýmTRAINfitom a kontrolovanýmrozšírenímconditioningu,
+   nie tvrdením, že už poznáme príčinu. Aj600k/69~8696updates/case
+   nieje ekvivalentV11singlecase50kupdates; nepoužiť to ako jediné
+   vysvetlenie po skoromvalplateau.
+7. Každáďalšiametóda musí overiť full238/chybyU,p/divergenciu a
+   úplnúlatenciu naH2001024x256,vrátaneconditioning.5ms zostáva
+   meranýcieľ,niezaručená vlastnosťframeworku.
+
+ČO JE HOTOVÉ A ČO NIE
+Prečítaná lokálnaimplementácia, autorskékonfigurácie/models/train/
+gradientweighting/architektúry; vybranézdrojeuložené scommitmi aSHA.
+Len malézdrojáky/dokumenty, žiadnedatasety/modelovéváhy ani nováCFD.
+Kódpredlôh neboltrénovaný aniimportovaný, nepridávali sa balíky do
+Perunenv. ŽiadnyGPUjob vtomto rešeršno-auditnomkroku nespustený.
+Všetkypredchádzajúcezmrazenévýsledky nezmenené. VýberjAX-PIdáva
+podloženýzáklad ďalšiehovývoja, niegaranciu presnosti/generality.

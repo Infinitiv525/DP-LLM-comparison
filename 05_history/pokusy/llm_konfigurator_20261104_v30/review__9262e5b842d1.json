@@ -1,0 +1,321 @@
+{
+  "status": "FOUR_LDC_LLM_PREFLIGHTS_COMPLETE",
+  "checks": {
+    "common_success": true,
+    "four_distinct_offline_gpus": true,
+    "qwen3_8b_complete": true,
+    "qwen3_8b_1_prompt_provenance": true,
+    "qwen3_8b_1_valid_proposal": true,
+    "qwen3_8b_1_matched_initial_weights": true,
+    "qwen3_8b_1_matched_sampling": true,
+    "qwen3_8b_1_full_train_coverage": true,
+    "qwen3_8b_1_true_physics_and_speed": true,
+    "qwen3_8b_1_real_feedback": true,
+    "qwen3_8b_2_prompt_provenance": true,
+    "qwen3_8b_2_valid_proposal": true,
+    "qwen3_8b_2_matched_initial_weights": true,
+    "qwen3_8b_2_matched_sampling": true,
+    "qwen3_8b_2_full_train_coverage": true,
+    "qwen3_8b_2_true_physics_and_speed": true,
+    "qwen3_8b_2_real_feedback": true,
+    "qwen3_8b_sequential_feedback": true,
+    "random_same_initial_sampling": true,
+    "ministral3_8b_complete": true,
+    "ministral3_8b_1_prompt_provenance": true,
+    "ministral3_8b_1_valid_proposal": true,
+    "ministral3_8b_1_matched_initial_weights": true,
+    "ministral3_8b_1_matched_sampling": true,
+    "ministral3_8b_1_full_train_coverage": true,
+    "ministral3_8b_1_true_physics_and_speed": true,
+    "ministral3_8b_1_real_feedback": true,
+    "ministral3_8b_2_prompt_provenance": true,
+    "ministral3_8b_2_valid_proposal": true,
+    "ministral3_8b_2_matched_initial_weights": true,
+    "ministral3_8b_2_matched_sampling": true,
+    "ministral3_8b_2_full_train_coverage": true,
+    "ministral3_8b_2_true_physics_and_speed": true,
+    "ministral3_8b_2_real_feedback": true,
+    "ministral3_8b_sequential_feedback": true,
+    "tpe_same_initial_sampling": true,
+    "phi4_mini_complete": true,
+    "phi4_mini_1_prompt_provenance": true,
+    "phi4_mini_1_valid_proposal": true,
+    "phi4_mini_1_matched_initial_weights": true,
+    "phi4_mini_1_matched_sampling": true,
+    "phi4_mini_1_full_train_coverage": true,
+    "phi4_mini_1_true_physics_and_speed": true,
+    "phi4_mini_1_real_feedback": true,
+    "phi4_mini_2_prompt_provenance": true,
+    "phi4_mini_2_valid_proposal": true,
+    "phi4_mini_2_matched_initial_weights": true,
+    "phi4_mini_2_matched_sampling": true,
+    "phi4_mini_2_full_train_coverage": true,
+    "phi4_mini_2_true_physics_and_speed": true,
+    "phi4_mini_2_real_feedback": true,
+    "phi4_mini_sequential_feedback": true,
+    "granite33_8b_complete": true,
+    "granite33_8b_1_prompt_provenance": true,
+    "granite33_8b_1_valid_proposal": true,
+    "granite33_8b_1_matched_initial_weights": true,
+    "granite33_8b_1_matched_sampling": true,
+    "granite33_8b_1_full_train_coverage": true,
+    "granite33_8b_1_true_physics_and_speed": true,
+    "granite33_8b_1_real_feedback": true,
+    "granite33_8b_2_prompt_provenance": true,
+    "granite33_8b_2_valid_proposal": true,
+    "granite33_8b_2_matched_initial_weights": true,
+    "granite33_8b_2_matched_sampling": true,
+    "granite33_8b_2_full_train_coverage": true,
+    "granite33_8b_2_true_physics_and_speed": true,
+    "granite33_8b_2_real_feedback": true,
+    "granite33_8b_sequential_feedback": true,
+    "all_eight_real_trials": true,
+    "both_control_paths": true
+  },
+  "rows": [
+    {
+      "model": "qwen3_8b",
+      "round": 1,
+      "configuration": {
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "reason": "Balanced weights based on prior convergence",
+        "expected_effect": "Stable training with moderate error reduction",
+        "risk": "Potential underfitting due to low physics weight",
+        "evidence_ids": [
+          "common_0"
+        ]
+      },
+      "measurements": {
+        "velocity_relative_l2": 0.3269922025392157,
+        "pressure_relative_l2": 1.6873866780951574,
+        "mse_all": 0.02227107179439386,
+        "relative_l2_all": 0.5504640534717261
+      },
+      "proposal_seconds": 38.78284593598801,
+      "training_seconds": 97.92363333899993,
+      "p99_max_ms": 2.899072573184967,
+      "peak_llm_gpu_bytes": 17387487232,
+      "main_test_opened": false
+    },
+    {
+      "model": "qwen3_8b",
+      "round": 2,
+      "configuration": {
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "reason": "Baseline configuration from previous runs shows stable convergence with moderate error scores",
+        "expected_effect": "Maintain balance between velocity and pressure losses while ensuring physical consistency",
+        "risk": "Overfitting due to insufficient regularization or underweighting boundary conditions",
+        "evidence_ids": [
+          "qwen3_8b_1"
+        ]
+      },
+      "measurements": {
+        "velocity_relative_l2": 0.3269922025392157,
+        "pressure_relative_l2": 1.6873866780951574,
+        "mse_all": 0.02227107179439386,
+        "relative_l2_all": 0.5504640534717261
+      },
+      "proposal_seconds": 44.390954649978084,
+      "training_seconds": 97.52219281700673,
+      "p99_max_ms": 2.8958381128311155,
+      "peak_llm_gpu_bytes": 17439916032,
+      "main_test_opened": false
+    },
+    {
+      "model": "ministral3_8b",
+      "round": 1,
+      "configuration": {
+        "parameters": {
+          "learning_rate": 0.0005,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.003,
+          "bc_weight": 0.03,
+          "warmup_fraction": 0.03125
+        },
+        "reason": "Balanced weights favor PDE stability with moderate BC enforcement; lower LR avoids overshooting early epochs",
+        "expected_effect": "Reduced velocity_error dominance via stronger physics regularization while preserving BC fidelity",
+        "risk": "Higher physics_weight may slightly increase pressure instability if momentum residuals are not tightly controlled",
+        "evidence_ids": [
+          "common_0"
+        ]
+      },
+      "measurements": {
+        "velocity_relative_l2": 0.43195661303450306,
+        "pressure_relative_l2": 1.444933011757072,
+        "mse_all": 0.024871916550958544,
+        "relative_l2_all": 0.5935587893229528
+      },
+      "proposal_seconds": 39.311349763011094,
+      "training_seconds": 100.97092216502642,
+      "p99_max_ms": 2.909474549293518,
+      "peak_llm_gpu_bytes": 20812136448,
+      "main_test_opened": false
+    },
+    {
+      "model": "ministral3_8b",
+      "round": 2,
+      "configuration": {
+        "parameters": {
+          "learning_rate": 0.0005,
+          "pressure_weight": 0.5,
+          "physics_weight": 0.0003,
+          "bc_weight": 0.03,
+          "warmup_fraction": 0.0625
+        },
+        "reason": "Low momentum weight via small learning rate with higher bc_weight reduces slip overshoot while physics_weight penalty at",
+        "expected_effect": "balance between boundary fidelity and steady-state PDE enforcement improves u/v/p alignment without divergence",
+        "risk": "warmup_fraction extension may delay initial physics convergence but stabilizes later dynamics",
+        "evidence_ids": [
+          "ministral3_8b_1"
+        ]
+      },
+      "measurements": {
+        "velocity_relative_l2": 0.3635495636032109,
+        "pressure_relative_l2": 1.7750907602067394,
+        "mse_all": 0.02337675473166283,
+        "relative_l2_all": 0.5851699896551975
+      },
+      "proposal_seconds": 41.591389042994706,
+      "training_seconds": 98.91539088700665,
+      "p99_max_ms": 2.904897301197052,
+      "peak_llm_gpu_bytes": 20342374400,
+      "main_test_opened": false
+    },
+    {
+      "model": "phi4_mini",
+      "round": 1,
+      "configuration": {
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "reason": "Increase viscosity weight",
+        "expected_effect": "Reduce velocity error",
+        "risk": "Low",
+        "evidence_ids": [
+          "common_0"
+        ]
+      },
+      "measurements": {
+        "velocity_relative_l2": 0.3269922025392157,
+        "pressure_relative_l2": 1.6873866780951574,
+        "mse_all": 0.02227107179439386,
+        "relative_l2_all": 0.5504640534717261
+      },
+      "proposal_seconds": 33.358719221985666,
+      "training_seconds": 97.96439273099531,
+      "p99_max_ms": 2.899201562404633,
+      "peak_llm_gpu_bytes": 8596226048,
+      "main_test_opened": false
+    },
+    {
+      "model": "phi4_mini",
+      "round": 2,
+      "configuration": {
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "reason": "Optimize weight balance",
+        "evidence_ids": [
+          "phi4_mini_1"
+        ],
+        "expected_effect": "Reduce overall error rates",
+        "risk": "Low"
+      },
+      "measurements": {
+        "velocity_relative_l2": 0.3269922025392157,
+        "pressure_relative_l2": 1.6873866780951574,
+        "mse_all": 0.02227107179439386,
+        "relative_l2_all": 0.5504640534717261
+      },
+      "proposal_seconds": 33.40686761701363,
+      "training_seconds": 98.53472970900475,
+      "p99_max_ms": 2.9031379342079164,
+      "peak_llm_gpu_bytes": 8642363392,
+      "main_test_opened": false
+    },
+    {
+      "model": "granite33_8b",
+      "round": 1,
+      "configuration": {
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "reason": "This configuration is based on the successful 'common_0' history, utilizing its parameters for a comparative technical 2",
+        "evidence_ids": [
+          "common_0"
+        ],
+        "expected_effect": "Improved stability due to lower learning rate and balanced weights",
+        "risk": "Potential overfitting if weights are too sensitive to this specific case"
+      },
+      "measurements": {
+        "velocity_relative_l2": 0.3269922025392157,
+        "pressure_relative_l2": 1.6873866780951574,
+        "mse_all": 0.02227107179439386,
+        "relative_l2_all": 0.5504640534717261
+      },
+      "proposal_seconds": 46.80739054302103,
+      "training_seconds": 102.32036699698074,
+      "p99_max_ms": 2.9171085119247437,
+      "peak_llm_gpu_bytes": 17368612864,
+      "main_test_opened": false
+    },
+    {
+      "model": "granite33_8b",
+      "round": 2,
+      "configuration": {
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "reason": "This configuration utilizes a moderate learning rate with a balanced weight distribution amongst the loss components, a ",
+        "expected_effect": "should provide stable convergence and reasonable error reduction over two epochs",
+        "risk": "under-tuned parameters may lead to suboptimal performance",
+        "evidence_ids": [
+          "granite33_8b_1"
+        ]
+      },
+      "measurements": {
+        "velocity_relative_l2": 0.3269922025392157,
+        "pressure_relative_l2": 1.6873866780951574,
+        "mse_all": 0.02227107179439386,
+        "relative_l2_all": 0.5504640534717261
+      },
+      "proposal_seconds": 46.579197571001714,
+      "training_seconds": 101.50474523400771,
+      "p99_max_ms": 2.918744966983795,
+      "peak_llm_gpu_bytes": 17469276160,
+      "main_test_opened": false
+    }
+  ],
+  "technical_only": true,
+  "main_test_opened": false,
+  "main_experiment_started": false,
+  "llm_accuracy_benefit_established": false
+}

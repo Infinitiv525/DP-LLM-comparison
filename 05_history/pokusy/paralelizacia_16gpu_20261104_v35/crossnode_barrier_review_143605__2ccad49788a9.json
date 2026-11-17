@@ -1,0 +1,57 @@
+{
+  "status": "TWO_NODE_QUEUE_LOCK_TEST_PASS",
+  "checks": {
+    "two_distinct_nodes": true,
+    "exactly_25_unique_claims": true,
+    "all_fixture_tasks_done": true,
+    "both_nodes_claimed_work": true,
+    "different_first_claims": true,
+    "dependency_order": true
+  },
+  "rows": [
+    {
+      "rank": 0,
+      "host": "cn11",
+      "claimed": [
+        "unit_fixture_1_r00_c00",
+        "unit_fixture_2_r00_c00",
+        "unit_fixture_3_r00_c00",
+        "unit_fixture_4_r00_c00",
+        "unit_fixture_1_r00_c01",
+        "unit_fixture_2_r00_c01",
+        "unit_fixture_3_r00_c01",
+        "unit_fixture_4_r00_c01",
+        "unit_fixture_1_r00_c02",
+        "unit_fixture_2_r00_c02",
+        "unit_fixture_3_r00_c02",
+        "unit_fixture_4_r00_c02",
+        "unit_fixture_1_r00_c03",
+        "unit_fixture_2_r00_c03",
+        "unit_fixture_3_r00_c03",
+        "unit_fixture_4_r00_c03",
+        "unit_fixture_1_r00_c04",
+        "unit_fixture_2_r00_c04",
+        "unit_fixture_3_r00_c04",
+        "unit_fixture_4_r00_c04"
+      ],
+      "job": "143605",
+      "fixture_only": true
+    },
+    {
+      "rank": 1,
+      "host": "cn23",
+      "claimed": [
+        "unit_fixture_0_r00_c00",
+        "unit_fixture_0_r00_c01",
+        "unit_fixture_0_r00_c02",
+        "unit_fixture_0_r00_c03",
+        "unit_fixture_0_r00_c04"
+      ],
+      "job": "143605",
+      "fixture_only": true
+    }
+  ],
+  "real_training": false,
+  "main_test_opened": false,
+  "scientific_freeze_sha256": "c61230aa43a09ae18ac2f7b79a53dac33934227c42746bc31dfb3499e8f24e6b"
+}

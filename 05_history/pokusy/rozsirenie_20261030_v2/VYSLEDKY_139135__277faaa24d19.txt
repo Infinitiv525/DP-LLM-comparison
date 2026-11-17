@@ -1,0 +1,110 @@
+VYSLEDKY PRVEHO ROZSIRENIA PINN - 30. 10. 2026
+
+Stav: priprava 139134 aj treningy 139135 uspesne COMPLETED, exit 0:0.
+Vsetkych 17 vybranych referencnych scenarov je overenych a pripravenych.
+Velke data a vahy modelov zostavaju na Perune.
+
+1. Jeden znamy scenar: presnost sa podstatne zlepsila
+
+Model                         Chyba rychlosti   Chyba tlaku   GPU p99 max
+Plain, 2 000 krokov                 42,88 %        70,92 %       0,502 ms
+Plain, 20 000 krokov                 7,55 %        12,60 %       0,502 ms
+Fourier + PDE, 20 000 krokov         5,02 %         8,06 %       0,657 ms
+Fourier bez PDE, 20 000 krokov       5,11 %         8,14 %       0,654 ms
+
+Chyby su priemery relativnych L2 chyb cez 160 odlozenych casovych
+snimkov rovnakej simulacie harmonics/1/Re_382; kazdy snimok zahrna
+vsetky fluidne bunky. Tlaku sa odstrani lubovolna konstanta po snimkoch.
+Tieto snimky neboli treningove/validacne datove pozorovania; PDE pri
+novych behoch vzorkuje aj priebezny cas v celom povolenom intervale.
+Ide o casovu interpolaciu znameho pripadu, nie novy nezavisly scenar.
+Novy kratky plain kontrolny beh sa lisi od povodneho pilotu v1 aj
+vzorkovanim a tlakovym gauge; preto maju odlisne cisla.
+
+Dlhsi trening pomohol; pri rovnakom rozpocte krokov pomohli aj
+Fourierove priznaky. Rozdiel PDE oproti modelu bez PDE je v tejto
+metriku maly: priblizne 0,09 percentneho bodu v rychlosti a 0,08 v tlaku.
+Z jedneho seedu to nie je dokaz statisticky vyznamneho prinosu fyziky.
+Cas treningu PDE Fourier bol 157,23 s, bez PDE 17,35 s; samotny pocet
+krokov preto NIE JE rovnaky vypoctovy naklad. LLM porovnanie bude
+musiet tento rozdiel transparentne zaznamenavat a kontrolovat.
+
+GPU p99 znamena najvyssie p99 z troch kol po 200 predikciach celej
+1024x256 mriezky na zahriatom GPU. Fourier+PDE dosiahol p99 prenosu
+CPU->GPU->CPU priblizne 1,019 ms na 30 vzorkach. Nezahrna vykreslovanie
+ani spracovanie novej geometrie. Su to rozdielne casove metriky.
+
+2. Spolocny model: rychly, ale prenos na nove geometrie nefunguje
+
+Scenar                         Chyba rychlosti   Chyba tlaku
+harmonics/87/Re_292                 70,36 %         86,78 %
+harmonics/87/Re_838                 77,52 %         93,45 %
+nurbs/22/Re_164                     35,87 %         56,93 %
+nurbs/22/Re_977                     53,60 %         82,47 %
+skelenton/36/Re_209                 39,96 %         57,55 %
+skelenton/36/Re_867                 47,83 %         76,95 %
+
+Kazdy z tychto scenarov ma vyhodnotenych vsetkych 240 snimkov na celej
+fluidnej mriezke. Ziadna z troch validacnych geometrii nebola v treningu.
+Hlavny test zo zmrazeneho splitu zostal zavrety.
+Priemer tychto siestich scenarov je priblizne 54,19 % U a 75,69 % p.
+Vybrany checkpoint pochadza z kroku 3 000, hoci trening dobehol 50 000
+krokov. Dalsi trening teda sam o sebe nezlepsoval pouzitu validaciu.
+Tento vysledok zatial neurcuje pricinu; maly pocet trenovacich geometrii,
+reprezentacia geometrie a ucenie samotneho priebehu treba rozlisit.
+
+Spolocny model dosiahol najhorsie GPU p99 1,092 ms; encoder geometrie
+p99 0,202 ms a host-to-host p99 1,841 ms (ine vzorkovanie a iny rozsah).
+Presnost nesplna vopred stanovene pracovne ciele 10 % U / 20 % p.
+Model preto ZATIAL NIE JE HOTOVY NA HLAVNE LLM POROVNANIE.
+
+3. Nasledna dokoncena diagnostika a dalsi spusteny krok
+
+Diagnosticka GPU uloha 139229 dokoncila porovnanie najlepsieho a posledneho checkpointu
+na vsetkych 11 treningovych aj 6 validacnych scenaroch bez zmeny vah.
+Tym sme rozlisili ucenie treningovych pripadov od prenosu na nove
+geometrie. Zaroven vyhodnotila fyzikalne
+rezidua na vnutornych fluidnych bodoch a porovna ich s konecnymi
+diferenciami referencie; zahrnie aj Fourier model s PDE a bez PDE.
+Analyticka kontrola tohto nezavisleho FD vypoctu presla pre 3 Re.
+139230 archivovala skutocne vyuzitie zdrojov.
+Nove zdroje a vstupne checkpointy su zmrazene cez diagnostic_freeze_v1.
+
+                     Train U    Train p     Validation U    Validation p
+Checkpoint 3 000      46,76 %    71,40 %          54,19 %         75,69 %
+Checkpoint 50 000     13,47 %    26,32 %          75,69 %         96,24 %
+
+Model sa teda uci treningove pripady, ale nezovseobecnuje ich dobre na
+tri odlisne geometrie tejto vyvojovej validacie. Ani na treningu este
+nesplna priemerne vyvojove ciele. Preto nasleduje rozsirena sada
+a kontrolovane porovnanie dvoch kapacit siete, nie iba dlhsie opakovanie
+rovnakeho maleho treningu.
+
+NS reziduum jednopripadoveho Fourier/PDE modelu je mensie nez bez PDE,
+ale stale vyssie nez diskretna konzistencia CFD referencie. Napriklad
+momentum RMS delene referencnou skalou clenov: PDE 0,1580, bez PDE
+0,1780, samotna referencia pri FD 0,0276. To je ina metrika nez chyba
+rychlosti a nie dokaz presneho splnenia rovnic. Prehlad je ulozeny
+v diagnostika_139229/summary.json. Diagnostika spotrebovala skutocnych
+204 GPU*s a 816 core*s podla Slurmu.
+
+Nova verzia v3 ma 69 treningovych scenarov na 36 geometriach a tych
+istych 6 validacnych scenarov na 3 geometriach. Porovna sirku 96 a 192,
+rovnaku hlbku 4 a ostatne nastavenia na rovnakych datach; 300 000 krokov
+na model. Zmena oproti v2 zahŕna aj primerane dlhsi trening, preto nie
+je cistym izolovanym experimentom iba o pocte dat. Hlavny test ostava
+nedotknuty. 139231 bezi priprava, po nej 139232 oba treningy;
+139233/139234 uchovaju skutocne scheduler zdroje.
+
+4. Skutocne zdroje a dokazove subory
+
+Priprava 139134: 884 s na 2 CPU = 1 768 core*s, 0 GPU*s.
+Treningova uloha 139135: 838 s, 4 CPU a 1 GPU = 3 352 core*s a
+838 GPU*s (priblizne 0,233 GPU*h). Su to skutocne scheduler zaznamy,
+nie odhad buducich nakladov. Predosly neuspesny import je samostatne
+zdokumentovany; nepouzila sa pri nom GPU alokacia.
+
+Lokalne podpriecinky ablations/ a conditional/ obsahuju povodne male
+summary.json, history.json, per_frame_accuracy.json, config.json a
+normalization.json. Scheduler/ obsahuje skutocne uctovanie. Vahy .pt
+a velke referencne polia sa do PC nestahovali.

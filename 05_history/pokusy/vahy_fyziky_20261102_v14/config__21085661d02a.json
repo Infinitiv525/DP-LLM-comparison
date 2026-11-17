@@ -1,0 +1,26 @@
+{
+  "name": "pde_0p01",
+  "model_kind": "baseline",
+  "train_count": 3,
+  "state_conditioning": true,
+  "width": 192,
+  "depth": 4,
+  "latent": 32,
+  "frequencies": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0
+  ],
+  "seed": 20261102,
+  "updates": 30000,
+  "lr": 3e-05,
+  "warmup": -1000,
+  "batch": 2048,
+  "collocation": 256,
+  "assess_every": 5000,
+  "pde_weight": 0.01,
+  "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_own_conditioning_20261101_v13/training/140676/baseline_3train/best.pt",
+  "warm_start_sha256": "62123717b4e9cd1f9a06ef65a149bf1725a475abafa425c034f56e47ade4be24"
+}

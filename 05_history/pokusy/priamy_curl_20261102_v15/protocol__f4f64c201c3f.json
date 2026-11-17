@@ -1,0 +1,68 @@
+{
+  "status": "DIRECT_CURL_REPRESENTATION_PROTOCOL_FROZEN",
+  "candidates": [
+    {
+      "name": "direct_primitive",
+      "representation": "primitive",
+      "train_count": 3,
+      "state_conditioning": true,
+      "width": 192,
+      "depth": 4,
+      "latent": 32,
+      "frequencies": [
+        1.0,
+        2.0,
+        4.0,
+        8.0,
+        16.0
+      ],
+      "seed": 20261102,
+      "updates": 150000,
+      "lr": 0.0003,
+      "warmup": 1000,
+      "batch": 2048,
+      "collocation": 256,
+      "assess_every": 15000
+    },
+    {
+      "name": "direct_curl",
+      "representation": "curl",
+      "train_count": 3,
+      "state_conditioning": true,
+      "width": 192,
+      "depth": 4,
+      "latent": 32,
+      "frequencies": [
+        1.0,
+        2.0,
+        4.0,
+        8.0,
+        16.0
+      ],
+      "seed": 20261102,
+      "updates": 150000,
+      "lr": 0.0003,
+      "warmup": 1000,
+      "batch": 2048,
+      "collocation": 256,
+      "assess_every": 15000
+    }
+  ],
+  "question": "Can direct absolute-time curl increments retain accurate3TRAINreconstruction while preserving initial interiorFDdivergence?",
+  "representation": "Same StatePINNv4trunk/CNN/FF/time normalization. Primitive outputs3scaled corrections;curl outputspsi andpressure. vel=currentKnownPrefixUV+(1-exp(-t))*curl(psi),p=currentKnownPrefixP+(1-exp(-t))*pressureCorrection.",
+  "initial": "Freshtraining, same seed/sharedtrunk initialization; lasthead weights/biaszero forBOTH so identical initial persistence predictions. No unfair loading traineduvphead into mismatchedpsihead.",
+  "comparison": "Same input/seed/case+frame schedules/budget/losses, head count2vs3 differs; representation comparison, not exact parameter match or proof only recurrence caused oldfailures.",
+  "derivative_contract": "Training data sparseFDpsi atneighbors exactly matches fullgrid curl including one-sidedcropedges; continuousPDE uses physicalautograd including thirdpsi derivatives and initialbicubicfeatures. OnlyONEtime perfullgridquery.",
+  "guarantee": "Divergence of increment vanishes on erodedfluidinterior under commutingFD, preserving nonzero initialCFDdiv. Solidmask can disturb adjacentstencils; no wholeboundary/momentum guarantee. No geometrytaper added, BC remains same softpenalty. Crop not wall/periodic.",
+  "training": "Same3TRAINharmonics1/Re382,nurbs11/Re107,skelenton57/Re168,150kupdates50k/case,Adam3e-4cosine1.5e-5,clip1,data/trainStd,PDE.01,BC.01,warm1000/ramp1000.",
+  "inputs": "Always knownprefix2,3+geometry+Re+time. Future4..241TRAINlabels losses only,dt.05solverunit. No validation/test read,newCFD/download or external templates.",
+  "selection": "Same meanfull238TRAINEu/Ep every15000(first/last),separate mass/accuracy/latencygates; criterion is NOT mass-first so baselinefit is reported honestly. Keep best/last/history/perframe and actualresources.",
+  "physics_metrics": "Full238FDdiv and midpointFDmomentum vs referencefloor. Hard continuity increment is not hard fullNS. Directquerytiming includesgridcurl/context/gauge/mask; notcausalstep.",
+  "smoke": "Bothrepresentations3updates withactivePDE/BCgradients/full238all3TRAINscoring/hardIC; passed kernel tests for sparseFD/corners/hardIC/curlinterior/thirdderivatives beforefreeze.",
+  "main_test_opened": false,
+  "new_CFD": false,
+  "new_downloads": false,
+  "validation_scenarios": 0,
+  "causal_stepper": false,
+  "llm_ready": false
+}

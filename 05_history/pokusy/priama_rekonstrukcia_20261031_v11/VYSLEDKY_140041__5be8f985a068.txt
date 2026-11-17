@@ -1,0 +1,49 @@
+PRIAMA REKONŠTRUKCIA V11 – výsledky140041,31.10.2026
+
+Obe šírky dokončili50kaktualizácií, vybranýupdate50000, všetkých238
+tréningových rámcov navštívených. Celý238časovýpriebeh známehoTRAIN
+harmonics1/Re382, priemernáL2chyba rýchlosti/tlaku:
+šírka96:Eu6.081043%,Ep10.769438%,directqueryp991.493054ms.
+šírka192:Eu2.944015%,Ep4.794671%,directqueryp992.888473ms.
+Tlak po odstránení konštanty. Žiadne zlyhanieguardu pri záverečnomscoringu.
+
+ČO TO ZNAMENÁ
+Aktuálna prefix-conditionedrodina dokáže známy priebeh presne opísať,
+ak dostane rovnaké úvodné stavy2,3 a relatívnyčas. Oproti stepperovým
+desiatkampercent je táto rekonštrukcia podstatne presnejšia. Nie je to
+čistý dôkaz, že jedinou príčinou bol autoregresívnydrift: mení sa tiež
+reprezentácia primitive/curl, škálovanie dataloss a časová formulácia.
+Skorší single-casecoordinatePINN~5%U/8%p zostáva relevantný precedent.
+
+ČO TO NEZNAMENÁ
+Model bol učený a vybraný na tej istej známejTRAINtrajektórii. Nie je
+nezávisle overený na novej geometrii/prúdení a nie je to reťazený
+simulačnýkrok. Čas2.89ms je PRIAMY DOTAZ NA POLE PRE ZADANÉt,
+nie preukázané splnenie pôvodného5mscausalstepcieľa.
+MeaninteriorFDdivRMS96=.169748871,192=.106723381, oproti predchádzajúcemu
+inžinierskemumasslimitu.043538913 by oba boli nadlimitom. Nie je preto
+splnená celková fyzikálna kvalita. V11selekcia bola iba meanEu/Ep, nie
+massgate. Zachovaťtento rozdiel, netvrdiť hotovýfyzikálnysimulátor.
+BeznovýchCFD/downloadov/otvoreniamainTest. LLMmainstále nezačal.
+
+AKTUÁLNY CIEĽ A ĎALŠIE ROZHODNUTIE
+Hlavnýcieľ zostáva porovnať prínosLLM pri konfiguráciiPINN pre2D
+časovéprúdenie s meranoupresnosťou/fyzikou/rýchlosťou. Doterajšiebehy
+sú technickývývoj a pozitívnekontroly základu, nie samotnéLLMporovnanie.
+Úspešná rekonštrukcia sa nesmie potichu premenovať na budúciforecast.
+Ďalšíprotokol musí explicitne odlíšiť rekonštrukciu známejtrajektórie,
+priamy časovýforecastnevidenéhocase zprefixu a kauzálnyčasovýstepper.
+Priame časovédotazy majú perspektívnu presnosť naznámomprípade,
+ale treba overiťnezávislégeneralizovanie a fyzikálnerezíduá; stepper
+stále nevyriešený. Nový tréning vtomtokontrolnomkroku nespustený.
+
+INTEGRITA/SPOTREBA/SÚBORY
+140041COMPLETED0:0,140042captureOK,V11freezeOK,frontaprázdna.
+3673GPU*s=1.020278GPU*h,14692core*s vrátane skúšky aassessmentov.
+Pytraining96=1820.79588s,192=1825.05130s. PeakCUDA1146053632/1350241280B.
+BestSHA96:603eab8d5961f8800acc323fb9156288836476eeaafd7c04c281fbf76b01a020
+BestSHA192:0eaf65ebe78dcab0a2b443e41ebe5fcc0e1f2f69bf35557ad26996ac72d7fd74.
+Perun:results/fpo_pinn_direct_probe_20261031_v11/training/140041/.
+LokálnemaléJSON/logy:vysledky_140041/,19súborov53573B,
+overenýSHAzip3d2897961c28f33116d9fb8ec6fe203b05ab5635902a1b92816ff0eb6541c8f8.
+Veľképolia a váhy zostávajúPerun; pôvodnévýsledkyzachované.

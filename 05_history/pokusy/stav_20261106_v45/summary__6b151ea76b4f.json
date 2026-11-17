@@ -1,0 +1,92 @@
+{
+  "status": "PASS",
+  "observed_at": "2026-11-06T16:40:11.098774+01:00",
+  "counts": {
+    "DONE": 219,
+    "RUNNING": 8,
+    "PENDING": 168
+  },
+  "by_kind": {
+    "search": {
+      "DONE": 211,
+      "RUNNING": 6,
+      "PENDING": 23
+    },
+    "retrain": {
+      "DONE": 8,
+      "RUNNING": 2,
+      "PENDING": 140
+    },
+    "fixed": {
+      "PENDING": 5
+    }
+  },
+  "completed_outcomes": {
+    "COMPLETE": 219
+  },
+  "newly_reviewed": 33,
+  "previously_reviewed": 186,
+  "checks_total": 1591,
+  "checks_passed": 1591,
+  "problem_count": 0,
+  "completed_job_accounts": [
+    {
+      "job": "143656",
+      "accounting": {
+        "job": "143656",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "runtime_seconds": 119882,
+        "cpu_count": 32,
+        "gpu_count": 8,
+        "allocated_core_seconds": 3836224,
+        "allocated_gpu_seconds": 959056,
+        "peak_memory_unknown": true,
+        "raw_query_sha256": "1b3e4816e202bf8b9a0fd325373015219ef55d1f80855727cb433097eb320fb2"
+      },
+      "review_status": "LDC_MAIN_BATCH_PARTIAL_PASS",
+      "review_checks": 1959,
+      "review_sha256": "02a21661187efda448668df443a6380e071b5cc7c743ea7f0086f92d289beacb"
+    },
+    {
+      "job": "143684",
+      "accounting": {
+        "job": "143684",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "runtime_seconds": 119137,
+        "cpu_count": 32,
+        "gpu_count": 8,
+        "allocated_core_seconds": 3812384,
+        "allocated_gpu_seconds": 953096,
+        "peak_memory_unknown": true,
+        "raw_query_sha256": "2266d7991542a068c63641dea5fe379d5e7a7c5f8a82d520e1418f4bc3f33d35"
+      },
+      "review_status": "LDC_MAIN_BATCH_PARTIAL_PASS",
+      "review_checks": 1968,
+      "review_sha256": "c7b44f7c1ccea834abb496f4d71ed519550247d587f5c8d3ea291be1664e50ee"
+    }
+  ],
+  "collector": {
+    "group": "group_000",
+    "collector": "144648",
+    "accounted": [
+      "143342",
+      "143656",
+      "143684"
+    ],
+    "waiting": [
+      "144649"
+    ],
+    "main_test_opened": false,
+    "unix": 1793979593.09509
+  },
+  "running_owners": {
+    "144649": 8
+  },
+  "new_training": false,
+  "TEST_opened": false,
+  "larger_network_training": false,
+  "CPU_only": true,
+  "source_sha256": "8d61fe23efd90fcda882e3b2e34d283694b8b889bbe73a3a2d26684e3efabf3c"
+}

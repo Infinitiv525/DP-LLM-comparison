@@ -1,0 +1,118 @@
+{
+  "status": "DEVELOPMENT_TRAINING_EVALUATED",
+  "config": {
+    "seed": 20261030,
+    "width": 64,
+    "depth": 4,
+    "latent": 32,
+    "lr": 0.001,
+    "batch": 2048,
+    "collocation": 256,
+    "warmup": 200,
+    "ramp": 800,
+    "validate_every": 1000,
+    "bc_weight": 0.0,
+    "ic_weight": 0.0,
+    "conditional": false,
+    "pde_weight": 0.01,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "name": "fourier_20000",
+    "steps": 20000
+  },
+  "selected_step": 19000,
+  "best_sampled_validation_score": 0.0645443892569074,
+  "training_process_seconds": 157.23466332815588,
+  "validation_seconds": 0.04165186360478401,
+  "peak_cuda_allocated_bytes": 306799616,
+  "device": "NVIDIA H200",
+  "torch_version": "2.12.0+cu130",
+  "train_scenarios": 1,
+  "validation_scenarios": 0,
+  "accuracy": [
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "role": "heldout_time",
+      "frames": 160,
+      "velocity_relative_l2": 0.05016303786935404,
+      "pressure_relative_l2": 0.08059064037572003
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "role": "train",
+      "frames": 40,
+      "velocity_relative_l2": 0.049461038744458015,
+      "pressure_relative_l2": 0.07912388620952701
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "role": "validation",
+      "frames": 40,
+      "velocity_relative_l2": 0.05001176282389834,
+      "pressure_relative_l2": 0.08031196229630833
+    }
+  ],
+  "latency": {
+    "grid": [
+      1024,
+      256
+    ],
+    "gpu_resident_rounds_ms": [
+      {
+        "p50": 0.6483680009841919,
+        "p95": 0.652238404750824,
+        "p99": 0.6567766636610031
+      },
+      {
+        "p50": 0.6484479904174805,
+        "p95": 0.6530640244483947,
+        "p99": 0.6554582464694977
+      },
+      {
+        "p50": 0.6485120058059692,
+        "p95": 0.6528559744358062,
+        "p99": 0.655695680975914
+      }
+    ],
+    "samples_per_round": 200,
+    "context_gpu_input_ms": {
+      "p50": 0.003919936716556549,
+      "p99": 0.006523858755826953
+    },
+    "host_to_host_ms": {
+      "p50": 0.9386502206325531,
+      "p99": 1.0187991708517075
+    },
+    "context_samples": 30,
+    "includes_rendering": false,
+    "includes_geometry_preprocessing": false,
+    "warmed_gpu": true,
+    "batch_scenarios": 1,
+    "timing_clock": "CUDA events for GPU; perf_counter+synchronize for transfers"
+  },
+  "checkpoint_sha256": "bd7335f76a7f573f87c9b8b4b885c30ac997cebbec8884a8965cc21e4713c6cc",
+  "provisional_engineering_gate": {
+    "accuracy_pass": true,
+    "gpu_latency_pass": true,
+    "eligible_for_multi_seed_confirmation": false,
+    "thresholds": {
+      "velocity": 0.1,
+      "pressure": 0.2,
+      "gpu_p99_ms": 5
+    }
+  },
+  "independent_main_test_opened": false,
+  "temporal_interpolation_only": true,
+  "llm_comparison_ready": false,
+  "limitations": [
+    "Data-assisted coordinate reconstruction, not causal rollout",
+    "Time interval is solver-relative, not SI seconds or physical startup",
+    "Only selected development geometries; not the full 775 training scenarios",
+    "Readiness needs additional seeds, residual audit and protocol freeze"
+  ]
+}

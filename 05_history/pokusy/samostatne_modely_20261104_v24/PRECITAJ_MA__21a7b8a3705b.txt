@@ -1,0 +1,89 @@
+AKTUALIZÁCIA 04.11.2026 — TENTO TRÉNING JE ZASTAVENÝ
+
+Na výslovný pokyn používateľa boli úlohy 143066 a 143067 zrušené.
+Prechádzame na jeden spoločný PINN pre ustálené LDC prúdenie.
+V24 je nedokončený experiment; priebežné výsledky sa nepovažujú za
+finálne závery. Váhy a veľké polia zostávajú na Perune. Malé záznamy:
+zastavene_20261104/ a cancelled_20261104_small.zip. Účtovanie zachované.
+Aktuálny smer je opísaný v susednom priečinku ustalene_ldc_20261104_v25.
+
+PÔVODNÝ OPIS PRED ZASTAVENÍM
+JEDNA SIMULÁCIA — JEDEN PINN: V24, 04.11.2026
+
+Prečo sme prešli na tento postup
+Rozšírenie spoločného modelu z 2 na 20 vstupných snímok nevyriešilo
+presnosť. Používateľ vopred povolil tento záložný postup, preto sme
+prešli na tri samostatne trénované modely pre tri existujúce simulácie.
+Ide o pilot pred porovnávaním konfigurácií navrhnutých LLM.
+
+Čo modeluje PINN
+Model má známy počiatočný stav zo snímok 2 a 3, geometriu a Reynoldsovo
+číslo. Po tréningu prijme polohu a čas a vypočíta rýchlosť a tlak.
+Učí sa z pozorovaní počas dostupného priebehu aj z fyzikálnych rovníc.
+Je to rekonštrukcia a časová interpolácia konkrétnej simulácie.
+Nejde o predpoveď úplne novej simulácie bez ďalšieho tréningu.
+5 ms je cieľ výpočtu celého poľa z už natrenovaného modelu.
+
+Tri prípady
+1. harmonics/1, Re382
+2. nurbs/11, Re107
+3. skelenton/57, Re168
+Všetky sú z už dostupnej pôvodnej TRAIN skupiny. Žiadne nové CFD ani
+sťahovanie datasetov, pôvodných 6 VAL a hlavný TEST v tomto pilote
+nepoužívame. Každý prípad má vlastnú novú sieť, optimalizátor a seed.
+Neprenášame váhy neúspešného spoločného modelu.
+
+Ako overíme presnosť
+Z 238 cieľových snímok 4 až 241 v každej simulácii je presne:
+160 snímok na tréning; 39 na výber checkpointu; 39 na následný audit.
+Rozdelenie je pevné podľa j=číslo snímky-4: j%6<4 tréning, j%6=4
+validácia, j%6=5 audit. Tréning obsahuje oba konce časového intervalu.
+Audit preto kontroluje interpoláciu medzi naučenými časmi.
+
+Validačné a auditné cieľové polia nevstupujú do učenia ani normalizácie.
+Na GPU sa načítajú iba tréningové cieľové snímky a známy úvodný stav.
+Normalizácia sa vypočíta pre každý prípad iba zo 160 tréningových snímok
+a buniek tekutiny. Starý spoločný normalizér nepoužijeme, lebo jeho
+štatistiky obsahovali aj tieto teraz vyhradené časy.
+
+Checkpoint sa vyberá iba podľa 39 validačných snímok. Po skončení sa
+vybraný model raz vyhodnotí na celom priebehu; z tých istých výsledkov
+sa oddelene vypočíta skóre 39 auditných snímok. Audit teda neovplyvní
+výber modelu. Priemerná chyba cez všetkých 238 snímok je len opisná,
+pretože obsahuje veľa tréningových časov.
+
+Model a tréning
+Používame náš vlastný PINN V15 s výstupmi prúdová funkcia a tlak,
+šírkou 192 a štyrmi skrytými vrstvami. Počiatočný stav je poskytnutý
+a konštrukčne zachovaný. Tréning zahŕňa chybu dát, Navierove–Stokesove
+rezíduá a podmienku na prekážke. Hranice výrezu nie sú steny.
+Každý model dostane 60 000 aktualizácií, Adam3e-4 s postupným znížením
+na1.5e-5. Kolokačné body fyziky môžu byť v celom časovom intervale,
+pretože na nich používame rovnice, nie vyhradené cieľové hodnoty.
+
+Pri hodnotení fyziky vždy porovnávame susedné originálne časy s odstupom
+0,05, aj keď sa validačné snímky vyberajú redšie. Ukladáme tiež rovnaké
+rezíduum na referenčných dátach. Zachovanie divergencie samo nezaručuje
+správnosť všetkých rovníc a hraníc.
+
+Čo musí pilot splniť
+Na každom z troch prípadov osobitne majú validačné aj auditné snímky
+dosiahnuť priemernú chybu rýchlosti do10 % a tlaku do20 %. Overíme aj
+hmotu a p99 času celého poľa do5 ms. Tri prípady sú overenie uskutočniteľnosti,
+nie finálny štatistický záver o LLM.
+
+Úlohy a uchovanie
+143066: modely prípadov0a1 postupne; účtovanie143068.
+143067: model prípadu2; účtovanie143069.
+Pred plným tréningom každý pracovník vykoná testy, natívne meranie
+rýchlosti a krátky tréning s3aktualizáciami. Auditné ciele sa pri ňom
+neotvárajú. Plný tréning sa spustí až po úspešnej skúške.
+Uchovávame protokol, delenie snímok, normalizáciu, priebeh strát,
+best/last váhy, stav optimalizátora a náhodného generátora, výsledky
+po snímkach a skutočnú spotrebu zdrojov. Váhy a veľké polia iba Perun.
+
+Overený stav: obe úlohy bežia na H200 gpu03. Všetky krátke tréningy
+skončili úspešne: worker0 prípady0a1, worker1 prípad2. Merania p99
+pred tréningom sú 2,94 / 3,41 / 3,38 ms na celé pole. Kontroly zahŕňajú
+5 testov delenia dát, 2 testy ochrany auditu a 3 testy pôvodného modelu.
+Plný tréning už začal na prípadoch0a2. Presnosť po tréningu ešte nepoznáme.

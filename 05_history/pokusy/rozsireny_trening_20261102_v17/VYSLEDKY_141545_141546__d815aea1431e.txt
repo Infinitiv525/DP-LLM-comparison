@@ -1,0 +1,91 @@
+V17 – VÝSLEDKY ŠIRŠIEHO TRÉNINGU, OVERENÉ 03.11.2026
+
+Obe úlohy141545/141546 COMPLETED, exit0:0. Účtovanie141547/141548
+uložené, zmrazené zdroje/protokol overené, fronta pri kontrole prázdna.
+Obe dokončili600000aktualizácií,8695/8696naTRAINsimuláciu, všetkých
+238cieľovýchsnímok navštívených. Zhoduje sa SHApostupnosticase/frame:
+2ee442d250e24361e7883901c601081879fa1f3768049688829cdf3fda7ebf54
+Nie je to samostatný hash všetkých priestorových vzoriek.
+
+HLAVNÝ VÝSLEDOK – 6VAL, priemer po238snímkach a potom po simuláciách
+                            pôvodnýu/v/p       novýpsi/p
+Chyba rýchlosti                37,111 %          39,427 %
+Chyba tlaku                    55,118 %          55,066 %
+Počet prípadov s presnosťou     0/6               0/6
+Kontrola zachovania hmoty       0/6               6/6
+Najvyššiequeryp99               3,380ms           3,605ms
+Priemer vnútornáFDdivRMS        0,42792054        0,01625861
+Priemer FDmomentumloss          4,46406944        12,28724156
+
+Oba vybrané checkpointy sú z update100000, podľa rovnakého priemeru
+chýbU/p na6vývojovýchVAL. Nepoužívame automaticky posledné váhy.
+Novýcurl nie je celkovo presnejší: chybaU vyššia, tlak prakticky
+rovnaký. Zlepšená kontinuita nezaručuje správnu hybnosť ani polia.
+FDmomentumloss nového modelu je väčší než pri pôvodnom. Referenčné
+hodnoty sú podľa prípadu približne0,00254..0,02550; oba modely horšie.
+Nie štatisticky dokázané poradie metód, zatiaľ iba jeden seed.
+
+PODĽA PRÍPADOV – priemerná chybaU/p vpercentách, oba selected100k
+                             pôvodnýu/v/p        novýpsi/p
+harmonics87/Re292             43,80 / 57,57      61,37 / 68,08
+harmonics87/Re838             67,52 / 82,51      67,72 / 82,88
+nurbs22/Re164                 11,54 / 29,07      11,73 / 26,79
+nurbs22/Re977                 51,67 / 71,10      59,58 / 73,79
+skelenton36/Re209             13,27 / 29,47      12,65 / 24,49
+skelenton36/Re867             34,87 / 60,99      23,52 / 54,38
+
+ČO UKÁZAL PRIEBEH UČENIA
+Na3sledovanýchTRAINprípadoch sa presnosť ďalej zlepšovala:
+                         update100k               update600k
+pôvodnýmeanU/p           13,10% / 27,23%           7,44% / 17,33%
+novýmeanU/p              11,93% / 28,17%           6,34% / 15,07%
+Na6VAL sa však táto výhoda neprejavila:
+pôvodnýmeanU/p           37,11% / 55,12%          38,97% / 56,08%
+novýmeanU/p              39,43% / 55,07%          40,43% / 56,99%
+To je dôkaz rozdielneho vývoja monitorovanej TRAINpresnosti aVAL,
+nie dôkaz jedinej konkrétnej príčiny. TRAINmonitory sú iba3prípady,
+nie audit všetkých69. Dlhší rovnaký tréning zatiaľ nie je podložený.
+
+CHYBA ZÁVISÍ AJ OD ČASU – selectedcheckpoint, priemer cez6VAL
+Novýpsi/p pri prvom budúcom čase0.05: U1,77% / p3,13%.
+Pri čase0.50: U12,85% / p24,27%.
+Pri poslednom čase11.90: U55,58% / p70,63%.
+Ide o relatívny čas solvera od pôvodnej snímky3, nie potvrdené sekundy.
+Nejde o reťazenie vlastných stavov: model odpovedá priamo zo snímok2,3
+na zadaný čas. Zhoršovanie s časom preto nemožno automaticky nazvať
+akumuláciou chyby autoregresívnych krokov.
+
+VZŤAH K V16
+Oproti modelom naučeným na3TRAIN sa výsledky širšieho tréningu
+zlepšili (napr.curl zU82,49%/p104,52% na39,43%/55,07%). Menil sa však
+celý tréningový rozpočet a rozdelenie aktualizácií, preto to nie je
+izolovaný dôkaz účinku samotného počtu tréningových simulácií.
+
+HRANICE ZÁVERU
+Stále ide o69TRAIN/6opakovane používaných vývojovýchVAL. BudúceVAL
+polia iba CPUscorer/selection, nie vstupy alebo tréningovýgradient.
+HlavnýTEST zatvorený, model zatiaľ nepripravený pre hlavný LLMexperiment.
+Kontrola hmoty len na stenčenej vnútornej fluidnejmaske, nie celáhranica.
+5ms je priamyquerycelého1024x256poľa naH200, vstupyGPU, vrátane
+context/curl/gauge/mask, bezCPUprenosu/renderingu a20warm-upqueries.
+Nie kauzálnykrok ani reakcia na zmenu prekážky počasbehu.
+
+SKUTOČNÉ ZDROJE A DOKUMENTY
+Pôvodnáúloha22119GPU*s, nová61349GPU*s. Spolu83468GPU*s
+(23,186GPUhodín),333872pridelenýchCPU*s(92,742corehodín).
+472malýchJSON/logov + graf a jeho proveniencia v archíve5374000B.
+SHA256 po stiahnutí overený:
+f2464d70338321485fb25223563158f1929bf61bf15c00f6a0bdbc10823ada2a
+Lokálne:vysledky_141545_141546/. Veľképolia a všetkyváhy ibaPerun.
+Graf: vysledky_141545_141546/results/fpo_pinn_multicurl_20261102_v17/
+review_20261103/learning_curves.png. Plné súhrnné čísla analysis.json,
+kontrolnéSHA a zdroj grafu provenance.json; graf vizuálne overený.
+
+ĎALŠÍ POSTUP
+Najprv cielený audit príčiny, ažpotom ďalší tréning. Overiť rozdiel
+kontinuálnejPDE použitej pri tréningu a fyziky reálneho FDgridvýstupu
+na rovnakých miestach/časoch; oddelene porovnať známe a odlišné
+geometrie a krátky/dlhý horizont. Rozdiel diskretizácií aj obmedzené
+podmienenie geometriou sú hypotézy, zatiaľ nie dokázané príčiny.
+Nezvyšovať naslepo iba postih fyziky alebo početaktualizácií.
+V tejto kontrole žiadny ďalšíGPUtréning/audit nespustený.

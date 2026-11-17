@@ -1,0 +1,94 @@
+POROVNANIE GRADIENTU8 A32 – V8,31.10.2026
+
+AKTUÁLNE PO DOKONČENÍ
+139944COMPLETED0:0,matched_execution=True. Obe vetvy200epochov,
+1600aktualizácií, zhodný samplingtrace a spoločnépočiatočnéváhy.
+Celý238forecast:gradient8 U52.57%/p66.87%,gradient32 U51.87%/p66.80%.
+Rozdielmalý, žiadnyaccuracygatepass. Obe držia vnútornúdivergenciu
+a5mslimit(actualp99~1.94ms). Podrobnosti:VYSLEDKY_139944.txt.
+Frontaprázdna; ďalšívýpočet zatiaľ nespustený. Pôvodný plán nižšie
+zostáva zachovaný ako história, nieaktuálnebežiaci tréning.
+
+ČO ROBÍME
+Po súhlase používateľa bol odoslaný pilot139944, účtovanie139945.
+Porovnávame rovnaký variantD s prúdovou funkciou. Obe vetvy začínajú
+z toho istého posledného checkpointuV7 a líšia sa iba tým, či gradient
+prechádza cez8 alebo32vlastných krokov. Presnosť nového pilotu neznáma.
+
+PREČO TO NIE JE LEN PREDĹŽENIE PREDOŠLÉHO TRÉNINGU
+V7 sa učil na celých238krokoch, ale gradient sa prerušoval po8krokoch.
+Teraz zisťujeme, či zohľadnenie dlhších následkov zmeny váh pomôže.
+Aby sme nemenili dve veci naraz, V OBOCH VETVÁCH sa váhy menia až
+po32predikovaných krokoch. Kratšia vetva zhromaždí chyby štyroch
+8krokových blokov a urobí jednu aktualizáciu. Dlhšia vetva urobí rovnaké
+výpočty, ale prepojí aj ich gradienty. Posledné aktualizačné okno má14
+krokov v oboch vetvách. Toto je nové porovnanie8vs32; rozdiel oproti
+V7 zahŕňa aj inú frekvenciu aktualizácií a rýchlosť učenia.
+
+ROVNAKÉ PODMIENKY
+Jeden známy pôvodnýTRAIN harmonics/1/Re382, úvodné snímky2,3,
+ciele4..241, dt0.05solverových jednotiek. V každom priebehu potom iba
+vlastné predikcie, bez dosadzovania neskorších pravdivých stavov.
+TRAINbudúce polia sú iba ciele chyby. Test/validácia sa neotvárajú.
+Rovnaké váhy modelu na začiatku, geometria,taper,normalizácia,seed,
+straty, tréningový plán a generovanie kolokačných bodov.
+200plných238krokových tréningových priebehov na vetvu, teda47600
+predikovaných krokov,1600aktualizácií a6000fyzikálnych blokov pri
+bezchybnom dokončení. Adam sa resetuje rovnako, lr1e-5 až1e-6,
+gradientclip0.25. Výstupné polia sa neorezávajú.
+
+FYZIKÁLNE STRATY
+AkoV6/V7: dáta škálované0.05*trainStd, kontinuálneNS.01, obstacleBC.01,
+ownFDhybnosť.1 a kontinuita.1. V OBOCH vetvách sa kontinuálna fyzika
+vzorkuje na rovnakých8krokových začiatkoch. Straty jednotlivých blokov
+sa vážia počtom ich krokov. Rozdiel je v prenose gradientu, nie v počte
+kolokačných bodov. Kontinuita curlprírastku platí iba vnútri oblasti,
+nie ako záruka správnej hybnosti alebo celých hraníc prekážky.
+
+OVERITEĽNOSŤ POROVNANIA
+Zaznamenávame stav generátora náhodných bodov pred a po každom
+aktualizačnom okne. Kontrolné súčty celých samplingtrace musia byť
+zhodné. Pre matched_execution=True sa vyžaduje aj rovnaký warmstartSHA,
+všetky plánované aktualizácie a všetky dokončené priebehy. Ak niektorá
+vetva numericky zlyhá, toto obmedzenie sa vykáže; nemožno ju potichu
+prezentovať ako rovnako dokončené porovnanie.
+
+HODNOTENIE A UCHOVANIE
+Pred učením, po prvom priebehu, každých10priebehov a na konci vždy
+všetkých238krokov z2,3 so zmrazenými váhami. Uchová sa aj chyba každého
+kroku, divergencia, fyzikálne rezíduá, tlak a rýchlosť. Výbercheckpointu
+zostáva massgate→priemerEu/Ep a nevracia prebiehajúci tréning späť.
+PrahyU10%/p20%/p99GPU5ms sa nemenia; meria sa aj krok sFDmonitorom.
+Uložené best/last/continuation, optimizer/RNG, gradientové normy pred
+clipom a počtyclipov, celá tréningová história, samplingtrace a účtovanie.
+Zlyhanie signálu/nonfinite sa uloží a ukončí príslušnýepoch; neplatný
+gradient ukončí príslušnú vetvu. Chyby sa nenahrádzajú referenciou.
+
+KONTROLY PRED SPUSTENÍM
+5nových syntetických testov prešlo: presne rovnaké dopredné hodnoty
+a strata, analyticky odlišný správny gradient8vs32, neúplné14krokové
+okno, oddelenie grafu medzi aktualizáciami, neplatné parametre.
+SyntaxAST a bash-n prešli, rodičovskýV7freeze overený bezozmeny.
+Novýfreeze zafixoval zdroje, protokol, vstupy aj spoločné počiatočné váhy.
+GPU úloha najprv zopakuje9+4+5kontrol a vykoná46krokovú skúšku
+32+14 pri oboch gradientoch. Vyžaduje zhodné samplingtrace a2/2
+finitegradientaktualizácie na vetvu, až potom spustí200priebehov.
+
+OBMEDZENIA
+Jeden seed a jeden známyTRAINprípad, použitý aj na výber checkpointu.
+Nie nezávislá validácia, štatisticky významný záver alebo LLMbenchmark.
+Môže to pomôcť, ale nie je to záruka požadovanej presnosti.
+Žiadne nové CFD, sťahovanie dát alebo otváranie hlavného testu.
+Perun:/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8
+Veľké dáta a váhy zostávajú naPerune; lokálne iba maléJSON a texty.
+
+POTVRDENIE ŠTARTU
+139944RUNNING na gpu11. GPU9+4+5kontrol prešlo. Skúška SMOKE_COMPLETE,
+matched_execution=True: obe vetvy46krokov a2/2finiteaktualizácie,
+úplne zhodnýsamplingtraceSHA256
+ee45fbb3afcd2ecba56936c28c97579ed4fd0a49ad3edfbeefb2ec940d2558ba.
+PeakCUDA skúšky8vetva16553531904B,32vetva16560345600B.
+Obe začali z rovnakého modelu so skóre0.6034376562; nehodnotíme tým
+výslednú presnosť. Plný tréning už začalD_gradient_08,32vetva nasleduje
+v tej istej úlohe. Malé protokol/freezereceipt/submission a skúšobný
+summaryJSON sú lokálne v zaznamy/. Výsledky plného porovnania neznáme.

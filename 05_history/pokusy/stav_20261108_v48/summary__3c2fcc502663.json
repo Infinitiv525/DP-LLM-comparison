@@ -1,0 +1,198 @@
+{
+  "status": "PASS",
+  "at": "2026-11-08T00:06:13.594407+01:00",
+  "counts": {
+    "DONE": 387,
+    "RUNNING": 8
+  },
+  "by_kind": {
+    "search": {
+      "DONE": 240
+    },
+    "retrain": {
+      "DONE": 147,
+      "RUNNING": 3
+    },
+    "fixed": {
+      "RUNNING": 5
+    }
+  },
+  "previous_reviewed": 355,
+  "new_reviewed": 32,
+  "checks_total": 1645,
+  "checks_passed": 1645,
+  "problems": 0,
+  "completed_job": {
+    "job": "145597",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "runtime_seconds": 14679,
+    "cpu_count": 32,
+    "gpu_count": 8,
+    "allocated_core_seconds": 469728,
+    "allocated_gpu_seconds": 117432,
+    "peak_memory_unknown": true,
+    "raw_query_sha256": "b68ac7933c446a78636df387b4005d6af78597b2fa826c7ab5a4f01bf413fde3"
+  },
+  "completed_review_checks": 3823,
+  "one_round_records": [
+    {
+      "policy": "At most one original queued attempt per worker",
+      "task": "tpe_r04_k02",
+      "rank": 0,
+      "job": "145597",
+      "stop_reason": "ONE_ATTEMPT_ASSIGNED",
+      "operational_freeze_sha256": "10fd1f0a9a4ecbbddc33e959db9264739978adc865960bfb1bc3da0730fa49f6",
+      "main_test_opened": false
+    },
+    {
+      "policy": "At most one original queued attempt per worker",
+      "task": "random_r04_k02",
+      "rank": 1,
+      "job": "145597",
+      "stop_reason": "ONE_ATTEMPT_ASSIGNED",
+      "operational_freeze_sha256": "10fd1f0a9a4ecbbddc33e959db9264739978adc865960bfb1bc3da0730fa49f6",
+      "main_test_opened": false
+    },
+    {
+      "policy": "At most one original queued attempt per worker",
+      "task": "granite33_8b_r04_k02",
+      "rank": 2,
+      "job": "145597",
+      "stop_reason": "ONE_ATTEMPT_ASSIGNED",
+      "operational_freeze_sha256": "10fd1f0a9a4ecbbddc33e959db9264739978adc865960bfb1bc3da0730fa49f6",
+      "main_test_opened": false
+    },
+    {
+      "policy": "At most one original queued attempt per worker",
+      "task": "tpe_r04_k01",
+      "rank": 3,
+      "job": "145597",
+      "stop_reason": "ONE_ATTEMPT_ASSIGNED",
+      "operational_freeze_sha256": "10fd1f0a9a4ecbbddc33e959db9264739978adc865960bfb1bc3da0730fa49f6",
+      "main_test_opened": false
+    },
+    {
+      "policy": "At most one original queued attempt per worker",
+      "task": "phi4_mini_r04_k02",
+      "rank": 4,
+      "job": "145597",
+      "stop_reason": "ONE_ATTEMPT_ASSIGNED",
+      "operational_freeze_sha256": "10fd1f0a9a4ecbbddc33e959db9264739978adc865960bfb1bc3da0730fa49f6",
+      "main_test_opened": false
+    },
+    {
+      "policy": "At most one original queued attempt per worker",
+      "task": "qwen3_8b_r04_k03",
+      "rank": 5,
+      "job": "145597",
+      "stop_reason": "ONE_ATTEMPT_ASSIGNED",
+      "operational_freeze_sha256": "10fd1f0a9a4ecbbddc33e959db9264739978adc865960bfb1bc3da0730fa49f6",
+      "main_test_opened": false
+    },
+    {
+      "policy": "At most one original queued attempt per worker",
+      "task": "ministral3_8b_r04_k02",
+      "rank": 6,
+      "job": "145597",
+      "stop_reason": "ONE_ATTEMPT_ASSIGNED",
+      "operational_freeze_sha256": "10fd1f0a9a4ecbbddc33e959db9264739978adc865960bfb1bc3da0730fa49f6",
+      "main_test_opened": false
+    },
+    {
+      "policy": "At most one original queued attempt per worker",
+      "task": "qwen3_8b_r04_k02",
+      "rank": 7,
+      "job": "145597",
+      "stop_reason": "ONE_ATTEMPT_ASSIGNED",
+      "operational_freeze_sha256": "10fd1f0a9a4ecbbddc33e959db9264739978adc865960bfb1bc3da0730fa49f6",
+      "main_test_opened": false
+    }
+  ],
+  "live_trainings": [
+    {
+      "id": "granite33_8b_r04_k04",
+      "kind": "retrain",
+      "job": "145176",
+      "seed": 150005,
+      "latest_update": 62400,
+      "equivalent_epoch": 390.0
+    },
+    {
+      "id": "random_r04_k04",
+      "kind": "retrain",
+      "job": "145176",
+      "seed": 150005,
+      "latest_update": 64000,
+      "equivalent_epoch": 400.0
+    },
+    {
+      "id": "tpe_r04_k04",
+      "kind": "retrain",
+      "job": "145176",
+      "seed": 150005,
+      "latest_update": 62400,
+      "equivalent_epoch": 390.0
+    },
+    {
+      "id": "fixed_k00",
+      "kind": "fixed",
+      "job": "145176",
+      "seed": 150001,
+      "latest_update": 59200,
+      "equivalent_epoch": 370.0
+    },
+    {
+      "id": "fixed_k01",
+      "kind": "fixed",
+      "job": "145176",
+      "seed": 150002,
+      "latest_update": 56000,
+      "equivalent_epoch": 350.0
+    },
+    {
+      "id": "fixed_k02",
+      "kind": "fixed",
+      "job": "145176",
+      "seed": 150003,
+      "latest_update": 52800,
+      "equivalent_epoch": 330.0
+    },
+    {
+      "id": "fixed_k03",
+      "kind": "fixed",
+      "job": "145176",
+      "seed": 150004,
+      "latest_update": 51200,
+      "equivalent_epoch": 320.0
+    },
+    {
+      "id": "fixed_k04",
+      "kind": "fixed",
+      "job": "145176",
+      "seed": 150005,
+      "latest_update": 49600,
+      "equivalent_epoch": 310.0
+    }
+  ],
+  "collector": {
+    "group": "group_000",
+    "collector": "145596",
+    "accounted": [
+      "143342",
+      "143656",
+      "143684",
+      "144649",
+      "145597"
+    ],
+    "waiting": [
+      "145176"
+    ],
+    "main_test_opened": false,
+    "unix": 1794092763.1393607
+  },
+  "CPU_only": true,
+  "new_training": false,
+  "TEST_opened": false,
+  "source_sha256": "c06f163e4ca388e122b6a7237ca693aa7033f6d893b17eb6891e8fcdd9247da7"
+}

@@ -1,0 +1,32 @@
+ZAVAZNE PRAVIDLO PRE CASOVE 2D PINN EXPERIMENTY
+Potvrdene pouzivatelom 30. 10. 2026
+
+Vsetky porovnavane PINN modely budu mat poskytnuty rovnaky znamy
+pociatocny stav, respektive rovnaku vstupnu historiu snimok.
+Toto plati pre manualne nastavenia, automaticke baseline aj konfiguracie
+navrhnute ktoroukolvek LLM. LLM konfiguruje PINN; nemeni pravidla
+pristupu k vstupnym a cielovym datam.
+
+Aktualna v4 formulacia:
+- povodne indexy 0 a 1 su vylucene;
+- indexy 2 a 3 su zname vstupne snimky u,v,p;
+- iba neskorsie indexy 4..241 su predikovane a hodnotene;
+- buduce validacne/testovacie polia sa nepouziju na tvorbu vstupov;
+- rovnake rozdelenie scenarov/geometrii a rovnaky vstupny prefix pre
+  vsetky porovnavane metody;
+- vstupny tlak sa centruje iba z hodnot danej znamej vstupnej snimky;
+- statistiky normalizacie sa ucia iba z treningovej sady.
+
+Interval vstupnych snimkov a horizont predikcie musia byt vzdy zapisane
+v zmrazenom protokole pred prislusnym porovnanim. Zmena zadania sa
+zdokumentuje osobitne a nevydava za zhodny predosly experiment.
+
+Historicke v2/v3 behy bez vstupneho stavu sa zachovaju ako vyvojove
+zaznamy. Nezaradia sa medzi rovnocenne hlavne LLM porovnania.
+Po tomto pokyne sa nerozbiehaju dalsie bezstavove experimenty.
+Rozbehnuta pomocna geometry_only_control vetva 139483 bude zastavena;
+jej ciastkove checkpointy/logy aj skutocna spotreba zostanu zachovane.
+Nahradny beh pouzije iba uz pripraveny prefix_conditioned model.
+
+Tento dodatok plati pre nove casove PINN experimenty. Neprepisuje
+historicke zmrazene protokoly/vysledky ani ukonceny 3D steady FNO clanok.

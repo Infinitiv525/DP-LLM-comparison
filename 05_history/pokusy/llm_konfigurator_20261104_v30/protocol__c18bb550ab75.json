@@ -1,0 +1,145 @@
+{
+  "phase": "technical_preflight",
+  "contract_version": 30,
+  "models": [
+    {
+      "label": "qwen3_8b",
+      "repo": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "license": "apache-2.0",
+      "loader": "causal",
+      "disable_thinking": true
+    },
+    {
+      "label": "ministral3_8b",
+      "repo": "mistralai/Ministral-3-8B-Instruct-2512",
+      "revision": "5b26027e7b19eeb4b7352e1fed3926375dd2cb4d",
+      "license": "apache-2.0",
+      "loader": "mistral3_dequantize_fp8"
+    },
+    {
+      "label": "phi4_mini",
+      "repo": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "license": "mit",
+      "loader": "causal"
+    },
+    {
+      "label": "granite33_8b",
+      "repo": "ibm-granite/granite-3.3-8b-instruct",
+      "revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+      "license": "apache-2.0",
+      "loader": "causal",
+      "disable_thinking": true
+    }
+  ],
+  "preparation": "/mnt/project/perun2601449/dp_llm_cfd/results/llm_feasibility/prepare_123299",
+  "versioned_repair": "V27 environment fixed in V28; V29 Qwen/Ministral and both controls passed. Phi omitted fields/added commentary and Granite returned ranges. V30 shares LM Format Enforcer0.11.3 schema decoding across all four models,120-character explanations,complete-JSON stopping and independent numeric validation. Core adapter avoids old optional Transformers import path. PINN/data/search space/scores unchanged; prior attempts preserved.",
+  "prepared_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_pinn_prepare_20261104_v25/prepared.json",
+  "split_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_pinn_prepare_20261104_v25/split.json",
+  "base_model": {
+    "width": 192,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "seed": 20261104,
+    "epochs": 400,
+    "batch_cases": 4,
+    "lr": 0.001,
+    "data_points": 2048,
+    "physics_points": 64,
+    "wall_points_per_side": 16,
+    "body_points": 64,
+    "physics_weight": 0.001,
+    "bc_weight": 0.01,
+    "warmup": 2000,
+    "ramp": 2000,
+    "assess_epochs": 10
+  },
+  "technical_epochs": 2,
+  "training_seed": 270001,
+  "rounds_per_model": 2,
+  "common_start": {
+    "learning_rate": 0.001,
+    "pressure_weight": 1.0,
+    "physics_weight": 0.001,
+    "bc_weight": 0.01,
+    "warmup_fraction": 0.03125
+  },
+  "llm_runtime": {
+    "torch": "2.12.0+cu130",
+    "transformers": "5.20.2",
+    "accelerate": "1.15.0",
+    "huggingface_hub": "2.2.0",
+    "mistral-common": "1.12.0",
+    "optuna": "5.0.0",
+    "lm-format-enforcer": "0.11.3",
+    "interegular": "0.3.3"
+  },
+  "system_prompt": "Choose training settings for one shared steady 2D FlowBench LDC PINN: geometry/Re -> u,v,p. This is a two-epoch technical test, not converged performance evidence. Supplied history is real; no TEST data. Minimize score: mean unweighted validation u/v/p MSE. Other errors and NS/divergence are diagnostics. Loss is TRAIN-std-normalized data MSE (pressure_weight on pressure), plus physics_weight times steady incompressible Navier-Stokes loss (viscosity 1/Re), plus bc_weight times no-slip loss. Fixed architecture,640TRAIN/160VAL,2epochs,seed,batch4,2048data/64PDE/128BC points per case. Adam/cosine; warmup_fraction delays PDE, then fixed 0.03125-fraction ramp. Inference 5ms is a separate fixed-architecture check; it is NOT a training-time or divergence limit. Return ONE COMPACT SINGLE-LINE JSON object only. Exactly five top-level keys: parameters,reason,evidence_ids,expected_effect,risk. No Markdown. parameters has exactly: learning_rate real [0.0001,0.002]; pressure_weight in [0.5,1,2]; physics_weight in [0.0001,0.0003,0.001,0.003,0.01]; bc_weight in [0.001,0.003,0.01,0.03,0.1]; warmup_fraction in [0,0.03125,0.0625]. No other settings. reason,expected_effect,risk are each ONE short string, 1 to 120 characters EACH. Generation is constrained to a JSON schema for all models; choose ONE NUMBER per parameter, never a range object. Use a brief public reason, a hypothesis for expected_effect, and one risk. Do not repeat phrases. evidence_ids is a nonempty list of unique completed history IDs; include latest_required_id. No tools,code,files,internet or fabricated measurements. Duplicate configurations still consume a trial.",
+  "system_prompt_sha256": "90b76b08adcc2e068481217cd7ddf1592f69bda275e53019d3185ce5480ebe86",
+  "generation": {
+    "max_input_tokens": 8192,
+    "max_new_tokens": 512,
+    "max_time_seconds": 120,
+    "max_repairs": 1,
+    "do_sample": true,
+    "temperature": 0.6,
+    "top_p": 0.9,
+    "top_k": 40,
+    "repetition_penalty": 1.1,
+    "seed_policy": "270100+round, same across families; not main independent repetition"
+  },
+  "search_space": {
+    "learning_rate": {
+      "min": 0.0001,
+      "max": 0.002,
+      "scale": "log"
+    },
+    "categories": {
+      "pressure_weight": [
+        0.5,
+        1.0,
+        2.0
+      ],
+      "physics_weight": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01
+      ],
+      "bc_weight": [
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1
+      ],
+      "warmup_fraction": [
+        0.0,
+        0.03125,
+        0.0625
+      ]
+    }
+  },
+  "fixed": "Own V26 shared geometry/Re coordinate streamfunction PINN; same native full-field query. All 640 TRAIN and 160 VAL cases; 200 TEST targets sealed. TRAIN-only normalizer. Batch4, 2048 data/64 PDE/128 BC per case, Adam/cosine/gradient clip1, fixed architecture and no per-case network.",
+  "schedule": "Warmup fraction of exact trial updates; fixed 0.03125 ramp fraction. Two-epoch technical trial320updates means baseline warmup10/ramp10; 400epoch reference would use2000/2000. PDE coefficient remains positive after ramp.",
+  "sampling": "Independent deterministic order/data/PDE/BC RNG streams, sample PDE points even during warmup. Same seed and sample hash across all fresh technical trials. Not source V26 RNG bitwise reproduction.",
+  "fair_budget": "All methods use same five-parameter space and full 2 TRAIN epochs. Checkpoint selected by mean unweighted all-cell u/v/p VAL MSE; pressure gauge/mask. No architecture or epoch proposals; positive physics required. Bad formats have one model repair; no manual parameter changes. Duplicate proposals consume full attempt/resources.",
+  "model_policy": "Pinned local checkpoints with full compute-node SHA checks before use; no network/API. Qwen/Granite thinking disabled. Ministral published FP8 is dequantized to BF16; not recovered original BF16. Public brief explanation is logged, not a hidden reasoning trace.",
+  "pipeline": "One common real baseline trial, then four parallel one-GPU workers. Each worker: proposal1 -> fresh PINN train1 -> actual VAL feedback -> proposal2 citing trial1 -> fresh train2. Worker0 also one actual random ask/train/tell;worker1 one actual TPE ask/train/tell. CPU sampler tests cover the same space. End-to-end review verifies hashes and matching sampler/initial weights.",
+  "resources": "Record prompt/reply/repair/transports, tokens, first-token/generation/load/process wall and CPU, sampled GPU/RSS, PINN peak allocation, actual Slurm allocated GPU/core seconds. Whole 4GPU job allocation includes common-start idle GPUs and worker-tail idle time; never sum child runtimes as total billed allocation.",
+  "timing": "Use frozen V26 full 512x512 benchmark with native input pooling+encoder+MLP+curl+gauge+mask,30warmup200repeat1TRAIN1VAL,p99<=5ms before/after every technical trial. Not host transfer/rendering.",
+  "safety": "No reading main 200 TEST labels, no new CFD/model downloads, no copying large data/weights locally, no edits of frozen V26 or its running job. Two tiny pinned pure-Python format wheels installed in isolated test/runtime directory; existing environments unchanged. Technical two-epoch metrics cannot establish LLM superiority or final accuracy.",
+  "schema_policy": "Same schema and field order for every family. Parameter values are selected by LLM, never repaired by code. Type/category/required-key/120char-length constraints; lr bounds still validated independently. Latest evidence label is grammar-fixed routing metadata, not evidence of semantic reasoning. Log schema hash/setup and all generation overhead.",
+  "main_search_protocol_frozen": false,
+  "main_experiment_started": false,
+  "main_test_opened": false
+}

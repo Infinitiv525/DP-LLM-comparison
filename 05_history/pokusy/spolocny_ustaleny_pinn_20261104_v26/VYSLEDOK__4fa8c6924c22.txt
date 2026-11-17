@@ -1,0 +1,50 @@
+SPOLOČNÝ USTÁLENÝ PINN — VÝSLEDOK PILOTA — 04.11.2026
+
+Úloha 143115 skončila COMPLETED 0:0. Jedna spoločná sieť absolvovala
+400 epoch na všetkých 640 tréningových prípadoch, 64 000 aktualizácií.
+Na všetkých 160 validačných prípadoch sa podľa vopred určenej MSE vybral
+checkpoint z aktualizácie 62 400, teda z epochy 390. Posledná epocha sa
+automaticky nevydáva za najlepší model. TEST (200 prípadov) je uzavretý.
+
+Presnosť vybraného modelu na VAL
+Priemerná relatívna L2 chyba rýchlosti: 2.465 %.
+Priemerná relatívna L2 chyba tlaku: 8.875 %.
+95. percentil chýb medzi prípadmi: rýchlosť 3.493 %,
+tlak 13.226 %.
+Najhorší prípad: rýchlosť 6.290 %,
+tlak 16.566 %.
+Validačné skóre MSE u/v/p na celom poli: 0.000416598904397.
+Chyby pri prekážke sú vyššie: priemer rýchlosti
+7.938 % a tlaku
+20.178 %.
+Nejde o finálny nezávislý test: VAL slúžila na výber checkpointu.
+
+Rýchlosť
+P99 celého poľa na H200: 2,895 a 2,893 ms, limit 5 ms splnený na dvoch
+meraných vstupoch. Každý 30 zahrievacích a 200 meraných opakovaní.
+Zahrnuté spracovanie geometrie aj výpočet rýchlosti, tlaku, masky a
+tlakovej kalibrácie. Vstupy sú už na GPU; prenos a vykresľovanie mimo.
+Nejde o dôkaz p99 na všetkých prípadoch a ľubovoľnom hardvéri.
+
+Kontrola fyziky
+Priemerné mriežkové momentum RMS modelu:
+0.800666; referencia 0.100106.
+Priemerné normalizované momentum rezíduum modelu:
+0.0855985; referencia 0.0159853.
+Divergencia modelu je približne 7.65e-07; nízka
+hodnota je podporená konštrukciou rýchlosti z prúdovej funkcie a sama
+nedokazuje správnosť rovníc hybnosti. Tie model ešte nespĺňa na úrovni
+referenčných dát. Presnosť a rýchlosť vyzerajú použiteľne ako východisko
+porovnávania, ale nevyhlasujeme automaticky úplnú fyzikálnu zhodu.
+Ďalší audit má preveriť okraje, kontinuálny výpočet proti mriežkovému
+a obrázky predikcie/referencie. Model ani prahy sa spätne neupravovali.
+
+Spotreba a uchovanie
+Skutočný pridelený čas 13 175 s na 1 GPU: 3,6597 GPU h;
+4 CPU: 14,6389 core h. Obsahuje krátku úvodnú skúšku a režijný čas.
+Lokálne iba číselné JSON a overený baseline_numeric_receipts.zip;
+veľké váhy, optimalizátor a dátové polia zostávajú na Perune:
+/mnt/project/perun2601449/dp_llm_cfd/results/ldc_shared_pinn_20261104_v26
+Základné súbory v zaznamy/: vysledok_143115.json,
+validacia_160_pripadov_143115.json, rychlost_143115.json,
+accounting_143115.json. Archív navyše obsahuje históriu a všetky VAL tabuľky.

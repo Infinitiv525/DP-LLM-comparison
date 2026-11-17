@@ -1,0 +1,102 @@
+Postupný PINN — známe úvodné snímky a potom vlastné predpovede
+31. 10. 2026
+
+Cieľom zostáva presne predpovedať všetkých 238 budúcich snímok.
+Predošlý model mal lepšie krátke než dlhé predpovede. Nový vývojový
+test preto skúsi postupné modelovanie; úspech zatiaľ nie je potvrdený.
+
+PINN dostane dva stavy prúdenia a predpovie ďalší krok s odstupom 0,05
+v jednotkách solvera. Pri validácii dostane zo skutočných dát iba snímky
+2 a 3. Všetkých ďalších 238 krokov vytvorí z vlastných predpovedí.
+Samostatný hodnotiaci kód číta referencie až po predikcii a neposkytuje
+ich sieti. Geometria a Reynoldsovo číslo sú známe a v scenári pevné.
+
+Sieť má súradnicový MLP, priestorové Fourierove príznaky a CNN opis
+známych stavov. Navierove–Stokesove rovnice sa vyhodnocujú autogradom.
+Lokálny čas siete je 0 až 0,05 pre každý krok. Na jeho začiatku sa
+predikcia rovná známemu aktuálnemu stavu; sieť sa učí opravu jednoduchej
+lineárnej predpovede z dvoch stavov. Viskozita je 1/Re. Okraje výrezu
+nepovažujeme za steny. Netvrdíme potvrdené SI sekundy ani fyzikálny startup.
+
+Trénujeme na rovnakých 69 scenároch s 36 geometriami. Validácia zostáva
+na rovnakých 6 scenároch s troma inými geometriami. Celkové rozdelenie
+kandidátov 775/160/169 sa nemení; hlavný test zostáva zatvorený.
+
+Prvá fáza má 40 000 aktualizácií. Učí jednotlivé prechody medzi známymi
+stavmi TRÉNINGOVÝCH scenárov. Premiešava všetkých 238 prechodov každého
+prípadu a zaznamenáva ich pokrytie. Aktualizácia vzorkuje 4 096 dátových
+a 256 fyzikálnych bodov.
+
+Druhá fáza má 10 000 aktualizácií. Zo známeho tréningového prefixu
+predpovedá štyri ďalšie stavy na celej mriežke, pričom priebežne používa
+vlastné výstupy. Ich chyby porovnáva s tréningovými cieľmi. Fyzikálna
+a okrajová strata sa počíta v prvom intervale každého takého okna.
+Takto tréning zahrnie aj chyby vznikajúce pri retazení predpovedí.
+
+Nastavenia sú pred behom zmrazené: šírka 96, štyri vrstvy, latent 32;
+normalizácia dátovej chyby pomocou tréningovej odchýlky násobenej 0,05;
+váhy PDE aj okrajovej straty 0,01. Pevná počiatočná podmienka nahrádza
+IC penalizáciu. Rýchlosti učenia sú 0,0003 a 0,0001 s cosine schedule.
+Checkpoint vyberá celý 238-krokový vlastný priebeh všetkých 6 validačných
+scenárov. Druhá fáza začína najlepším checkpointom prvej a globálne
+najlepší checkpoint sa zachová aj pri neúspechu dolaďovania.
+
+Hodnotíme celú fluidnú mriežku 1024 × 256 v každej budúcej snímke,
+samostatne po scenároch aj horizontoch 1–10, 11–40, 41–120 a 121–238.
+Baseline zostáva nezmenený posledný známy stav. Ciele 10 % pre rýchlosť,
+20 % pre tlak v každom scenári a GPU p99 najviac 5 ms sa nemenia.
+
+Divergencia sa nesmie vynechať z výsledkov. Neplatné hodnoty alebo
+absolútna veľkosť signálu nad 1 000 zastavia konkrétny priebeh. Uloží
+sa zlyhanie a vopred určená penalizácia skóre 1e6. Predikcie sa neorežú
+ani nenahradia referenciou. Tlak sa centruje iba z vlastnej predpovede.
+Bunky vnútri známej pevnej prekážky sa nulujú podľa geometrie.
+
+Meriame celý GPU krok: aktualizáciu stavových príznakov, ich zmenšený
+opis, encoder, predikciu, tlakovú konštantu a masku prekážky. Použijeme
+tri merania po 200 vzorkách aj časy skutočných krokov každej trajektórie.
+Obe p99 kontroly musia splniť 5 ms. Vstupné tenzory a mriežka už sú na
+GPU; vykresľovanie nie je zahrnuté. Výstup do CPU sa meria osobitne.
+
+Nevznikajú nové CFD dáta ani downloady. Existujúce referencie overí CPU
+pomocou SHA; pred a po načítaní sa kontrolujú aj vlastnosti súborov.
+Tréningové trajektórie budú dočasne vo float32 na H200, pôvodné float64
+súbory sa nemenia. Pri nedostatku pamäte beh skončí jasnou chybou,
+bez tichej zmeny rozlíšenia. Pri validácii GPU dostane iba prefix;
+budúce referencie zostanú u CPU hodnotiaceho kódu. Normalizácia pochádza
+výhradne z pôvodných 69 tréningových prípadov.
+
+Úlohy: 139545 overí súbory. Po nej 139546 vykoná šesť kontrol, krátky
+funkčný smoke oboch tréningových fáz a potom hlavný tréning.
+139547 a 139548 uchovajú skutočnú spotrebu. Smoke je kontrola funkčnosti,
+nie dôkaz presnosti. Protokol, zdroje a registry boli zmrazené pred štartom.
+
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_autoregressive_20261031_v5
+Zatiaľ nejde o potvrdený hotový PINN, porovnanie LLM, nezávislý hlavný
+test ani štatistický záver.
+
+Aktualizácia po funkčnej skúške
+Kontrola SHA všetkých 75 scenárov v úlohe 139545 úspešne skončila.
+139546 sa zastavila ešte pred tréningom na porovnaní čísla lokálneho
+pripojenia disku medzi uzlami. Veľkosť, čas zmeny a identifikátor súboru
+boli rovnaké; lokálne číslo disku sa líšilo. Bola to chyba mojej kontroly,
+nie zmena dát. Spotreba neúspešného GPU pokusu bola 5 GPU sekúnd.
+
+Obnova V5a zachováva model aj všetky tréningové nastavenia. V porovnaní
+medzi uzlami vynechá iba číslo lokálneho pripojenia; SHA a zostávajúce
+kontroly integrity sú zachované. Využije už úspešné SHA overenie,
+nebude zbytočne znova čítať všetky referencie. Staré zdroje a logy
+ostali zachované. Matematické funkcie oboch verzií boli porovnané aj
+automaticky a sú totožné.
+
+Teraz beží úloha 139549; 139550 uchová skutočnú spotrebu. Sedem kontrol
+a celá krátka skúška oboch tréningových fáz už prešli vrátane
+238-krokovej validácie z vlastných predpovedí. To potvrdzuje funkčnosť,
+nie dosiahnutú presnosť. Hlavný beh už načítal tréningové dáta na GPU
+a začal učenie. Prvé priebežné hodnotenie vykonalo všetkých 238 vlastných
+predikcií vo všetkých šiestich validačných scenároch bez runtime chyby.
+Skóre takto skorého checkpointu nie je konečným výsledkom.
+
+Aktuálny Perun priečinok:
+/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_autoregressive_20261031_v5a
+Malé metadáta obnovy a kontrol sú lokálne v obnova_v5a/.

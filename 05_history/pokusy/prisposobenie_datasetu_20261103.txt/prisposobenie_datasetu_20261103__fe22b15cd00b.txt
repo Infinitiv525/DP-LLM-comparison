@@ -1,0 +1,78 @@
+PRISPOSOBENIE CASOVEJ ULOHY FLOWBENCH – NAVRH DALSIEHO PILOTA
+STAV: Pouzivatel nasledne odmietol tento smer. Nespustat automaticky20/5.
+Nadvazujuci audit: podklady_autorov_20261103/ZISTENIA_A_PINN.txt.
+03.11.2026; nadvazuje na otazku pouzivatela a audit replikovatelnosti.
+Toto je navrh noveho protokolu, nie zmena beziaceho zmrazeneho V21.
+
+Co preberame od autorov
+Pouzitie minulej sekvencie na predikciu buducej, dostupne u/v/p, geometriu,
+Re, interval vystupu 0.05 bezrozmernej casovej jednotky, vynechanie snimok0,1.
+Presne dve vstupne snimky ani jednorazovy horizont238 autor nepredpisuje.
+Nezname BC nie su dokazana pricina neuspechu a nemaju byt vyhovorka.
+Zdroj: pinned DataPrep/fpo2d.py v commite
+6877099b8883232138c73b2b6056ff01f7d3697b, riadky5..8,44..68.
+https://github.com/baskargroup/flowbench-tools/blob/6877099b8883232138c73b2b6056ff01f7d3697b/DataPrep/fpo2d.py
+
+Co ukazuje uz vypocitany V21 – vyvojova diagnostika, nie finalny test
+Z existing selected_checkpoint/per_frame.json oboch vetiev, 6VAL,
+originalne vstupy2,3; priemery chyb cez prve N predikovanych snimok
+a potom cez6pripadov. Kontrola poradia vsetkych238ramecov4..241.
+Learned spatial context:
+N=1:   rychlost1.719%, tlak3.054%, limity poli splna6/6pripadov.
+N=5:   rychlost4.597%, tlak8.410%, limity poli splna6/6pripadov.
+N=10:  rychlost7.551%, tlak14.312%, limity poli splna4/6pripadov.
+N=20:  rychlost12.342%, tlak24.043%, limity poli splna2/6pripadov.
+N=238: rychlost38.151%, tlak55.165%, limity poli splna0/6pripadov.
+Kontrolna vetva ma podobny rast chyb. Skratenie reportovaneho horizontu
+nie je zlepsenie modelu. Prvych5presnych predikcii nedokazuje presnost
+po stovkach krokov ani po nahradeni historie vlastnymi vystupmi.
+Ide o post-hoc pozorovanie uz opakovane pouzivanej vyvojovej VAL.
+
+Konkretny nasledny pilot: historia -> kratky blok -> vlastna historia
+Ako pracovny kandidat20minulych snimok a5buducich. Tieto cisla su volba
+pilota, NIE tvrdenie autorov ani dokaz optimality. Odovodnenie: dlhsia
+historia moze ulahcit rozpoznanie dynamiky; kratky horizont uz vykazuje
+mensiu chybu. Zlepsenie musi overit experiment.
+
+Vstup noveho behu: originalne ramce2..21, teda20ramecov za0.95jednotky.
+Prvy blok cielov22..26, potom dalsie bloky po5 az do241:220vystupov,
+44blokov. Po prvom bloku sa aktualizuje historia iba vlastnymi vystupmi.
+Ziadne buduce referencne vnutorne polia ani okrajove bunky sa pri
+volnom priebehu nepodstrkuju modelu. Je to dlhy rollout, nie resetovany
+rad kratkych predikcii. Originalne0,1 zostavaju vynechane.
+
+Trening: casove okna len z69TRAIN; referencna vstupna historia v treningu
+je dovolena. Potrebna aj kontrola/trening s vlastnymi vystupmi, kedze
+stare autoregresivneV5-V8 modely uz vykazovali narast chyb.
+Samotna zmena poctu vstupov nie je zaruka opravy tohto problemu.
+Zachovat fyzikalnu stratu Navier-Stokes, geometriu a znamy stav;
+oznacovat ako podmieneny, datami podporeny PINN. Cisto datovy seq-model
+by nemal byt bez dalsieho vydavany za PINN. Bez prevzatia cudzej predlohy.
+
+Kontrola prinosu historie:2vs20vstupov pri SPOLOCNOM casovom zaciatku21
+a spolocnych cieloch22..241; kratky vstup ma20,21, dlhy2..21.
+Bez toho by sa miesal vplyv historie s lahsim cielovym intervalom.
+Treningovy rozpocet a vyber checkpointu musia byt porovnatelne.
+69TRAIN/6VAL geometricke rozdelenie ostava, hlavnyTEST uzavrety.
+VALprefix2..21 bude v NOVOM protokole explicitne znamy vstup;
+VAL22..241 iba vyhodnotenie. Stary prefixcache2,3 sa nesmie potichu prepisat.
+
+Vyhodnotenie: zvlast presnost nasledujucich5ramecov z referencnej historie
+(diagnostika) a volny cely220-ramcovy priebeh z vlastnej historie (hlavny
+vysledok simulacie). Uvadzat rast chyb v case, fyziku, worstcase a latenciu.
+Ziadne vyhlasenie uspechu celej simulacie len podla kratkeho bloku.
+5ms p99 zostava ciel na jeden vystupny full-field snimok. Zmerat skutocnu
+cestu aktualizacie historie/encoder/vystup a reportovat aj blokovu latenciu;
+priemer casu bloku/5 sam o sebe nedokazuje p99 jednotlivych krokov.
+
+Buduce okrajove hodnoty vyrezu su ina mozna, legitimna uloha s dodanymiBC.
+Ich pridanie by znamenalo extra vstupy. Nemiesat tuto intervenciu s testom
+historie. Presne steny celej domeny nevnucovat na hranice vyrezu.
+
+Postup pri casovej tiesni
+Dokoncit archivaciuV21; potom jeden kratky pilot oknovej ulohy a najprv
+overit volny rollout. Az ked bude pouzitelna presnost aj rychlost, zmrazit
+architekturu/rozdelenie/pravidla a spustit porovnanie konfiguracii LLM.
+Nepokracovat automaticky v dalsich dlhych variantoch rovnakej zlyhavajucej
+ulohy. Neotvarat hlavnyTEST na ladenie. Nie je potrebne nove CFD ani download.
+Tymto navrhom sa nic neodosiela do scheduleru a predosle vysledky sa nemenia.

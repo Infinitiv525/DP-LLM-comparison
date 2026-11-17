@@ -1,0 +1,187 @@
+{
+  "status": "FINAL_TEST_EVALUATION_COMPLETE",
+  "at": "2026-11-08T02:50:08.908844+01:00",
+  "models": 155,
+  "case_model_pairs": 31000,
+  "raw_timing_queries": 6200000,
+  "worst_case_p99_ms": 3.0157705307006837,
+  "methods": [
+    {
+      "method": "qwen3_8b",
+      "models": 25,
+      "test_cases_per_model": 200,
+      "mse_all": 0.0002943538732310084,
+      "velocity_relative_l2": 0.02406649385573435,
+      "pressure_relative_l2": 0.0860098053807703,
+      "relative_l2_all": 0.04459050692316133,
+      "mean_momentum_rms": 0.5921812299146854,
+      "mean_divergence_rms": 7.526676089233811e-07,
+      "mean_boundary_rms": 0.01749227435489614,
+      "worst_p99_ms": 3.0157705307006837,
+      "speed_pass_models": 25,
+      "evaluation_seconds": 3562.906636388041
+    },
+    {
+      "method": "ministral3_8b",
+      "models": 25,
+      "test_cases_per_model": 200,
+      "mse_all": 0.0002846921916462477,
+      "velocity_relative_l2": 0.024321388693613746,
+      "pressure_relative_l2": 0.08366118276056154,
+      "relative_l2_all": 0.04333718551072454,
+      "mean_momentum_rms": 0.7341155885853672,
+      "mean_divergence_rms": 7.08790911581092e-07,
+      "mean_boundary_rms": 0.019527341565745482,
+      "worst_p99_ms": 2.919188206195831,
+      "speed_pass_models": 25,
+      "evaluation_seconds": 3570.4720385458786
+    },
+    {
+      "method": "phi4_mini",
+      "models": 25,
+      "test_cases_per_model": 200,
+      "mse_all": 0.0002943538732318525,
+      "velocity_relative_l2": 0.02406649385639255,
+      "pressure_relative_l2": 0.08600980538088614,
+      "relative_l2_all": 0.04459050692360231,
+      "mean_momentum_rms": 0.592181229250315,
+      "mean_divergence_rms": 7.526676089233811e-07,
+      "mean_boundary_rms": 0.01749227435489614,
+      "worst_p99_ms": 2.9457007813453675,
+      "speed_pass_models": 25,
+      "evaluation_seconds": 3561.579889643006
+    },
+    {
+      "method": "granite33_8b",
+      "models": 25,
+      "test_cases_per_model": 200,
+      "mse_all": 0.0002943538732318462,
+      "velocity_relative_l2": 0.0240664938587935,
+      "pressure_relative_l2": 0.08600980538157922,
+      "relative_l2_all": 0.04459050692462814,
+      "mean_momentum_rms": 0.5921812499837997,
+      "mean_divergence_rms": 7.526676089233811e-07,
+      "mean_boundary_rms": 0.01749227435489614,
+      "worst_p99_ms": 2.9171914744377134,
+      "speed_pass_models": 25,
+      "evaluation_seconds": 3570.6415942021413
+    },
+    {
+      "method": "random",
+      "models": 25,
+      "test_cases_per_model": 200,
+      "mse_all": 0.0002639173152593615,
+      "velocity_relative_l2": 0.02231459385512491,
+      "pressure_relative_l2": 0.0840884691574144,
+      "relative_l2_all": 0.04182380335274916,
+      "mean_momentum_rms": 0.7849253050195774,
+      "mean_divergence_rms": 6.306282079663011e-07,
+      "mean_boundary_rms": 0.0167376496648307,
+      "worst_p99_ms": 2.9603927397727965,
+      "speed_pass_models": 25,
+      "evaluation_seconds": 3560.784264522139
+    },
+    {
+      "method": "tpe",
+      "models": 25,
+      "test_cases_per_model": 200,
+      "mse_all": 0.00024307851224993112,
+      "velocity_relative_l2": 0.02459558453922258,
+      "pressure_relative_l2": 0.07976168888980455,
+      "relative_l2_all": 0.04125729152488309,
+      "mean_momentum_rms": 1.0678810924868425,
+      "mean_divergence_rms": 5.819298358907756e-07,
+      "mean_boundary_rms": 0.01617820106796895,
+      "worst_p99_ms": 2.919500753879547,
+      "speed_pass_models": 25,
+      "evaluation_seconds": 3570.2135347380536
+    },
+    {
+      "method": "fixed",
+      "models": 5,
+      "test_cases_per_model": 200,
+      "mse_all": 0.00029435387322869,
+      "velocity_relative_l2": 0.024066493855534915,
+      "pressure_relative_l2": 0.08600980538546946,
+      "relative_l2_all": 0.04459050692333904,
+      "mean_momentum_rms": 0.5921812312369501,
+      "mean_divergence_rms": 7.526676089233811e-07,
+      "mean_boundary_rms": 0.017492274354896135,
+      "worst_p99_ms": 2.916240322589874,
+      "speed_pass_models": 5,
+      "evaluation_seconds": 712.7633112221956
+    }
+  ],
+  "primary_contrasts": [
+    {
+      "method": "qwen3_8b",
+      "control": "tpe",
+      "delta_test_mse": 5.1275360981077264e-05,
+      "relative_delta_percent": 21.094156166447327,
+      "interval_percent": 98.75,
+      "interval": [
+        1.8316935860454543e-05,
+        9.882452303567029e-05
+      ],
+      "interval_below_zero": false
+    },
+    {
+      "method": "ministral3_8b",
+      "control": "tpe",
+      "delta_test_mse": 4.1613679396316626e-05,
+      "relative_delta_percent": 17.119439727987896,
+      "interval_percent": 98.75,
+      "interval": [
+        1.2335067077934942e-05,
+        8.362657035411007e-05
+      ],
+      "interval_below_zero": false
+    },
+    {
+      "method": "phi4_mini",
+      "control": "tpe",
+      "delta_test_mse": 5.127536098192137e-05,
+      "relative_delta_percent": 21.094156166794583,
+      "interval_percent": 98.75,
+      "interval": [
+        1.831693586133647e-05,
+        9.882452303680488e-05
+      ],
+      "interval_below_zero": false
+    },
+    {
+      "method": "granite33_8b",
+      "control": "tpe",
+      "delta_test_mse": 5.1275360981915135e-05,
+      "relative_delta_percent": 21.09415616679202,
+      "interval_percent": 98.75,
+      "interval": [
+        1.8316935861477813e-05,
+        9.882452303067919e-05
+      ],
+      "interval_below_zero": false
+    }
+  ],
+  "bootstrap": {
+    "primary_metric": "Mean unweighted all-cell TEST MSE, equal weighting of200cases,5seeds then5searches",
+    "primary_contrasts": "Each of4LLM methods minusTPE; negative favoursLLM. Random/fixed and all other metrics descriptive.",
+    "bootstrap": "Paired crossed resampling:5search IDs and85TEST geometry clusters; same draws for every method. Include all cases per sampled cluster with original equal-case weights. Average5finalseeds first, never treat25models as25independent searches.",
+    "iterations": 10000,
+    "bootstrap_seed": 510001,
+    "family_alpha": 0.05,
+    "contrasts": 4,
+    "ci_percent": 98.75,
+    "quantiles": [
+      0.00625,
+      0.99375
+    ],
+    "quantile_method": "linear",
+    "limits": "Approximate bootstrap coverage, only5 independent searches. Known-geometry flowcase split; no unseen-geometry claim. Formal dissertation hypothesis wording remains a later writing task."
+  },
+  "source_freeze_sha256": "7f4c7c50ea36048599edb6b26635d7893000fb42b2310e085f637eea9fb6c873",
+  "model_manifest_sha256": "5ab7ad1991baa76783ddf26077f0abc614478330bbcccafc81b1b8dd75544c35",
+  "TEST_opened": true,
+  "no_training": true,
+  "no_config_selection_on_TEST": true,
+  "uncertainty_note": "Approximate paired crossed-bootstrap intervals; only5 independent searches. Final seeds averaged, not25 independent searches. Known-geometry flowcase split."
+}

@@ -1,0 +1,33 @@
+DOPLNENIE HLAVNÉHO EXPERIMENTU Z 8 NA 24 GPU
+06.11.2026
+
+Pri kontrole bežala iba dávka144649 na8GPU. V pôvodnom pláne bolo163
+čakajúcich tréningov;115 z nich bolo pripravených okamžite (110 finálnych
+opakovaní a5 fixed baseline). Automatický V36 mechanizmus čaká na dobehnutie
+celej skupiny pred založením ďalšej skupiny. Ďalšie potrebné behy sa preto
+dali spustiť už teraz manuálnym doplnením existujúcej skupiny.
+
+Spustená nová16GPU dávka145176 cez pôvodný, nezmenený a auditovaný V36
+launcher. Existujúca8GPU dávka144649 pokračuje bez prerušenia. Súbeh
+sa vracia na24GPU, počet395vedeckých pokusov ostáva rovnaký.
+Žiadna väčšia sieť, ďalšie opakovania alebo TEST nie sú pridané.
+
+Aby účtovný zberač od začiatku poznal novú dávku, pôvodný čistoCPU zberač
+144648 bol nahradený čistoCPU zberačom145175. Pôvodná CPU úloha nemalaGPU,
+jej skutočná spotreba a úmyselný stavCANCELLED sú uložené. GPU tréningy
+sa počas tejto výmeny nerušili.
+
+Poradie: registrácia držaného novéhoCPU -> ukončenie staréhoCPU ->
+registrácia držaného16GPU jobu -> zápis jobu do autoritatívnej skupiny ->
+štartCPU a overenie, že sleduje obeGPUdávky -> uvoľnenie16GPU jobu.
+Počas presunu sa neprekročili4rezervovanéuzly. Žiadny vedecký zdroj,
+protokol, seed, výber konfigurácie, metrika alebo checkpoint sa nemenil.
+
+Nová dávka používa rovnakých400epoch, šírku192 a pôvodný spoločný
+plánovač, ktorý atomicky prideľuje každý pokus jedinému pracovníkovi.
+Doklady o štarte a rozdielnych24H200 sú v closeout.json.
+Čakanie a účtovanie ostáva naCPU. Ďalšie nadväzovanie pôvodného plánu
+je zachované; limit hlavného súbehu ostáva24GPU.
+
+Na Perune: results/ldc_main_refill_20261106_v46.
+Zdroj: test/analysis/refill_ldc_main_v46.py.

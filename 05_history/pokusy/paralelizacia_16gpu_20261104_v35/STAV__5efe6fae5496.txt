@@ -1,0 +1,65 @@
+NOVŠÍ STAV — 04.11.2026
+Súbeh zvýšený na 24 GPU. Tri dávky 143342 / 143656 / 143684 a jeden
+spoločný CPU zberač 143685. Vedecké pravidlá sa nemenia. Aktuálny opis:
+../paralelizacia_24gpu_20261104_v36/STAV.txt.
+
+HISTORICKÝ ZÁZNAM
+
+SÚBEH JE ZVÝŠENÝ NA 16 GPU — 04.11.2026
+
+Overený aktuálny stav
+143342 na gpu26: pôvodných 8 H200, tréningy pokračujú bez prerušenia.
+143656 na gpu10: pridaných 8 H200, všetky už absolvovali prvých 10 epoch.
+Spolu 16 rôznych GPU a 16 rôznych tréningových položiek z rovnakého plánu.
+Pri overení: 16 RUNNING / 379 PENDING. Pôvodné modely majú 260–280 epoch,
+nové 10 epoch; všetky majú celkový rozpočet 400 epoch. Je to okamžitý
+záznam, nie živá stránka. Konečné výsledky sa týmto ešte nevyhlasujú.
+
+Plán a porovnateľnosť
+Zostáva najviac 395 tréningových pokusov, rovnaké seedy, päť povolených
+parametrov, architektúra a hodnotenie, 640 TRAIN / 160 VAL. TEST s 200
+prípadmi zostáva uzavretý. Každý tréning má vlastnú GPU a 4 CPU tak ako
+predtým. Pridanie súbehu nemení výpočtový rozpočet jednotlivého pokusu.
+Rozbehnuté modely sa nereštartovali a žiadny logický pokus sa nespustil
+dvakrát. Spoločné základné konfigurácie sa zámerne opakujú podľa plánu;
+to sa nesmie zamieňať s duplicitným pridelením tej istej položky.
+
+Nadväzovanie
+Účtovanie a pokračovanie prvej dávky: 143655, druhej: 143657.
+Každá sa po skončení samostatne zaúčtuje. Keď dobehnú obe, posledná
+účtovacia úloha spustí jednu spoločnú 16-GPU dávku na dvoch uzloch.
+Prvá dvojica začala v rôznych časoch; skoršia sa preto môže ukončiť
+skôr a prechodne ostane bežať iba druhá. Uvoľnené GPU vtedy nerezervujeme.
+Ďalšie veľké dávky už používajú 16 GPU spoločne v jednej Slurm úlohe.
+Pri úplnom zvyšku najviac 8 pokusov sa môže použiť menšia 8-GPU dávka.
+
+Perun povoľuje najviac 4 rezervované uzly vrátane čakajúcich účtovacích
+úloh. Teraz 2 GPU uzly + 2 čakajúce CPU úlohy = 4. Budúca spoločná dávka
+má 2 GPU uzly + 1 CPU úlohu, pri odovzdaní ďalšej dávke najviac 4 uzly.
+Zvýšenie súbehu tak rešpektuje skutočný limit centra. Súbežné účtovacie
+úlohy si zvolia jediného pokračovateľa; nevytvoria dve ďalšie dávky.
+Pri technickej chybe sa nadväzovanie zastaví na kontrolu. TEST sama
+reťaz neotvorí. Tréningové a dátové súbory zostávajú na Perune.
+
+Overenie a dokumentovanie
+Skutočná skúška medzi cn11 a cn23 so štartovacou bariérou: obidva uzly
+si naraz pridelili prácu, 25 skúšobných položiek presne raz, prvé položky
+rôzne, správne závislosti; 6/6 kontrol. Išlo iba o označené testovacie
+položky v oddelenom adresári, bez neurónového tréningu alebo TEST dát.
+Prešlo aj 12 kontrol prevádzkového spúšťača a nadväzovania.
+Pri novom 8-GPU štarte prešlo všetkých 14 pôvodných kontrol produkčnej
+cesty za 105,227 s. Samostatne overených 16 fyzických UUID, skutočné
+400-epochové konfigurácie, správne seedy a uložené tréningové histórie.
+Pôvodných 130 zmrazených súborov vedeckého experimentu zostalo nezmenených.
+Zmena súbehu je v dodatku a samostatnom prevádzkovom manifeste V35.
+
+Súbory
+zaznamy/launch_verification_16.json — dôkaz 16 GPU a skutočných tréningov.
+zaznamy/crossnode_barrier_review_143605.json — skúška prideľovania medzi uzlami.
+zaznamy/parallelism_amendment_v35.json — dodatok k súbehu.
+zaznamy/operational_manifest_v35.json — odtlačky nových prevádzkových zdrojov.
+zaznamy/submission_143656.json — registrácia novej GPU dávky pred uvoľnením.
+Vedecký protokol ostáva v susednom priečinku
+velky_test_ustaleneho_pinn_20261104_v33/protokol.txt.
+
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33

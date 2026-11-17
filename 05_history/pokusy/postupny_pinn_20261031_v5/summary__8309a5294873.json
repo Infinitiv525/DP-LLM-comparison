@@ -1,0 +1,479 @@
+{
+  "status": "AUTOREGRESSIVE_PINN_EVALUATED",
+  "config": {
+    "seed": 20261031,
+    "state_conditioning": true,
+    "width": 96,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "one_step_updates": 40000,
+    "rollout_updates": 10000,
+    "rollout_length": 4,
+    "lr": 0.0003,
+    "rollout_lr": 0.0001,
+    "batch": 4096,
+    "collocation": 256,
+    "validate_every": 2000,
+    "warmup": 1000,
+    "ramp": 4000,
+    "pde_weight": 0.01,
+    "bc_weight": 0.01,
+    "data_loss_scale": 0.05,
+    "divergence_limit": 1000.0,
+    "divergence_score_penalty": 1000000.0
+  },
+  "selected_phase": "short_rollout",
+  "selected_update": 2000,
+  "accuracy": {
+    "score": 1.7138318119208487,
+    "any_diverged": false,
+    "cases": [
+      {
+        "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+        "predicted_steps": 238,
+        "divergence": null,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 1.612001725288399,
+              "pressure_relative_l2": 3.359017922041658
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.7575628273851636,
+              "pressure_relative_l2": 1.1019513357435289
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.02814913680541308,
+              "pressure_relative_l2": 0.03577994089501547
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.1347465646867611,
+              "pressure_relative_l2": 0.20064237694320014
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.2682191271365896,
+              "pressure_relative_l2": 0.37380827838239244
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5613858531631656,
+              "pressure_relative_l2": 0.8178329912932505
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.9497734780821881,
+              "pressure_relative_l2": 1.3261331981597724
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.9275970095452702,
+              "pressure_relative_l2": 1.3070399512787811
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 2.536834467711119,
+              "pressure_relative_l2": 5.777826795192464
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.7449419568837689,
+              "pressure_relative_l2": 1.1115237991222695
+            }
+          }
+        },
+        "actual_rollout_step_gpu_ms": {
+          "p50": 1.824016034603119,
+          "p95": 1.8406112253665923,
+          "p99": 1.849549800157547
+        }
+      },
+      {
+        "path": "FPO_NS_2D_1024x256/harmonics/87/Re_838.npz",
+        "predicted_steps": 238,
+        "divergence": null,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 2.4317681047097923,
+              "pressure_relative_l2": 3.879214669648692
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.8546196386572068,
+              "pressure_relative_l2": 1.1425583735453868
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.13666299994546066,
+              "pressure_relative_l2": 0.0827199365355091
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.17467807432543792,
+              "pressure_relative_l2": 0.2514499140771156
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.47623518288600736,
+              "pressure_relative_l2": 0.5722566349183181
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6496798486186448,
+              "pressure_relative_l2": 0.9316564417081482
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 1.324842506534034,
+              "pressure_relative_l2": 2.15119668864969
+            },
+            "persistence": {
+              "velocity_relative_l2": 1.0613340872800519,
+              "pressure_relative_l2": 1.4048444608943522
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 3.873895956882823,
+              "pressure_relative_l2": 6.213241168402617
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.8241997526796383,
+              "pressure_relative_l2": 1.0938740986460869
+            }
+          }
+        },
+        "actual_rollout_step_gpu_ms": {
+          "p50": 1.819968044757843,
+          "p95": 1.8343231797218322,
+          "p99": 1.84222593665123
+        }
+      },
+      {
+        "path": "FPO_NS_2D_1024x256/nurbs/22/Re_164.npz",
+        "predicted_steps": 238,
+        "divergence": null,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.32018831159951827,
+              "pressure_relative_l2": 1.0519658550455302
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.39774380336238824,
+              "pressure_relative_l2": 0.48244725440268893
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.03109878317512275,
+              "pressure_relative_l2": 0.04462360532689309
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.11833399338596447,
+              "pressure_relative_l2": 0.17262256120140257
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.1937497681181459,
+              "pressure_relative_l2": 0.6487109113547087
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.4393901555168622,
+              "pressure_relative_l2": 0.5712855269520499
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.31562660611427057,
+              "pressure_relative_l2": 1.1575207805391092
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.387777632948523,
+              "pressure_relative_l2": 0.4524860654358861
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.3799254982732889,
+              "pressure_relative_l2": 1.1682936242694684
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.41759127088983944,
+              "pressure_relative_l2": 0.5064302533253692
+            }
+          }
+        },
+        "actual_rollout_step_gpu_ms": {
+          "p50": 1.821615993976593,
+          "p95": 1.837100774049759,
+          "p99": 1.8413725078105927
+        }
+      },
+      {
+        "path": "FPO_NS_2D_1024x256/nurbs/22/Re_977.npz",
+        "predicted_steps": 238,
+        "divergence": null,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 1.2485515232718472,
+              "pressure_relative_l2": 3.548782091711246
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5923580855464712,
+              "pressure_relative_l2": 0.8554418855918431
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.08294292046306653,
+              "pressure_relative_l2": 0.13437830999374692
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.18997094408452853,
+              "pressure_relative_l2": 0.2879829564944326
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.4329887208994115,
+              "pressure_relative_l2": 0.9680084861509841
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6224877876487338,
+              "pressure_relative_l2": 0.8339202216707401
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.9398399303760261,
+              "pressure_relative_l2": 2.1288145102582527
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6222417167564772,
+              "pressure_relative_l2": 0.8950524970061254
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 1.763974383703428,
+              "pressure_relative_l2": 5.45695711289957
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5985385080443616,
+              "pressure_relative_l2": 0.8821485830110348
+            }
+          }
+        },
+        "actual_rollout_step_gpu_ms": {
+          "p50": 1.8209120035171509,
+          "p95": 1.833299171924591,
+          "p99": 1.8358448100090028
+        }
+      },
+      {
+        "path": "FPO_NS_2D_1024x256/skelenton/36/Re_209.npz",
+        "predicted_steps": 238,
+        "divergence": null,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.3768486574008471,
+              "pressure_relative_l2": 1.0756873921829828
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.45345725583648183,
+              "pressure_relative_l2": 0.5109262183722189
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.0379335692088543,
+              "pressure_relative_l2": 0.04566349367236035
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.13648960494827658,
+              "pressure_relative_l2": 0.18949704606292608
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.21580836173850135,
+              "pressure_relative_l2": 0.6709730831630889
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5048725625839122,
+              "pressure_relative_l2": 0.6006311509470625
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.36338966649520177,
+              "pressure_relative_l2": 1.1175908074959673
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.43808372926160655,
+              "pressure_relative_l2": 0.4800262644558845
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.4556374626910329,
+              "pressure_relative_l2": 1.2374619263411544
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.4776699628911358,
+              "pressure_relative_l2": 0.5363087612464084
+            }
+          }
+        },
+        "actual_rollout_step_gpu_ms": {
+          "p50": 1.8196159601211548,
+          "p95": 1.830617606639862,
+          "p99": 1.8388595151901246
+        }
+      },
+      {
+        "path": "FPO_NS_2D_1024x256/skelenton/36/Re_867.npz",
+        "predicted_steps": 238,
+        "divergence": null,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.46618030551160566,
+              "pressure_relative_l2": 1.195775184638067
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5633201696777478,
+              "pressure_relative_l2": 0.7755520197768302
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.058797040270741396,
+              "pressure_relative_l2": 0.07577032638103331
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.18431480759743368,
+              "pressure_relative_l2": 0.3320797999201633
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.3146137860861266,
+              "pressure_relative_l2": 0.7418865802649398
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6255307997930594,
+              "pressure_relative_l2": 0.88710137024203
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.4462657081047003,
+              "pressure_relative_l2": 1.1936667420078328
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5252432520456234,
+              "pressure_relative_l2": 0.741897951389283
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.5527395938821602,
+              "pressure_relative_l2": 1.4075157111141936
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.605437865677017,
+              "pressure_relative_l2": 0.8075907244854273
+            }
+          }
+        },
+        "actual_rollout_step_gpu_ms": {
+          "p50": 1.8231840133666992,
+          "p95": 1.8370704352855682,
+          "p99": 1.8433497333526612
+        }
+      }
+    ],
+    "reference_future_used_as_input": false
+  },
+  "latency": {
+    "whole_gpu_step_rounds_ms": [
+      {
+        "p50": 1.319760024547577,
+        "p95": 1.3262415468692779,
+        "p99": 1.329960641860962
+      },
+      {
+        "p50": 1.3219040036201477,
+        "p95": 1.329100775718689,
+        "p99": 1.3374349296092987
+      },
+      {
+        "p50": 1.3211680054664612,
+        "p95": 1.3287343978881836,
+        "p99": 1.3313177120685578
+      }
+    ],
+    "samples_per_round": 200,
+    "grid": [
+      1024,
+      256
+    ],
+    "includes_state_feature_rebuild": true,
+    "includes_encoder": true,
+    "includes_prediction_pressure_gauge": true,
+    "includes_solid_mask_update": true,
+    "initial_tensors_already_gpu": true,
+    "rendering_included": false,
+    "gpu_step_plus_output_copy_ms": {
+      "p50": 1.489807851612568,
+      "p99": 1.5692490711808205
+    }
+  },
+  "training_seconds": 2591.683368401602,
+  "gpu": "NVIDIA H200",
+  "peak_cuda_allocated_bytes": 54349680128,
+  "train_scenarios": 69,
+  "validation_scenarios": 6,
+  "input_frames": [
+    2,
+    3
+  ],
+  "future_frames": [
+    4,
+    241
+  ],
+  "rollout_steps": 238,
+  "dt": 0.05,
+  "main_test_opened": false,
+  "reference_future_used_as_validation_input": false,
+  "causal_rollout": true,
+  "working_gate": {
+    "accuracy_pass": false,
+    "whole_step_latency_pass": true,
+    "benchmark_latency_pass": true,
+    "actual_rollout_latency_pass": true,
+    "beats_persistence": false
+  },
+  "llm_comparison_ready": false,
+  "checkpoint_sha256": "fbf283fab579f1ef9c567f26ac575666a7bcd178f9011d65091cd93c5938a70d",
+  "limitations": [
+    "Data-assisted time-local PINN; crop lacks full external boundary histories",
+    "Training may use true states from training trajectories; validation gets only two prefix frames",
+    "No final independent test, multiple seeds or hypothesis significance claim"
+  ]
+}

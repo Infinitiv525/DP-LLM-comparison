@@ -1,0 +1,53 @@
+{
+  "stale": true,
+  "old": {
+    "group": "group_000",
+    "jobs": [
+      "143342",
+      "143656",
+      "143684"
+    ],
+    "collector": "143685",
+    "target_gpus": 24
+  },
+  "authoritative_group": {
+    "id": "group_000",
+    "jobs": [
+      "143342",
+      "143656",
+      "143684",
+      "144649"
+    ],
+    "collectors": [
+      "143685",
+      "143805",
+      "143807",
+      "144648"
+    ],
+    "status": "INITIAL_THREE8GPU_GROUP",
+    "capacity_collector": "143807",
+    "active_collector": "144648",
+    "budget_rebalance_v43": {
+      "old_capacity_collector": "143807",
+      "cpu_collector": "144648",
+      "added_main_job": "144649",
+      "intent_sha256": "f2b8acd781f12ba6ec12e24d3404529ef3e635d838d2b0152cae3801ddcfe35e",
+      "no_new_capacity_runs": true
+    }
+  },
+  "running_collector": {
+    "group": "group_000",
+    "collector": "144648",
+    "accounted": [
+      "143342"
+    ],
+    "waiting": [
+      "143656",
+      "143684",
+      "144649"
+    ],
+    "main_test_opened": false,
+    "unix": 1793927058.4342241
+  },
+  "scientific_results_affected": false
+}

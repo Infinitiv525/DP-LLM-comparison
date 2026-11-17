@@ -1,0 +1,146 @@
+{
+  "checkpoint": {
+    "name": "curl_best",
+    "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141546/multicase_curl/best.pt",
+    "sha256": "fdc8c9b595f132496a87751a5947c22e48d9fe4a0a47bbad72b2e17d05960b59",
+    "update": 100000
+  },
+  "by_scope": {
+    "train": {
+      "case_time_count": 24,
+      "field_mean_errors": {
+        "velocity_relative_l2": 0.09152135247386028,
+        "pressure_relative_l2": 0.2179409098534668
+      },
+      "continuous_centre_momentum_loss": 6.943465776085676,
+      "continuous_jitter_momentum_loss": 2.9218182013791565,
+      "fine_fd_momentum_loss": 1.0591591467189014,
+      "coarse_fd_momentum_loss": 1.0596602541179179,
+      "fine_fd_ad_momentum_difference_rms": 0.630150042163829,
+      "fine_fd_ad_velocity_difference_rms": 0.00020013893117720727,
+      "reference_instantaneous_fd_momentum_loss": 0.00420020749950131,
+      "v17_midpoint_fd_momentum_loss_full_interior": 0.961563074340423,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.004290675967543696
+    },
+    "validation": {
+      "case_time_count": 48,
+      "field_mean_errors": {
+        "velocity_relative_l2": 0.26945487858732514,
+        "pressure_relative_l2": 0.3987633168986519
+      },
+      "continuous_centre_momentum_loss": 17.10152291592956,
+      "continuous_jitter_momentum_loss": 9.474728701269992,
+      "fine_fd_momentum_loss": 4.655656758902175,
+      "coarse_fd_momentum_loss": 4.655402944897652,
+      "fine_fd_ad_momentum_difference_rms": 0.9058604280774792,
+      "fine_fd_ad_velocity_difference_rms": 0.00043294787237376414,
+      "reference_instantaneous_fd_momentum_loss": 0.0120091868163453,
+      "v17_midpoint_fd_momentum_loss_full_interior": 10.291163981271287,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.013682578641843671
+    }
+  },
+  "by_scope_horizon": {
+    "train": {
+      "early": {
+        "case_time_count": 9,
+        "field_mean_errors": {
+          "velocity_relative_l2": 0.040074981677807826,
+          "pressure_relative_l2": 0.10296865416841228
+        },
+        "continuous_centre_momentum_loss": 2.15997133454502,
+        "continuous_jitter_momentum_loss": 1.074121080943626,
+        "fine_fd_momentum_loss": 0.4111004021207461,
+        "coarse_fd_momentum_loss": 0.4110868400503688,
+        "fine_fd_ad_momentum_difference_rms": 0.33433132949802613,
+        "fine_fd_ad_velocity_difference_rms": 6.817866152333509e-05,
+        "reference_instantaneous_fd_momentum_loss": 0.004966836112549526,
+        "v17_midpoint_fd_momentum_loss_full_interior": 0.37584886617130703,
+        "reference_midpoint_fd_momentum_loss_full_interior": 0.0041227037501004
+      },
+      "middle": {
+        "case_time_count": 6,
+        "field_mean_errors": {
+          "velocity_relative_l2": 0.10997716636675835,
+          "pressure_relative_l2": 0.2655932286348082
+        },
+        "continuous_centre_momentum_loss": 8.945170718398632,
+        "continuous_jitter_momentum_loss": 4.130614295880354,
+        "fine_fd_momentum_loss": 1.143693242323901,
+        "coarse_fd_momentum_loss": 1.1435123897321782,
+        "fine_fd_ad_momentum_difference_rms": 0.8174477914969126,
+        "fine_fd_ad_velocity_difference_rms": 0.0002939826905882607,
+        "reference_instantaneous_fd_momentum_loss": 0.003719567848820925,
+        "v17_midpoint_fd_momentum_loss_full_interior": 1.1407609780629475,
+        "reference_midpoint_fd_momentum_loss_full_interior": 0.004119040677323937
+      },
+      "late": {
+        "case_time_count": 9,
+        "field_mean_errors": {
+          "velocity_relative_l2": 0.13066384734131406,
+          "pressure_relative_l2": 0.30114495301762717
+        },
+        "continuous_centre_momentum_loss": 10.392490256084358,
+        "continuous_jitter_momentum_loss": 3.963651258813889,
+        "fine_fd_momentum_loss": 1.6508618275803908,
+        "coarse_fd_momentum_loss": 1.6523322444426265,
+        "fine_fd_ad_momentum_difference_rms": 0.8011035886075761,
+        "fine_fd_ad_velocity_difference_rms": 0.00026953669455704384,
+        "reference_instantaneous_fd_momentum_loss": 0.003754005320240018,
+        "v17_midpoint_fd_momentum_loss_full_interior": 1.4278120133611891,
+        "reference_midpoint_fd_momentum_loss_full_interior": 0.0045730717118001646
+      }
+    },
+    "validation": {
+      "early": {
+        "case_time_count": 18,
+        "field_mean_errors": {
+          "velocity_relative_l2": 0.07339443013615182,
+          "pressure_relative_l2": 0.13627191966763907
+        },
+        "continuous_centre_momentum_loss": 5.148351378440731,
+        "continuous_jitter_momentum_loss": 2.5691193525841767,
+        "fine_fd_momentum_loss": 1.3383832303407908,
+        "coarse_fd_momentum_loss": 1.3384839310558447,
+        "fine_fd_ad_momentum_difference_rms": 0.4645605757832527,
+        "fine_fd_ad_velocity_difference_rms": 0.00014657183515333195,
+        "reference_instantaneous_fd_momentum_loss": 0.011614953616023356,
+        "v17_midpoint_fd_momentum_loss_full_interior": 2.6451963923043675,
+        "reference_midpoint_fd_momentum_loss_full_interior": 0.01542301272921678
+      },
+      "middle": {
+        "case_time_count": 12,
+        "field_mean_errors": {
+          "velocity_relative_l2": 0.2796264184855867,
+          "pressure_relative_l2": 0.47272278199430023
+        },
+        "continuous_centre_momentum_loss": 28.033775978026043,
+        "continuous_jitter_momentum_loss": 14.340698507169755,
+        "fine_fd_momentum_loss": 6.8195300283028075,
+        "coarse_fd_momentum_loss": 6.818261987351675,
+        "fine_fd_ad_momentum_difference_rms": 1.2753027578194935,
+        "fine_fd_ad_velocity_difference_rms": 0.0006231148181541357,
+        "reference_instantaneous_fd_momentum_loss": 0.012349767112695711,
+        "v17_midpoint_fd_momentum_loss_full_interior": 19.652895351250965,
+        "reference_midpoint_fd_momentum_loss_full_interior": 0.012633629026822746
+      },
+      "late": {
+        "case_time_count": 18,
+        "field_mean_errors": {
+          "velocity_relative_l2": 0.4587343004396574,
+          "pressure_relative_l2": 0.6119484040658991
+        },
+        "continuous_centre_momentum_loss": 21.766525745354073,
+        "continuous_jitter_momentum_loss": 13.136358179355964,
+        "fine_fd_momentum_loss": 6.530348107863141,
+        "coarse_fd_momentum_loss": 6.530415930436779,
+        "fine_fd_ad_momentum_difference_rms": 1.1008653938770294,
+        "fine_fd_ad_velocity_difference_rms": 0.0005925459457406154,
+        "reference_instantaneous_fd_momentum_loss": 0.012176366485766971,
+        "v17_midpoint_fd_momentum_loss_full_interior": 11.695977323585087,
+        "reference_midpoint_fd_momentum_loss_full_interior": 0.012641444297817847
+      }
+    }
+  },
+  "optimizer_updates": 0,
+  "main_test_opened": false
+}

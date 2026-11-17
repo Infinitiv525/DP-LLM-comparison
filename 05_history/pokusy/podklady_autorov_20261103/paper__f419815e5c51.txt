@@ -1,0 +1,1881 @@
+       FlowBench : A Large Scale Benchmark for Flow
+           Simulation over Complex Geometries
+
+
+   Ronak Tali1∗, Ali Rabeh1* , Cheng-Hau Yang1* , Mehdi Shadkhah1 , Samundra Karki1
+  Abhisek Upadhyaya2 , Suriya Dhakshinamoorthy1 , Marjan Saadati1 , Soumik Sarkar1 ,
+ Adarsh Krishnamurthy1 , Chinmay Hegde2 , Aditya Balu1 , Baskar Ganapathysubramanian1
+
+                   1                                                     2
+                Iowa State University                                   New York University
+         {rtali,arabeh,chenghau,mehdish,                           {au2216,chinmay.h}@nyu.edu
+       samundra,snarayan,marjansd,soumiks,
+       adarsh,baditya,baskarg}@iastate.edu
+
+
+
+
+Figure 1: FlowBench offers comprehensive datasets and metrics for assessing neural PDE solvers designed to
+model flow phenomena around complex objects. It includes three sets of application-relevant geometries with
+varying complexities and high-fidelity flow simulation data under different forcing conditions. The left panel in
+the figure above showcases 30 randomly selected shapes from each geometry group. The middle panel provides
+a close-up of one geometry within the computational domain, highlighting the boundary conditions. The right
+panel displays the simulation outputs, including velocity results for three samples.
+
+                                                  Abstract
+          Simulating fluid flow around arbitrary shapes is key to solving various engineering
+          problems. However, simulating flow physics across complex geometries remains
+          numerically challenging and computationally resource-intensive, particularly when
+          using conventional PDE solvers. Machine learning methods offer attractive oppor-
+          tunities to create fast and adaptable PDE solvers. However, benchmark datasets to
+          measure the performance of such methods are scarce, especially for flow physics
+          across complex geometries. We introduce FlowBench , a benchmark for neural
+          simulators with over 10K samples, which is larger than any publicly available
+          flow physics dataset. FlowBench contains flow simulation data across complex
+          geometries (parametric vs. non-parametric), spanning a range of flow conditions
+          (Reynolds number and Grashoff number), capturing a diverse array of flow phe-
+   ∗
+    These authors contributed equally to this work.
+Preprint. Under review.
+         nomena (steady vs. transient; forced vs. free convection), and for both 2D and
+         3D. FlowBench contains over 10,000 data samples, with each sample the outcome
+         of a fully resolved, direct numerical simulation using a well-validated simulator
+         framework designed for modeling transport phenomena in complex geometries.
+         For each sample, we include velocity, pressure, and temperature field data at 3
+         different resolutions and several summary statistics features of engineering rele-
+         vance (such as coefficients of lift and drag, and Nusselt numbers). We envision
+         that FlowBench will enable evaluating the interplay between complex geometry,
+         coupled flow phenomena, and data sufficiency on the performance of current, and
+         future, neural PDE solvers. We enumerate several evaluation metrics to help rank
+         order the performance of current (and future) neural PDE solvers. We benchmark
+         the performance of three baseline methods: Fourier Neural Operators (FNO), Con-
+         volutional Neural Operators (CNO), and DeepONets. This dataset(here) will be
+         a valuable resource for evaluating neural PDE solvers that model complex fluid
+         dynamics around 2D and 3D objects.
+
+
+
+1   Introduction
+
+Accurate modeling of fluid flow around complicated objects is central to a plethora of applications.
+In aerospace and automotive applications, flow around wings, and car bodies can significantly impact
+design and performance [1–3]. In civil and environmental engineering applications, understanding
+fluid flow patterns around structures like buildings [4] and bridges [5] is critical from a safety per-
+spective, while flow patterns inside buildings are important from a safety and comfort perspective [6].
+Bio-flow applications, such as flow around fish [7, 8], birds [9], insects [10], and heart valves [11],
+are all important fields of study. Sports engineering scientists use fluid flow simulations to optimize
+equipment design, such as bike helmets and golf ball shapes [12].
+Fluid flow is also often intricately connected with thermal effects. A thermal mismatch between
+the fluid medium and the object geometry can produce buoyancy-driven phenomena, cause thermal
+plumes, and impact mixing and thermal transport with significant engineering implications. For
+example, geometry is a critical consideration during the design of heat exchangers [13, 14] in
+the semiconductor industry. Mitigating urban heat island effects [15, 16] requires modeling and
+controlling thermal and flow transport across complex urban landscapes. Additionally, ensuring
+indoor comfort and safety from the transmission of infectious diseases requires a comprehensive
+understanding of the indoor flow patterns in the built environment [6, 17].
+A central challenge in accurately simulating flow patterns in complex geometries is the high resource
+cost of traditional simulation approaches. High-fidelity flow (and thermal) simulations often require
+hours to days (or sometimes even months [18]) on high-performance computing (HPC) systems.
+Scientific machine learning (SciML) has emerged as a promising path towards resolving this chal-
+lenge. By combining training data with domain-specific information (e.g., physical constraints and
+smoothness assumptions), SciML approaches offer fast simulation, better extrapolation capabilities,
+and lower data requirements. This includes impactful applications like weather prediction [19] and
+canonical flows in simple geometries [20–24].
+Despite these successes however, there is a notable lack of datasets for flow (and flow-thermal)
+interactions with complicated geometries. While databases exist for flow passing through simple
+shapes such as cylinders [21, 22] and airfoils [20, 24], there remains a significant gap in datasets
+involving more diverse and complex shapes. We note the availability of a few datasets that include
+other geometries, but these geometries are limited to drone shapes [23].
+In addition to the need for more complex geometries in existing flow datasets, there is also a shortage
+of multiphysics datasets. By multiphysics, we mean applications that are modeled as a set of
+(tightly) coupled partial differential equations (PDE), with each PDE modeling a specific physical
+phenomenon – for instance, Navier-Stokes that models flow phenomena and the advective heat
+equation that models thermal phenomena. This gap exists because coupling different types of PDEs
+is inherently challenging and computationally expensive. Solving multiphysics problems requires
+sophisticated numerical methods and substantial computational resources to accurately simulate each
+subproblem and capture the interactions between various physical phenomena.
+
+
+                                                  2
+FlowBench seeks to enable the ML community to build the next generation of SciML neural PDE
+solvers by filling these gaps – complex geometries and multiphysics phenomena. In particular,
+FlowBench offers:
+• Flow across complex geometries: We simulate flow and thermal-flow phenomena across a wide
+  range of complex shapes – both parametric and non-parametric – in 2D and 3D. These include
+  simple shapes like ellipses, more complex blobs, and geometries like insects, animals, and birds.
+  Flow across this spectrum of complex objects exhibits a rich array of vortex formation, flow
+  separation, and a range of lift and drag profiles. The diverse shapes and the flow interactions with
+  them provide a rich and intricate dataset for training geometry-aware SciML solvers that can be
+  used for various applications.
+• Multiphysics simulations: For each shape, we perform a variety of simulations representing flow
+  (i.e., incompressible Navier-Stokes, NS) as well as thermal flow (i.e., coupled Navier-Stokes and
+  Heat Transfer using the Bousinessque coupling, NS-HT) scenarios. Here, we span steady-state and
+  transient behaviors, offering a comprehensive dataset and benchmarks to test and evaluate solvers
+  under various scenarios.
+    – For the steady-state case, we consider a variant of the canonical fluid dynamics problem of
+      lid-driven cavity flow (LDC), which is an example of internal flow. The cavity has an object
+      (complex geometry) placed inside (see Figure 3). Additionally, we consider a temperature
+      difference between the cavity walls and the object, producing thermal and flow coupling. For
+      each object, we simulate across a range of Reynolds number Re ∈ [101 , 103 ],and Grashof
+      number Gr ∈ [101 , 107 ]. This range offers a variety of forced Gr/Re2 ≈ 0.1 , mixed, and
+      free convection Gr/Re2 ≈ 10 scenarios. In this case, there are nearly 9000 unique samples
+                                        
+      for 2D and 500 unique samples for 3D.
+    – For the transient case, we consider a variant of another canonical fluid dynamics problem –
+      flow past a bluff object (FPO) – which is an example of external flow. Here, we consider flow
+      moving past a stationary (complex geometry) object that is placed in a large domain. The
+      fluid exhibits various intricate time-dependent patterns as it moves past the object. For each
+      object, we simulate across a range of Reynolds number Re ∈ [102 , 103 ], offering an array of
+      vortex-shedding frequencies and other time-dependent patterns. In this case, there are over
+      1000 unique samples in 2D.
+  We provide field data of velocity, pressure, and temperature for each of the 10K+ simulations.
+  Additionally, we provide summary engineering features, including the coefficient of lift (CL ), drag
+  (CD ), and the average heat transfer (Nusselt number, N u) from the surface of the complex object.
+  We provide our dataset as a benchmark for others interested in the development and evaluation of
+  SciML models
+• Benchmark metrics and comparisons: Besides the dataset, we also include workflows to train
+  three types of neural operators – Fourier Neural Operators (FNO), Convolutional Neural Operators
+  (CNO), and Deep Operator Networks (DeepONets). We provide trained operator networks for the
+  steady-state case and comprehensive evaluation metrics for all cases. We also suggest a hierarchy
+  of in-distribution and out-of-distribution tests to evaluate the generalizability of these models.
+The dataset (consisting of 10K+ samples), evaluation metrics, workflows, and trained models
+together make FlowBench a valuable tool for the ML community to create SciML solvers of coupled
+phenomena involving complex geometries. All data, visualizations, models, and model evaluations
+are available on the FlowBench website.
+
+2   Related Work
+Most publicly available benchmark datasets are summarized and compared in Table 1. PDEBench [26]
+presents a dataset consisting of simulations run for a wide range of PDEs, not just flow physics. It
+includes simulations for both compressible and incompressible Navier-Stokes problems, in both two
+and three dimensions.
+CFDBench [21] is a fluid flow-focused dataset containing a total of 739 cases. These cases are
+distributed across various setups: lid-driven cavity (with varying density and viscosity over 25
+different length and width combinations), tube flow (varying density, viscosity, and geometry, with
+50 different inlet velocity conditions), dam flow, and cylinder flow specialties.
+
+
+                                                  3
+Table 1: Comparison of incompressible flow simulation data in AirfRANS, Curated Dataset, CFDBench,
+MegaFlow, Eagle, Graph-Mesh, PDEBench, and our FlowBench . An orange check mark indicates a restricted
+family of shapes (Airfoil: AirRANS and Graph-Mesh; Cylinder: CFDBench, Cylinders and Ellipses: MegaFlow;
+Drone geometry: Eagle).
+             Name                Dimensions       # Simulations       Geometry         Multiphysics
+        AirfRANS [20]                2                1000               ✓                  ✗
+     Curated Dataset [25]            2                 116               ✗                  ✗
+        CFDBench [21]                2                 739               ✓                  ✗
+        MegaFlow [22]                2                3000               ✓                  ✗
+           Eagle [23]                2                1200               ✓                  ✗
+       Graph-Mesh [24]               2                 230               ✓                  ✗
+        PDEBench [26]                2                1000               ✗                  ✗
+        ScalarFlow [27]              3                 100               ✗                  ✓
+    Fluid Flow Dataset [28]          2                8000               ✗                  ✗
+        BubbleML [29]               2,3                 79               ✗                  ✓
+      FlowBench (ours)              2,3               10650              ✓                  ✓
+
+Megaflow2D [22] is a comprehensive collection of 3000 cases for 2D Navier-Stokes problems.
+Each case features different geometrical configurations, including circles, ellipses, and nozzles. All
+simulations are performed at a fixed Reynolds number of 300.
+McConkey et al. [25] focuses exclusively on 2D turbulence simulations, covering 841 different cases
+across 29 flow scenarios such as a periodic hill, square duct, parametric bump, converging-diverging
+channel, and curved backward-facing step. Each scenario includes 29 simulations with varying
+parameters, such as Reynolds numbers, producing 841 data samples.
+The Graph-Mesh [24] dataset simulates incompressible 2D Navier-Stokes problems at high Reynolds
+numbers (greater than 106 ) exclusively for Aerofoils. It varies the angle of attack, inlet velocity,
+Reynolds number, and Mach number for a total of 230 simulations. A distinguishing feature is the
+calculation of drag and lift after fitting the SciML models, not just the solutions.
+WeatherBench [19] condenses raw weather data from the ERA5 dataset by reducing resolution levels
+to fit within a GPU. Along with discrete weather-based variables, WeatherBench runs simulations for
+a range of u, v velocities, temperature, and vorticity. It uses the entire world as its grid and provides
+both 2D and 3D data post-processed from the ERA5 dataset.
+ScalarFlow [27] is the multiphysics simulation dataset coupling Navier-Stokes with density distribu-
+tion solving, focusing on buoyancy-driven smoke plume reconstructions. It provides volumetric 3D
+flow reconstructions for complex buoyancy-driven flows transitioning to turbulence.
+The Fluid Flow Dataset [28] contains 8000 unsteady 2D fluid flow simulations, each with 1001 time
+steps, parameterized by Reynolds number.
+BubbleML [29] is another multiphysics dataset to couple two-phase Navier-Stokes and energy
+equations. It includes 79 simulations covering nucleate pool boiling, flow boiling, and sub-cooled
+boiling under various gravity conditions, flow rates, sub-cooling levels, and wall superheat.
+
+3     FlowBench
+
+3.1   Geometries
+
+Our dataset includes three distinct categories of geometries, namely G1, G2, and G3 as illustrated in
+Figure 2. The first set of geometries, G1, consists of parametric shapes generated using Non-Uniform
+Rational B-Splines (NURBS) curves. NURBS are mathematical representations used in computer
+graphics and CAD systems to generate and represent curves and surfaces. They offer great flexibility
+and precision in modeling complex shapes. Each NURBS curve is defined by a set of control
+points, the degree of the basis function, and knot vectors [30]. We use a uniform knot vector with a
+second-order (quadratic) basis function, which remains fixed. However, the positions of eight control
+points are randomly varied to produce a variety of curves. We ensure that the shapes are smooth and
+
+
+                                                   4
+           G1
+
+
+
+           G2
+
+
+
+           G3
+
+
+      Figure 2: Examples of the diverse and complex geometries in FlowBench using 9 samples from each of the
+      three groups. The first row corresponds to geometries from the nurbs group G1, the second row to the spherical
+      harmonics group G2, and the third row to the skelneton group G3.
+
+      do not have any discontinuities or self-intersections. All shapes are normalized to fit within the unit
+      hypercube, [0, 1]2 . We provide the shapes as well as code for recreating these geometries.
+     The next set of geometries, G2, consists of parametric shapes generated using spherical harmon-
+     ics [31]. We randomly select N = 8, ..., 15 harmonics with amplitudes (an , bn ) ranging from 0 to
+                                            PN
+     0.2. The radial function r(t) = 0.5 + n=1 (an cos(nt) + bn sin(nt)) then defines the shape; and
+     is computed at 500 evenly spaced points in t ∈ [0, 2π]. We normalize
+                                                                       r(t) so that any surface point is
+                                                                       r(t)
+     within a distance of 0.5 from the center of the shape, r(t) = 0.5 rmax . We provide shapes as well
+     as code for recreating these geometries.
+     The last set of geometries, G3, consist of non-parametric shapes sampled from the grayscale dataset
+     in SkelNetOn [32, 33]. We apply a Gaussian blur filter with a scale of 2 to smoothen out some of the
+     thin features of the object. This ensures the shape remains consistent across the three resolutions we
+     provide data for. We then scale the shape to ensure it is contained in the unit hypercube [0, 1]2 .
+      interactions
+137 137            between
+          interactions      the the
+                       between        the the
+                                lid, lid, cavity walls,
+                                              cavity    andand
+                                                     walls,     objects’
+                                                            the the      surfaces.
+                                                                    objects’       A key
+                                                                             surfaces.    challenge
+                                                                                       A key        is the
+                                                                                             challenge     flowflow
+                                                                                                        is the
+      3.2
+      separation
+138 138      Flow
+         separation Physics
+                 andand         Problem:
+                     recirculation zones
+                         recirculation        Domain,
+                                         around
+                                       zones     these
+                                             around        Boundary
+                                                       shapes
+                                                     these    in the
+                                                           shapes         Conditions,
+                                                                     middle
+                                                                  in the    of the
+                                                                         middle    domain.
+                                                                                of the    and  Outputs
+                                                                                           ThinThin
+                                                                                       domain.  structures
+                                                                                                    structures
+      on the
+139 139      surfaces
+          on the      cause
+                 surfaces cause       to separate
+                            the the
+                                flowflow          intointo
+                                          to separate  smaller circulation
+                                                           smaller         regions,
+                                                                   circulation      as illustrated
+                                                                               regions,            in Table
+                                                                                        as illustrated      2 2
+                                                                                                       in Table
+      andthe
+      In
+140 140     Table
+          and   Table
+                2D      Our
+                     3.LDC    detailed
+                         3. Our setup,   simulations
+                                   detailed    simulations
+                                          a square           capture    the
+                                                                   capture
+                                                            features         intricate
+                                                                             the
+                                                                          three           flowflow
+                                                                                  intricate
+                                                                                    stationary  patterns   around
+                                                                                                     patterns
+                                                                                                     walls     around
+                                                                                                              and    different
+                                                                                                                     one       shapes,
+                                                                                                                         different
+                                                                                                                           moving   shapes,
+                                                                                                                                       lid, with a domain size
+      providing
+141 141   providing essential   insights
+                        essential         intointo
+                                    insights              dynamics
+                                                 fluidfluid            around
+                                                                dynamics    aroundcomplex
+                                                                                       complexobjects.  At low
+                                                                                                   objects.       Reynolds
+                                                                                                             At low          numbers,
+                                                                                                                      Reynolds    numbers,
+      of
+      the the
+142 142
+          [0,   2]
+           flowflow   ×
+                 features[0,   2].
+                             a large
+                       features
+                                     An    object
+                                       vortex
+                                  a large  vortexabove   is
+                                                       above
+                                                              placed
+                                                            the the
+                                                                  object, in
+                                                                      object,
+                                                                               the
+                                                                           whichwhich
+                                                                                      middle
+                                                                                     shifts  downward
+                                                                                          shifts
+                                                                                                   of  the
+                                                                                                  downward
+                                                                                                             flow
+                                                                                                          as the
+                                                                                                               as the
+                                                                                                                     within
+                                                                                                                   Reynolds
+                                                                                                                       Reynolds
+                                                                                                                                the
+                                                                                                                               numberchamber.
+                                                                                                                                   number
+                                                                                                                                                  Examples of
+      LDC
+      increases
+143 143        simulations
+          increases duedue         showing
+                         to stronger
+                             to strongerconvection.streamlines
+                                            convection.    Thin  Thin    and
+                                                                         sharp
+                                                                    andand     y-direction
+                                                                                 geometries
+                                                                              sharp   geometries   velocities,
+                                                                                                 introduce                  with
+                                                                                                                   alongcomplexity,
+                                                                                                             additional
+                                                                                                     introduce    additional        the drag coefficient (CD )
+                                                                                                                              complexity,
+      and
+      resulting
+144 144      lift incoefficient
+          resulting   more
+                       in more              ) values,
+                                      (CLregions.
+                             circulation
+                                  circulation    regions. We We are   shown
+                                                                alsoalso
+                                                                      observe
+                                                                          observe in vorticities
+                                                                                      Figure
+                                                                                 vorticities       3.
+                                                                                               forming Increasing
+                                                                                                         at the
+                                                                                                   forming    at the         Reynolds
+                                                                                                                        thecorners
+                                                                                                                 domain’s
+                                                                                                                     domain’s         at at number brings the
+                                                                                                                                 corners
+      higher
+      vortices
+145 145        Reynolds
+          higher    Reynolds
+                    closer  numbers.
+                               tonumbers.
+                                   the right wall, with additional vortices forming at the bottom-left and bottom-right
+      corners.
+          Table
+      Table
+     Table
+        Table 2:Drag
+             2:  Drag
+                2:    With
+                  2:Drag
+                      Drag     increasing
+                        coefficients
+                             coefficients
+                         coefficients (C
+                           coefficients(C(C
+                                         DD(C
+                                           ),),and
+                                            D ), and lift coefficients (CL ) for different shapes and different Reynolds numbers
+                                               D  ),Reynolds
+                                                and   lift
+                                                     and              numbers,
+                                                       liftcoefficients
+                                                            lift coefficients
+                                                            coefficients  (C   ))for
+                                                                           (CLL(C for   thedifferent
+                                                                                       different
+                                                                                       for    smaller
+                                                                                   L )different  shapes
+                                                                                                  shapes   viscous
+                                                                                                      shapes
+                                                                                                          and
+                                                                                                         and   different
+                                                                                                              different
+                                                                                                              and       forces
+                                                                                                                             Reynolds
+                                                                                                                         Reynolds
+                                                                                                                         Reynolds
+                                                                                                                   different       acting
+                                                                                                                                   numbers
+                                                                                                                                    numbers on the geometries
+                                                                                                                                        numbers
+      Table   2: Drag
+          Table
+      decrease    2:     coefficients
+                      Drag
+                      both              (C C
+                             coefficients   (C   and
+                                              ), D      lift coefficients
+                                                    ), and                   (CL(C
+                                                              lift coefficients    ) for
+                                                                                      L ) different  shapes
+                                                                                          for different      andand
+                                                                                                         shapes    different Reynolds
+                                                                                                                       different Reynolds
+                                 D and D       L.
+      inpure-NS
+     in  pure-NS
+        inin pure-NS
+            pure-NS  LDC
+                    LDC    simulations.
+                          simulations.
+                         LDC
+                       LDC    Csimulations.
+                             simulations.
+      numbers in
+         numbers
+               Re
+               Repure-NS
+                  in=pure-NS
+                   =Re
+                  Re  11
+                      = =1111LDC
+                       11        simulations.
+                               LDC  simulations.
+                                            ReRe  =533
+                                                 =533
+                                                =Re
+                                               Re   =533
+                                                      533                                 Re
+                                                                                         Re   ==662
+                                                                                           Re=Re  = 662
+                                                                                                 662
+                                                                                                  662                         Re
+                                                                                                                             ReRe=Re  = 970
+                                                                                                                                  ==970
+                                                                                                                                     970
+                                                                                                                                     970
+               Re = Re11= 11               Re =Re533
+                                                  = 533                                   Re662
+                                                                                       Re =   = 662                       Re =
+                                                                                                                             Re970
+                                                                                                                                = 970
+
+
+
+
+               C
+               CD
+               C DCC=
+                  D  D=DD-3.935
+                          -3.935
+                         -7.869
+                          =    -3.935
+                           ==-3.935
+                               -7.869             CCC
+                                                    DDC
+                                                      D ==
+                                                       =C
+                                                        D
+                                                        D  -0.743
+                                                            =-0.743
+                                                              =-0.074
+                                                          -0.149
+                                                           D      -0.743
+                                                                -0.149               CDCC=
+                                                                                        CC
+                                                                                         D D
+                                                                                           DC
+                                                                                            D===D
+                                                                                            -0.087 = -0.043
+                                                                                                  -0.043
+                                                                                                =-0.043
+                                                                                                   -0.043
+                                                                                                  -0.087                CD C=CC
+                                                                                                                              D
+                                                                                                                              D0.007
+                                                                                                                               DD====
+                                                                                                                                 C  D  = 0.004
+                                                                                                                                     0.004
+                                                                                                                                      0.004
+                                                                                                                                      0.004
+                                                                                                                                    0.007
+               C
+               C     =L=LL0.175
+                CLLLCC    0.087
+                          =    0.175
+                            ==0.087
+                           0.0870.087              CCCC
+                                                     LL=C
+                                                       L  0.171
+                                                         L=
+                                                         = L    0.171
+                                                               =0.085
+                                                            =0.085
+                                                            0.085 0.085              CLCC
+                                                                                        C=CL0.046
+                                                                                          LLC
+                                                                                            L===L 0.046
+                                                                                                =0.023
+                                                                                                  0.023
+                                                                                                   = 0.023
+                                                                                                   0.023                CL C=CC
+                                                                                                                              L
+                                                                                                                              L0.010
+                                                                                                                               LL=
+                                                                                                                                 ===L
+                                                                                                                                 C  0.010
+                                                                                                                                    0.005
+                                                                                                                                     0.005
+                                                                                                                                       = 0.005
+                                                                                                                                      0.005
+
+      Figure
+      ForFor
+146 146          3: 2D
+           the the
+                 2D  Drag     coefficients
+                     Navier-Stokes
+                          Navier-Stokes      heat
+                                        andand(Cheat   ), and
+                                                   Dtransfer   lift coefficients
+                                                               (NSHT)
+                                                          transfer  (NSHT)lid-driven(Ccavity
+                                                                                        L ) cavity
+                                                                              lid-driven     for(LDC)
+                                                                                                 different
+                                                                                                   (LDC)    shapes
+                                                                                                       problem,    theand
+                                                                                                            problem,   the   different Reynolds numbers
+                                                                                                                        bottom
+                                                                                                                            bottom
+         Table
+      Table
+     Table  3:
+        Table    3:
+             3: Drag Drag
+                3: Drag
+                Drag        acoefficients
+                         coefficients
+                     coefficients
+                      coefficients  (CDD(C
+                                   (C     (C1,of),while
+                                         ), D
+                                        ),D lift
+                                             lift  liftwhile
+                                               ), coefficients
+                                                  lift
+                                                   coefficients
+                                                        coefficients
+                                                                 (CLL(C
+                                                                (C
+                                                       coefficients  (Cwall
+                                                                      ), and
+                                                                     ),Lis),set
+                                                                           ), and
+                                                                          andand  Nusselt
+                                                                               Nusselt
+                                                                              Nusselt  numbers
+                                                                                  Nusselt
+                                                                                        numbers
+                                                                                            numbersof
+                                                                                                (Nu)
+                                                                                          numbers    (Nu)
+                                                                                                      for
+                                                                                                       for different
+                                                                                                 (Nu)(Nu)  for
+                                                                                                           for different
+                                                                                                            different     shapes
+                                                                                                                       shapes
+                                                                                                                different
+                                                                                                                      shapes  and
+                                                                                                                          shapes  and
+                                                                                                                               andand
+      in pure-NS
+      wall
+147 147      is set
+          wall   is to
+                    setLDC      simulations.
+                       atotemperature
+                               temperatureof       1,     the the
+                                                              top top
+                                                                   wall  L   is to
+         different Richardson numbers in NSHT LDC simulations (fixed Re = 100).
+                                                                                setatotemperature
+                                                                                        a temperature  0.ofThe  left left
+                                                                                                            0. The    andand
+                                                                                                                           right
+                                                                                                                               right
+      different
+     different
+     walls
+148 148   walls     Richardson
+          different
+                Richardson
+               Richardson
+             have zero-flux
+                 have       numbers
+                             numbers
+                             boundary
+                       zero-fluxnumbers  NSHT
+                                          in conditions.
+                                    ininconditions.
+                                        NSHT
+                                 boundary    NSHTLDC
+                                                LDC LDC
+                                                     simulations
+                                                      simulations
+                                                     The simulations
+                                                         The      (fixed
+                                                                 (fixed
+                                                          geometry
+                                                             geometry     Re
+                                                                      (fixed
+                                                                         Re
+                                                                     also   ==
+                                                                           has
+                                                                         alsoRea100).
+                                                                                 = a100).
+                                                                               100).
+                                                                                 Dirichlet
+                                                                               has         boundary
+                                                                                     Dirichlet      condition
+                                                                                               boundary       withwith
+                                                                                                        condition
+149 149        RiRi
+              Ri  ==
+      a temperature  =
+           a temperature0.1085
+                      0.1085
+                   Ri0.1085
+                       =of0.1085
+                           0.ofExamples
+                                0. Examples     ofRi
+                                               Ri
+                                                Ri  = =1.0097
+                                            of NSHT-LDC =1.0097
+                                                  =NSHT-LDC
+                                                    Ri1.0097
+                                                           1.0097
+                                                               simulations,
+                                                                   simulations,  RiRi
+                                                                                 Ri  ==
+                                                                               showingRi=5.4072
+                                                                                          5.4072
+                                                                                    showing5.4072
+                                                                                           =  5.4072
+                                                                                            streamlines,
+                                                                                                streamlines,    Ri Ri==
+                                                                                                                  Ri  Ri
+                                                                                                          temperatures,=9.8434
+                                                                                                                          9.8434
+                                                                                                                          =and
+                                                                                                                         9.8434
+                                                                                                              temperatures,  9.8434
+                                                                                                                                the the
+                                                                                                                               and
+      values
+150 150                ,C
+               of CofD C
+           values        DL, ,Cand
+                                L , and       presented
+                                          are are
+                                     Nu,Nu,       presentedin Table   3. When
+                                                               in Table    3. When we increase
+                                                                                       we increase     Richardson
+                                                                                                   the the Richardsonnumber,    we we
+                                                                                                                          number,
+      observe
+151 151          higher
+           observe        CD Cand
+                     higher          CL .CAL .higher
+                                 D and                Richardson
+                                               A higher    Richardsonnumber
+                                                                          number       5 thatthat
+                                                                                indicates
+                                                                                     indicates    buoyancy   effects
+                                                                                                      buoyancy        (caused
+                                                                                                                  effects        by by
+                                                                                                                           (caused
+      temperature
+152 152    temperature differences)
+                           differences)     more
+                                       are are     significant
+                                                more             thanthan
+                                                        significant          flow’s
+                                                                        the the       inertia,
+                                                                                  flow’s         which
+                                                                                            inertia,     means
+                                                                                                     which       thatthat
+                                                                                                             means          heated
+                                                                                                                       the the  heated
+      fluidfluid
+153 153             more
+             risesrises    strongly,
+                        more            creating
+                                strongly,         more
+                                            creating      circulation
+                                                       more   circulationwithin    the the
+                                                                              within     chamber.
+                                                                                             chamber.     increased
+                                                                                                     TheThe           circulation
+                                                                                                              increased    circulation
+      flowflow
+154 154      results  in stronger
+                 results  in strongerforces  acting
+                                         forces      on the
+                                                 acting       object,
+                                                          on the       leading
+                                                                  object,         to higher
+                                                                            leading            CD Cand
+                                                                                       to higher         CL .CL .
+                                                                                                     D and
+
+      For For
+155 155   the the setup,
+              FPOFPO     a parabolic
+                      setup,                boundary
+                                     inletinlet
+                             a parabolic             condition
+                                                boundary       is applied
+                                                         condition        on the
+                                                                   is applied    inletinlet
+                                                                              on the    wall, no-slip
+                                                                                            wall,     Dirichlet
+                                                                                                  no-slip Dirichlet
+         Table
+     Table     2: Drag
+           2: Drag               (CD(C
+                        coefficients
+                    coefficients                lift coefficients
+                                         lift), coefficients
+                                      ), D                    (CL(C  L ), and
+                                                                  ), and      Nusselt
+                                                                          Nusselt      numbers
+                                                                                  numbers    (Nu)(Nu) for different
+                                                                                                  for different     shapes
+                                                                                                                shapes
+     and and different
+         different     Richardson
+                   Richardson        numbers
+                                 numbers           in NSHT
+                                              in NSHT     LDCLDC     simulations
+                                                                simulations       (fixed
+                                                                              (fixed Re =Re100).
+                                                                                              = 100).
+                     = 0.1085
+             Ri =Ri0.1085                               = 1.0097
+                                                Ri =Ri1.0097                            = 5.4072
+                                                                                Ri =Ri5.4072                          = 9.8434
+                                                                                                              Ri =Ri9.8434
+
+
+
+
+                     = -0.826
+                =D-0.826
+             CD C                            CD C    = -0.700
+                                                =D-0.700                            = -9.995
+                                                                               =D-9.995
+                                                                            CD C                                   = -13.234
+                                                                                                              =D-13.234
+                                                                                                           CD C
+                     = 0.071
+                = L0.071
+             CL C                            CL C    = -0.258
+                                                = L-0.258                           = 7.871
+                                                                               = L7.871
+                                                                            CL C                                   = -17.513
+                                                                                                              = L-17.513
+                                                                                                           CL C
+                     = 1.597
+                Nu1.597
+             Nu =                                    = 1.843
+                                                Nu1.843
+                                             Nu =                              Nu0.591
+                                                                            Nu =    = 0.591                    Nu0.933
+                                                                                                                    = 0.933
+                                                                                                            Nu =
+
+  Figure 4: Drag coefficients (CD ), lift coefficients (CL ), and Nusselt numbers (Nu) for different shapes and
+  different Richardson numbers in NSHT LDC simulations (fixed Re = 100).
+
+  For the 2D Navier-Stokes and heat transfer (NSHT) lid-driven cavity (LDC) problem, the bottom
+  wall is set to a temperature of 1, while the top wall is set to 0. The left and right walls have zero-flux
+  temperature boundary conditions. The object surface is set to a temperature of 0. This setup produces
+  a combination of forced convection (flow due to the moving lid) and Rayleigh-Benard instabilities
+  (flow due to buoyancy-driven
+                          (a)=Re
+                     (a) Re      = 100
+                               100        natural convection). Examples      (b)=Re
+                                                                        (b) Re         of NSHT-LDC simulations, showing
+                                                                                    = 534
+                                                                                  534
+  streamlines, temperatures, and the values of CD , CL , and Nu, are presented in Figure 4. We use
+  a non-dimensional number, Richardson number, defined as Ri = Gr/Re2 , representing the ratio
+  between buoyancy and inertial force. As Ri increases, we observe higher values of CD and CL . A
+  higher Richardson number indicates that buoyancy effects are more significant than the forced flow.
+  The heated fluid (c)    (c)=Re
+                      rises
+                         Re      = 700strongly, creating greater(d)
+                              more
+                               700                                          (d)=Re
+                                                                         circulation
+                                                                           Re       = 1000within the chamber. The increased
+                                                                                 1000
+               results
+  circulationFigure
+                 Figure in   stronger
+                        4: Flow
+                    4: Flow              forces
+                                  characteristics
+                              characteristics     atacting
+                                                     various
+                                              at various    on  thenumbers
+                                                             Reynolds
+                                                         Reynolds    object,
+                                                                      numbers   leading
+                                                                            (FPO,(FPO,     toNS).
+                                                                                    purepure
+                                                                                         NS). higher CD and CL .
+   For the FPO setup, we consider a domain [0, 64] × [0, 16] with the object placed at (6, 8). A parabolic
+   velocity
+     TheThe
+171 171
+               inlet
+              running
+          running      boundary
+                    timetime
+                          of simulationscondition
+                              of simulations           istheapplied
+                                                 to prepare
+                                             to prepare      the dataset
+                                                             dataset   ison  isthe
+                                                                           5874058740 left,
+                                                                                     nodes    no-slip
+                                                                                          nodes
+                                                                                             hourshours  boundary
+                                                                                                        on
+                                                                                                    on bothboth  Frontera
+                                                                                                            Frontera     conditions
+                                                                                                                        and and     are applied on
+172the  top  and bottom walls, and a zero pressure boundary condition is applied on the right. The large
+         Nova.
+     Nova.
+    172
+
+   domain size for the FPO problem is chosen to capture as much physical detail as possible in our
+173dataset.
+     3.4 3.4
+    173       We     report a smaller cropped-out region of size [0, 16] × [0, 4] from this dataset, representing
+               MetaData
+           MetaData
+   a tradeoff between dataset size and the amount of physics captured. Figure 5 shows time snapshots of
+         Input
+     Input      Fields:
+            Fields:      The
+                     Theshapes foundational
+                          foundational     goalgoal  of our
+                                                 ofvortex
+                                                    our      effort
+                                                         effort          to archive
+                                                                is toisarchive          the
+                                                                                   thethe    flow
+                                                                                        flowflow
+                                                                                               physics
+                                                                                                   physics around
+                                                                                                       around        a range
+                                                                                                                          of of around the object.
+                                                                                                                a range
+   representative
+174 174
+         geometries
+                                     showing                  shedding,          as                 rotates   and     stretches
+     geometries
+175 175           and and   inherent
+                       inherent   fluidfluid  characteristics
+                                         characteristics      designated
+                                                          designated    by the    thecalled
+                                                                              by so    so called   Reynolds
+                                                                                               Reynolds      number
+                                                                                                         number          -a -a
+                                                                                                                   (Re)(Re)
+   Movies
+     dimensionless
+176 176
+              of thequantity
+         dimensionless  time-dependent
+                           quantity
+                                 thatthat         flow
+                                           determines
+                                       determines         canthe
+                                                         whether
+                                                     whether    bethe seen
+                                                                    fluid fluidon
+                                                                            flow   isthe
+                                                                                 flow      FlowBench
+                                                                                        is laminar
+                                                                                      laminar             andwebsite.
+                                                                                                     (smooth
+                                                                                                 (smooth      and   orderly)
+                                                                                                               orderly)   or or
+177 177   turbulent
+     turbulent   (chaotic  and and
+                      (chaotic      irregular).
+                                irregular).  For For  example,
+                                                  example,        changing
+                                                              changing       the Reynolds
+                                                                        the Reynolds       number
+                                                                                       number   can can  fundamentally
+                                                                                                     fundamentally
+     alteralter
+178 178         the flow
+           the flow            eveneven
+                         physics
+                      physics            if geometry
+                                    if the  the geometry    of domain
+                                                       of the  the domain  is held
+                                                                      is held      constant.
+                                                                               constant.      thesethese
+                                                                                         WithWith        considerations,
+                                                                                                     considerations,
+179 179   we have
+     we have        provisioned
+                provisioned       the following
+                              the following        inputs
+                                              inputs       in our
+                                                      in our      study:
+                                                              study:
+
+
+                                                            6   6
+
+
+
+
+                           (a) Re = 100                                                                      (b) Re = 534
+
+
+
+
+                           (c) Re = 700                                                                     (d) Re = 1000
+  Figure 5: Time snapshots of vorticity for the FPO problem, illustrating vortex shedding profiles across four
+  samples of geometries and Reynolds numbers. Each sample showcases distinct flow characteristics and vortex
+  dynamics.
+
+
+                                                                            6
+The 3D LDC cases are similarly defined and simulated. Due to the computational expense of
+performing DNS simulations on 3D geometries, we report 500 simulations of complex objects. Here,
+we focused on parametric shapes, specifically ellipsoids and tori, exhibiting various aspect ratios and
+orientations.
+
+3.3   Simulation Framework and Compute effort
+
+Our simulation framework is a highly parallel octree-based CFD and multiphysics code. We account
+for complex geometries using a robust variant of the immersed boundary method, called the Shifted
+Boundary Method (SBM) [34, 35]. For readers interested in our framework’s SBM formulation and
+implementation, please refer to [36]. Our octree-based framework has been extensively validated
+and used in various applications like industrial-scale CFD simulations [37], two-phase flow [38],
+buoyancy-driven flows [39], and coupled multiphysics application [40]. For additional validation
+of the incompressible flow and thermal incompressible flow solving using SBM, please refer to
+Section A.5 in the appendix. All the 2D LDC cases are simulated using a uniform mesh of 512 × 512.
+All the 2D FPO cases are simulated using an adaptive mesh that resolved to the Kolmogorov length
+scale close to the object. All the 3D LDC cases are simulated using an adaptive mesh that resolved
+to 2X the Kolmogorov scale. Illustrations of the mesh are provided in Section A.3. We deployed
+this framework on one of the largest academic supercomputing clusters in the US, called TACC
+Frontera [41]. These simulations required about 65K nodehours of runtime.
+
+3.4   MetaData
+
+Input Fields: We have provisioned the following input fields
+1. Reynolds Number, Grashof Number: We feed the Reynolds and Grashof numbers as a con-
+   cordant (matching the dimensions of the flow domain e.g. for 2D lid driven cavity problem,
+   512 × 512) array comprising of a single integer value everwhere.
+2. Geometry Mask: A geometry mask (g) is a binary representation of a shape or object within a
+   spatial domain. Each element in the mask can have one of two values, typically 0 or 1, where:
+   0 indicates that the point is outside the object and 1 indicates that the point is inside the object.
+   The geometry mask helps in identifying and isolating the region of interest (the object) from the
+   background or surrounding space. This information is again packaged as a concordant array with
+   each entry marked as 0 or 1.
+3. Signed Distance Field (SDF): A Signed Distance Field (s) is a scalar field that represents the
+   shortest distance from any point in space to the surface of a given shape. The "signed" aspect of
+   the signed distance field indicates whether the point is inside or outside the shape. A negative
+   value indicates the point is inside the shape, while a positive value indicates the point is outside
+   the shape. A value of zero indicates the point is exactly on the surface of the shape. The SDF
+   provides additional information through the distance values, which is important for understanding
+   the spatial relationship between locations and the geometric boundary. This method offers richer
+   geometric information compared to the binary geometry mask, as it includes both positional and
+   distance information. Yet again, this information is packaged as a concordant array with each
+   entry representing the nearest distance to the geometrical shape.
+Output Fields: We are interested in obtaining field solutions (i.e., solutions at every point in the
+interior of the domain) for certain cardinal fields. For a 2D solution domain, these are: u - velocity in
+x direction, v - velocity in y direction, p - pressure and θ - temperature. Additionally, depending on
+whether we are solving a steady-state or a time-dependent problem, we would have either have one
+final snapshot of these cardinal fields or a sequence of these fields distributed uniformly over time.
+Resolution: We perform simulations at DNS resolution. FlowBench contains postprocessed simula-
+tion results at three different resolutions. This serves multiple purposes: First, it allows the community
+to systematically explore tradeoffs in the amount of data vs resolution vs accuracy. Second, since we
+perform non-interpolatory sub-sampling, this data allows the community to systematically test PDE
+super-resolution approaches. Finally, the lower-resolution datasets offer easier opportunities to train
+the data. For instance, at the time of submission, we could not train the 3D SciML models at the high-
+est resolution available. For the steady state cases, we provide data at resolutions 512 × 512(×512),
+256 × 256(×256), 128 × 128(×128). For the time dependant cases, we provide data at resolution
+2048 × 512, 1024 × 256, and 512 × 128. We provide 240 snapshots for each time-dependant case.
+
+
+                                                    7
+Dataset Format: All of our datasets are provided as numpy compressed (.npz) files. For each
+steady-state problem, we provide two .npz files - one for input and one for output. The input files are
+suffixed with the marker "_X.npz", and similarly, the corresponding output files are suffixed with
+the marker "_Y.npz". In 2D, each of these .npz files contains a 4D numpy tensor of the following
+form:
+                  [samples][number_of _channels][resolution_x][resolution_y]
+ For time-dependent problems, we provide a single file for each problem. This decision was taken to
+allow maximum flexibility to the end user in deciding what and how many time steps they want to use
+to train their models, as these time-dependent problems often take the shape of sequence-to-sequence
+formulations. In 2D, the resulting .npz files take the following form:
+      [samples][number_of _time_steps][number_of _channels][resolution_x][resolution_y]
+ We provide a total of over 10,000 samples spread across four families of datasets. Table 5 in the
+Appendix provides a detailed formulaic description of the packaging of the input and output numpy
+tensors for each of these five families.
+
+3.5     Evaluation Metrics and Test Datasets
+Evaluation metrics: We recommend a hierarchy of metrics (M 1, M 2, M 3, M 4) to comprehensively
+assess the performance of trained models using FlowBench :
+• M 1: Global metrics: The Mean Squared Error (MSE) over the entire domain is a good primary
+  metric to measure the accuracy of predicted velocity, pressure, and temperature fields, reflecting
+  how closely the model’s predictions match the true values.
+• M 2: Boundary layer metrics: The MSE of velocity, pressure, and temperature fields over a tight
+  bounding box encompassing the complex object (we suggest 10%). This tougher metric provides
+  insight into the model’s accuracy in predicting near-surface phenomena, which are crucial for
+  applications including flow diagnostics, shape design, and dynamic control.
+• M 3: Property metrics: An application-driven metric is to evaluate the accuracy of the summary
+  statistics – CD , CL , N u. The coefficients of lift and drag are critical for assessing the forces acting
+  on the object, while the average Nusselt number predicts heat transfer rates, all of which are key for
+  flow-thermal management and engineering applications. This is a more forgiving metric because it
+  represents spatially averaged properties.
+• M 4: Residual metrics: One can also evaluate how well the predicted field satisfies the underlying
+  (set of) PDE. Evaluating how well continuity (∇ · u = 0) is satisfied all over the domain is a
+  measure of respecting the conservation of mass. Similarly, the global average of the PDE residual
+  evaluates how well the model satisfies the underlying PDE in the domain.
+Test Datasets: We recommend evaluating trained models on two test scenarios
+• Standard: This is the standard 80-20 random split of the FlowBench data.
+• Hard: Here, we recommend splitting the data based on their operating characteristics, i.e. Reynolds
+  number and Grashof (or Richardson) number. Samples with (Re, Gr) in the intermediate range
+  (say, the middle 70%) should be used for training and tested against the out-of-distribution (Re, Gr)
+  samples. While the specifics of the flow patterns in this test dataset may differ from the training set,
+  the global features remain the same, thus providing a good test of generalizability.
+We provide code for creating the test data and evaluating these metrics. Together, these metrics and
+test datasets provide a comprehensive evaluation framework, allowing practitioners to evaluate model
+accuracy, physical consistency, and practical reliability.
+
+4      Experiments
+We report baseline results on training a suite of the most common neural PDE solvers. We studied
+the following (neural operator) frameworks and report results on the 2D LDC-NS: (a) Fourier
+Neural Operator (FNO) [42], (b) Convolutional Neural Operators (CNO) [43], (c) DeepONet [44].
+The results for the other cases will be available on the FlowBench website. We used the Python
+packages/code base released by the developers of these three approaches—deepxde (DeepONet),
+neuraloperators (FNO), ConvolutionalNeuralOperator (CNO)—and closely followed the published
+code examples. All models were trained on a single A100 80GB GPU, batch size 5 (for the 512 × 512
+resolution case), Adam optimizer with learning rate 10−3 , and run for 400 epochs. The validation
+loss seems to saturate by 400 epochs.
+
+
+                                                     8
+Table 2: The mean squared errors of CNO and FNO neural operators trained on the 2D LDC dataset at two
+different resolutions. All errors are reported on the validation dataset. We denote by * the cases in which our
+implementations diverged. 0+ indicates an error value comparable to machine precision.
+                                                    Metrics           FNO                     CNO
+                                                        M1              4.5 × 10−2            3.1 × 10−4
+                                    G1
+                                                        M2                9 × 10−3            2.5 × 10−4
+                                  512x512
+                                                        M3         0.31        0.31 0.0072 0.0061
+                                                        M1              4.8 × 10−2            3.8 × 10−4
+                                    G2
+                                                        M2              1.3 × 10 −2
+                                                                                              3.0 × 10−4
+                                  512x512
+                                                        M3          2.5         2.5 0.0066 0.0054
+     High Resolution
+                                                        M1              4.4 × 10−2            6.9 × 10−4
+                                    G3
+                                                        M2              9.2 × 10 −3
+                                                                                              4.5 × 10−4
+                                  512x512
+                                                        M3          2.6         2.6 0.0051 0.0046
+                                                        M1              4.6 × 10−2            2.1 × 10−4
+                             All (G1, G2, G3)
+                                                        M2              3.8 × 10 −3
+                                                                                              2.1 × 10−4
+                                  512x512
+                                                        M3         0.23        0.23 0.0052 0.0047
+                                                        M1                 O(103 )∗           4.4 × 10−4
+                                    G1
+                                                        M2                      3 ∗
+                                                                           O(10 )             6.5 × 10−4
+                                  256x256
+                                                        M3 O(10 )   3 ∗         3 ∗
+                                                                           O(10 )      0.0290          0+
+                                                        M1              4.9 × 10 −2
+                                                                                              2.7 × 10−4
+                                    G2
+                                                        M2              7.7 × 10 −2
+                                                                                              3.1 × 10−4
+                                  256x256
+                                                        M3          6.1         0 +
+                                                                                       0.0047          0+
+      Low Resolution
+                                                        M1                      3 ∗
+                                                                           O(10 )             4.9 × 10−4
+                                    G3
+                                                        M2                      3 ∗
+                                                                           O(10 )             6.8 × 10−4
+                                  256x256
+                                                        M3 O(10 )   3 ∗         3 ∗
+                                                                           O(10 )      0.0220          0+
+                                                        M1                      3 ∗
+                                                                           O(10 )             2.8 × 10−4
+                             All (G1, G2, G3)
+                                                        M2                      3 ∗
+                                                                           O(10 )             1.1 × 10−4
+                                  256x256
+                                                        M3 O(10 )   3 ∗         3 ∗
+                                                                           O(10 )      0.0210          0+
+While FNO and CNO perform well for the individual datasets, the combined (G1, G2, G3) dataset
+proved more difficult. Table 2 provides a global view of the performance of the three approaches.
+We evaluate on three of the metrics, across each of the geometry classes, and at 2 resolutions for
+FNOs, CNOs, and DeepONets. Unfortunately, we could not get the standard implementation of
+DeepONets to converge (detailed metrics are reported in the Appendix). Some of the mean squared
+error of the lift coefficient is very small and close to machine precision (O(10−8 )) and are denoted as
+0+ in Table 2. CNO performed well across all three metrics at both resolutions. In addition, CNO
+appears to require less tuning (just a single hyperparameter) to produce good results. However, we
+suspect that fine-tuning the models could improve performance, and we continue to explore this. We
+encourage the community to further test and build on these results.
+
+5    Conclusions
+We introduce a comprehensive benchmark dataset designed for evaluating neural solvers of flow
+simulations over complex geometries. FlowBench encompasses 2D and 3D simulations, covering
+many scenarios, from steady-state problems to time-dependent problems. FlowBench will be useful
+in advancing scientific machine-learning methods for complex geometries by providing datasets and
+evaluation metrics. Neural PDE solvers that can account for the effect of complex geometries can
+have a major impact on various applications ranging from bioengineering and power production to
+automotive and aerospace engineering defined by the interaction of complex geometrical objects with
+a fluid medium.
+Limitations: (1) At the time of submission, our evaluation of existing neural PDE solvers is limited to
+two of the four FlowBench datasets and on only three of the many promising neural PDE approaches.
+We invite the community to contribute to evaluating a broader set of approaches using this dataset
+and suggested metrics. (2) We plan to continue to add more data – and invite the CFD community
+to add more data – to FlowBench , especially for 3D simulations, and push the range of operating
+conditions (higher Re and Gr).
+
+
+                                                      9
+References
+ [1] David Greenblatt and Israel J Wygnanski. The control of flow separation by periodic excitation.
+     Progress in aerospace Sciences, 36(7):487–545, 2000.
+ [2] A Spohn and P Gilliéron. Flow separations generated by a simplified geometry of an automotive
+     vehicle. In IUTAM Symposium: unsteady separated flows, volume 1. Kluwer Academic„ 2002.
+ [3] D You and Parviz Moin. Active control of flow separation over an airfoil using synthetic jets.
+     Journal of Fluids and structures, 24(8):1349–1357, 2008.
+ [4] Rubina Ramponi and Bert Blocken. Cfd simulation of cross-ventilation for a generic isolated
+     building: Impact of computational parameters. Building and environment, 53:34–48, 2012.
+ [5] Tore A Helgedagsrud, Yuri Bazilevs, Kjell M Mathisen, and Ole A Øiseth. Ale-vms methods
+     for wind-resistant design of long-span bridges. Journal of Wind Engineering and Industrial
+     Aerodynamics, 191:143–153, 2019.
+ [6] Kendrick Tan, Boshun Gao, Cheng-Hau Yang, Emily L Johnson, Ming-Chen Hsu, Alberto
+     Passalacqua, Adarsh Krishnamurthy, and Baskar Ganapathysubramanian. A computational
+     framework for transmission risk assessment of aerosolized particles in classrooms. Engineering
+     with Computers, pages 1–22, 2023.
+ [7] Jung-Hee Seo and Rajat Mittal. Improved swimming performance in schooling fish via leading-
+     edge vortex enhancement. Bioinspiration & Biomimetics, 17(6):066020, 2022.
+ [8] Yi Zhu, Fang-Bao Tian, John Young, James C Liao, and Joseph CS Lai. A numerical study
+     of fish adaption behaviors in complex environments with a deep reinforcement learning and
+     immersed boundary–lattice boltzmann method. Scientific Reports, 11(1):1691, 2021.
+ [9] Jialei Song, Haoxiang Luo, and Tyson L Hedrick. Three-dimensional flow and lift characteristics
+     of a hovering ruby-throated hummingbird. Journal of The Royal Society Interface, 11(98):
+     20140541, 2014.
+[10] T Engels, D Kolomenskiy, Kai Schneider, F-O Lehmann, and J Sesterhenn. Bumblebee flight in
+     heavy turbulence. Physical review letters, 116(2):028103, 2016.
+[11] Fei Xu, Emily L Johnson, Chenglong Wang, Arian Jafari, Cheng-Hau Yang, Michael S Sacks,
+     Adarsh Krishnamurthy, and Ming-Chen Hsu. Computational investigation of left ventricular
+     hemodynamics following bioprosthetic aortic and mitral valve replacement. Mechanics Research
+     Communications, 112:103604, 2021.
+[12] LL Ting. Effects of dimple size and depth on golf ball aerodynamic performance. In Fluids
+     engineering division summer meeting, volume 36975, pages 811–817, 2003.
+[13] Muhammad Mahmood Aslam Bhutta, Nasir Hayat, Muhammad Hassan Bashir, Ahmer Rais
+     Khan, Kanwar Naveed Ahmad, and Sarfaraz Khan. Cfd applications in various heat exchangers
+     design: A review. Applied Thermal Engineering, 32:1–12, 2012.
+[14] Chamil Abeykoon. Compact heat exchangers–design and optimization with cfd. International
+     Journal of Heat and Mass Transfer, 146:118766, 2020.
+[15] Rajagopalan Priyadarsini, Wong Nyuk Hien, and Cheong Kok Wai David. Microclimatic
+     modeling of the urban thermal environment of singapore to mitigate urban heat island. Solar
+     energy, 82(8):727–745, 2008.
+[16] Jonas Allegrini and Jan Carmeliet. Simulations of local heat islands in zürich with coupled cfd
+     and building energy models. Urban climate, 24:340–359, 2018.
+[17] Suvanjan Bhattacharyya, Kunal Dey, Akshoy Ranjan Paul, and Ranjib Biswas. A novel cfd
+     analysis to minimize the spread of covid-19 virus in hospital isolation room. Chaos, Solitons &
+     Fractals, 139:110294, 2020.
+[18] Kumar Saurabh, Masado Ishii, Makrand A Khanwale, Hari Sundar, and Baskar Ganapathysubra-
+     manian. Scalable adaptive algorithms for next-generation multiphase flow simulations. In 2023
+     IEEE International Parallel and Distributed Processing Symposium (IPDPS), pages 590–601.
+     IEEE, 2023.
+[19] Stephan Rasp, Peter D. Dueben, Sebastian Scher, Jonathan A. Weyn, Soukayna Mouatadid,
+     and Nils Thuerey. Weatherbench: A benchmark data set for data-driven weather forecasting.
+     Journal of Advances in Modeling Earth Systems, 12(11), November 2020. ISSN 1942-2466.
+     doi: 10.1029/2020ms002203. URL http://dx.doi.org/10.1029/2020MS002203.
+
+
+                                                10
+[20] Florent Bonnet, Jocelyn Mazari, Paola Cinnella, and Patrick Gallinari. Airfrans: High fi-
+     delity computational fluid dynamics dataset for approximating reynolds-averaged navier–stokes
+     solutions. Advances in Neural Information Processing Systems, 35:23463–23478, 2022.
+[21] Yining Luo, Yingfa Chen, and Zhen Zhang. Cfdbench: A large-scale benchmark for machine
+     learning methods in fluid dynamics, 2024.
+[22] Wenzhuo Xu, Noelia Grande Gutierrez, and Christopher McComb. MegaFlow2D: A parametric
+     dataset for machine learning super-resolution in computational fluid dynamics simulations. In
+     Proceedings of Cyber-Physical Systems and Internet of Things Week 2023. Association for
+     Computing Machinery, 2023. URL https://doi.org/10.1145/3576914.3587552.
+[23] Steeven Janny, Aurélien Béneteau, Madiha Nadri, Julie Digne, Nicolas Thome, and Christian
+     Wolf. Eagle: Large-scale learning of turbulent fluid dynamics with mesh transformers, 2023.
+[24] Florent Bonnet, Jocelyn Ahmed Mazari, Thibaut Munzer, Pierre Yser, and Patrick Gallinari.
+     An extensible benchmarking graph-mesh dataset for studying steady-state incompressible
+     navier-stokes equations, 2022.
+[25] Ryley McConkey, Eugene Yee, and Fue-Sang Lien. A curated dataset for data-driven turbu-
+     lence modelling. Scientific Data, 8(1), September 2021. ISSN 2052-4463. doi: 10.1038/
+     s41597-021-01034-2. URL http://dx.doi.org/10.1038/s41597-021-01034-2.
+[26] Makoto Takamoto, Timothy Praditia, Raphael Leiteritz, Dan MacKinlay, Francesco Alesiani,
+     Dirk Pflüger, and Mathias Niepert. Pdebench: An extensive benchmark for scientific machine
+     learning, 2023.
+[27] Marie-Lena Eckert, Kiwon Um, and Nils Thuerey. Scalarflow: a large-scale volumetric data
+     set of real-world scalar transport flows for computer animation and machine learning. ACM
+     Transactions on Graphics (TOG), 38(6):1–16, 2019.
+[28] Jakob Jakob, Markus Gross, and Tobias Günther. A fluid flow data set for machine learning
+     and its application to neural flow map interpolation. IEEE Transactions on Visualization and
+     Computer Graphics, 27(2):1279–1289, 2020.
+[29] Sheikh Md Shakeel Hassan, Arthur Feeney, Akash Dhruv, Jihoon Kim, Youngjoon Suh, Jaiy-
+     oung Ryu, Yoonjin Won, and Aparna Chandramowlishwaran. BubbleML: A multiphase
+     multiphysics dataset and benchmarks for machine learning. In Thirty-seventh Conference
+     on Neural Information Processing Systems Datasets and Benchmarks Track, 2023. URL
+     https://openreview.net/forum?id=0Wmglu8zak.
+[30] Les Piegl and Wayne Tiller. The NURBS book. Springer Science & Business Media, 2012.
+[31] Deheng Wei, Jianfeng Wang, and Budi Zhao. A simple method for particle shape generation
+     with spherical harmonics. Powder Technology, 330:284–291, 2018. ISSN 0032-5910. doi:
+     https://doi.org/10.1016/j.powtec.2018.02.006. URL https://www.sciencedirect.com/
+     science/article/pii/S0032591018301189.
+[32] Ilke Demir, Camilla Hahn, Kathryn Leonard, Geraldine Morin, Dana Rahbani, Athina Pan-
+     otopoulou, Amelie Fondevilla, Elena Balashova, Bastien Durix, and Adam Kortylewski. Skel-
+     neton 2019: Dataset and challenge on deep learning for geometric shape understanding. In
+     Proceedings of the IEEE/CVF conference on computer vision and pattern recognition workshops,
+     pages 0–0, 2019.
+[33] Rowel Atienza. Pyramid u-network for skeleton extraction from shape points. In The IEEE
+     Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, June 2019.
+[34] Alex Main and Guglielmo Scovazzi. The shifted boundary method for embedded domain
+     computations. part i: Poisson and stokes problems. Journal of Computational Physics, 372:
+     972–995, 2018.
+[35] Alex Main and Guglielmo Scovazzi. The shifted boundary method for embedded domain
+     computations. part ii: Linear advection-diffusion and incompressible navier-stokes equations. J.
+     Comput. Phys., 372:996–1026, 2018.
+[36] Cheng-Hau Yang, Kumar Saurabh, Guglielmo Scovazzi, Claudio Canuto, Adarsh Krishna-
+     murthy, and Baskar Ganapathysubramanian. Optimal surrogate boundary selection and scalabil-
+     ity studies for the shifted boundary method on octree meshes. Computer Methods in Applied
+     Mechanics and Engineering, 419:116686, 2024.
+
+
+                                                 11
+[37] Kumar Saurabh, Boshun Gao, Milinda Fernando, Songzhe Xu, Makrand A Khanwale, Biswajit
+     Khara, Ming-Chen Hsu, Adarsh Krishnamurthy, Hari Sundar, and Baskar Ganapathysubrama-
+     nian. Industrial scale large eddy simulations with adaptive octree meshes using immersogeo-
+     metric analysis. Computers & Mathematics with Applications, 97:28–44, 2021.
+[38] Makrand A Khanwale, Kumar Saurabh, Masado Ishii, Hari Sundar, James A Rossmanith, and
+     Baskar Ganapathysubramanian. A projection-based, semi-implicit time-stepping approach for
+     the cahn-hilliard navier-stokes equations on adaptive octree meshes. Journal of Computational
+     Physics, 475:111874, 2023.
+[39] Songzhe Xu, Boshun Gao, Ming-Chen Hsu, and Baskar Ganapathysubramanian. A residual-
+     based variational multiscale method with weak imposition of boundary conditions for buoyancy-
+     driven flows. Computer Methods in Applied Mechanics and Engineering, 352:345–368, 2019.
+[40] Sungu Kim, Kumar Saurabh, Makrand A Khanwale, Ali Mani, Robbyn K Anand, and Baskar
+     Ganapathysubramanian. Direct numerical simulation of electrokinetic transport phenomena
+     in fluids: Variational multi-scale stabilization and octree-based mesh refinement. Journal of
+     Computational Physics, 500:112747, 2024.
+[41] Dan Stanzione, John West, R Todd Evans, Tommy Minyard, Omar Ghattas, and Dhabaleswar K
+     Panda. Frontera: The evolution of leadership computing at the National Science Foundation. In
+     Practice and Experience in Advanced Research Computing, pages 106–111, 2020.
+[42] Zongyi Li, Nikola Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik Bhattacharya,
+     Andrew Stuart, and Anima Anandkumar. Fourier neural operator for parametric partial differen-
+     tial equations, 2021.
+[43] Bogdan Raonić, Roberto Molinaro, Tim De Ryck, Tobias Rohner, Francesca Bartolucci, Rima
+     Alaifari, Siddhartha Mishra, and Emmanuel de Bézenac. Convolutional neural operators for
+     robust and accurate learning of pdes, 2023.
+[44] Lu Lu, Pengzhan Jin, Guofei Pang, Zhongqiang Zhang, and George Em Karniadakis. Learning
+     nonlinear operators via deeponet based on the universal approximation theorem of operators.
+     Nature Machine Intelligence, 3:218––229, 2021.
+[45] Nabil M Atallah, Claudio Canuto, and Guglielmo Scovazzi. The second-generation shifted
+     boundary method and its numerical analysis. Computer Methods in Applied Mechanics and
+     Engineering, 372:113341, 2020.
+[46] Nabil Atallah, Claudio Canuto, and Guglielmo Scovazzi. The shifted boundary method for solid
+     mechanics. International Journal for Numerical Methods in Engineering, 122(20):5935–5970,
+     2021.
+[47] Charles S Peskin. Flow patterns around heart valves: a numerical method. Journal of Computa-
+     tional Physics, 10(2):252–271, 1972.
+[48] Lucy Zhang, Axel Gerstenberger, Xiaodong Wang, and Wing Kam Liu. Immersed finite element
+     method. Computer Methods in Applied Mechanics and Engineering, 193(21-22):2051–2067,
+     2004.
+[49] Rajat Mittal, Haibo Dong, Meliha Bozkurttas, FM Najjar, Abel Vargas, and Alfred
+     Von Loebbecke. A versatile sharp interface immersed boundary method for incompressible
+     flows with complex boundaries. Journal of computational physics, 227(10):4825–4852, 2008.
+[50] J. Parvizian, A. Düster, and E. Rank. Finite cell method: h- and p- extension for embedded
+     domain methods in solid mechanics. Computational Mechanics, 41:122–133, 2007.
+[51] D. Kamensky, M.-C. Hsu, D. Schillinger, J. A. Evans, A. Aggarwal, Y. Bazilevs, M. S. Sacks,
+     and T. J. R. Hughes. An immersogeometric variational framework for fluid–structure interaction:
+     Application to bioprosthetic heart valves. Computer Methods in Applied Mechanics and
+     Engineering, 284:1005–1053, 2015.
+[52] Kumar Saurabh, Masado Ishii, Milinda Fernando, Boshun Gao, Kendrick Tan, Ming-Chen Hsu,
+     Adarsh Krishnamurthy, Hari Sundar, and Baskar Ganapathysubramanian. Scalable adaptive
+     pde solvers in arbitrary domains. In Proceedings of the International Conference for high
+     performance computing, networking, storage and analysis, pages 1–15, 2021.
+[53] Tingting Huang and Hee-Chang Lim. Simulation of lid-driven cavity flow with internal circular
+     obstacles. Applied Sciences, 10(13):4583, 2020.
+
+
+                                                12
+[54] Zhen Chen, Chang Shu, L. Yang, Xiang Zhao, and Ningyu Liu. Immersed boundary–simplified
+     thermal lattice boltzmann method for incompressible thermal flows. Physics of Fluids, 32, 01
+     2020. doi: 10.1063/1.5138711.
+[55] Ronald D Henderson. Details of the drag curve near the onset of vortex shedding. Physics of
+     Fluids, 7(9):2102–2104, 1995.
+[56] Haoxiang Luo, Hu Dai, and Paulo Ferreira de Sousa. A hybrid formulation to suppress the
+     numerical oscillations caused by immersed moving boundaries. In APS Division of Fluid
+     Dynamics Meeting Abstracts, volume 62, pages EL–006, 2009.
+[57] D. Kamensky, M.-C. Hsu, D. Schillinger, J. A. Evans, A. Aggarwal, Y. Bazilevs, M. S. Sacks,
+     and T. J. R. Hughes. An immersogeometric variational framework for fluid–structure interaction:
+     Application to bioprosthetic heart valves. Computer Methods in Applied Mechanics and
+     Engineering, 284:1005–1053, 2015.
+[58] Alex Main and Guglielmo Scovazzi. The shifted boundary method for embedded domain
+     computations. part ii: Linear advection–diffusion and incompressible navier–stokes equations.
+     Journal of Computational Physics, 372:996–1026, 2018.
+[59] Soonpil Kang and Arif Masud. A variational multiscale method with immersed boundary
+     conditions for incompressible flows. Meccanica, 56(6):1397–1422, 2021.
+[60] Yoann Cheny and Olivier Botella. The ls-stag method: A new immersed boundary/level-set
+     method for the computation of incompressible viscous flows in complex moving geometries
+     with good conservation properties. Journal of Computational Physics, 229(4):1043–1076, 2010.
+[61] W. Jester and Y. Kallinderis. Numerical study of incompressible flow about fixed cylinder pairs.
+     Journal of Fluids and Structures, 17(4):561–577, 2003. ISSN 0889-9746. doi: https://doi.
+     org/10.1016/S0889-9746(02)00149-4. URL https://www.sciencedirect.com/science/
+     article/pii/S0889974602001494.
+[62] Utkarsh Ayachit. The paraview guide: a parallel visualization application. Kitware, Inc., 2015.
+
+
+
+
+                                                 13
+Checklist
+    1. For all authors...
+        (a) Do the main claims made in the abstract and introduction accurately reflect the paper’s
+            contributions and scope? [Yes]
+        (b) Did you describe the limitations of your work? [Yes] We describe the limitations in
+            Section 5.
+        (c) Did you discuss any potential negative societal impacts of your work? [NA] Since the
+            data generated involves fundamental science, the negative impact it has on the society
+            is of similar nature to any fundamental science itself.
+        (d) Have you read the ethics review guidelines and ensured that your paper conforms to
+            them? [Yes]
+    2. If you are including theoretical results...
+        (a) Did you state the full set of assumptions of all theoretical results? [NA]
+        (b) Did you include complete proofs of all theoretical results? [NA]
+    3. If you ran experiments (e.g., for benchmarks):
+        (a) Did you include the code, data, and instructions needed to reproduce the main experi-
+            mental results (either in the supplemental material or as a URL)? [Yes] We provide
+            the code, data, and instructions to reproduce the main experimental results on the
+            FlowBench website.
+        (b) Did you specify all the training details (e.g., data splits, hyperparameters, how they
+            were chosen)? [Yes]
+        (c) Did you report error bars (e.g., with respect to the random seed after running experi-
+            ments multiple times)? [Yes] The dataset itself is generated deterministically from
+            simulations. Where possible, we ran multiple experiments and will report the
+            error.
+        (d) Did you include the total amount of compute and the type of resources used (e.g.,
+            type of GPUs, internal cluster, or cloud provider)? [Yes] We mention the simulation
+            efforts in Section 3.3.
+    4. If you are using existing assets (e.g., code, data, models) or curating/releasing new assets...
+        (a) If your work uses existing assets, did you cite the creators? [Yes] We cite the code
+            used for SciML in Section 4
+        (b) Did you mention the license of the assets? [Yes]
+        (c) Did you include any new assets either in the supplemental material or as a URL? [Yes]
+            We have included details of geometry generation and simulation results on our
+            FlowBench website.
+        (d) Did you discuss whether and how consent was obtained from people whose data you’re
+            using/curating? [NA]
+        (e) Did you discuss whether the data you are using/curating contains personally identifiable
+            information or offensive content? [NA]
+    5. If you used crowdsourcing or conducted research with human subjects [NA] .
+        (a) Did you include the full text of instructions given to participants and screenshots, if
+            applicable? [NA]
+        (b) Did you describe any potential participant risks, with links to Institutional Review
+            Board (IRB) approvals, if applicable? [NA]
+        (c) Did you include the estimated hourly wage paid to participants and the total amount
+            spent on participant compensation? [NA]
+
+
+
+
+                                                14
+A     Details of the CFD simulation framework
+Our CFD framework is a well-validated and massively scalable software suite that uses a variant of
+the immersed boundary method integrated with octree meshes to perform highly efficient and accurate
+Large-Eddy Simulations (LES) of flows around complex geometries. This framework demonstrates
+scalability of up to 32,000 processors, achieved through several key innovations, including (a) Rapid
+in-out tests: These tests quickly determine whether a point is inside or outside a given geometry,
+significantly speeding up the simulation process. (b) adaptive quadrature: This technique ensures
+accurate force evaluation by dynamically adjusting the numerical integration based on the local
+complexity of the geometry, and (c) Tensorized operations: These operations optimize performance
+by leveraging tensor algebra for computational efficiency. Additional details of the CFD framework,
+including implementation, are provided in [18, 37].
+Our datasets and code are licensed under CC BY NC. Next, we briefly detail the mathematics of the
+shifted boundary method.
+
+A.1   Formulation of SBM for Navier Stokes
+The Shifted Boundary Method (SBM) [34–36, 45, 46] is a numerical approach for solving partial
+differential equations (PDEs) on complex geometries without the need for body-fitted meshes. It
+is a robust variant of the immersed boundary methods used in CFD [11, 47–51]. In SBM, the
+boundary conditions are imposed not on the actual boundary of the immersed object but on a nearby
+surrogate boundary. This surrogate boundary is chosen to conform to a Cartesian mesh, and the
+boundary conditions are corrected using Taylor expansions. This method effectively transforms the
+problem into one on a body-fitted domain, significantly simplifying the mesh generation process
+while maintaining accuracy and stability. The surrogate boundary is optimally chosen to minimize
+numerical errors, and the method demonstrates excellent scalability and efficiency, particularly
+when applied to adaptive octree meshes (see, for instance, Yang et al. [36]). This makes SBM
+particularly suitable for simulations involving complex geometries and multiphysics couplings. In
+SBM, additional terms are incorporated into the standard stabilized finite element formulations for
+solving the Navier-Stokes equations. These terms include a consistency term (which appears due
+to integration by parts operation), an adjoint consistency term (which is included to ensure optimal
+convergence rates), and the penalty term (which ensures that as the mesh size is reduced, the boundary
+conditions asymptote to the true boundary conditions) :
+
+
+                                      c,h
+                                            ∂uc,h
+                                                              
+              ^V M S V MS     c,h 1 ∂ui        j          c,h
+              BN S =BN S − wi ,     (     +       )n˜j − p ñi
+                                  Re ∂xj     ∂xi                 Γ̃D,h
+                          |                 {z                       }
+                                                      Consistency term
+
+                                    ∂wic,h       ∂wjc,h                ∂uc,h
+                                                                                          
+                                1
+                        −         (    +     )n˜j + q c,h ñi , uc,h
+                                                                 i   +   i
+                                                                             dj
+                                Re ∂xj   ∂xi                            ∂xj                    Γ̃D,h
+                        |                         {z                                              }
+                                                 Adjoint consistency term
+
+                                           ∂wic,h             ∂uc,h
+                                                                       
+                             β
+                        +          wic,h +        dj , uc,h
+                                                        i   +   i
+                                                                    d j         ,                      (1)
+                          h · Re            ∂xj                ∂xj        Γ̃D,h
+                        |                        {z                           }
+                                                 P enalty term
+
+
+and
+                                                                 c,h
+                                             1 ∂wic,h   ∂wj
+                                                                                     
+                  V M S =F V M S −
+                 F^                            (      +       )n˜j + q c,h ñi , gi
+                  NS      NS
+                                             Re ∂xj      ∂xi                              Γ̃D,h
+                                     |                     {z                                }
+                                                    Adjoint Consistency T erm
+
+                                               ∂wic,h
+                                                             
+                                 β
+                            +          wic,h +        dj , gi         ,                                (2)
+                              h · Re             ∂xj            Γ̃D,h
+                            |                 {z                    }
+                                             P enalty T erm
+
+
+
+                                                       15
+where β is the penalty parameter for the Navier-Stokes equation, BN
+                                                                  V MS
+                                                                    S  is the bilinear weak form
+for Navier-Stokes without SBM, and FN S is the linear weak for Navier-Stokes form without SBM.
+                                      V MS
+
+The formulation for Navier-Stokes with SBM can be expressed as:
+                                          V MS − F
+                                         B^
+                                          NS
+                                                 ^ V M S = 0.
+                                                   NS                                                  (3)
+
+A.2    Formulation of SBM for Heat Transfer
+Similar to the Navier-Stokes equations, we use SBM to apply Dirichlet boundary conditions in the
+energy equation. Essentially, we use SBM to set the temperature to a desired value (TD ) on the
+geometries. The formulation for energy equation with SBM is:
+                                          V MS − F
+                                         B^
+                                          HT
+                                                 ^ V M S = 0,
+                                                   HT                                                  (4)
+with
+                                  c,h
+                                                     1 ∂lc,h            ∂T c,h
+                                                                               
+       ^V M S V MS   1     c,h ∂T                                   c,h
+       BHT =BHT −         l ,         n˜j         −          n˜j , T +         dj
+                     Pe         ∂xj         Γ̃D,h   P e ∂xj              ∂xj        Γ̃D,h
+                   |           {z               } |                  {z                 }
+                                 Consistency term                     Adjoint consistency term
+                                        c,h                c,h
+                                                                
+                       α          ∂l               ∂T
+                  +        lc,h +     dj , T c,h +      dj                   ,                         (5)
+                    h · Pe        ∂xj               ∂xj              Γ̃D,h
+                  |                   {z                                }
+                                       Penalty term
+
+and
+                               c,h
+                                                                        ∂lc,h
+                                                                                    
+          V M S =F V M S − 1   ∂l                         α       c,h
+         F^
+          HT      HT                n˜j , TD         +          l     +       dj , TD         ,        (6)
+                           P e ∂xj             Γ̃D,h   h · Pe           ∂xj             Γ̃D,h
+                         |         {z              } |                  {z                  }
+                               Adjoint consistency term                      Penalty term
+
+where α is the penalty parameter for energy equation, P e is Peclet number, which is 0.7Re inside
+our simulations, BHT
+                  V MS
+                        is the bilinear weak form for Heat Transfer without SBM, and FHT
+                                                                                       V MS
+                                                                                            is the
+linear weak form for Heat Transfer without SBM.
+
+A.3    Solving the CFD equations: Automated creation of meshes involving complex geometries
+Tree-based mesh generation, using quadtrees in 2D and octrees in 3D, is common in computational
+sciences due to its simplicity and parallel scalability. These tree-based data structures enable efficient
+refinement of regions of interest, facilitating their deployment in large-scale multi-physics simulations.
+Our mesh generation tool, Dendro-kt [52], provides balanced, partitioned, and parallel tree structures,
+making it highly effective for large-scale numerical PDE discretizations.
+LDC (Lid-driven cavity flow): For the LDC case, we use an octree-based mesh generation framework
+to create a uniform mesh with an element size of 219 over a [0, 2] × [0, 2] domain. This produces a
+512 × 512 mesh resulting in total degress-of-freedom of 512 × 512 × 3 ∼ 750K.
+FPO (Flow passing object): Our computational domain is a rectangular region spanning [0, 64] ×
+[0, 16], with the complex geometry centered at the coordinates (6, 8). Our mesh refinement strategy
+involves several layers of progressively coarser mesh surrounding the geometry and along the wake.
+Specifically, we utilize five concentric circles centered at (6, 8), with the innermost circle having a
+radius of 0.71 and a refinement level of 13 (yielding an element size of 264   13 ), the next circle with a
+
+radius of 0.8 and a refinement level of 12 ( 26412 element size), the third circle with a radius of 1 and
+
+a refinement level of 11 ( 26411 element size), the fourth circle with a radius of 2.5 and a refinement
+
+level of 10 ( 264
+                10 element size), and the outermost circle with a radius of 3 and a refinement level of 9
+( 64
+  29 element   size). We use  a non-dimensional   time step of 0.01 for the simulation. Starting from a
+non-dimensional total time of 392, we begin outputting results every 0.05 non-dimensional time units
+until reaching a non-dimensional total time of 404. The period from non-dimensional time 392 to
+404 is when we output results that are post-processed for use in FlowBench .
+Additionally, we define two rectangular refinement regions aligned with the flow direction. The first
+rectangle has its bottom-left corner at (6, 5.5) and top-right corner at (64, 10.5), with a refinement
+
+
+                                                      16
+Figure 6: Uniform octree mesh for the lid-driven cavity flow. We illustrate the mesh with a representative shape
+from the Skelneton data. This mesh is carved out from a 512 × 512 uniform tessellation of the domain.
+                10 element size). The second rectangle has its bottom-left corner at (6, 5) and top-right
+level of 10 ( 264
+                                                   29 element size). Close to the geometry, to ensure
+corner at (64, 11), with a refinement level of 9 ( 64
+detailed capture of the flow dynamics, we achieve a finer mesh with a refinement level of 14, resulting
+in an element size of 26414 . The mesh with different refinement levels are shown in Figure 7.
+
+
+The refinement strategy leads to a total nodal point number of 117978. Consequently, the total degrees
+of freedom (DOFs) amount is 117978 × 3 (353934). The combination of adaptive refinement and
+SBM formulation is critical to our ability to solve the PDEs in complex geometries. For comparison,
+if we were to use a uniform mesh (as in the case of the LDC) instead of an adaptively refined mesh,
+we would have had a problem with 214 × 212 × 3 ∼ 201M DOFs!
+3D LDC: We use a similar adaptive refinement strategy for the 3D LDC case. See Figure 8 for an
+example of an object and the mesh used. Close to the object’s surface, we use a refinement of level 9,
+producing elements of size 2/29 , and away from the object, we progressively coarsen the mesh to a
+refinement level of 7, for elements of size 2/27 . This produces a problem with 2.5M DOFs.
+Solver configuration: We use the Petsc linear algebra package for solving the system of equations.
+We utilize the BCGS solver, with an ASM pre-conditioner. The solver continues iterating until a
+relative tolerance, rtol, of 10−8 , is reached.
+A.4   Postprocessing of the results to compute force coefficients and Nusselt number
+After the CFD solve, we also compute three engineering summary variables. The drag coefficient
+(CD ) represents the non-dimensional force exerted on an object in the direction of the flow. It is
+calculated using the formula:
+                                                   2Fx
+                                           CD =         .                                       (7)
+                                                   Apy
+where Fx is the drag force and Apy is the projection area in the y-direction.
+The lift coefficient (CL ) indicates the non-dimensional lift force acting perpendicular to the flow
+direction. It is defined as:
+                                                    2Fy
+                                             CL =        .                                        (8)
+                                                    Apx
+where Fy is the lift force and Apx is the projection area in the x-direction.
+Finally, we compute the Nusselt number to determine the amount of heat transfer. The local Nusselt
+number can be defined as:
+                                         N u = ∇T · n.                                         (9)
+
+
+                                                      17
+                                 (a) Overview of the mesh refinement levels.
+
+
+
+
+   (b) Zoomed-in view of the local mesh refinement. The
+   five levels of progressively coarser meshes surrounding        (c) Zoomed-in view of the local mesh re-
+   the geometry are clearly visible.                              finement near the geometry.
+Figure 7: Local refinement octree mesh for the flow passing through the geometry. The geometry is represented
+by a deer.
+
+
+
+
+                                                             (b) The octree mesh showing local refinement near
+ (a) The object inside the lid driven cavity domain.         the object boundary.
+       Figure 8: An example shape in the 3D LDC case, along with a slice of the computational mesh
+
+
+
+                                                       18
+  Table 3: Comparison of drag coefficients and strouhal numbers for flow past a 2D cylinder at Re = 100.
+                                                                                  Cd                                             St
+                             Current                                             1.35                                      0.167
+                         Mittal et al. [49]                                      1.35                                      0.165
+                        Henderson et al. [55]                                    1.35                                        -
+                          Luo et al. [56]                                        1.35                                      0.159
+                        Kamensky et al. [57]                                     1.386                                     0.170
+                          Main et al. [58]                                       1.36                                      0.169
+                          Kang et al. [59]                                       1.374                                     0.168
+
+The averaged Nusselt number can be written as:
+                                                                                  R
+                                                                                      N u dΓ
+                                                                   Nu =               R      .                                                                         (10)
+                                                                                        dΓ
+
+We compute the average N u across both the bottom wall as well as the surface of the object.
+
+A.5      Validation of the CFD framework
+
+LDC (Lid-driven cavity flow), NS: We simulate a disk with a diameter D = L3 placed at the center
+of the lid-driven cavity, where L is the chamber’s box length. Our CFD results match against detailed
+simulations available in literature [53] shown in Figure 9.
+
+
+         1                                                                                    1
+
+
+       0.8                                                                                   0.9
+
+
+       0.6                                                                                   0.8
+
+
+       0.4                                                                                   0.7
+
+
+       0.2                                                                                   0.6
+
+
+         0                                                                                   0.5
+   v
+
+
+
+
+                                                                                         y
+
+
+
+
+       -0.2                                                                                  0.4
+
+
+       -0.4                                                                                  0.3
+
+
+       -0.6                                                                                  0.2
+
+
+       -0.8                                                                                  0.1
+                                                              SBM                                                                                   SBM
+                                                              Huang et al.                                                                          Huang et al.
+        -1                                                                                    0
+              0   0.1   0.2   0.3   0.4   0.5   0.6   0.7   0.8   0.9        1                 -1   -0.8    -0.6   -0.4   -0.2    0   0.2   0.4   0.6   0.8        1
+                                          x                                                                                       u
+
+
+                    (a) Horizontal velocity profile.                                                       (b) Vertical velocity profile.
+Figure 9: Comparison of velocity profiles for lid-driven cavity flow with a circular disk at Re = 1000 against
+results from the literature.
+
+
+LDC (Lid-driven cavity flow), NSHT: To validate our multiphysics simulation framework, we select
+a case from [54] to compare with. Here, a heated circle is placed at the center of the chamber, with a
+radius of 0.2L, where L represents the length of the chamber. We evaluate the local Nusselt number
+on the bottom wall and report an excellent match with [54] in Figure 10 at two distinct operating
+conditions.
+FPO (Flow passing object): For the flow passing through geometries, we tested several shapes.
+To ensure the reliability of our framework, we used a circle and tested at two different Reynolds
+numbers: 100 and 1000. Our drag coefficients and Strouhal numbers matched well with the literature,
+as shown in Table 3 and Table 4.
+
+
+                                                                                  19
+    Nulocal
+
+
+
+
+Figure 10: Comparison of the Nusselt number profile along the bottom wall of the domain. The simulation
+results are validated against data from [54] to demonstrate the accuracy of the current multiphyics (NSHT)
+model.
+
+
+
+    Table 4: Comparison of drag coefficients and strouhal numbers for flow past a 2D cylinder at Re = 1000.
+                                                     Cd                         St
+                       Current                      1.52                      0.239
+                  Mittal et al. [49]                1.45                      0.230
+                 Henderson et al. [55]              1.51                         -
+                    Luo et al. [56]                 1.56                      0.235
+                  Cheny et al. [60]                 1.61                      0.251
+                   Jester et al. [61]               1.51                       0.25
+
+B       Benchmark Setup
+
+B.1       Downsampling
+
+We used our in-house FEM simulation software DendroKT to perform forward simulations. In order
+to capture the physics precisely, we use a very fine resolution – with mesh sizes at the Kolmogorov
+length scale in 2D, and mesh sizes at 2× the Kolmogorov length scale in 3D – to run the FEM
+simulations. While this approach allows us to model the physics very precisely, the resulting tensors
+generated at those resolutions are impractically large in size i.e., running into hundreds of gigabytes.
+We therefore use the ParaView tool [62] to downsample the original resolution to lower resolutions
+such as, 512 × 512, 256 × 256, 128 × 128, 128 × 128 × 128 and 512 × 128. It is important to note
+that this downsampling is on the fully resolved data, and thus still captures all the larger scale features
+(as well as the impact of the small scale features on the large scale features).
+
+B.2       Machine Learning
+
+Our Machine Learning pipeline consists of three modules. In the first module, we undertake the
+tensorization exercise. We group the available downsampled data to a four or five dimensional numpy
+tensor depending on the nature of the physics outlined in Table 2. Tensorization helps us to subset the
+data using the tensor notation, and it also makes the data ready to be fed into Neural Operators. Data
+at this point is fed into the second module, where we primarily train the Neural Operator. We have two
+principal objectives in this module, a) Learn the best hyperparameters for a given dataset and a given
+Neural Operator. b) Select the best hyperparameter and perform a final training exercise to record
+the performance of each Neural Operator on every dataset. Finally, we move to the post-processing
+module, where we report a complete suite of goodness of fit statistics using the trained model on a
+held-out data sample. We make all our code publicly available.
+
+
+                                                      20
+Table 5: Formulaic description of the input and output tensors. 3000/6000/1150/500 are sample sizes for the
+dataset. 240 is the number of equi-spaced time snapshots for the FPO case; x, y(, z) are the dimensions of a
+field. E.g., Y [0, 1, :, :] indicates the pointwise v velocity over the entire grid.
+            Dataset         Dim.            Input Tensor                    Output Tensor
+           LDC - NS           2        X[3000][Re, g, s][x][y]           Y [3000][u, v, p][x][y]
+        LDC - NS+HT           2      X[5990][Re, Gr, g, s][x][y]        Y [5990][u, v, p, θ][x][y]
+           FPO - NS           2        X[1150][Re, g, s][x][y]        Y [1150][240][u, v, p][x][y]
+           LDC - NS           3       X[500][Re, g, s][x][y][z]         Y [500][u, v, p][x][y][z]
+B.3   DeepONet Results
+As mentioned in the main paper, we could not get the standard implementation of DeepONets to
+converge on our dataset. We still report the overall errors here for completeness.
+
+Table 6: The mean squared errors of DeepONet neural operators trained on the 2D LDC dataset at two different
+resolutions. All errors are reported on the validation dataset for three different metrics.
+                                                                     Metrics DeepONet
+                                                                         M1        O(103 )∗
+                                                     G1
+                                                                         M2        O(103 )∗
+                                                  512x512
+                                                                         M3        O(103 )∗
+                                                                         M1        O(103 )∗
+                                                     G2
+                                                                         M2        O(103 )∗
+                                                  512x512
+                                                                         M3        O(103 )∗
+                        High Resolution
+                                                                         M1        O(103 )∗
+                                                     G3
+                                                                         M2        O(103 )∗
+                                                  512x512
+                                                                         M3        O(103 )∗
+                                                                         M1        O(103 )∗
+                                              All (G1,G2,G3)
+                                                                         M2        O(103 )∗
+                                                  512x512
+                                                                         M3        O(102 )∗
+                                                                         M1        O(102 )∗
+                                                     G1
+                                                                         M2        O(103 )∗
+                                                  256x256
+                                                                         M3        O(103 )∗
+                                                                         M1        O(103 )∗
+                                                     G2
+                                                                         M2        O(103 )∗
+                                                  256x256
+                                                                         M3        O(103 )∗
+                        Low Resolution
+                                                                         M1        O(102 )∗
+                                                     G3
+                                                                         M2        O(102 )∗
+                                                  256x256
+                                                                         M3        O(103 )∗
+                                                                         M1        O(103 )∗
+                                              All (G1,G2,G3)
+                                                                         M2        O(103 )∗
+                                                  256x256
+                                                                         M3        O(103 )∗
+
+
+
+
+                                                    21
+

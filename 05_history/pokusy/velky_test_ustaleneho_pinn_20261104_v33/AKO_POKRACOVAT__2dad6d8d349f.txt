@@ -1,0 +1,80 @@
+AKTUALIZÁCIA 05.11.2026 — SAMOSTATNÝ KAPACITNÝ TEST V39
+Hlavné GPU dávky 143342/143656/143684 pokračujú, 24 tréningov bez zmeny.
+Účtovanie ich skupiny teraz vykonáva úloha 143807, ktorá má navyše 1 GPU
+na vedľajšie porovnanie väčšej siete. Nahradila čakajúci CPU zberač 143685
+a technicky chybnú prvú extra úlohu 143805. Po skončení skupiny a vedľajších
+behov nadviaže pôvodný spúšťač V36 ďalšou hlavnou dávkou. Dáta a vedecký
+plán V33 ostávajú zmrazené. Detaily: ../vacsia_siet_20261105_v39/PRECITAJ_MA.txt.
+Pri kontrole čítať group_000.json, aktuálne collectors, záznamy 143807,
+main/state.json a hold.json; nižšie uvedené ID 143685 je historické.
+
+PREVÁDZKOVÁ V36 PRE 24 GPU — 04.11.2026
+Tri bežiace GPU dávky 143342, 143656 a 143684 majú spoločný CPU zberač
+143685. Ten po skončení ktorejkoľvek dávky zachytí jej výsledky a spotrebu,
+počká na ostatné a pri úspešnej kontrole pripraví ďalšiu dávku na 24 GPU.
+Nová GPU dávka si ešte pred učením pripojí vlastné CPU účtovanie.
+Najviac sú tak rezervované 3 GPU uzly a 1 CPU uzol aj pri nadväzovaní.
+Posledný menší zvyšok môže použiť 16 alebo 8 GPU.
+
+Pri prerušení najprv prezrieť operational_pool_v36/hold.json,
+operational_pool_v36/current_group.json, príslušné skupinové a účtovacie
+záznamy a main/state.json. Aktuálne nástroje sú collect_ldc24_v36.py
+a ldc24_ops_v36.py; nadväzovanie je už pripravené v existujúcich úlohách.
+Nepúšťať staré spúšťače V33/V34/V35 ani druhú kópiu toho istého pokusu.
+Pri technickej chybe najprv vyšetriť dôvod, bez tichého opakovania.
+Vedecký protokol V33 zostáva zmrazený a TEST uzavretý.
+Čitateľný stav: ../paralelizacia_24gpu_20261104_v36/STAV.txt.
+
+HISTORICKÝ NÁVOD PRE PREVÁDZKU V35 NA 16 GPU
+Obe pôvodné 8-GPU dávky sa nechajú dobehnúť. Ich nové callbacky
+samostatne zaúčtujú výsledky, posledný spustí spoločný 16-GPU batch.
+Nepúšťať ručne starý launcher V33/V34, ktorý predpokladal jedinú dávku.
+Pri prerušení najprv preveriť operational_pool_v35/hold.json,
+scheduler/ID/parallel_continuation.json a main/state.json. Bez zásahu
+pri technickej chybe sa ďalšie dávky automaticky neopakujú.
+Aktuálny prevádzkový nástroj je submit_ldc_parallel_v35.py; rollover
+sa smie vykonať až keď nebeží žiadna predošlá hlavná dávka a sú voľné
+uzlové rezervácie. Žiadne rozpracované položky nesmú byť stale.
+
+STARŠÍ NÁVOD PRE PREDOŠLÚ PREVÁDZKU
+
+AUTOMATICKÉ NADVÄZOVANIE HLAVNÝCH DÁVOK
+Po úspešnom ukončení a kontrole dávky pokračuje nadväzujúca CPU úloha
+sama ďalšou dávkou. Pri probléme sa zastaví a dôvod je v
+scheduler/ID/continuation.json alebo v príslušnom účtovacom logu.
+Záverečný TEST zostane uzavretý. Nasledujúci ručný postup slúži na
+kontrolované obnovenie, nie na druhé súbežné spustenie.
+
+POKRAČOVANIE VÝPOČTOV — V33
+
+Veľký experiment má pevný plán 395 tréningov. Aktuálny priebeh sa číta
+na Perune z results/ldc_main_20261104_v33/main/state.json.
+Žiadne veľké dáta ani váhy nesťahovať do PC. Už dokončené výsledky
+neprepisovať. Hlavný spúšťač odmietne druhú súčasnú dávku aj nevybavené
+RUNNING/ATTENTION po zlyhaní; tie treba najprv preskúmať.
+
+Technická skúška integration má vlastné seedy a výsledky. Produkčný
+spúšťač vyžaduje LDC_MAIN_INTEGRATION_PASS, všetkých 25 skutočných tréningov
+a úspešné skutočné účtovanie prípravnej dávky.
+
+Po skončení hlavnej dávky s limitom 36 hodín sa najprv skontrolujú review.json,
+scheduler/ID/summary.json a state.json. Ak je dávka PARTIAL_PASS a
+nezostali nepreskúmané rozpracované úlohy, ďalšia dávka sa registruje:
+
+envs/visualization/bin/python -B test/analysis/submit_ldc_main_batch_v34.py
+
+Príkaz sa vykonáva cez nastavené SSH na Perune z koreňa projektu
+/mnt/project/perun2601449/dp_llm_cfd. Nesmie sa púšťať iný starý FNO/FPO
+launcher. Tento spúšťač overí zmrazené zdroje, vedecký protokol a gate,
+vytvorí pozastavenú úlohu pre 8 GPU, nadväzujúcu účtovaciu úlohu, zapíše presné ID a až potom
+uvoľní výpočet. Neobnovuje potichu prerušené tréningy. Ak je všetko
+hotové, druhýkrát nič nespustí.
+
+Po dokončení všetkých 395 pozícií sa uloží nemenný zoznam vybraných
+konfigurácií a všetkých finálnych checkpointov/seedov, až následne
+príde samostatné záverečné vyhodnotenie 200 uzavretých testovacích prípadov.
+Nesmie sa vybrať najlepší finálny seed ani spätne meniť konfigurácie
+podľa TEST. Presné znenie hypotéz a štatistického vyhodnotenia až neskôr.
+
+Aktuálna prevádzková revízia je V34, manifest operational_manifest_v34.json.
+Vedecké zdroje a výsledkový priečinok ostávajú V33.

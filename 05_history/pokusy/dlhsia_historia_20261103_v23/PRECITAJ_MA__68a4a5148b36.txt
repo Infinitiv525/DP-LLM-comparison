@@ -1,0 +1,85 @@
+UZAVRETÉ — 04.11.2026
+Úloha142897 skončila. Dlhšia história nevyriešila presnosť.
+Pozri VYSLEDKY_142897.txt a overený archív výsledkov.
+Podľa dohody nadväzuje V24: samostatný PINN pre každú simuláciu,
+úlohy143066/143067. Nižšie zostáva pôvodný opis a historický stav.
+DLHŠIA VSTUPNÁ SEKVENCIA SPOLOČNÉHO PINN — 03.11.2026
+
+Aktuálna úloha: 142897. Účtovanie po jej skončení: 142898.
+GPU kontroly prešli. Presnosť nového tréningu ešte nepoznáme.
+Aktualizácia: aj skúšobné tréningy oboch variantov skončili úspešne
+(SMOKE_COMPLETE). Zhodujú sa počiatočné váhy aj celý rozvrh vzorkovania.
+Nasleduje plný tréning na 69 TRAIN/6 VAL; pri poslednom overení načítaval
+dáta. Malé súhrny readiness a smoke sú uložené v priečinku zaznamy.
+
+Čo skúšame
+Porovnáme dva varianty jedného spoločného modelu pre viac simulácií.
+Kontrola dostane dve posledné snímky. Druhý variant dostane 20 snímok.
+Obe siete majú rovnaký začiatok predikcie a rovnaké cieľové snímky.
+Chceme zistiť, či dlhšia história pomôže rozpoznať vývoj prúdenia.
+
+Presné vstupy a výstupy
+Kontrola používa pôvodné snímky 20 a 21. Dlhší vstup používa 2 až 21.
+Oba varianty predpovedajú všetkých 220 zostávajúcich snímok 22 až 241.
+Snímky 0 a 1 vynechávame. Rozostup je 0,05 bezrozmernej časovej jednotky;
+dlhá história pokrýva 0,95 jednotky, predikcia ďalších 11 jednotiek.
+Nejde o predpovedanie iba piatich snímok ani o dopĺňanie referenčnej
+pravdy počas predikcie. Výsledky treba porovnávať medzi týmito dvoma
+variantmi, lebo staršie experimenty mali iný začiatok a 238 cieľov.
+
+Model a fyzika
+Použijeme náš vlastný PINN s priestorovým kontextom z V21. Spracovanie
+posledných dvoch snímok zostáva zachované. K nemu pridáme vetvu pre
+18 starších snímok, ktorých u/v/p sú vyjadrené voči poslednému stavu.
+Táto vetva začína s nulovými váhami v oboch variantoch, takže štartujú
+z rovnakého výstupu. Kontrolný variant má staršie vstupy vynulované.
+Ide o spoločné váhy pre všetky prípady, nie o osobitné siete pre prípady.
+
+Zostáva dátová strata, spojité Navierove–Stokesove rovnice, fyzikálna
+kontrola predikcie na mriežke a podmienka na prekážke. Hranice výrezu
+nepovažujeme za steny. Konštrukcia zachová počiatočnú diskrétnu divergenciu
+vo vnútorných bodoch; nezaručuje tým celú správnu dynamiku.
+
+Tréning a hodnotenie
+Použijeme existujúcich 69 TRAIN a 6 VAL simulácií s oddelenými geometriami.
+Nový protokol výslovne povoľuje VAL snímky 2 až 21 ako známy vstup.
+VAL snímky 22 až 241 zostanú iba na vyhodnotenie a výber checkpointu.
+Hlavnú testovaciu sadu neotvárame. Nové CFD ani nové dáta sa negenerujú.
+
+Oba varianty začínajú z rovnakého V21 checkpointu. Každý dostane 60 000
+ďalších aktualizácií, rovnaký rozvrh vzorkovania, normalizáciu a optimalizátor.
+Každý TRAIN prípad dostane 869 alebo 870 aktualizácií; všetky jeho cieľové
+snímky sa navštívia. V pravidelných hodnoteniach sa overuje celý priebeh
+všetkých 6 VAL prípadov. Uloží sa najlepší checkpoint aj koniec pri 60 000.
+Fyziku hodnotíme po celom priebehu pomocou diskrétnych rezíduí a ich
+referenčnej úrovne. Spojitá fyzikálna strata sa zaznamenáva počas tréningu.
+Samostatný bodový audit V18 v tejto skúške neopakujeme.
+
+Kontroly pred plným tréningom
+Prešlo 5 pôvodných a 5 nových jednotkových testov. Tie kontrolujú aj
+správne snímky, absenciu budúcich VAL vstupov, zachovanie úvodného stavu,
+zhodu bodového a mriežkového výstupu a gradienty fyziky do novej vetvy.
+GPU benchmark na H200 prešiel: najvyššie p99 približne 3,18 ms na celé
+pole 1024 × 256. Zahŕňa spracovanie histórie aj výpočet siete. Vstupy
+sú už na GPU; nezahŕňa prenos do PC ani zobrazenie. Nie je to dôkaz presnosti.
+Potom nasleduje skúšobný tréning s 3 aktualizáciami na 1 TRAIN a 1 VAL
+prípade v oboch variantoch. Plný tréning sa spustí iba po jeho úspechu.
+
+Rozhodnutie po výsledku
+Ponechávame doterajšie brány: na každom VAL prípade priemerná chyba
+rýchlosti najviac 10 %, tlaku najviac 20 %, príslušný limit hmoty
+a p99 výpočtu celého poľa najviac 5 ms. Malé zlepšenie bez použiteľnej
+presnosti nebudeme označovať za hotový model.
+Ak spoločný model ani potom nebude spĺňať požiadavky, používateľ už
+povolil prechod na postup jedna simulácia — jeden trénovaný PINN.
+Nebudeme automaticky skúšať ďalšie univerzálne architektúry.
+
+Technická poznámka
+Prvý pokus V22/142894 zastavila ešte pred tréningom kontrola zhody
+s pôvodným modelom. Rozšírená konvolúcia mierne zmenila výpočet vo float32.
+V23 zachová pôvodnú konvolúciu a pridá oddelenú vetvu s nulovými váhami;
+zhoda už prešla pri rovnakých toleranciách. V22 sa neprepisoval.
+Jeho skutočná alokácia bola 9 GPU sekúnd, 36 CPU sekúnd.
+
+Všetky veľké dáta a váhy zostávajú na Perune. V priečinku zaznamy sú
+iba malé protokoly, kontrolné súčty, záznamy odoslania a výsledky kontrol.

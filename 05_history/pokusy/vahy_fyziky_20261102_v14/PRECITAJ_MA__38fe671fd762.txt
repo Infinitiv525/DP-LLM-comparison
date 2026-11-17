@@ -1,0 +1,50 @@
+VÄČŠÍ POSTIH ZA CHYBY FYZIKY – V14, 02.11.2026
+
+AKTUÁLNE PO DOKONČENÍ
+140890COMPLETED0:0,matched_sampling=True. Pôvodný/10x/100x meanU
+1.72/1.79/2.25%,meanp3.86/3.93/5.13%.100x znížil meanFDdiv~28%
+a meanFDmomentumloss~42%, ale ani jeden masslimit nieje splnený.
+Všetky accuracy/directquery5ms splnené; nie celková fyzikálna kvalita.
+Podrobnosti:VYSLEDKY_140890.txt. Fronta prázdna, ďalší behnespustený.
+Nižšie pôvodný plán a zápis spustenia.
+
+Úloha GPU: 140890. Účtovanie: 140891.
+Overujeme návrh používateľa na pôvodnom modeli, ktorý už presne
+opisuje tri známe tréningové simulácie. Všetky tri vetvy začínajú
+z totožného checkpointu V13 baseline_3train/best.pt.
+
+Porovnanie koeficientov fyzikálnej straty:
+0.01 – pôvodná váha, kontrolná vetva;
+0.1 – desaťnásobný postih;
+1.0 – stonásobný postih.
+Koeficient násobí súčet rezíduí hybnosti u/v a kontinuity.
+Postih podmienky pri prekážke zostáva 0.01. Koeficienty nie sú percentá.
+
+Rovnaká architektúra, dáta, počiatočné váhy, seed 20261102, sampling,
+30 000 aktualizácií na vetvu, LR 3e-5 s poklesom na 1.5e-6, clip1.
+Tri TRAIN prípady ako V13, 10 000 aktualizácií na každý. Fyzikálna
+strata naplno od prvého kroku; nemeníme ostatné tréningové nastavenia
+medzi vetvami. Žiadne nové predlohy, CFD, dáta alebo validačné/testové
+prípady. Známe snímky 2,3 sú vždy vstupom, budúce TRAIN polia iba cieľmi.
+
+Predpoklad: väčší postih môže znížiť fyzikálne chyby, ale tiež zhoršiť
+zhodu rýchlosti a tlaku s CFD. Nezaručuje správnu dynamiku.
+Preto uchováme best podľa fyziky, samostatný best_accuracy a last.
+Fyzikálny výber: splnenie mass limitu na všetkých troch prípadoch,
+potom chyba polí. Ak žiadny neprejde, minimalizuje sa najhoršie
+normalizované prekročenie limitu, potom chyba polí. Výber nemení
+pokračujúce učenie. Všetky straty a assessmenty zostanú zachované.
+
+Pri každej kontrole vyhodnotíme všetkých 238 časov na troch TRAIN
+prípadoch: chyby U/p, divergenciu, vlastné a referenčné FD rezíduá
+hybnosti a čas priameho dotazu na celé pole. Tréningová fyzika používa
+autograd; hodnotiaca fyzika FD, rozdiel diskretizácií priznaný.
+Prahy U10%/p20%/mass screen/5ms bez zmeny, žiadna automatická LLM/69/6.
+Nie nezávislá validácia alebo štatistický dôkaz.
+
+4 testy výberu checkpointu a AST/bash-n prešli pred freeze/submission.
+GPU najprv zopakuje 9 fyzikálnych a 4 selekčné testy, potom krátku
+skúšku najsilnejšieho postihu1.0 s plnou fyzikou, až potom tri vetvy.
+Veľké polia a váhy iba Perun; lokálne malé texty/JSON.
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_physics_weights_20261102_v14
+Výsledná presnosť a fyzikálny prínos zatiaľ neznáme.

@@ -1,0 +1,1144 @@
+{
+  "checkpoint": {
+    "name": "primitive_v17",
+    "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/best.pt",
+    "sha256": "1f8b9276407b6fe6fc126c6a8fe2e1f0a3ece0d4c51161af75a11ec8bb80b980",
+    "recorded_update": 100000,
+    "expected_per_frame": {
+      "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/selected_checkpoint/0/per_frame.json",
+      "FPO_NS_2D_1024x256/harmonics/87/Re_838.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/selected_checkpoint/1/per_frame.json",
+      "FPO_NS_2D_1024x256/nurbs/22/Re_164.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/selected_checkpoint/2/per_frame.json",
+      "FPO_NS_2D_1024x256/nurbs/22/Re_977.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/selected_checkpoint/3/per_frame.json",
+      "FPO_NS_2D_1024x256/skelenton/36/Re_209.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/selected_checkpoint/4/per_frame.json",
+      "FPO_NS_2D_1024x256/skelenton/36/Re_867.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/selected_checkpoint/5/per_frame.json",
+      "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/training_monitor/0/per_frame.json",
+      "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/training_monitor/1/per_frame.json",
+      "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/training_monitor/2/per_frame.json"
+    }
+  },
+  "by_scope": {
+    "train": {
+      "original": {
+        "case_time_count": 24,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.09865612996856525,
+            "pressure_relative_l2": 0.2037051840139511,
+            "velocity_rmse": 0.09239575307449416,
+            "pressure_rmse": 0.03627870450307607,
+            "reference_velocity_rms": 0.947705456509564,
+            "reference_pressure_rms": 0.16606559701997553,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.1767728460878295,
+            "pressure_relative_l2": 0.15322553217065532,
+            "velocity_rmse": 0.09705037391346043,
+            "pressure_rmse": 0.07555404938331016,
+            "reference_velocity_rms": 0.50807097451274,
+            "reference_pressure_rms": 0.46434658789640554,
+            "area_fraction": 0.007348716026114238,
+            "velocity_error_fraction": 0.007435294138477167,
+            "pressure_error_fraction": 0.03081442180440938,
+            "pooled_velocity_error_fraction": 0.0091349560558008,
+            "pooled_pressure_error_fraction": 0.028457684567495454
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.10867760220393312,
+            "pressure_relative_l2": 0.13567855451654304,
+            "velocity_rmse": 0.10157515710661354,
+            "pressure_rmse": 0.05401252306267069,
+            "reference_velocity_rms": 0.9045265474026393,
+            "reference_pressure_rms": 0.3783480951460713,
+            "area_fraction": 0.030698343240685527,
+            "velocity_error_fraction": 0.03331067168485741,
+            "pressure_error_fraction": 0.07488845761391144,
+            "pooled_velocity_error_fraction": 0.040722146850263506,
+            "pooled_pressure_error_fraction": 0.05835418726476038
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.09777628088935579,
+            "pressure_relative_l2": 0.2179726970520305,
+            "velocity_rmse": 0.09185845438245449,
+            "pressure_rmse": 0.034996187014492225,
+            "reference_velocity_rms": 0.9517681130877699,
+            "reference_pressure_rms": 0.14945459647323622,
+            "area_fraction": 0.9619529407332003,
+            "velocity_error_fraction": 0.9592540341766654,
+            "pressure_error_fraction": 0.8942971205816791,
+            "pooled_velocity_error_fraction": 0.9501428970939358,
+            "pooled_pressure_error_fraction": 0.9131881281677441
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0,
+          "pressure_rmse": 0.0,
+          "velocity_relative_l2": 0.0
+        }
+      },
+      "geometry_neutral": {
+        "case_time_count": 24,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.12077495712093807,
+            "pressure_relative_l2": 0.2650858771510346,
+            "velocity_rmse": 0.11309432254007916,
+            "pressure_rmse": 0.04728164610291852,
+            "reference_velocity_rms": 0.947705456509564,
+            "reference_pressure_rms": 0.16606559701997553,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.17789437860265753,
+            "pressure_relative_l2": 0.19098725906396616,
+            "velocity_rmse": 0.09622759310685064,
+            "pressure_rmse": 0.09023006504075892,
+            "reference_velocity_rms": 0.50807097451274,
+            "reference_pressure_rms": 0.46434658789640554,
+            "area_fraction": 0.007348716026114238,
+            "velocity_error_fraction": 0.005952003727910518,
+            "pressure_error_fraction": 0.035971990384051376,
+            "pooled_velocity_error_fraction": 0.005247517184953071,
+            "pooled_pressure_error_fraction": 0.01978450002286889
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.12472319479164433,
+            "pressure_relative_l2": 0.18919543047259932,
+            "velocity_rmse": 0.11666103751372585,
+            "pressure_rmse": 0.07399351039548013,
+            "reference_velocity_rms": 0.9045265474026393,
+            "reference_pressure_rms": 0.3783480951460713,
+            "area_fraction": 0.030698343240685527,
+            "velocity_error_fraction": 0.031669057341149026,
+            "pressure_error_fraction": 0.09417160234111481,
+            "pooled_velocity_error_fraction": 0.03499361791272924,
+            "pooled_pressure_error_fraction": 0.06293460532389439
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.1201150656071644,
+            "pressure_relative_l2": 0.28078770960838234,
+            "velocity_rmse": 0.11282074778524497,
+            "pressure_rmse": 0.04544742757079337,
+            "reference_velocity_rms": 0.9517681130877699,
+            "reference_pressure_rms": 0.14945459647323622,
+            "area_fraction": 0.9619529407332003,
+            "velocity_error_fraction": 0.9623789389309404,
+            "pressure_error_fraction": 0.8698564072748338,
+            "pooled_velocity_error_fraction": 0.9597588649023178,
+            "pooled_pressure_error_fraction": 0.9172808946532367
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.06767527843832367,
+          "pressure_rmse": 0.030498372371810162,
+          "velocity_relative_l2": 0.07332545584596441
+        }
+      },
+      "global_state_neutral": {
+        "case_time_count": 24,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.3316586678257169,
+            "pressure_relative_l2": 0.49497965307852976,
+            "velocity_rmse": 0.31259331924099615,
+            "pressure_rmse": 0.08637834569576151,
+            "reference_velocity_rms": 0.947705456509564,
+            "reference_pressure_rms": 0.16606559701997553,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.3426643316591633,
+            "pressure_relative_l2": 0.3100769543141741,
+            "velocity_rmse": 0.17357188758289757,
+            "pressure_rmse": 0.14260580371126352,
+            "reference_velocity_rms": 0.50807097451274,
+            "reference_pressure_rms": 0.46434658789640554,
+            "area_fraction": 0.007348716026114238,
+            "velocity_error_fraction": 0.0031473483106602388,
+            "pressure_error_fraction": 0.030328147626991268,
+            "pooled_velocity_error_fraction": 0.0021332321526528818,
+            "pooled_pressure_error_fraction": 0.01769180533317237
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.2654153313034224,
+            "pressure_relative_l2": 0.29581647895024316,
+            "velocity_rmse": 0.2399021208783588,
+            "pressure_rmse": 0.11391128901668135,
+            "reference_velocity_rms": 0.9045265474026393,
+            "reference_pressure_rms": 0.3783480951460713,
+            "area_fraction": 0.030698343240685527,
+            "velocity_error_fraction": 0.023416945328276654,
+            "pressure_error_fraction": 0.0725524777072631,
+            "pooled_velocity_error_fraction": 0.017410988606957473,
+            "pooled_pressure_error_fraction": 0.046514688602554574
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.3331457330166106,
+            "pressure_relative_l2": 0.5332941023988401,
+            "velocity_rmse": 0.31509156097343355,
+            "pressure_rmse": 0.08406231669400648,
+            "reference_velocity_rms": 0.9517681130877699,
+            "reference_pressure_rms": 0.14945459647323622,
+            "area_fraction": 0.9619529407332003,
+            "velocity_error_fraction": 0.9734357063610631,
+            "pressure_error_fraction": 0.8971193746657457,
+            "pooled_velocity_error_fraction": 0.9804557792403896,
+            "pooled_pressure_error_fraction": 0.9357935060642731
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.29522015710537003,
+          "pressure_rmse": 0.08032262554493355,
+          "velocity_relative_l2": 0.3141714937513172
+        }
+      },
+      "latent_zero": {
+        "case_time_count": 24,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.4502054092068031,
+            "pressure_relative_l2": 1.5658063021136506,
+            "velocity_rmse": 0.42551258564236094,
+            "pressure_rmse": 0.24355009616399248,
+            "reference_velocity_rms": 0.947705456509564,
+            "reference_pressure_rms": 0.16606559701997553,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.6188926110519272,
+            "pressure_relative_l2": 0.4821498260951702,
+            "velocity_rmse": 0.3037840280165312,
+            "pressure_rmse": 0.21510423876810503,
+            "reference_velocity_rms": 0.50807097451274,
+            "reference_pressure_rms": 0.46434658789640554,
+            "area_fraction": 0.007348716026114238,
+            "velocity_error_fraction": 0.004710197602348069,
+            "pressure_error_fraction": 0.005790879743825671,
+            "pooled_velocity_error_fraction": 0.0035948372134104074,
+            "pooled_pressure_error_fraction": 0.006331260478105199
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.3803306308402082,
+            "pressure_relative_l2": 0.5844154907892832,
+            "velocity_rmse": 0.34197618709465183,
+            "pressure_rmse": 0.21391213785492294,
+            "reference_velocity_rms": 0.9045265474026393,
+            "reference_pressure_rms": 0.3783480951460713,
+            "area_fraction": 0.030698343240685527,
+            "velocity_error_fraction": 0.01978363680242656,
+            "pressure_error_fraction": 0.024546706094689553,
+            "pooled_velocity_error_fraction": 0.0197662704889125,
+            "pooled_pressure_error_fraction": 0.02479540979991595
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.45160188791427197,
+            "pressure_relative_l2": 1.7741253322149604,
+            "velocity_rmse": 0.4284680996212089,
+            "pressure_rmse": 0.2443044591142053,
+            "reference_velocity_rms": 0.9517681130877699,
+            "reference_pressure_rms": 0.14945459647323622,
+            "area_fraction": 0.9619529407332003,
+            "velocity_error_fraction": 0.9755061655952254,
+            "pressure_error_fraction": 0.9696624141614848,
+            "pooled_velocity_error_fraction": 0.9766388922976771,
+            "pooled_pressure_error_fraction": 0.9688733297219789
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.4203223937095066,
+          "pressure_rmse": 0.2415907917653041,
+          "velocity_relative_l2": 0.4469057465674296
+        }
+      },
+      "geometry_swap": {
+        "case_time_count": 24,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.09859839560480789,
+            "pressure_relative_l2": 0.2037323126297821,
+            "velocity_rmse": 0.09234170570871543,
+            "pressure_rmse": 0.036278789330729956,
+            "reference_velocity_rms": 0.947705456509564,
+            "reference_pressure_rms": 0.16606559701997553,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.17659773405395082,
+            "pressure_relative_l2": 0.15319825787069147,
+            "velocity_rmse": 0.09695677281650487,
+            "pressure_rmse": 0.07554299635865541,
+            "reference_velocity_rms": 0.50807097451274,
+            "reference_pressure_rms": 0.46434658789640554,
+            "area_fraction": 0.007348716026114238,
+            "velocity_error_fraction": 0.007431846559259937,
+            "pressure_error_fraction": 0.030796212494958734,
+            "pooled_velocity_error_fraction": 0.009133184582672945,
+            "pooled_pressure_error_fraction": 0.028454433268040497
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.10868599933911789,
+            "pressure_relative_l2": 0.13574817196809164,
+            "velocity_rmse": 0.10157755655335171,
+            "pressure_rmse": 0.05403398278388465,
+            "reference_velocity_rms": 0.9045265474026393,
+            "reference_pressure_rms": 0.3783480951460713,
+            "area_fraction": 0.030698343240685527,
+            "velocity_error_fraction": 0.03336005097242401,
+            "pressure_error_fraction": 0.07489597462255378,
+            "pooled_velocity_error_fraction": 0.040767532546424436,
+            "pooled_pressure_error_fraction": 0.05839963545613086
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.09771669637693471,
+            "pressure_relative_l2": 0.21800796231673045,
+            "velocity_rmse": 0.09180246560222494,
+            "pressure_rmse": 0.03499659830560047,
+            "reference_velocity_rms": 0.9517681130877699,
+            "reference_pressure_rms": 0.14945459647323622,
+            "area_fraction": 0.9619529407332003,
+            "velocity_error_fraction": 0.9592081024683162,
+            "pressure_error_fraction": 0.8943078128824875,
+            "pooled_velocity_error_fraction": 0.9500992828709025,
+            "pooled_pressure_error_fraction": 0.9131459312758288
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0007145659860331227,
+          "pressure_rmse": 0.00025207718005443915,
+          "velocity_relative_l2": 0.0007620123410867263
+        }
+      }
+    },
+    "validation": {
+      "original": {
+        "case_time_count": 48,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.24529673564544577,
+            "pressure_relative_l2": 0.39321268084013034,
+            "velocity_rmse": 0.2320017157184029,
+            "pressure_rmse": 0.11937122858210177,
+            "reference_velocity_rms": 0.9595902724371231,
+            "reference_pressure_rms": 0.27643221120520656,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.30311269268406577,
+            "pressure_relative_l2": 0.31642657011430914,
+            "velocity_rmse": 0.20977303878338613,
+            "pressure_rmse": 0.20402204682201244,
+            "reference_velocity_rms": 0.6520173522553473,
+            "reference_pressure_rms": 0.6155064531980131,
+            "area_fraction": 0.007076503834023304,
+            "velocity_error_fraction": 0.007038057490626491,
+            "pressure_error_fraction": 0.03164393582478864,
+            "pooled_velocity_error_fraction": 0.004544422481043261,
+            "pooled_pressure_error_fraction": 0.01634484543264372
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.23701059783138367,
+            "pressure_relative_l2": 0.3015946318997502,
+            "velocity_rmse": 0.24557291025673356,
+            "pressure_rmse": 0.1559185634030574,
+            "reference_velocity_rms": 1.0211468710979463,
+            "reference_pressure_rms": 0.513914640142434,
+            "area_fraction": 0.029580910115237054,
+            "velocity_error_fraction": 0.04335139086063278,
+            "pressure_error_fraction": 0.0892228662295883,
+            "pooled_velocity_error_fraction": 0.028922262774191822,
+            "pooled_pressure_error_fraction": 0.03713436622232587
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.24508879118459284,
+            "pressure_relative_l2": 0.40151541706566235,
+            "velocity_rmse": 0.23150487554246557,
+            "pressure_rmse": 0.11635466430789891,
+            "reference_velocity_rms": 0.9598106124339599,
+            "reference_pressure_rms": 0.26107067768919856,
+            "area_fraction": 0.9633425860507397,
+            "velocity_error_fraction": 0.9496105516487408,
+            "pressure_error_fraction": 0.879133197945623,
+            "pooled_velocity_error_fraction": 0.9665333147447649,
+            "pooled_pressure_error_fraction": 0.9465207883450305
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0,
+          "pressure_rmse": 0.0,
+          "velocity_relative_l2": 0.0
+        }
+      },
+      "geometry_neutral": {
+        "case_time_count": 48,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.2967088350342693,
+            "pressure_relative_l2": 0.4385087524335752,
+            "velocity_rmse": 0.28320531242169694,
+            "pressure_rmse": 0.12722465335469532,
+            "reference_velocity_rms": 0.9595902724371231,
+            "reference_pressure_rms": 0.27643221120520656,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.31826620778476994,
+            "pressure_relative_l2": 0.3502347995721222,
+            "velocity_rmse": 0.2197369534840016,
+            "pressure_rmse": 0.22254171628290065,
+            "reference_velocity_rms": 0.6520173522553473,
+            "reference_pressure_rms": 0.6155064531980131,
+            "area_fraction": 0.007076503834023304,
+            "velocity_error_fraction": 0.005212614985859742,
+            "pressure_error_fraction": 0.028026393484245432,
+            "pooled_velocity_error_fraction": 0.003613981731966069,
+            "pooled_pressure_error_fraction": 0.018292448156117504
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.2515049390007306,
+            "pressure_relative_l2": 0.3545724787690756,
+            "velocity_rmse": 0.2609909452339825,
+            "pressure_rmse": 0.1799860447019428,
+            "reference_velocity_rms": 1.0211468710979463,
+            "reference_pressure_rms": 0.513914640142434,
+            "area_fraction": 0.029580910115237054,
+            "velocity_error_fraction": 0.03261972491798854,
+            "pressure_error_fraction": 0.08906436285131873,
+            "pooled_velocity_error_fraction": 0.023907335083102232,
+            "pooled_pressure_error_fraction": 0.04757134492420407
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.2977023649361064,
+            "pressure_relative_l2": 0.4497234380700536,
+            "velocity_rmse": 0.28405256756251157,
+            "pressure_rmse": 0.12352472225894114,
+            "reference_velocity_rms": 0.9598106124339599,
+            "reference_pressure_rms": 0.26107067768919856,
+            "area_fraction": 0.9633425860507397,
+            "velocity_error_fraction": 0.9621676600961518,
+            "pressure_error_fraction": 0.8829092436644358,
+            "pooled_velocity_error_fraction": 0.9724786831849317,
+            "pooled_pressure_error_fraction": 0.9341362069196784
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.12823977293670316,
+          "pressure_rmse": 0.04603883546713978,
+          "velocity_relative_l2": 0.136036492139186
+        }
+      },
+      "global_state_neutral": {
+        "case_time_count": 48,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.41017775340545826,
+            "pressure_relative_l2": 0.5372410199396519,
+            "velocity_rmse": 0.3873483732598291,
+            "pressure_rmse": 0.16111704118785108,
+            "reference_velocity_rms": 0.9595902724371231,
+            "reference_pressure_rms": 0.27643221120520656,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.3545138922781837,
+            "pressure_relative_l2": 0.36205393064761626,
+            "velocity_rmse": 0.23520575714965977,
+            "pressure_rmse": 0.23287074733534718,
+            "reference_velocity_rms": 0.6520173522553473,
+            "reference_pressure_rms": 0.6155064531980131,
+            "area_fraction": 0.007076503834023304,
+            "velocity_error_fraction": 0.0038596303770734434,
+            "pressure_error_fraction": 0.024796464296869783,
+            "pooled_velocity_error_fraction": 0.0023443438383694065,
+            "pooled_pressure_error_fraction": 0.011192725358554817
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.31705467187652525,
+            "pressure_relative_l2": 0.3551626907247492,
+            "velocity_rmse": 0.32312265936055756,
+            "pressure_rmse": 0.1853517381208977,
+            "reference_velocity_rms": 1.0211468710979463,
+            "reference_pressure_rms": 0.513914640142434,
+            "area_fraction": 0.029580910115237054,
+            "velocity_error_fraction": 0.024411104881352303,
+            "pressure_error_fraction": 0.06601235405298461,
+            "pooled_velocity_error_fraction": 0.021389730669718762,
+            "pooled_pressure_error_fraction": 0.028864064989017033
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.4126455264616209,
+            "pressure_relative_l2": 0.5596700404002991,
+            "velocity_rmse": 0.3895755385430433,
+            "pressure_rmse": 0.1587734579623102,
+            "reference_velocity_rms": 0.9598106124339599,
+            "reference_pressure_rms": 0.26107067768919856,
+            "area_fraction": 0.9633425860507397,
+            "velocity_error_fraction": 0.9717292647415742,
+            "pressure_error_fraction": 0.9091911816501458,
+            "pooled_velocity_error_fraction": 0.9762659254919118,
+            "pooled_pressure_error_fraction": 0.9599432096524282
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.33640055286672527,
+          "pressure_rmse": 0.12797408115215192,
+          "velocity_relative_l2": 0.3626660051400239
+        }
+      },
+      "latent_zero": {
+        "case_time_count": 48,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.5148672823381238,
+            "pressure_relative_l2": 1.147723769894254,
+            "velocity_rmse": 0.48616010254644365,
+            "pressure_rmse": 0.2740618198889371,
+            "reference_velocity_rms": 0.9595902724371231,
+            "reference_pressure_rms": 0.27643221120520656,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.5721422674010824,
+            "pressure_relative_l2": 0.41380479626912064,
+            "velocity_rmse": 0.3744159138589942,
+            "pressure_rmse": 0.26272374486878225,
+            "reference_velocity_rms": 0.6520173522553473,
+            "reference_pressure_rms": 0.6155064531980131,
+            "area_fraction": 0.007076503834023304,
+            "velocity_error_fraction": 0.00544148379635371,
+            "pressure_error_fraction": 0.005614340510280316,
+            "pooled_velocity_error_fraction": 0.0035667470791901894,
+            "pooled_pressure_error_fraction": 0.006361208787347219
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.40016402117817057,
+            "pressure_relative_l2": 0.4462699537370802,
+            "velocity_rmse": 0.40814131158869965,
+            "pressure_rmse": 0.22574199881260426,
+            "reference_velocity_rms": 1.0211468710979463,
+            "reference_pressure_rms": 0.513914640142434,
+            "area_fraction": 0.029580910115237054,
+            "velocity_error_fraction": 0.024950056951161887,
+            "pressure_error_fraction": 0.01894654890902722,
+            "pooled_velocity_error_fraction": 0.019605265398432856,
+            "pooled_pressure_error_fraction": 0.020856807172760554
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.5178000949514007,
+            "pressure_relative_l2": 1.2603306023991088,
+            "velocity_rmse": 0.4885493893718284,
+            "pressure_rmse": 0.27537119026800455,
+            "reference_velocity_rms": 0.9598106124339599,
+            "reference_pressure_rms": 0.26107067768919856,
+            "area_fraction": 0.9633425860507397,
+            "velocity_error_fraction": 0.9696084592524844,
+            "pressure_error_fraction": 0.9754391105806924,
+            "pooled_velocity_error_fraction": 0.976827987522377,
+            "pooled_pressure_error_fraction": 0.9727819840398921
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.43487549519929436,
+          "pressure_rmse": 0.25237410594781334,
+          "velocity_relative_l2": 0.4693494862509225
+        }
+      },
+      "geometry_swap": {
+        "case_time_count": 48,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.24490336770522406,
+            "pressure_relative_l2": 0.39297443810388427,
+            "velocity_rmse": 0.23159302113685512,
+            "pressure_rmse": 0.11931514111441117,
+            "reference_velocity_rms": 0.9595902724371231,
+            "reference_pressure_rms": 0.27643221120520656,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.3031237882762825,
+            "pressure_relative_l2": 0.31655708144927314,
+            "velocity_rmse": 0.20976618172935504,
+            "pressure_rmse": 0.20408810751023523,
+            "reference_velocity_rms": 0.6520173522553473,
+            "reference_pressure_rms": 0.6155064531980131,
+            "area_fraction": 0.007076503834023304,
+            "velocity_error_fraction": 0.007058982748020535,
+            "pressure_error_fraction": 0.031758083732351096,
+            "pooled_velocity_error_fraction": 0.004554769780802596,
+            "pooled_pressure_error_fraction": 0.01635451161991363
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.23704075060293187,
+            "pressure_relative_l2": 0.30160392719035994,
+            "velocity_rmse": 0.24560351770434105,
+            "pressure_rmse": 0.15593672666876965,
+            "reference_velocity_rms": 1.0211468710979463,
+            "reference_pressure_rms": 0.513914640142434,
+            "area_fraction": 0.029580910115237054,
+            "velocity_error_fraction": 0.043484140697008435,
+            "pressure_error_fraction": 0.0894590435291366,
+            "pooled_velocity_error_fraction": 0.029016034586404716,
+            "pooled_pressure_error_fraction": 0.03711573759297663
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.24468040495069557,
+            "pressure_relative_l2": 0.4011982787968347,
+            "velocity_rmse": 0.23107880125334668,
+            "pressure_rmse": 0.11629120896399729,
+            "reference_velocity_rms": 0.9598106124339599,
+            "reference_pressure_rms": 0.26107067768919856,
+            "area_fraction": 0.9633425860507397,
+            "velocity_error_fraction": 0.949456876554971,
+            "pressure_error_fraction": 0.8787828727385123,
+            "pooled_velocity_error_fraction": 0.9664291956327927,
+            "pooled_pressure_error_fraction": 0.9465297507871099
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0018340151528761846,
+          "pressure_rmse": 0.0007627232754000582,
+          "velocity_relative_l2": 0.001967304940512641
+        }
+      }
+    }
+  },
+  "original_by_scope_horizon": {
+    "train": {
+      "early": {
+        "case_time_count": 9,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.03984732621986851,
+            "pressure_relative_l2": 0.08761224415144979,
+            "velocity_rmse": 0.03750622952786817,
+            "pressure_rmse": 0.015426148714388938,
+            "reference_velocity_rms": 0.9476159215061989,
+            "reference_pressure_rms": 0.16480563846119536,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.06700662718327023,
+            "pressure_relative_l2": 0.07147554196414062,
+            "velocity_rmse": 0.0388879495411281,
+            "pressure_rmse": 0.03546791567870572,
+            "reference_velocity_rms": 0.5103311972858738,
+            "reference_pressure_rms": 0.4604682652491808,
+            "area_fraction": 0.007348716026114239,
+            "velocity_error_fraction": 0.006504901704127392,
+            "pressure_error_fraction": 0.026539054921392947,
+            "pooled_velocity_error_fraction": 0.01222342139763755,
+            "pooled_pressure_error_fraction": 0.044709907439891027
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.04253547652434726,
+            "pressure_relative_l2": 0.06483204760234923,
+            "velocity_rmse": 0.040311682678299494,
+            "pressure_rmse": 0.025560037848011696,
+            "reference_velocity_rms": 0.9079781276476244,
+            "reference_pressure_rms": 0.36628342206674447,
+            "area_fraction": 0.03069834324068552,
+            "velocity_error_fraction": 0.028744844919364815,
+            "pressure_error_fraction": 0.06267263983094773,
+            "pooled_velocity_error_fraction": 0.051803782684571725,
+            "pooled_pressure_error_fraction": 0.09607415192754998
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.03940299842382854,
+            "pressure_relative_l2": 0.09302896673856295,
+            "velocity_rmse": 0.03724208931816676,
+            "pressure_rmse": 0.014743527419144302,
+            "reference_velocity_rms": 0.9515679304443234,
+            "reference_pressure_rms": 0.14902014622709864,
+            "area_fraction": 0.9619529407332004,
+            "velocity_error_fraction": 0.9647502533765078,
+            "pressure_error_fraction": 0.9107883052476592,
+            "pooled_velocity_error_fraction": 0.9359727959177906,
+            "pooled_pressure_error_fraction": 0.8592159406325589
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0,
+          "pressure_rmse": 0.0,
+          "velocity_relative_l2": 0.0
+        }
+      },
+      "middle": {
+        "case_time_count": 6,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.11192421243813522,
+            "pressure_relative_l2": 0.25212935861599983,
+            "velocity_rmse": 0.10499645724486713,
+            "pressure_rmse": 0.044433556941797014,
+            "reference_velocity_rms": 0.9472284401088483,
+            "reference_pressure_rms": 0.16630404444924593,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.2628527938798909,
+            "pressure_relative_l2": 0.2231663161328187,
+            "velocity_rmse": 0.14141238767308753,
+            "pressure_rmse": 0.11380397159004402,
+            "reference_velocity_rms": 0.5092375399623017,
+            "reference_pressure_rms": 0.46899380154017245,
+            "area_fraction": 0.0073487160261142374,
+            "velocity_error_fraction": 0.012076476390685265,
+            "pressure_error_fraction": 0.041826101650639325,
+            "pooled_velocity_error_fraction": 0.01447526217455592,
+            "pooled_pressure_error_fraction": 0.0471389161772476
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.1507664227540337,
+            "pressure_relative_l2": 0.19461159846655748,
+            "velocity_rmse": 0.14111113886432497,
+            "pressure_rmse": 0.0782086020409661,
+            "reference_velocity_rms": 0.8996778102939493,
+            "reference_pressure_rms": 0.38669117045909246,
+            "area_fraction": 0.03069834324068552,
+            "velocity_error_fraction": 0.04967147255897011,
+            "pressure_error_fraction": 0.10859828319133787,
+            "pooled_velocity_error_fraction": 0.06569516934805283,
+            "pooled_pressure_error_fraction": 0.0841231587335642
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.10949512563425867,
+            "pressure_relative_l2": 0.2653957400326688,
+            "velocity_rmse": 0.10311618689445995,
+            "pressure_rmse": 0.04195959286686061,
+            "reference_velocity_rms": 0.9514097538161161,
+            "reference_pressure_rms": 0.14921353432873827,
+            "area_fraction": 0.9619529407332003,
+            "velocity_error_fraction": 0.9382520510503444,
+            "pressure_error_fraction": 0.8495756151580228,
+            "pooled_velocity_error_fraction": 0.9198295684773912,
+            "pooled_pressure_error_fraction": 0.8687379250891882
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0,
+          "pressure_rmse": 0.0,
+          "velocity_relative_l2": 0.0
+        }
+      },
+      "late": {
+        "case_time_count": 9,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.14861954540421538,
+            "pressure_relative_l2": 0.2875153408084199,
+            "velocity_rmse": 0.13888480717420487,
+            "pressure_rmse": 0.05169469199928259,
+            "reference_velocity_rms": 0.9481130024467392,
+            "reference_pressure_rms": 0.16716659062590875,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.22915243313101444,
+            "pressure_relative_l2": 0.1883483330690611,
+            "velocity_rmse": 0.12563812244604133,
+            "pressure_rmse": 0.09014023495009203,
+            "reference_velocity_rms": 0.5050330414398984,
+            "reference_pressure_rms": 0.46512676811445236,
+            "area_fraction": 0.007348716026114239,
+            "velocity_error_fraction": 0.005271565071354877,
+            "pressure_error_fraction": 0.027748668789939174,
+            "pooled_velocity_error_fraction": 0.0071346612718893795,
+            "pooled_pressure_error_fraction": 0.018265821264160483
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.14676051418345187,
+            "pressure_relative_l2": 0.16723636546406057,
+            "velocity_rmse": 0.13648131036312003,
+            "pressure_rmse": 0.06633428895846608,
+            "reference_velocity_rms": 0.9043074585634473,
+            "reference_pressure_rms": 0.3848507180167174,
+            "area_fraction": 0.03069834324068552,
+            "velocity_error_fraction": 0.0269692978676082,
+            "pressure_error_fraction": 0.06463105834525754,
+            "pooled_velocity_error_fraction": 0.031643204819462645,
+            "pooled_pressure_error_fraction": 0.0426077058005383
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.14833700019161444,
+            "pressure_relative_l2": 0.31130106537840596,
+            "velocity_rmse": 0.13896966443873857,
+            "pressure_rmse": 0.05060657604159455,
+            "reference_velocity_rms": 0.9522072019123191,
+            "reference_pressure_rms": 0.1500497548157058,
+            "area_fraction": 0.9619529407332004,
+            "velocity_error_fraction": 0.967759137061037,
+            "pressure_error_fraction": 0.9076202728648032,
+            "pooled_velocity_error_fraction": 0.961222133908648,
+            "pooled_pressure_error_fraction": 0.9391264729353013
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0,
+          "pressure_rmse": 0.0,
+          "velocity_relative_l2": 0.0
+        }
+      }
+    },
+    "validation": {
+      "early": {
+        "case_time_count": 18,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.07085172580840476,
+            "pressure_relative_l2": 0.1266222952860706,
+            "velocity_rmse": 0.06735557823675008,
+            "pressure_rmse": 0.03625809309018982,
+            "reference_velocity_rms": 0.9592049390213787,
+            "reference_pressure_rms": 0.27826122062848696,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.1166140624651605,
+            "pressure_relative_l2": 0.09248558385246466,
+            "velocity_rmse": 0.08032641007100579,
+            "pressure_rmse": 0.05828497770070281,
+            "reference_velocity_rms": 0.6514076315478028,
+            "reference_pressure_rms": 0.6157720794725751,
+            "area_fraction": 0.007076503834023305,
+            "velocity_error_fraction": 0.008039017495559513,
+            "pressure_error_fraction": 0.020300827153151953,
+            "pooled_velocity_error_fraction": 0.009756248921612287,
+            "pooled_pressure_error_fraction": 0.01604061066524041
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.08854674744409925,
+            "pressure_relative_l2": 0.10473254616222974,
+            "velocity_rmse": 0.09372015963308071,
+            "pressure_rmse": 0.05609716263357897,
+            "reference_velocity_rms": 1.035796397001924,
+            "reference_pressure_rms": 0.5117032959931014,
+            "area_fraction": 0.02958091011523705,
+            "velocity_error_fraction": 0.05179487247243349,
+            "pressure_error_fraction": 0.07461874238452611,
+            "pooled_velocity_error_fraction": 0.056645522064800106,
+            "pooled_pressure_error_fraction": 0.0681682528495972
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.06983418384509686,
+            "pressure_relative_l2": 0.13136058471396225,
+            "velocity_rmse": 0.06627297040734495,
+            "pressure_rmse": 0.03520375085714121,
+            "reference_velocity_rms": 0.9589810623724142,
+            "reference_pressure_rms": 0.26255652006329283,
+            "area_fraction": 0.9633425860507394,
+            "velocity_error_fraction": 0.940166110032007,
+            "pressure_error_fraction": 0.9050804304623219,
+            "pooled_velocity_error_fraction": 0.9335982290135876,
+            "pooled_pressure_error_fraction": 0.9157911364851624
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0,
+          "pressure_rmse": 0.0,
+          "velocity_relative_l2": 0.0
+        }
+      },
+      "middle": {
+        "case_time_count": 12,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.24489044676442526,
+            "pressure_relative_l2": 0.43943624868682013,
+            "velocity_rmse": 0.23162445851870642,
+            "pressure_rmse": 0.12806169029419942,
+            "reference_velocity_rms": 0.9593969891725905,
+            "reference_pressure_rms": 0.2780781839774004,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.3962152682611253,
+            "pressure_relative_l2": 0.4089125800800985,
+            "velocity_rmse": 0.28387062020617543,
+            "pressure_rmse": 0.2397287612011362,
+            "reference_velocity_rms": 0.6674497564323785,
+            "reference_pressure_rms": 0.6020505876343433,
+            "area_fraction": 0.007076503834023306,
+            "velocity_error_fraction": 0.010237371519074289,
+            "pressure_error_fraction": 0.04307475327876875,
+            "pooled_velocity_error_fraction": 0.00886654629810197,
+            "pooled_pressure_error_fraction": 0.020841225098857205
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.26175631002363214,
+            "pressure_relative_l2": 0.3845924959360268,
+            "velocity_rmse": 0.26520869466276437,
+            "pressure_rmse": 0.19574989810827134,
+            "reference_velocity_rms": 1.006144317835307,
+            "reference_pressure_rms": 0.5374849880521678,
+            "area_fraction": 0.029580910115237048,
+            "velocity_error_fraction": 0.05292423100111223,
+            "pressure_error_fraction": 0.11661992646036423,
+            "pooled_velocity_error_fraction": 0.03262935023682528,
+            "pooled_pressure_error_fraction": 0.059877582243480595
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.24335643526752862,
+            "pressure_relative_l2": 0.4422789897011217,
+            "velocity_rmse": 0.22989656531063288,
+            "pressure_rmse": 0.12322454758692124,
+            "reference_velocity_rms": 0.9599275528397767,
+            "reference_pressure_rms": 0.26230173478898233,
+            "area_fraction": 0.9633425860507397,
+            "velocity_error_fraction": 0.9368383974798135,
+            "pressure_error_fraction": 0.8403053202608669,
+            "pooled_velocity_error_fraction": 0.9585041034650726,
+            "pooled_pressure_error_fraction": 0.9192811926576623
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0,
+          "pressure_rmse": 0.0,
+          "velocity_relative_l2": 0.0
+        }
+      },
+      "late": {
+        "case_time_count": 18,
+        "regions": {
+          "all_fluid": {
+            "velocity_relative_l2": 0.4200126047365005,
+            "pressure_relative_l2": 0.6289873544963968,
+            "velocity_rmse": 0.3968993579998534,
+            "pressure_rmse": 0.1966907229326153,
+            "reference_velocity_rms": 0.9601044613625562,
+            "reference_pressure_rms": 0.27350588660046365,
+            "area_fraction": 1.0,
+            "velocity_error_fraction": 1.0,
+            "pressure_error_fraction": 1.0,
+            "pooled_velocity_error_fraction": 1.0,
+            "pooled_pressure_error_fraction": 1.0
+          },
+          "near_0_to_0.125": {
+            "velocity_relative_l2": 0.42754293918493136,
+            "pressure_relative_l2": 0.4787102163989606,
+            "velocity_rmse": 0.2898212798805735,
+            "pressure_rmse": 0.325954639690573,
+            "reference_velocity_rms": 0.6423388035115374,
+            "reference_pressure_rms": 0.6242114039658979,
+            "area_fraction": 0.007076503834023305,
+            "velocity_error_fraction": 0.0039042214667282713,
+            "pressure_error_fraction": 0.03536649952710523,
+            "pooled_velocity_error_fraction": 0.0033517257994939366,
+            "pooled_pressure_error_fraction": 0.015280547455979586
+          },
+          "middle_0.125_to_0.5": {
+            "velocity_relative_l2": 0.3689773067571693,
+            "pressure_relative_l2": 0.4431248082797529,
+            "velocity_rmse": 0.3843351379430325,
+            "pressure_rmse": 0.22918574103572661,
+            "reference_velocity_rms": 1.0164990473690616,
+            "reference_pressure_rms": 0.5004124190186111,
+            "area_fraction": 0.02958091011523705,
+            "velocity_error_fraction": 0.028526015821845767,
+            "pressure_error_fraction": 0.0855622832541332,
+            "pooled_velocity_error_fraction": 0.02706719506993936,
+            "pooled_pressure_error_fraction": 0.030538746163471464
+          },
+          "far_over_0.5": {
+            "velocity_relative_l2": 0.4214983024687984,
+            "pressure_relative_l2": 0.6444945343270562,
+            "velocity_rmse": 0.39780898749880794,
+            "pressure_rmse": 0.19292565557264177,
+            "reference_velocity_rms": 0.9605622022249611,
+            "reference_pressure_rms": 0.2587641305819151,
+            "area_fraction": 0.9633425860507394,
+            "velocity_error_fraction": 0.9675697627114261,
+            "pressure_error_fraction": 0.8790712172187615,
+            "pooled_velocity_error_fraction": 0.9695810791305666,
+            "pooled_pressure_error_fraction": 0.954180706380549
+          }
+        },
+        "mean_prediction_change": {
+          "velocity_rmse": 0.0,
+          "pressure_rmse": 0.0,
+          "velocity_relative_l2": 0.0
+        }
+      }
+    }
+  },
+  "context_stats": [
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "scope": "train",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "latent_norm": 5.149226665496826,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.224782794713974,
+        "global_state_neutral": 1.0219175815582275,
+        "latent_zero": 0.9102632403373718,
+        "geometry_swap": 0.0018517832504585385
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+      "scope": "validation",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "latent_norm": 4.659142017364502,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.2513691782951355,
+        "global_state_neutral": 1.2747488021850586,
+        "latent_zero": 0.8236277103424072,
+        "geometry_swap": 0.004494993947446346
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_838.npz",
+      "scope": "validation",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "latent_norm": 4.510773181915283,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.19544464349746704,
+        "global_state_neutral": 1.2914342880249023,
+        "latent_zero": 0.7973995804786682,
+        "geometry_swap": 0.004953855648636818
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "scope": "train",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "latent_norm": 4.527587890625,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.2457878589630127,
+        "global_state_neutral": 0.947631299495697,
+        "latent_zero": 0.8003720045089722,
+        "geometry_swap": 0.004893741104751825
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/nurbs/22/Re_164.npz",
+      "scope": "validation",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "latent_norm": 4.14370059967041,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.3160877525806427,
+        "global_state_neutral": 0.8178480863571167,
+        "latent_zero": 0.7325096726417542,
+        "geometry_swap": 0.0067254938185215
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/nurbs/22/Re_977.npz",
+      "scope": "validation",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "latent_norm": 4.584812164306641,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.2540571391582489,
+        "global_state_neutral": 0.6609432101249695,
+        "latent_zero": 0.8104879260063171,
+        "geometry_swap": 0.004097858909517527
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "scope": "train",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "latent_norm": 4.754279136657715,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.15716838836669922,
+        "global_state_neutral": 1.191014289855957,
+        "latent_zero": 0.8404456973075867,
+        "geometry_swap": 0.002278900006785989
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/skelenton/36/Re_209.npz",
+      "scope": "validation",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "latent_norm": 4.17277193069458,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.2997938394546509,
+        "global_state_neutral": 0.8304497003555298,
+        "latent_zero": 0.7376488447189331,
+        "geometry_swap": 0.005211072973906994
+      }
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/skelenton/36/Re_867.npz",
+      "scope": "validation",
+      "geometry_donor_path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "latent_norm": 3.8996455669403076,
+      "latent_change": {
+        "original": 0.0,
+        "geometry_neutral": 0.3515813648700714,
+        "global_state_neutral": 0.8068230152130127,
+        "latent_zero": 0.6893664598464966,
+        "geometry_swap": 0.006525276228785515
+      }
+    }
+  ],
+  "optimizer_updates": 0,
+  "physical_input_consistency_only_for_original": true
+}

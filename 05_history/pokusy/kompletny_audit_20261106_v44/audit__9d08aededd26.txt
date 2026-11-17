@@ -1,0 +1,136 @@
+KOMPLETNÝ AUDIT HLAVNÉHO 2D PINN EXPERIMENTU
+06.11.2026; hlavná kontrola 02:05, záverečná kontrola 02:08 Europe/Bratislava
+
+VÝSLEDOK
+PASS: 8922 kontrol bez kritického nálezu, navyše 12 úspešných testov
+automatického účtovania a pokračovania. Všetkých 186 dokončených hlavných
+tréningov bolo skontrolovaných jednotlivo. Všetkých 16 práve rozpracovaných
+tréningov má správnu konfiguráciu, čerstvé záznamy o postupe a žiadnu
+zachytenú chybu vykonávania. Nezistila sa chyba, ktorá by vyžadovala ich
+opakovanie. Nový tréning, väčšia sieť ani záverečný TEST sa pri audite nespustili.
+
+OPRAVENÝ NÁLEZ
+Pomocný prevádzkový prehľad current_group.json ešte uvádzal starý zrušený
+zberač 143685 a neobsahoval novú dávku 144649. Skutočný CPU zberač 144648
+pritom od začiatku správne sledoval všetky potrebné úlohy. Index bol
+zosúladený pod prevádzkovým zámkom. Pôvodné bajty aj oba SHA zostali
+uložené v operational_index_before.json a operational_index_repair.json.
+Žiadny vedecký výsledok, váha, tréningový protokol ani autoritatívny
+zoznam úloh nebol zmenený. Staršie historické záznamy ostali zachované.
+
+ČO JE SKONTROLOVANÉ
+1. Plán a opakovania
+   Presne 395 pokusov: 240 vyhľadávacích tréningov + 150 finálnych tréningov
+   vybraných nastavení + 5 pevnej baseline. Každá zo 6 vyhľadávacích metód
+   má 5 nezávislých hľadaní, každé 8 kandidátov a 5 čerstvých finálnych seedov.
+   Štyri LLM: Qwen3-8B, Ministral-3-8B, Phi-4-mini, Granite-3.3-8B;
+   kontrolné metódy: random a TPE. Nechýba žiadna metóda ani plánovaný seed.
+   Závislosti predchádzajúcich konfigurácií sú rešpektované. Žiadny skrytý
+   opakovaný pokus alebo duplicitné prevzatie tej istej úlohy sa nenašlo.
+
+2. Dáta a fyzikálny rozsah
+   FlowBench LDC_NS_2D, harmonics, 512x512, pripnutá revízia datasetu.
+   640 TRAIN / 160 VAL / 200 TEST prípadov, ID sú disjunktné a úplné.
+   Znovu overené SHA všetkých pripravených tréningových/validačných cache
+   súborov. Nezávisle prepočítané normalizačné štatistiky iba zo 640 TRAIN
+   prípadov; zhodujú sa s používanými hodnotami. TEST cieľové polia neboli otvorené.
+   Ustálené u/v/p, bez časovej osi. Fyzický rozsah [0,2]^2 sa prevádza na
+   modelové [0,1]^2, zodpovedajúca viskozita v modelových súradniciach je 1/Re.
+
+3. Všetkých 186 hotových tréningov
+   Pôvodná spoločná sieť: šírka 192, 4 skryté MLP vrstvy, 134922 parametrov.
+   Každý z 640 TRAIN prípadov bol použitý presne 400-krát; 64000 aktualizácií.
+   Fyzikálny člen bol skutočne zapnutý podľa warmupu/rampy a jeho kladnej váhy.
+   Nezávisle obnovená počiatočná inicializácia na CPU; hash sedí so záznamami.
+   Zhodné seedy majú medzi metódami zhodnú inicializáciu aj hash vzorkovania.
+   Skontrolovaných 41 validačných bodov na tréning, výber best.pt podľa
+   najnižšej predpísanej nevaženej VAL MSE, úplné VAL pokrytie 160 prípadov.
+   Znovu agregované metriky a chyby okrajových podmienok. Štyri už zmrazené
+   výbery konfigurácií aj živé finálne tréningy používajú správne nastavenia.
+
+4. Uložené siete a možnosť obnovy
+   SHA súhrnov a best.pt sa zhodujú s pôvodnými dokladmi. Na CPU načítané
+   best.pt, last.pt a training_state.pt všetkých 186 tréningov: spolu 558
+   checkpointových súborov. Kontrolované tvary a konečnosť hodnôt, konfigurácia,
+   normalizácia, epochy, optimizer, scheduler, RNG stavy a zhoda posledného
+   modelu s obnovovacím záznamom. Tieto váhy sa do PC nekopírovali.
+
+5. LLM návrhy a kontrolné metódy
+   Preverené pôvodné odpovede, verejné zdôvodnenia, parametre a ich skutočné
+   použitie v tréningu. Presné rodiny/revízie modelov, verzie balíkov, prompty,
+   seedy generovania, spoločná JSON schéma a najviac jedna modelová oprava.
+   LLM dostáva iba svoju dovtedajšiu nameranú históriu. Žiadne TEST metriky
+   alebo ručné nahradenie modelom navrhnutých hodnôt sa nenašlo.
+   Časy načítania, generovania, CPU, RAM a VRAM sú uložené. Náhodný výber
+   a TPE boli nezávisle zopakované z ich pôvodných seedov a histórie.
+   Úplné SHA kontroly pôvodných LLM sú doložené prípravou a compute-node
+   dokladmi; zhodujú sa aj aktuálne zmrazené fingerprinty. 61 GB LLM váh
+   sa pri tomto audite znova celé nehashovalo.
+
+6. Rýchlosť a nezávislý prepočet
+   Každý hotový model: 160 VAL prípadov x 200 surových meraní po 30 zahriatiach.
+   Znovu prepočítané p50/p95/p99 zo všetkých 5952000 uložených meraní
+   výsledných modelov. Najvyššie per-case p99 medzi auditovanými modelmi
+   bolo 3.303953 ms; všetky splnili limit 5 ms v predpísanom rozsahu merania.
+   Jedno úplné pole 512x512 bolo z uložených váh znovu vypočítané na CPU;
+   MSE aj relatívne chyby u/v a p sa zhodujú s pôvodným GPU výsledkom.
+   Overená zhoda bodového a mriežkového FD stencilu vrátane okrajov.
+   Navierove–Stokesove rezíduum pre analytické Poiseuilleovo prúdenie je
+   nulové; kontrola odhalí aj zámerne divergentné pole. AD divergencia
+   streamfunction modelu bola v kontrolných bodoch 1.75e-7.
+
+7. Prevádzka a automatické pokračovanie
+   Aktuálne GPU dávky 143656, 143684 a 144649; CPU zberač 144648.
+   Všetkých 24 pridelených H200 má rozdielne GPU UUID a správny offline režim.
+   CPU zberač sleduje všetky dávky a uchováva účtovanie pred stratou histórie
+   Slurmu. Dokončená 143342 má COMPLETED/0:0 a všetky kontroly prešli.
+   Kapacitná GPU úloha 143807 je ukončená a ďalšie väčšie siete sú uzavreté.
+   Testy preverili hranicu 4 rezervovaných uzlov, 24 GPU, zákaz pokračovania
+   po chybe, účtovanie jednotlivých koncov dávok a zachovanie uzavretého TEST.
+
+AKTUÁLNY STAV PRI ZÁVEREČNEJ KONTROLE
+186 hotových + 16 rozpracovaných + 193 čakajúcich = 395.
+Je to stav k uvedenému času, počas ďalšieho učenia sa čísla prirodzene menia.
+Žiadny attention ani hold. Väčšia sieť sa netrénuje. Čakanie na účtovanie
+nevyhradzuje GPU. Používateľom oznámený zostatok bol 1381 GPU-h.
+
+ČO MUSÍ EŠTE NASLEDOVAŤ
+A. Dokončiť všetky zostávajúce pokusy pôvodného plánu a uchovať aj zlyhania.
+B. Uzavrieť manifest finálnych váh: plánovaných 150 opakovaní vybraných
+   konfigurácií a 5 baseline. Nevyberať najlepší finálny seed. Prípadné
+   zlyhania pomenovať a zahrnúť podľa protokolu, nie potichu nahrádzať.
+C. Pred otvorením TEST pripraviť, skontrolovať a zmraziť jeho samostatný
+   evaluator a presný plán vyhodnotenia. Zachovať primárne metriky,
+   prevody, gauge, 5 ms rozsah a vnorenie 5 hľadaní x 5 tréningových seedov.
+D. Jednorazovo vyhodnotiť 200 TEST prípadov pre každý finálny model.
+   Uložiť čísla po prípadoch aj súhrny, fyziku, okraje, surovú latenciu,
+   konfigurácie, hash modelu a spotrebu. Žiadne učenie alebo výber podľa TEST.
+E. Uzavrieť finálnu štatistiku a grafy. Päť seedov v každom z piatich hľadaní
+   nie je 25 nezávislých hľadaní. Presné znenie téz sa týmto auditom nemenilo.
+F. Vytvoriť novú finálnu zálohu sietí, výsledkov, zdrojov a účtovania priamo
+   Perun -> GitHub; podľa veľkosti prípadne po častiach. Existujúci GitHub
+   modelový archív je starší bodový snapshot, nie automaticky živá záloha.
+   Súčasné váhy ostávajú na Perune. Veľké polia neukladať na disk PC.
+
+ROZSAH TVRDENÍ VO VÝSLEDKOCH
+Tento experiment skúma spoločný physics-informed model ustálených polí,
+nie časový rozbeh, voľnú hladinu alebo časový rollout. Rozdelenie prípadov
+zdieľa geometrie medzi množinami, preto sa nepreukazuje generalizácia na
+úplne nevidené geometrie. Chyby NS a stien ostávajú nenulové a sú uložené;
+nízka divergencia sama osebe nepreukazuje presnú fyziku.
+5 ms znamená GPU výpočet celého poľa s už pripravenými vstupmi na GPU,
+vrátane spracovania geometrie, siete, curl, gauge a masky. Nezahŕňa presun
+CPU/GPU, vykreslenie ani statické vytvorenie súradnicového stencilu.
+Váhy a dáta sú FP32; TF32 pre matmul je vypnuté, pre cuDNN je povolené.
+O úspechu LLM voči random/TPE/baseline rozhodne až finálny výsledok.
+
+DOKLADY
+closeout.json, summary.json, checks.json, incremental_checks.json,
+artifact_hashes.json, completed_trials.csv, pending_tasks.csv,
+live_progress.json, frozen_selections.json, cpu_replay.json,
+remaining_stage_checklist.json a continuation_tests.log.
+Log testov môže obsahovať zámerne simulované zlyhania kontrolných scenárov;
+celý balík 12 testov sa končí výsledkom OK.
+Na Perune: results/ldc_full_audit_20261106_v44/final.
+Audit bežal na jednom CPU v existujúcej alokácii s CUDA_VISIBLE_DEVICES
+prázdnym a potvrdením, že CUDA nebola dostupná. Žiadna nová GPU alokácia.

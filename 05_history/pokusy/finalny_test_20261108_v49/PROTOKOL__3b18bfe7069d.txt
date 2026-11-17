@@ -1,0 +1,35 @@
+FINÁLNY TEST SPOLOČNÉHO 2D PINN — 08.11.2026
+
+Všetkých 395 tréningov je dokončených. Vyhodnotí sa 155 finálnych sietí
+(6 metód x 5 hľadaní x 5 čerstvých tréningových seedov + 5 fixed baseline)
+na 200 doteraz odložených prípadoch. Váhy, konfigurácie, seedy a normalizácia
+sú uzavreté v models.json. Už sa nič netrénuje ani nevyberá podľa TEST.
+
+Primárna metrika je priemerná MSE celého poľa u/v/p, rovnako ako pri VAL.
+Ďalej sa uložia relatívne chyby rýchlosti a tlaku, rezíduá Navierových–Stokesových
+rovníc a divergencie, chyby na stenách a prekážke, aj surové časy výpočtu.
+Každý prípad má rovnakú váhu. Pole má natívne rozlíšenie 512 x 512.
+
+Rýchlosť: 30 zahriatí a 200 meraní na každý model/prípad; požiadavka p99 <= 5 ms.
+Meria sa celý GPU výpočet s už pripravenými vstupmi na GPU; bez prenosu do PC,
+vykreslenia a prípravy statických súradníc. Vstupná geometria sa v každom meraní
+znovu spracuje. Nastavenia FP32/TF32 a tlaková referencia sú rovnaké ako vo V33.
+Pred prvým otvorením TEST prejdú všetky 4 GPU kontrolou správnosti na VAL.
+Ide o overenie výpočtu, nie o používateľom vynechaný pilot odhadu spotreby.
+
+Primárne 4 porovnania: jednotlivé LLM mínus TPE v priemernej TEST MSE.
+Najprv sa spriemeruje 5 finálnych seedov v každom hľadaní. Následne párový
+crossed bootstrap (10 000 opakovaní, seed 510001) vzorkuje 5 hľadaní a
+85 geometrických zhlukov TEST. Použije všetky prípady vybratej geometrie
+so zachovanou rovnakou váhou prípadu a rovnaké vzorkovanie pre všetky metódy.
+Bonferroniho 98,75 % intervaly zohľadnia 4 primárne porovnania.
+Nejde o 25 nezávislých hľadaní. Pokrytie intervalov je približné a len
+5 nezávislých hľadaní je obmedzenie. Random, fixed a ostatné metriky sa
+uvedú tiež. Formálne znenie hypotéz zostáva na neskoršie písanie dizertácie;
+číselný postup sa uzatvára teraz, pred prvým výsledkom TEST.
+
+Nevolí sa najlepší finálny seed. Zlyhanie sa uloží a zastaví ďalšie úlohy,
+bez vymyslených hodnôt a skrytého opakovania. Porovnávací report vyžaduje
+všetkých 155 x 200 platných výsledkov. TRAIN a TEST zdieľajú geometrie,
+preto sa nevyvodzuje schopnosť predikovať úplne nevidené geometrie.
+Predikujú sa ustálené polia. Veľké polia, váhy a surové časy zostanú na Perune.

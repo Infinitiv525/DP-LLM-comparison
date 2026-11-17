@@ -1,0 +1,83 @@
+V20 – VÝSLEDKY AUDITU GEOMETRIE A ÚVODNÉHO STAVU, 03.11.2026
+
+Úloha142743 COMPLETED0:0, účtovanie142744 uložené, freezeOK, fronta prázdna.
+3checkpointy x9prípadov x8časov x5variantov =1080 vyhodnotení poľa.
+225globálnychvektorov z75známychprefixov. Žiadnytréning, váhynezmenené.
+Pôvodné predikcie a chyby v8časoch sa zhodovali s predchádzajúcimi
+výsledkami; hardIC ajexplicitnýRe zachované vo všetkýchvariantách.
+
+HLAVNÉ ZISTENIA
+1. Chyba nie je sústredená len do tenkej vrstvy pri prekážke. Pri novom
+   curlgridNScheckpointu leží96,04%celkovejštvorcovejchybyrýchlosti
+   voblasti vzdialenejšej než0.5jednotkysolvera od pevnejbunky.
+   Tátooblasť však tvorí aj96,33%tekutiny. Nie dôkaz neúmernej
+   koncentrácie chyby vďalekomprúde alebo jedinej príčinychyby.
+2. Výmena samotnejCNNgeometrie pri zachovanomúvodnompoli zmenila
+   výstup výrazne menej než neutralizácia globálnehoúvodnéhoprúdenia.
+   Tvar však zostáva nepriamo aj vúvodnýchpoliach a lokálnejmaske.
+   Preto výsledok neznamená, že sieť geometriu úplne ignoruje.
+3. Globálny kontext je používaný: jeho odstránenie silno mení výstup.
+   Audit nedokazuje nedostatočnúkapacitu32čísel ani prínos konkrétnej
+   novejarchitektúry. To musí overiť kontrolovanýtréningovýtest.
+
+REGIONÁLNE VÝSLEDKY – curlgridNS,6VAL,8auditnýchčasov
+Vzdialenosť k najbližšej pevnejbunke, nie presnýanalytickýpovrch:
+oblasť                    plocha    podielUchybySSE    relatívnaUchyba
+d<=0.125                  0,708%       0,480%              34,06%
+0.125<d<=0.5              2,958%       3,484%              27,86%
+d>0.5                   96,334%      96,036%              26,51%
+TlakováSSEchyba vo vzdialenejzóne94,66%. AbsolútnaRMSErýchlosti
+pri prekážke0,2352, vďalekomprúde0,2492. Veľkárelatívnachyba pri stene
+teda sama neoznačuje hlavnýzdrojglobálnejSSE. Vplyv okrajovýchpodmienok
+na vzdialenédynamicképrúdenie tentoaudit nevylučuje ani neizoluje.
+Pri pôvodnomprimitive farzóna96,33%plochy a96,65%UchybySSE;
+pri pôvodnomcurl96,21%UchybySSE. Podobnýpriestorovýobraz vo všetkých3.
+
+CITLIVOSŤ VÝSTUPU – curlgridNS, priemer cez6VAL a8časov
+RelatívnaL2ZMENArýchlosti oproti pôvodnejpredikcii, niechybaoprotiCFD:
+Výmena geometrie vCNN za inúTRAINgeometriu           0,154%
+Vynulovanie globálnychgeometrickýchkanálov            5,603%
+Neutralizácia globálnychúvodnýchkanálov              57,658%
+Vynulovanie latent32 so zachovanýmRe                 55,821%
+Lokálnyúvodnýstav,skutočnáfluidnámaska aRe sa nemenili.
+Po výmeneCNNgeometrie jeúvodnépole stále spojené s pôvodnougeometriou;
+po nulovaní sú vstupy tiež mimo bežnéhorozdelenia. Nie platnéCFDscenáre
+alebo izolovaný dôkaz vplyvu fyzickej zmenyprekážky.
+Primitive reagoval na geoswap0,197% a neutralizáciuúvodu36,267%;
+pôvodnýcurl0,182% a50,587%. Rozdiel nie je špecifický len novémupostihu.
+
+GLOBÁLNEVEKTORY – OSTRAŽITÁ INTERPRETÁCIA
+Pri najbližšomTRAINinejgeometrie, curlgridNS:
+medián štandardizovanejvzdialenosti TRAIN0,792,VAL0,685;
+maximum TRAIN2,177,VAL3,000. Štandardizácia niektorých takmerkonštantných
+rozmerov môže zosilniť drobnérozdiely; najmenšíTRAINstd2,40e-6.
+Doplnková posthocmetrika v pôvodnomtanhpriestore dáva mediány0,596/
+0,549 amaximum1,070/0,761. Nejde o konzistentný dôkaz, že všetkyVAL
+ležia mimo bežnéhoembeddingpriestoru. Ani jedna metrika nedokazuje,
+či globálnyvektor obsahuje informácie potrebné pre správnu budúcnosť.
+Podrobnosti a prvé3TRAINsusedy každého z75prípadov sú vJSON.
+
+ČO TENTO AUDIT NEMENÍ
+Iba8vybranýchčasov, nie nový238snímkovýtest. Napr.curlgridNS tu má
+U26,65%/p39,41% kvôlivýberučasov. PlnýV19výsledok zostáva
+U39,16%/p54,98%. Žiadne zlepšenie tréningom neprebehlo.
+Žiadny záver štatistickejvýznamnosti, konečnýTEST stále zatvorený.
+Neurobili sme meranie5ms ani novýfyzikálnygate v tomtoaudite.
+
+ODPORÚČANÝ NASLEDUJÚCI KONTROLOVANÝ TEST
+Poskytnúť výpočtu každého bodu aj priestorovúmapu známehoúvodného
+prúdenia a geometrie, pri zachovaní globálnehosúhrnu. Otestovať tým
+väčšie priestorovéokolie ako samotných6úvodnýchhodnôt vjednombode.
+PôvodnéPINNrovnice,FDgridkontrolu,hardIC,69/6split a238snímok zachovať.
+Porovnanie s identickou rozšírenousieťou, ktorej novépriestorovékanály
+budú nulové; rovnaké počiatočnépredikcie, vzorkovanie a početaktualizácií.
+Najprv otestovať zhodu bodového/gridvýpočtu, fyzikálnederivácie ačas5ms.
+Ide o hypotézu prenosu, nie už dokázanúopravu. Detaily vDALSI_TEST.txt.
+
+UCHOVANIE
+Actual60GPU*s/240pridelenýchCPU*s.46malýchJSON/logov/zdrojreview,
+archív732109B, SHA256 po stiahnutí overený:
+f3236736920f5bc5ab68cb4f865cd793af5340035885655f0550200b8a01cf4d
+Lokálne:vysledky_142743/. Kompaktnéčíslavreview_20261103/analysis.json,
+provenance.json. Masky/vzdialenostnépolia/váhy/veľképolia lenPerun.
+BezCFD/download/mainTEST/externýchpredlôh. Ďalšítréning zatiaľnespustený.

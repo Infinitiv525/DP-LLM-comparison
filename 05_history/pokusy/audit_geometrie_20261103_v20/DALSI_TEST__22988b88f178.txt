@@ -1,0 +1,40 @@
+NÁVRH CIELENÉHO TESTU PO V20 – PRIESTOROVÝ KONTEXT
+
+Hypotéza: sprístupnenie priestorového okolia známehoúvodného prúdenia
+a geometrie každému výpočtovémubodu zlepší prenos na odlišnéprípady.
+V20 ukázal používanie úvodnéhokontextu a slabšiu citlivosť na samostatnú
+CNNgeometriu; nepreukázal, že tento návrh bude presnejší.
+
+Model si ponechá globálny32číselnýsúhrn, lokálneúvodnésnímky2,3,
+Re,čas a rovnakývýstup psi/p s hardIC a curlkontinuitou. Navyše pri
+každom bode dostane známu priestorovúinformáciu zCNNmapy úvodu/geometrie.
+Možnosť vlastného riešenia: použiť16kanálov existujúcehopriestorového
+CNNvýstupu pred globálnym zbalením a vzorkovať ho podľa súradníc.
+Budúcepolia do mapy nikdy nevstúpia. Nie prechod na FNO alebo cudzítemplate.
+
+Nové priestorovévzorkovanie musí mať zmysluplné derivácie až po tretí
+rád preautogradPINN s psi. Použiť dostatočnehladkú interpoláciu znakov,
+nie predpokladať zhodu derivácií iba preto, že polia vyzerajúpodobne.
+Napríklad vlastná kvintickáB-splineinterpolácia learnedfeaturemapy;
+jej znaky nemusia byť interpoláciou surových fyzikálnych hodnôt.
+Existujúca interpolácia známychfyzikálnychpolí ostáva samostatná časť
+modelu, preto nemožno sľúbiť odstránenie celéhoAD-FDnesúladu.
+
+Férovýprototyp: v obochvetvách rovnaké rozšírenie vstupnejvrstvy,
+novéváhy začnú na nule a pôvodnéváhy sa prevezmú z rovnakéhocheckpointu.
+Obe počiatočnépredikcie musia byť totožné s pôvodným modelom.
+Kontrola dostáva novékanály nulové, skúšanávetva skutočné priestorové.
+Zachovať data/ADNS/BC/FDNSstraty, rovnakésamplovanie/seed,69TRAIN/6VAL,
+celých238cieľovýchsnímok a výberajzupdate0. ŽiadnenovéCFD/dáta/TEST.
+
+Predtréningom overiť sparse/gridzhodu vrátane priestorovýchznakov,
+hardIC, FDcurlkontinuitu, autogradvyššiederivácie a gradientdoCNN.
+Samostatne zmerať celýpredikčnýquery vrátane výpočtukontextu a vzorkovania,
+vstupyGPU, bezrenderingu. Výpočet lokálnychznakov neskrývať v nemeranom
+predspracovaní. 5msostáva. Na pravidelnejmriežke je možné využiť
+separovateľnývýpočetinterpolácie, ale jeho zhodu treba otestovať.
+
+Následne rovnakýpilotný tréningovýrozpočet obochvetiev; jeho konkrétne
+nastavenia a zdroje treba zmraziť až po technickom overeníprototypu.
+Hodnotiť accuracy,hybnosť,kontinuitu,p99 a celýčasvývoja zvlášť.
+Prínospriestorovéhokontextu je zatiaľ plán experimentu, nie výsledok.

@@ -1,0 +1,35 @@
+{
+  "status": "RECOMMEND_CONTROLLED_LLM_COMPARISON",
+  "technical_checks_passed": true,
+  "visual_review_completed": true,
+  "ready_for_controlled_configuration_comparison": true,
+  "exact_physics_or_boundary_satisfaction_established": false,
+  "main_test_opened": false,
+  "main_experiment_started": false,
+  "evidence": {
+    "quality_summary_sha256": "5c49f5f5d277d5b564e94654bb992a067147d91f5494861c1b144c215f5ba597",
+    "local_receipt_review_sha256": "cd96110f538c9a637163e1f935c4eec40ff59d3da8cb8aae317fce2930e6e924",
+    "images": {
+      "images/case_283.png": "0eed7a83313e8244a7133ea545ce1aa7baed66d0a52ffcab97194a90180edf03",
+      "images/case_341.png": "63284552bcae59285b80ede7f5f1407863013d80a6a50ec3f919cdba7b21caf0",
+      "images/case_396.png": "d468a38afb4b48a0e7a27e9e9753fac72eb4d17fe1a817c885221613261c667e",
+      "images/case_424.png": "bf85d7ab9b48c50fbd8b70f6397b89129b3cfb2473e9b55928c06270f666bd76",
+      "images/case_956.png": "0786925b0312590c0f3e59656c279146e620dbbd96749269753d1f5ba4b69636",
+      "images/overview.png": "6afcf2d3359d502752760895e95f006f091691725b3c8b144e8aa71b16ea6c3a",
+      "pressure_detail/pressure_283.png": "e29fee18b1c206808c494a670b2c798f2b83d09d8784d8417b015d593da809d7",
+      "pressure_detail/pressure_341.png": "b2f15fcbb720cc534d7f0ab5be9d479eb1b5e80e190640eb25447ebdf7f7fbfc",
+      "pressure_detail/pressure_396.png": "e3bb73c983d68c8dec54085ad5c0e9f9d45a299ef615162df53087874cc709df",
+      "pressure_detail/pressure_424.png": "9471e742d3e118dfb1bcdd2c93061feff51cb8e8ea6b6d4d25d4be61cbc0fe12",
+      "pressure_detail/pressure_956.png": "f799902c62ee1f615b9f56192401329fd43571a764651da58aef96a972126297"
+    }
+  },
+  "observations": [
+    "All 160 VAL cases reproduce previous errors; all native p99 values below 5ms.",
+    "Overall flow features agree; local velocity ripples and pressure contour differences remain visible.",
+    "Exact-wall velocities show finite slip; obstacle surfaces use the same half-cell approximation as training.",
+    "Full-grid momentum residual remains above reference; same-point AD/FD comparisons are consistent in scale, not identical.",
+    "Linear pressure plots conceal bulk variation due to corner extremes; additional symmetric-log views inspected.",
+    "No new acceptance threshold fitted after seeing results; fixed checkpoint unchanged."
+  ],
+  "next": "Freeze the main search/retraining protocol and implement the production runner with matched budgets; two-epoch technical launcher remains separate."
+}

@@ -1,0 +1,29 @@
+{
+  "seed": 20261031,
+  "state_conditioning": true,
+  "width": 96,
+  "depth": 4,
+  "latent": 32,
+  "frequencies": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0
+  ],
+  "one_step_updates": 40000,
+  "rollout_updates": 10000,
+  "rollout_length": 4,
+  "lr": 0.0003,
+  "rollout_lr": 0.0001,
+  "batch": 4096,
+  "collocation": 256,
+  "validate_every": 2000,
+  "warmup": 1000,
+  "ramp": 4000,
+  "pde_weight": 0.01,
+  "bc_weight": 0.01,
+  "data_loss_scale": 0.05,
+  "divergence_limit": 1000.0,
+  "divergence_score_penalty": 1000000.0
+}

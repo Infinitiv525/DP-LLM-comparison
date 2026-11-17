@@ -1,0 +1,369 @@
+{
+  "status": "SMOKE_COMPLETE",
+  "results": [
+    {
+      "status": "KNOWN_CASE_MATCHED_SPATIAL_EVALUATED",
+      "config": {
+        "seed": 20261031,
+        "state_conditioning": true,
+        "width": 96,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "state_update": "curl",
+        "collocation": 256,
+        "pde_weight": 0.01,
+        "bc_weight": 0.01,
+        "data_loss_scale": 0.05,
+        "own_momentum_weight": 0.1,
+        "own_divergence_weight": 0.1,
+        "divergence_limit": 1000.0,
+        "divergence_score_penalty": 1000000.0,
+        "name": "D_spatial_zeros",
+        "gradient_horizon": 32,
+        "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+        "warm_start_sha256": "b6a8bd9f81acbc3ac504bcb6d3ffc189fe7a6c6a02e155e46e901d0b39cf0f9d",
+        "horizon": 46,
+        "epochs": 1,
+        "lr": 1e-05,
+        "gradient_clip": 0.25,
+        "assess_every_epochs": 1,
+        "spatial_mode": "zeros"
+      },
+      "accuracy": {
+        "score": 0.5933733954137896,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.5187435483120735,
+              "pressure_relative_l2": 0.6680032425155057
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5698721496859207,
+              "pressure_relative_l2": 0.9745848419801173
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.08309662605532162,
+              "pressure_relative_l2": 0.1267873868943622
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.1383124573116147,
+              "pressure_relative_l2": 0.26184009682653586
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.3564767888078482,
+              "pressure_relative_l2": 0.3643705153220781
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5169503865428401,
+              "pressure_relative_l2": 0.973268673396553
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.6022751817505227,
+              "pressure_relative_l2": 0.7325151843054851
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5923710946347213,
+              "pressure_relative_l2": 1.0378516572149905
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.5402854240122289,
+              "pressure_relative_l2": 0.7473268444546236
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6046461685175428,
+              "pressure_relative_l2": 0.992428802067006
+            }
+          }
+        },
+        "divergence": null,
+        "predicted_steps": 238,
+        "mass": {
+          "initial_rms": 0.014042903669178486,
+          "mean_model_rms": 0.014042900374331395,
+          "mean_reference_rms": 0.014512970961901307,
+          "prospective_limit": 0.04353891288570392,
+          "pass_gate": true
+        },
+        "gpu_step_ms": {
+          "p50": 2.3835840225219727,
+          "p95": 2.398091125488281,
+          "p99": 2.4059382486343384
+        },
+        "gpu_step_plus_fd_monitor_ms": {
+          "p50": 2.8499200344085693,
+          "p95": 2.8662863850593565,
+          "p99": 2.875593950748444
+        },
+        "reference_future_as_input": false,
+        "scope": "KNOWN_TRAINING_SCENARIO_POSITIVE_CONTROL"
+      },
+      "latency": {
+        "grid": [
+          1024,
+          256
+        ],
+        "whole_gpu_step_rounds_ms": [
+          {
+            "p50": 1.8038080334663391,
+            "p95": 1.811819189786911,
+            "p99": 1.8191027283668517
+          },
+          {
+            "p50": 1.804095983505249,
+            "p95": 1.8106992185115813,
+            "p99": 1.81528542637825
+          },
+          {
+            "p50": 1.8029280304908752,
+            "p95": 1.8098880052566528,
+            "p99": 1.8138137352466583
+          }
+        ],
+        "step_plus_fd_monitor_rounds_ms": [
+          {
+            "p50": 2.225551962852478,
+            "p95": 2.2362927436828612,
+            "p99": 2.2417773461341857
+          },
+          {
+            "p50": 2.2248001098632812,
+            "p95": 2.23452171087265,
+            "p99": 2.2391542196273804
+          },
+          {
+            "p50": 2.222880005836487,
+            "p95": 2.2333776235580443,
+            "p99": 2.2400406503677366
+          }
+        ],
+        "samples_per_round": 200,
+        "rendering_included": false,
+        "initial_tensors_gpu": true
+      },
+      "selected_phase": "initial",
+      "selected_epoch": 0,
+      "actual_optimizer_updates": 2,
+      "expected_optimizer_updates": 2,
+      "all238_training_targets_visited": false,
+      "completed_episodes": 1,
+      "sampling_trace_sha256": "ee45fbb3afcd2ecba56936c28c97579ed4fd0a49ad3edfbeefb2ec940d2558ba",
+      "training_seconds": 14.79457331635058,
+      "peak_cuda_allocated_bytes": 16878743040,
+      "gpu": "NVIDIA H200",
+      "working_gate": {
+        "accuracy_pass": false,
+        "latency_pass": true,
+        "mass_growth_pass": true
+      },
+      "checkpoint_sha256": "27faa9625ac7a2b52efe7b6a40ec0f9883d9700a48e1d55add5a353c5d0a62eb",
+      "training_failure": null,
+      "independent_validation": false,
+      "main_test_opened": false,
+      "llm_comparison_ready": false,
+      "limitations": [
+        "Known TRAIN positive control only; same trajectory used for checkpoint selection",
+        "Both update weights and truncate gradient every32steps; zero vs real FD inputs",
+        "Common8step objectives/collocation schedule; own numerical states carry onward",
+        "Only interior curl increment has divergence identity; not global NS stability"
+      ]
+    },
+    {
+      "status": "KNOWN_CASE_MATCHED_SPATIAL_EVALUATED",
+      "config": {
+        "seed": 20261031,
+        "state_conditioning": true,
+        "width": 96,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "state_update": "curl",
+        "collocation": 256,
+        "pde_weight": 0.01,
+        "bc_weight": 0.01,
+        "data_loss_scale": 0.05,
+        "own_momentum_weight": 0.1,
+        "own_divergence_weight": 0.1,
+        "divergence_limit": 1000.0,
+        "divergence_score_penalty": 1000000.0,
+        "name": "D_spatial_fd",
+        "gradient_horizon": 32,
+        "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_gradient_20261031_v8/training/139944/D_gradient_32/best.pt",
+        "warm_start_sha256": "b6a8bd9f81acbc3ac504bcb6d3ffc189fe7a6c6a02e155e46e901d0b39cf0f9d",
+        "horizon": 46,
+        "epochs": 1,
+        "lr": 1e-05,
+        "gradient_clip": 0.25,
+        "assess_every_epochs": 1,
+        "spatial_mode": "fd"
+      },
+      "accuracy": {
+        "score": 0.593159798087664,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.5185145138601701,
+              "pressure_relative_l2": 0.6678050823151579
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5698721496859207,
+              "pressure_relative_l2": 0.9745848419801173
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.08305099720667555,
+              "pressure_relative_l2": 0.12647331195444617
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.1383124573116147,
+              "pressure_relative_l2": 0.26184009682653586
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.35532775547095585,
+              "pressure_relative_l2": 0.3629434977190283
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5169503865428401,
+              "pressure_relative_l2": 0.973268673396553
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.6021892430484923,
+              "pressure_relative_l2": 0.7327923436211272
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5923710946347213,
+              "pressure_relative_l2": 1.0378516572149905
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.5401777306664887,
+              "pressure_relative_l2": 0.7471286783915432
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6046461685175428,
+              "pressure_relative_l2": 0.992428802067006
+            }
+          }
+        },
+        "divergence": null,
+        "predicted_steps": 238,
+        "mass": {
+          "initial_rms": 0.014042903669178486,
+          "mean_model_rms": 0.01404287658647454,
+          "mean_reference_rms": 0.014512970961901307,
+          "prospective_limit": 0.04353891288570392,
+          "pass_gate": true
+        },
+        "gpu_step_ms": {
+          "p50": 2.3543360233306885,
+          "p95": 2.3676862955093383,
+          "p99": 2.373481888771057
+        },
+        "gpu_step_plus_fd_monitor_ms": {
+          "p50": 2.824128031730652,
+          "p95": 2.8395487666130066,
+          "p99": 2.8487942218780518
+        },
+        "reference_future_as_input": false,
+        "scope": "KNOWN_TRAINING_SCENARIO_POSITIVE_CONTROL"
+      },
+      "latency": {
+        "grid": [
+          1024,
+          256
+        ],
+        "whole_gpu_step_rounds_ms": [
+          {
+            "p50": 1.7981600165367126,
+            "p95": 1.8055551648139954,
+            "p99": 1.8110454833507539
+          },
+          {
+            "p50": 1.796176016330719,
+            "p95": 1.8040751695632935,
+            "p99": 1.8088582217693328
+          },
+          {
+            "p50": 1.7961440086364746,
+            "p95": 1.8040848314762115,
+            "p99": 1.809034856557846
+          }
+        ],
+        "step_plus_fd_monitor_rounds_ms": [
+          {
+            "p50": 2.2241439819335938,
+            "p95": 2.2381104230880737,
+            "p99": 2.240429489612579
+          },
+          {
+            "p50": 2.2213759422302246,
+            "p95": 2.2346928358078,
+            "p99": 2.239603810310364
+          },
+          {
+            "p50": 2.219920039176941,
+            "p95": 2.233251190185547,
+            "p99": 2.2371170854568483
+          }
+        ],
+        "samples_per_round": 200,
+        "rendering_included": false,
+        "initial_tensors_gpu": true
+      },
+      "selected_phase": "full238_matched_updates",
+      "selected_epoch": 1,
+      "actual_optimizer_updates": 2,
+      "expected_optimizer_updates": 2,
+      "all238_training_targets_visited": false,
+      "completed_episodes": 1,
+      "sampling_trace_sha256": "ee45fbb3afcd2ecba56936c28c97579ed4fd0a49ad3edfbeefb2ec940d2558ba",
+      "training_seconds": 14.460763368755579,
+      "peak_cuda_allocated_bytes": 16879765504,
+      "gpu": "NVIDIA H200",
+      "working_gate": {
+        "accuracy_pass": false,
+        "latency_pass": true,
+        "mass_growth_pass": true
+      },
+      "checkpoint_sha256": "7ed129fcbf33b790a6ee0c1f0d7121d83db1c65f46b1ea0ec98a9cf636a8f00a",
+      "training_failure": null,
+      "independent_validation": false,
+      "main_test_opened": false,
+      "llm_comparison_ready": false,
+      "limitations": [
+        "Known TRAIN positive control only; same trajectory used for checkpoint selection",
+        "Both update weights and truncate gradient every32steps; zero vs real FD inputs",
+        "Common8step objectives/collocation schedule; own numerical states carry onward",
+        "Only interior curl increment has divergence identity; not global NS stability"
+      ]
+    }
+  ],
+  "matched_execution": true,
+  "independent_validation": false
+}

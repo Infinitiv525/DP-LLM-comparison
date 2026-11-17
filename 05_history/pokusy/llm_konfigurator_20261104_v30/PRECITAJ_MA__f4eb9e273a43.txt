@@ -1,0 +1,102 @@
+DOKONČENÉ A OVERENÉ — 04.11.2026
+
+Všetky 4 lokálne LLM dokončili po 2 nadväzujúce návrhy a reálne
+krátke tréningy. Zbehlo aj random/TPE. Kontroly 70/70 a 136/136.
+Podrobné výsledky, obmedzenia a časy: VYSLEDOK.txt. TEST uzavretý.
+Nie je to ešte hlavné opakované porovnanie kvality.
+
+HISTORICKÉ ZÁZNAMY — stav v čase ich zápisu
+
+KONFIGURÁTOR PINN A SKÚŠKA ŠTYROCH LOKÁLNYCH LLM — V30 — 04.11.2026
+
+Čo pripravujeme
+Počas hlavného pilota spoločného PINN skúšame konfigurátor. Každý zo
+štyroch modelov Qwen, Ministral, Phi a Granite navrhne nastavenie učenia,
+pozrie si výsledok jeho krátkeho tréningu a navrhne ďalší pokus.
+Úloha 143245 používa 4 H200 a 16 CPU, účtovanie 143246. Hlavný pilot
+143115 beží samostatne, jeho zdroje ani nastavenia sa nemenili.
+
+Čo LLM vyberá
+Päť číselných nastavení: rýchlosť učenia, váhu chyby tlaku, váhu fyzikálnej
+straty, váhu podmienok na stenách a prekážke a začiatok fyzikálnej straty.
+Fyziku nemožno vypnúť. Presné rozsahy sú v protocol.json. Architektúra,
+tréningové a validačné prípady, počet epoch, počet bodov a spôsob
+hodnotenia zostávajú rovnaké pre všetky LLM aj kontrolné metódy.
+Nastavenia volí LLM; program ich nenahrádza ručne vybranými hodnotami.
+
+Prečo kontrolovaný JSON
+Predošlé pokusy overili prepojenie pre jednotlivé rodiny, ale nie všetky
+modely súčasne dodržali požadovaný zápis. Phi vynechal pole alebo pridal
+komentár, Granite vrátil rozsah namiesto jedného čísla. Toto nie je
+hodnotenie fyzikálnej kvality modelu. V30 preto používa rovnakú JSON
+schému počas generovania pre všetky štyri LLM. Schéma stráži povinné
+polia, typy, kategórie a maximálne 120 znakov každého zo stručných
+zdôvodnení. Rozsah rýchlosti učenia ešte samostatne preverí validátor.
+Nie je povolené doplniť číslo za model, orezať komentár a potichu vybrať
+konfiguráciu. Generovanie sa zastaví pri kompletnom JSON objekte.
+Najviac jedna oprava môže byť vyžiadaná od samotného LLM; všetko sa uloží.
+
+Schéma obsahuje aj povinný odkaz na práve poskytnutý výsledok. Tento
+odkaz je riadená identifikácia spätnej väzby, nie dôkaz, že LLM jej
+obsahu rozumie. Jeho prínos musí neskôr preukázať výkon navrhnutých
+konfigurácií. Ukladané zdôvodnenie je stručný deklarovaný dôvod modelu,
+nie sprístupnenie jeho vnútorného uvažovania.
+
+Knižnice a opakovateľnosť
+Používame lm-format-enforcer 0.11.3 a interegular 0.3.3, presné verejné
+wheels overené podľa SHA256. Spolu sa stiahlo len 69 053 bajtov.
+Sú v izolovanom test/runtime/ldc_schema_v30, pôvodné prostredia sa nemenili.
+Na prepojenie s Transformers 5 je vlastný malý adaptér verejného jadra
+knižnice, pretože jej voliteľný adaptér používa staršiu cestu importu.
+Nejde o prevzatie inej neurónovej alebo PINN architektúry. Celý adaptér,
+schéma aj všetkých 43 súborov nových balíkov sú zmrazené a overované.
+Oficiálny zdroj: https://github.com/noamgat/lm-format-enforcer
+Existujúci runtime navyše: pydantic 2.14.1, packaging 26.3, PyYAML 6.0.3.
+
+Skutočný postup skúšky
+Najprv jeden spoločný referenčný dvojepochový tréning na celej množine
+640 TRAIN / 160 VAL. Potom štyri nezávislé procesy na štyroch odlišných
+H200, čo sa preveruje podľa UUID. Každý LLM má dva nadväzujúce návrhy,
+každý s novým dvojepochovým tréningom PINN a skutočnou validáciou.
+Dva workery navyše overia po jednom skutočnom ask/train/tell pokuse
+náhodného a TPE hľadania. Celkom 11 krátkych tréningov. Všetky majú
+rovnaký seed 270001, počiatočné váhy a vzorkovanie; zhodu preverí SHA.
+Nie sú to nezávislé štatistické opakovania a nehodnotíme poradie LLM.
+Záverečných 200 TEST prípadov zostáva uzavretých.
+
+Fyzika a rýchlosť
+Každý tréning používa reálne referenčné dáta, NS rovnice cez autograd
+vrátane viskozity 1/Re, kontinuitu a okrajové podmienky. Fyzikálny nábeh
+sa pomerne škáluje na dve epochy, aby sa naozaj precvičila fyzikálna strata.
+Pred aj po tréningu sa meria celé pole 512 × 512 vrátane spracovania
+geometrie, 30 zahrievacích a 200 meraných opakovaní na TRAIN aj VAL vstupe.
+Požiadavka p99 <= 5 ms je na predikciu s údajmi už na GPU. Predikovaná
+presnosť po dvoch epochách nie je finálny výsledok a nemusí byť dobrá.
+
+Záznamy
+Ukladajú sa všetky prompty a surové odpovede, čísla vybrané LLM,
+zdôvodnenia, schéma a jej SHA, odkazy na skutočné výsledky, opravy,
+načítanie modelu, príprava schémy, čas generovania a prvého tokenu,
+počet tokenov, RAM/VRAM a CPU čas, tréningové histórie a checkpointy,
+validačné tabuľky, chyby fyziky, časovanie a skutočná Slurm alokácia.
+Aj čas čakania niektorých workerov je súčasťou rezervovanej GPU spotreby.
+Veľké polia a váhy zostávajú iba na Perune. Lokálne iba malé záznamy.
+
+Stav pred odoslaním
+7 testov kontraktu a 3 testy tokenovej schémy prešli za 0,604 a 0,059 s.
+Overujú aj zákaz rozsahových objektov, chýbajúcich polí, komentára za
+JSON a prekročenia dĺžky textu. AST/LF/bash-n v poriadku, zmrazenie
+pred odoslaním. Úlohy 143245/143246 zapísané pred uvoľnením výpočtu;
+spolu s pilotom a jeho účtovaním najviac 4 odoslané úlohy.
+
+Minulé pokusy sa zachovali
+V27: neodovzdané offline nastavenie, ukončené pred návrhmi LLM.
+V28: Qwen a Granite dokončili obe kolá, ostatné prekročili dĺžku odpovede.
+V29: Qwen, Ministral aj obe kontrolné metódy prešli; Phi/Granite chybný formát.
+Tieto tri alokácie spotrebovali spolu 6 108 GPU s, teda 1,6967 GPU h,
+a 24 432 core s. Sú započítané, nie vymazané z histórie.
+
+Perun: results/ldc_llm_preflight_20261104_v30. Aktuálne malé protokoly
+v zaznamy/. Záverečný review overí celý priebeh a zhodu údajov. Hlavné
+LLM porovnávanie sa spustí až po audite plného základného pilota a po
+uzamknutí hlavných pravidiel; táto skúška ho nenahrádza.

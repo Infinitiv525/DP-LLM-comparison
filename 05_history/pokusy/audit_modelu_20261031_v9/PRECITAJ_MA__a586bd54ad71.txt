@@ -1,0 +1,43 @@
+AUDIT MODELU A FYZIKÁLNYCH STRÁT V9 –31.10.2026
+
+Po súhlase používateľa spustená GPUúloha139989, účtovanie139990.
+Neučí nové váhy, nič nemení na starých modeloch. Preverí uložené
+bestcheckpointy obochV8vetiev na rovnakom známomTRAINprípade.
+
+ČO OVERUJE
+1. Každý člen straty osobitne: veľkosť gradientu do váh a jeho smer
+   oproti ostatným členom. Zistí, či niektoré fyzikálne kontroly
+   dominujú nad dátami alebo požadujú opačnú zmenu váh.
+2. Spojitý výstup s analytickou deriváciou prúdovej funkcie proti
+   diskrétnemu výstupu na mriežke, v rovnakých512vnútorných bodoch.
+   Ide o dve odlišné diskretizácie; rozdiel nie je automaticky bug.
+3. Rovnaké diskrétne fyzikálne rezíduá aj na pravdivých tréningových
+   dvojiciach: zistíme referenčnú úroveň chyby zvolenej diskretizácie.
+4. Citlivosť predikcie na malé poruchy úvodných polí s veľkosťou
+   1e-5/1e-4/1e-3násoboktrainStd. Rovnaká porucha predchádzajúceho
+   aaktuálneho stavu nemení ich rozdiel. Šum nemusí byť fyzikálne
+   prípustný; citlivosť nie je dôkaz všeobecnej nestability.
+
+KDE TO OVERUJE
+8predurčených pravdivých TRAINokien a4vlastné stavy po začiatku,
+31,119a237predikciách. Vlastný priebeh stále začína len2,3;
+nasledujúce pravdivé stavy sú iba ciele. Neskoršie pravdivé prefixy
+sa použijú výhradne v označenej TRAINdiagnostike. Test neotvárame.
+
+VSTUPY A LIMITY ZÁVEROV
+Inventár kódu: lokálne6stavovýchpríznakov, súradnice/Fourier,
+globálny32rozmernýCNNkontext,Re,geometria/taper. Curlvýstup využíva
+susednépsi cezstencil. Explicitné lokálne gradienty rýchlosti nie sú
+samostatnými vstupmi. Samotný tento inventár nepreukazuje nedostatok
+informácií. Ani konflikt gradientov nepreukáže jednu definitívnu
+príčinu alebo automaticky správny koeficient straty.
+
+Zdroje/protokol/vstupy aj checkpointy zmrazené SHA256 pred odoslaním,
+syntaktické kontrolyAST/bash-n prešli. GPUúloha najprv zopakuje9kontrol
+jadra, potom vykoná audit. Žiadnyoptimizer, novýCFD/download,
+nezávislávalidácia aleboLLMmain. Výsledky sa uložia ako maléJSON.
+Veľképolia a váhy zostávajúPerun; všetky staré výsledky zachované.
+
+Perun:/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_structure_audit_20261031_v9
+Po audite sa podľa dôkazov pripraví ďalší vývojový krok. Žiadny nový
+rozsiahly tréning sa zatiaľ nevydáva za potrebný alebo úspešný.

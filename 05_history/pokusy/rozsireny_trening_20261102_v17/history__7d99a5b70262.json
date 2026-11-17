@@ -1,0 +1,125 @@
+[
+  {
+    "update": 1,
+    "data": 0.9642432928085327,
+    "pde": 0.20664143562316895,
+    "pde_parts": [
+      0.04270075634121895,
+      0.16363085806369781,
+      0.0003098273300565779
+    ],
+    "boundary": 0.01642223820090294,
+    "assessment": {
+      "score": 0.9296410153685448,
+      "cases": [
+        {
+          "failure": false,
+          "predicted_frames": 238,
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "scope": "validation",
+          "mean_errors": {
+            "velocity_relative_l2": 0.7575621145690064,
+            "pressure_relative_l2": 1.1017199161680833
+          },
+          "score": 0.9296410153685448,
+          "persistence_mean_errors": {
+            "velocity_relative_l2": 0.7575628273851636,
+            "pressure_relative_l2": 1.1019513357435289
+          },
+          "interior_div_rms": 0.012262584015476603,
+          "prefix_div_rms": 0.012262583710253239,
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": true,
+          "direct_query_gpu_ms": {
+            "p50": 3.498736023902893,
+            "p95": 3.6109568595886232,
+            "p99": 3.6927501654624937
+          },
+          "causal_step_latency": false,
+          "mean_fd_momentum_loss": 1.432067577077561,
+          "mean_reference_fd_momentum_loss": 0.005376385450519684,
+          "accuracy_pass": false,
+          "latency_pass": true
+        }
+      ]
+    },
+    "elapsed_seconds": 12.165713354999752
+  },
+  {
+    "update": 3,
+    "data": 1.0803145170211792,
+    "pde": 0.30658382177352905,
+    "pde_parts": [
+      0.06136564910411835,
+      0.24499393999576569,
+      0.00022422766778618097
+    ],
+    "boundary": 0.01766621321439743,
+    "assessment": {
+      "score": 0.929443451936766,
+      "cases": [
+        {
+          "failure": false,
+          "predicted_frames": 238,
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "scope": "validation",
+          "mean_errors": {
+            "velocity_relative_l2": 0.7575598452123058,
+            "pressure_relative_l2": 1.1013270586612263
+          },
+          "score": 0.929443451936766,
+          "persistence_mean_errors": {
+            "velocity_relative_l2": 0.7575628273851636,
+            "pressure_relative_l2": 1.1019513357435289
+          },
+          "interior_div_rms": 0.012262583780689399,
+          "prefix_div_rms": 0.012262583710253239,
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": true,
+          "direct_query_gpu_ms": {
+            "p50": 3.5099040269851685,
+            "p95": 3.64247043132782,
+            "p99": 3.6950130105018615
+          },
+          "causal_step_latency": false,
+          "mean_fd_momentum_loss": 1.4319008423500703,
+          "mean_reference_fd_momentum_loss": 0.005376385450519684,
+          "accuracy_pass": false,
+          "latency_pass": true
+        }
+      ]
+    },
+    "elapsed_seconds": 23.597433812999952,
+    "train_fit_monitor": [
+      {
+        "failure": false,
+        "predicted_frames": 238,
+        "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+        "scope": "train",
+        "mean_errors": {
+          "velocity_relative_l2": 0.5698545625153526,
+          "pressure_relative_l2": 0.9740164400775254
+        },
+        "score": 0.7719355012964391,
+        "persistence_mean_errors": {
+          "velocity_relative_l2": 0.5698721496859207,
+          "pressure_relative_l2": 0.9745848419801173
+        },
+        "interior_div_rms": 0.014042903481348724,
+        "prefix_div_rms": 0.014042905531823635,
+        "mass_limit": 0.04353891288570392,
+        "mass_pass": true,
+        "direct_query_gpu_ms": {
+          "p50": 3.489759922027588,
+          "p95": 3.558705687522888,
+          "p99": 3.647718994617462
+        },
+        "causal_step_latency": false,
+        "mean_fd_momentum_loss": 1.7642665445303716,
+        "mean_reference_fd_momentum_loss": 0.006401343275049404,
+        "accuracy_pass": false,
+        "latency_pass": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "score": 0.775718756188432,
+  "scores": {
+    "all_future": {
+      "model": {
+        "velocity_relative_l2": 0.5703003451587556,
+        "pressure_relative_l2": 0.9811371672181083
+      },
+      "persistence": {
+        "velocity_relative_l2": 0.5698721496859207,
+        "pressure_relative_l2": 0.9745848419801173
+      }
+    },
+    "steps_1_10": {
+      "model": {
+        "velocity_relative_l2": 0.13815774071434103,
+        "pressure_relative_l2": 0.26146984678954066
+      },
+      "persistence": {
+        "velocity_relative_l2": 0.1383124573116147,
+        "pressure_relative_l2": 0.26184009682653586
+      }
+    },
+    "steps_11_40": {
+      "model": {
+        "velocity_relative_l2": 0.516514721289365,
+        "pressure_relative_l2": 0.9728228580065789
+      },
+      "persistence": {
+        "velocity_relative_l2": 0.5169503865428401,
+        "pressure_relative_l2": 0.973268673396553
+      }
+    },
+    "steps_41_120": {
+      "model": {
+        "velocity_relative_l2": 0.5927087342215562,
+        "pressure_relative_l2": 1.041236641646881
+      },
+      "persistence": {
+        "velocity_relative_l2": 0.5923710946347213,
+        "pressure_relative_l2": 1.0378516572149905
+      }
+    },
+    "steps_121_238": {
+      "model": {
+        "velocity_relative_l2": 0.6054047827477538,
+        "pressure_relative_l2": 1.0034943242209027
+      },
+      "persistence": {
+        "velocity_relative_l2": 0.6046461685175428,
+        "pressure_relative_l2": 0.992428802067006
+      }
+    }
+  },
+  "divergence": null,
+  "predicted_steps": 238,
+  "mass": {
+    "initial_rms": 0.014042903669178486,
+    "mean_model_rms": 0.014043133647157615,
+    "mean_reference_rms": 0.014512970961901307,
+    "prospective_limit": 0.04353891288570392,
+    "pass_gate": true
+  },
+  "gpu_step_ms": {
+    "p50": 1.9867839813232422,
+    "p95": 2.00078399181366,
+    "p99": 2.0054617309570313
+  },
+  "gpu_step_plus_fd_monitor_ms": {
+    "p50": 2.4634240865707397,
+    "p95": 2.480961561203003,
+    "p99": 2.488964731693268
+  },
+  "reference_future_as_input": false,
+  "scope": "KNOWN_TRAINING_SCENARIO_POSITIVE_CONTROL"
+}

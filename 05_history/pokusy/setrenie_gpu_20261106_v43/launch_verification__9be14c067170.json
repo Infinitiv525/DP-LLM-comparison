@@ -1,0 +1,167 @@
+{
+  "status": "PASS",
+  "observed_at": "2026-11-06T01:50:52.485232+01:00",
+  "device_assignment_sha256": "782182dac8dd6a022504161631c9cf61daed54d315a06f484cf66070946d68c7",
+  "unique_h200_gpus": 8,
+  "offline": true,
+  "new_job": "144649",
+  "cpu_collector": "144648",
+  "owned_tasks": [
+    {
+      "id": "phi4_mini_r04_c00",
+      "task": {
+        "id": "phi4_mini_r04_c00",
+        "kind": "search",
+        "method": "phi4_mini",
+        "run": 4,
+        "candidate": 0,
+        "seed": 140005,
+        "dependencies": []
+      },
+      "worker": 5
+    },
+    {
+      "id": "granite33_8b_r04_c00",
+      "task": {
+        "id": "granite33_8b_r04_c00",
+        "kind": "search",
+        "method": "granite33_8b",
+        "run": 4,
+        "candidate": 0,
+        "seed": 140005,
+        "dependencies": []
+      },
+      "worker": 1
+    },
+    {
+      "id": "random_r04_c00",
+      "task": {
+        "id": "random_r04_c00",
+        "kind": "search",
+        "method": "random",
+        "run": 4,
+        "candidate": 0,
+        "seed": 140005,
+        "dependencies": []
+      },
+      "worker": 7
+    },
+    {
+      "id": "tpe_r04_c00",
+      "task": {
+        "id": "tpe_r04_c00",
+        "kind": "search",
+        "method": "tpe",
+        "run": 4,
+        "candidate": 0,
+        "seed": 140005,
+        "dependencies": []
+      },
+      "worker": 2
+    },
+    {
+      "id": "qwen3_8b_r00_k00",
+      "task": {
+        "id": "qwen3_8b_r00_k00",
+        "kind": "retrain",
+        "method": "qwen3_8b",
+        "run": 0,
+        "repeat": 0,
+        "seed": 150001,
+        "dependencies": [
+          "qwen3_8b_r00_c00",
+          "qwen3_8b_r00_c01",
+          "qwen3_8b_r00_c02",
+          "qwen3_8b_r00_c03",
+          "qwen3_8b_r00_c04",
+          "qwen3_8b_r00_c05",
+          "qwen3_8b_r00_c06",
+          "qwen3_8b_r00_c07"
+        ]
+      },
+      "worker": 0
+    },
+    {
+      "id": "ministral3_8b_r00_k00",
+      "task": {
+        "id": "ministral3_8b_r00_k00",
+        "kind": "retrain",
+        "method": "ministral3_8b",
+        "run": 0,
+        "repeat": 0,
+        "seed": 150001,
+        "dependencies": [
+          "ministral3_8b_r00_c00",
+          "ministral3_8b_r00_c01",
+          "ministral3_8b_r00_c02",
+          "ministral3_8b_r00_c03",
+          "ministral3_8b_r00_c04",
+          "ministral3_8b_r00_c05",
+          "ministral3_8b_r00_c06",
+          "ministral3_8b_r00_c07"
+        ]
+      },
+      "worker": 6
+    },
+    {
+      "id": "phi4_mini_r00_k00",
+      "task": {
+        "id": "phi4_mini_r00_k00",
+        "kind": "retrain",
+        "method": "phi4_mini",
+        "run": 0,
+        "repeat": 0,
+        "seed": 150001,
+        "dependencies": [
+          "phi4_mini_r00_c00",
+          "phi4_mini_r00_c01",
+          "phi4_mini_r00_c02",
+          "phi4_mini_r00_c03",
+          "phi4_mini_r00_c04",
+          "phi4_mini_r00_c05",
+          "phi4_mini_r00_c06",
+          "phi4_mini_r00_c07"
+        ]
+      },
+      "worker": 4
+    },
+    {
+      "id": "granite33_8b_r00_k00",
+      "task": {
+        "id": "granite33_8b_r00_k00",
+        "kind": "retrain",
+        "method": "granite33_8b",
+        "run": 0,
+        "repeat": 0,
+        "seed": 150001,
+        "dependencies": [
+          "granite33_8b_r00_c00",
+          "granite33_8b_r00_c01",
+          "granite33_8b_r00_c02",
+          "granite33_8b_r00_c03",
+          "granite33_8b_r00_c04",
+          "granite33_8b_r00_c05",
+          "granite33_8b_r00_c06",
+          "granite33_8b_r00_c07"
+        ]
+      },
+      "worker": 3
+    }
+  ],
+  "state_counts": {
+    "DONE": 183,
+    "RUNNING": 19,
+    "PENDING": 193
+  },
+  "current_main_allocated_gpus": 24,
+  "no_larger_model_training": true,
+  "frozen_scientific_sources_unchanged": true,
+  "total_planned_attempts": 395,
+  "main_test_opened": false,
+  "user_reported_budget": {
+    "allocated_gpu_hours": 2246,
+    "used_gpu_hours": 865,
+    "remaining_gpu_hours": 1381,
+    "source": "User read current Perun portal; 2026-11-06, not an independently queried live balance"
+  }
+}

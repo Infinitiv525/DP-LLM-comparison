@@ -1,0 +1,53 @@
+ČAS EXPERIMENTU A PARALELNÉ GPU — 04.11.2026
+
+Mesiac nebol povinná dĺžka experimentu. Predošlý odhad predpokladal
+iba dve súbežné GPU pre väčší rozsah395tréningov. GPU-hodiny sú súčet
+spotreby všetkých GPU, nie kalendárny čas. Nezávislé tréningy a samostatné
+hľadania konfigurácie sa dajú rozložiť na viac GPU. Nasledujúce počty
+predpokladajú rovnaké tempo a dobré priebežné využitie pridelených GPU;
+nezapočítavajú frontu, technické opravy ani čas prípravy experimentu.
+
+Overenie Perunu iba čítaním
+Úloha143115 stále RUNNING,gpu12,pri kontrole44:29. Posledná validácia
+update12800=80epoch,elapsed2354,188558s. Interval11200->12800 predstavuje
+337,130706s na1600aktualizácií pri plne zapnutej PDE; extrapolácia na400
+staticky rovnakých epoch3,745897GPUh. Predošlý odhad3,7GPUh sa potvrdzuje.
+Sinfo: gpu_short má26uzlov,každý8GPU,spolu208. Pri kontrole boli aj
+voľné uzly,ale nejde o rezerváciu ani záruku dostupnosti v budúcnosti.
+Scontrol show partition:MaxTime2dni,bez obmedzenia počtu uzlov úlohy.
+Scontrol show assoc_mgr pre vlastný účet/používateľa:
+GrpTRES gres/gpu=32, cpu=1024; MaxJobs=20; MaxSubmitJobs=50.
+Projektový QoS perun2601449 nemá ďalší nižší MaxTRESPU/MaxTRESPA/PJ
+GPU limit. Môžeme žiadať8GPU bez porušenia týchto zobrazených limitov;
+finálne pridelenie závisí od plánovača. Aj pri našom konzervatívnom
+limite4odoslanýchúloh vrátane účtovania je to možné viacerýmiGPUvjednej
+úlohe,netreba zvýšiť počet čakajúcich úloh. Rozbehnutý pilot sa nemenil.
+Sacctmgr databázové spojenie nebolo dostupné; použitý bol živý cache
+správcu scontrol, ktorý tieto vlastné asociácie a QoS úspešne vrátil.
+Neoznačujeme to za chybu samotných tréningových výpočtov Perunu.
+
+Rozsahy
+Pôvodný5x5:4LLM a2kontrolné hľadacie metódy,5hľadaní/metódu,
+8kandidátov/hľadanie,5novýchtréningovvíťaza/hľadanie,5pevnýbaseline:
+6*5*(8+5)+5=395tréningov,približne1500GPUh.
+Menší3x3,potvrdený používateľom pred opravou čítania rozpočtu:
+3hľadania/metódu,8kandidátov/hľadanie,3tréningyvíťaza,3pevnýbaseline:
+6*3*(8+3)+3=201tréningov,približne750GPUh.
+Pôvodný rozsah:2GPU asi31dní,4GPU asi16dní,8GPU asi8dní čistého výpočtu.
+Menší rozsah:2GPU asi16dní,4GPU asi8dní,8GPU asi4dni čistého výpočtu.
+Rezerva a čakanie vo fronte kalendárny čas predĺžia. Napríklad1800–2000
+GPUh celkovej rezervy pri8GPU je9,4–10,4dňa čistého pridelenia.
+Samotné pridanieGPUneznamená8násobne rýchlejšie učenie jednej siete;
+na každejGPUbežia iné nezávislé tréningy. Postupné návrhy v rámci
+jedného hľadania čakajú na vlastný predchádzajúci výsledok, no máme
+viac nezávislých hľadaní, ktorými sa GPU dajú priebežne obsadzovať.
+LLM sa nenechávajú nečinne držať ďalšiu alokovanú GPU počas tréningu.
+
+Aktuálne rozhodnutie
+Používateľ opravil,že CPU aj GPU rozpočet si môže dovoliť,a pýta sa na
+kalendárny čas. Väčší rozsah je opäť finančne/kvótovo možný; nový presný
+rozsah ešte nie je zmrazený. Toto vysvetlenie samo neznamená odoslanie
+celého porovnania ani zmenu parametrov prebiehajúceho pilota. Po kontrole
+jeho presnosti a fyziky odporúčame paralelné vykonávanie na8GPU,s riadnym
+priradením jedného samostatného tréningu každejGPU a meraním reálnej
+alokovanej spotreby aj prípadného nečinného konca viacerých workerov.

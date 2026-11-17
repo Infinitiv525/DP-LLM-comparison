@@ -1,0 +1,52 @@
+KDE NÁJSŤ A AKO OBNOVIŤ PODSTATNÉ VÝSLEDKY
+
+1. Výsledky čitateľné bez Perunu
+V hlavnej vetve sú UZAVRETIE.txt, finálne grafy PNG/SVG, model_metrics.csv
+a číselné reporty vo vedľajšom priečinku finalny_test_20261108_v49/report.
+case_metrics.csv obsahuje 31 000 riadkov. Na ich čítanie netreba trénovať sieť.
+
+2. Finálne modely a ich hodnotenie
+GitHub Release je uvedený v github_release_receipt.json. Je v tom istom
+privátnom repozitári Infinitiv525/DP; treba byť prihlásený s prístupom.
+Najpodstatnejší balík je
+final_20261108_1794103280_final_models_results_part01.tar.gz
+Veľkosť: 120 462 696 bajtov (približne 120 MB). Obsahuje všetkých 155
+finálnych checkpointov, protokol/manifest, TEST výstupy, surové merania
+a kontrolné doklady v stave vytvorenia zálohy.
+
+3. Úplná tréningová história
+Časti training_provenance_part02 až part18 obsahujú aj všetkých 395
+hlavných tréningov: best/last checkpointy, optimizer/RNG obnovovacie stavy,
+VAL histórie, návrhy a dôvody LLM a pôvodné prevádzkové doklady.
+Všetkých 18 archívov spolu má 2 230 482 805 bajtov (približne 2,23 GB).
+Každá časť je samostatný tar.gz: pri úplnej obnove sa každá rozbalí
+samostatne do rovnakého cieľového priečinka. Obsah má prefix project/.
+Každá časť nesie aj rovnaký manifest.json s cestami a SHA256 súborov.
+Kontrolné súčty jednotlivých archívov sú v backup_index.json a doklade
+GitHub prenosu. Overené sú aj kontrolné súčty uložené GitHubom.
+
+4. Ako identifikovať konkrétnu sieť
+models.json v priečinku finálneho testu určuje ID, metódu, seed,
+konfiguráciu a presnú cestu k best.pt. V obnovenom archíve zodpovedá
+absolútnej ceste na Perune rovnaký relatívny podstrom pod project/.
+Definícia siete je v test/training/ldc_shared_pinn_v26.py,
+trieda SharedSteadyPINN. Checkpoint nesie parametre aj normalizáciu.
+Ide o výskumné artefakty, na spustenie treba obnoviť aj softvérové prostredie.
+
+5. Čo sa obstaráva osobitne pri reprodukcii
+Referenčné FlowBench polia a váhy pôvodných LLM sú externé veľké vstupy.
+Ich stiahnuté kópie nie sú v tomto archíve. Verzie, presné revízie a postupy
+prípravy sú uložené v zdrojoch a protokoloch; dátová revízia je
+937c672604d4c9f39aceedf1fa2f0a603695264b.
+Pôvodné overovanie obsahuje absolútne HPC cesty a fingerprinty súborov
+(veľkosť/čas/inode). Prenos na iný počítač potrebuje samostatné nastavenie
+ciest, prostredia a nový overovací manifest obnovenej kópie. Pôvodné
+zmrazené manifesty a archívy sa zachovajú ako doklad pôvodného experimentu.
+
+6. Umiestnenie na Perune
+/mnt/project/perun2601449/dp_llm_cfd/results/ldc_final_backup_20261108_v50/
+final_20261108_1794103280/
+
+Archívy sa do tohto PC automaticky nesťahovali. Prenos na GitHub ide priamo
+SSH prúdom cez pamäť; lokálne sú iba menšie tabuľky, grafy a textové doklady.
+Staršia samostatná záloha 3D výsledkov zostáva v jej pôvodnom GitHub Release.

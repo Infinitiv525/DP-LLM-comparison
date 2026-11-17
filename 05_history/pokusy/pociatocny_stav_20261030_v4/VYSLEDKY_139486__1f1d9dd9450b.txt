@@ -1,0 +1,61 @@
+Výsledky modelu s počiatočnými snímkami — beh 139486
+Kontrola: 31. 10. 2026
+
+Beh úspešne skončil. Model dostal známe snímky 2 a 3 a predpovedal všetkých
+238 neskorších snímok 4 až 241. Trénoval na 69 scenároch; hodnotil sa na
+6 scenároch s troma geometriami, ktoré pri tréningu nevidel. Hlavná
+testovacia sada zostala zatvorená. Vybral sa checkpoint z kroku 150 000
+z celkových 300 000.
+
+Priemerné chyby za všetkých šesť validačných scenárov:
+Horizont                PINN: rýchlosť / tlak     Nezmenený stav
+Všetkých 238 krokov           40,11 % / 56,84 %     60,32 % / 81,15 %
+Kroky 1 až 10                 7,80 % / 14,11 %     15,64 % / 23,90 %
+Kroky 11 až 40               25,58 % / 46,19 %     56,72 % / 77,37 %
+Kroky 41 až 120              38,79 % / 57,00 %     66,04 % / 88,02 %
+Kroky 121 až 238             47,43 % / 63,06 %     61,14 % / 82,30 %
+
+Ide o relatívne L2 chyby. Najprv sa počítajú pre každú snímku na celej
+fluidnej mriežke 1024 × 256, potom sa priemerujú cez snímky a scenáre.
+Tlaku sa odstráni ľubovoľná konštanta. „Nezmenený stav“ znamená jednoduchý
+odhad, ktorý zopakuje posledný známy vstup vo všetkých budúcich časoch.
+
+Za celý priebeh PINN prekonal tento odhad v oboch metrikách vo všetkých
+šiestich scenároch. Neznamená to víťazstvo v každej snímke alebo horizonte:
+v neskorých časoch niektorých prípadov je chyba rýchlosti aj väčšia.
+
+Chyby PINN za celý priebeh jednotlivých scenárov:
+harmonics/87/Re_292           47,28 % rýchlosť; 61,74 % tlak
+harmonics/87/Re_838           74,60 % rýchlosť; 88,26 % tlak
+nurbs/22/Re_164                9,77 % rýchlosť; 24,69 % tlak
+nurbs/22/Re_977               57,18 % rýchlosť; 76,06 % tlak
+skelenton/36/Re_209           12,87 % rýchlosť; 28,60 % tlak
+skelenton/36/Re_867           38,95 % rýchlosť; 61,71 % tlak
+
+Pracovný cieľ 10 % pre rýchlosť a 20 % pre tlak v každom scenári sa
+nesplnil. Ani dobrý priemer prvých desiatich krokov neznamená splnenie
+cieľa pre každý prípad. Hlavný horizont 238 krokov preto neskracujeme.
+Model zatiaľ nie je pripravený na hlavné porovnanie konfigurácií LLM.
+Z jedného seedu nevyvodzujeme štatistickú významnosť.
+
+Rýchlosť na H200:
+Najvyššie p99 z troch meraní po 200 predikciách celej snímky bolo 1,139 ms
+pri uložených vstupných príznakoch a 1,760 ms pri ich opakovanom
+bicubickom výpočte. Encoder sa meral osobitne: p99 0,271 ms.
+Prenos vstupu a výstupu pri uložených príznakoch mal p99 1,496 ms,
+ale iba na 30 vzorkách a s iným rozsahom merania. Vstupy už boli na GPU;
+vykresľovanie a prvotná príprava snímok sa nezapočítavali.
+
+V4 sa pýta na budúci čas priamo z pevného počiatočného prefixu.
+Tieto časy preto nemožno vydávať za celý postupný simulačný krok.
+
+Skutočná spotreba podľa Slurmu: 9 616 sekúnd na jednom GPU a štyroch CPU,
+teda 9 616 GPU*s (približne 2,671 GPU*h) a 38 464 core*s.
+Tréningový proces vrátane priebežnej validácie trval 9 564,52 s.
+Malé pôvodné JSON a účtovanie sú v podpriečinku vysledky_139486/.
+Veľké referencie a checkpointy zostávajú na Perune.
+
+Ďalší vývojový test V5 bude predpovedať jeden krok a potom používať
+vlastné výstupy na ďalšie kroky. Známe vstupy zostávajú iba snímky 2 a 3;
+všetkých 238 budúcich snímok slúži výlučne na hodnotenie. Nie je zaručené,
+že táto zmena vyrieši dlhodobú presnosť.

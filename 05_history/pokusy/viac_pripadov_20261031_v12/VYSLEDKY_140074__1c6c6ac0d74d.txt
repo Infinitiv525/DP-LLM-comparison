@@ -1,0 +1,67 @@
+V12 –69TRAIN/6VAL, výsledky overené01.11.2026
+
+ZÁVER
+Celých600000aktualizácií sa dokončilo. Najlepší checkpoint podľa
+validačného kritéria vznikol pri70000. Model na nevidených geometriách
+nedosiahol prahy10%U/20%p ani limit vnútornejdivergencie. Čas priamych
+dotazov na pole pod5ms. Táto verzia nie je pripravená na hlavnéLLM.
+
+VÝSLEDKY VYBRANÉHO CHECKPOINTU, CELÝCH238ČASOV
+Rovnaké priemery po snímkach, potom rovnaká váha každéhoVALcase.
+Scenár                      Uchyba     pchyba     p99directquery
+harmonics/87/Re292           43.29%     58.57%     3.257ms
+harmonics/87/Re838           59.25%     71.45%     3.258ms
+nurbs/22/Re164               13.20%     28.73%     3.259ms
+nurbs/22/Re977               45.61%     71.39%     3.253ms
+skelenton/36/Re209           11.05%     28.29%     3.255ms
+skelenton/36/Re867           23.90%     55.71%     3.257ms
+Priemer6VAL                  32.7168%   52.3575%
+Nijaký prípad nesplnil oba accuracypráhy. Tlak gauge-aligned.
+Všetky6 dokončili238dotazov bezguardfail. ŽiadnyVALcase neprešiel
+masslimitom:meaninteriorFDdiv.1723..7701 oproti limitom.02195..07751.
+DirectqueryGPUčasH200,1024x256,initialtensorsGPU,bezrenderingu;
+niekauzálnysimulačnýstep alebo potvrdená5msreakcia naľubovoľnúzmenu.
+
+TRÉNINGOVÉ KONTROLY VYBRANÉHO MODELU
+harmonics/1/Re382:25.35%U/43.23%p.
+nurbs/11/Re107:9.18%U/24.34%p.
+skelenton/57/Re168:11.07%U/25.03%p.
+Ani tieto3monitorprípady nesplnili všetky accuracy/fyzikálnepráhy.
+Nie je teda potvrdené, že problém je iba nevidenágeometria; selected
+model nevie dostatočne presne ani všetky kontrolovanéTRAINtrajektórie.
+Ide o3monitory bestVALcheckpointu, nie kompletný69TRAINaudit alebo
+porovnanieTRAINfit posledných600kweights. Nevyvodzovať jedinúpríčinu.
+
+PRIEBEH VALIDÁCIE
+Skóre=(priemerEu+priemerEp)/2:
+update1 .705698;70000 .425372(best);100000 .434277;
+300000 .443405;600000 .443912. Dlhšie učenie vtejto konfigurácii
+neprinieslo lepšiuVALpresnosť. Jednotlivé priebežnéTRAINlossy sú
+z rôznychcases, preto ich nemožno brať ako jednu hladkúTRAINkrivku.
+600kaktualizácií dokončených,8695alebo8696každémuTRAINcase,
+všetkých238framecieľov každého69case navštívených. Výber70000
+neznamená predčasnéukončenie tréningu.
+
+METODIKA A ĎALŠÍ POSTUP
+69TRAIN/36geometry,6VAL/3geometry,disjoint po family+geometry.
+Knownprefix2,3,geometry/Re/time jedinévstupy. VALfutureCPUscoreriba,
+nikdy vloss/backprop. Týchto6VAL užvývojových/modelselect, nie finálny
+nezávislýtest. ŽiadnynewCFD/download alebo hlavnýtest. Jeden seed,
+žiadnaštatistickávýznamnosť. V12väčšíwidth192/inéLR/fullfieldsampling
+niepureablation oprotiV4. V11presnosť~3%/5%bol singlecaseTRAINfit;
+nebola zárukou prenosu na novéprípady. Prenos sa zatiaľ nepotvrdil.
+Nemožno tvrdiť, že ďalší rovnakýtréning automaticky problém odstráni.
+Pred ďalším rozsiahlymbehom treba prehodnotiť podmienenúreprezentáciu
+a diagnostikovať spoločnýfit viacerýchTRAINcases; nejde o pripravenú
+základňu naLLMbenchmark. Novýtréning vtomto kontrolnomkroku nespustený.
+
+INTEGRITA A SPOTREBA
+140074COMPLETED0:0,140075accountingOK,V12freezeoverený,frontaprázdna.
+Skutočné22819GPU*s=6.338611GPU*h,91276core*s. Pythontraining
+22510.98435s vrátanecheckpointscoringu/monitorov,peakCUDA53251935232B.
+SelectedcheckpointSHA256:
+6ea8f3e841d3d5559387aca8e15f1b15a606baae43e9516e8239bbf8b50b72b0.
+Perun:results/fpo_pinn_multicase_20261031_v12/training/140074/.
+Lokálne:vysledky_140074/,30malýchJSON/logov275199B,overenýSHAzip
+66834713519b3fab66dbacf6d81cefb13195c4f95c78779c4361ef16e46c7024.
+Všetkyväčšiepolia/váhy a kompletnépriebežnéassessmenty ibaPerun.

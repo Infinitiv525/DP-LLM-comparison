@@ -1,0 +1,42 @@
+{
+  "study": "Separate width-only PINN capacity comparison",
+  "created_unix": 1793840608.763084,
+  "larger_width": 384,
+  "base_width": 192,
+  "depth": 4,
+  "latent": 32,
+  "seeds": [
+    150001,
+    150002,
+    150003
+  ],
+  "parameters": {
+    "learning_rate": 0.001,
+    "pressure_weight": 1.0,
+    "physics_weight": 0.001,
+    "bc_weight": 0.01,
+    "warmup_fraction": 0.03125
+  },
+  "epochs": 400,
+  "updates": 64000,
+  "training_cases": 640,
+  "validation_cases": 160,
+  "sealed_test_cases": 200,
+  "main_test_opened": false,
+  "larger_parameter_count": 481482,
+  "small_parameter_count": 134922,
+  "comparator": "Immutable main fixed-baseline final seeds150001..150003; compare all three paired seeds, no best-seed selection. Wait for these main baseline results if not completed yet.",
+  "adapters": "Reuse immutable V33 train() unchanged; new in-process readiness timer reports speed without aborting >5ms. Final diagnostic evaluates all160 VAL with200timings as main. Saved phase is capacity.",
+  "technical_smoke": "Fresh320101,2epochs640TRAIN/160VAL, actual PDE updates required before full seeds.",
+  "budget": "Equal400epochs/64000updates and sample counts; 12h per capacity subprocess including first smoke versus6h operational main trial timeout; wall resource cost is intentionally measured, not claimed equal.",
+  "speed": "Same FP32/H200/native512/full input processing; p99<=5ms remains feasibility threshold. Slower network is still trained for capacity comparison and explicitly fails speed requirement.",
+  "allocation": "One extra H200 and5CPU on fourth reserved node. It replaces the pending CPU collector, captures the original three GPU-job ends concurrently while training three capacity seeds sequentially. No original GPU job is interrupted. Next main group starts after capacity and original group complete.",
+  "main_comparison_unchanged": true,
+  "main_protocol_sha256": "454131bd73dca9b86ced7d2ef0d057072a7ed7a2f3fa4df596e4f382feb117cc",
+  "main_freeze_sha256": "c61230aa43a09ae18ac2f7b79a53dac33934227c42746bc31dfb3499e8f24e6b",
+  "source_manifest": "freeze.json",
+  "no_llm_feedback": true,
+  "predecessor_study": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_capacity_20261105_v37",
+  "fix": "Pass audited prepared/split arguments to Store exactly as main. Separate actual2epoch smoke before launching any400epoch seed. Stop on first infrastructure failure.",
+  "predecessor_failures": "Three V37 constructor failures before any model initialization/training; retained, not accuracy observations."
+}

@@ -1,0 +1,58 @@
+SAMOSTATNÉ POROVNANIE VEĽKOSTI PINN — 05.11.2026
+
+Hlavný experiment V33 sa nemení: 395 plánovaných pokusov, 24 GPU,
+pôvodná architektúra, rovnaké konfigurátory a pravidlá. Na troch
+pôvodných GPU úlohách sa nič nereštartovalo.
+
+Nová otázka: pomôže tej istej PINN väčšia kapacita a akú rýchlosť stratí?
+Meníme iba šírku súradnicovej siete zo 192 na 384 neurónov vo vrstve.
+Počet vrstiev ostáva 4, enkóder, latent32 a frekvencie zostávajú rovnaké.
+Malá sieť: 134 922 parametrov. Väčšia: 481 482, približne 3,57-násobok.
+Fyzikálne rovnice, vzorkovanie bodov a dáta sa nemenia.
+
+Tri väčšie siete sa čerstvo natrénujú so seedmi 150001, 150002, 150003,
+s pevným základným nastavením a 400 celými epochami (64 000 aktualizácií).
+Porovnajú sa s malými sieťami rovnakých seedov z pevného základu hlavného
+experimentu, keď budú hotové. Vyhodnotíme všetky tri, nie najlepší seed.
+Ide o vedľajšiu štúdiu kapacity, výsledky sa neposielajú LLM a nemiešajú
+sa do hlavnej tabuľky porovnávania konfigurátorov.
+
+640 TRAIN /160 VAL /200 zatiaľ uzavretý TEST. Meriame rýchlosť a tlak,
+MSE, fyzikálne rezíduá, okraje, čas a spotrebu tréningu aj latenciu.
+Tréningová slučka V33 je znovu použitá bez prepísania pôvodných súborov.
+V novom procese sme oddelene upravili iba rýchlostný gate: aj pomalšia
+sieť sa natrénuje, aby bolo možné porovnať jej presnosť. Limit 5 ms platí
+ďalej a jeho prekročenie sa jasne označí ako nesplnenie rýchlostnej podmienky.
+Prvé meranie pred učením: p99 približne 6,82 ms, teda nad limitom.
+Nie je to záverečné meranie natrénovaného modelu na celej VAL.
+Rozpočet je rovnaký v epochách, nie v hodinách; väčší beh má limit 12 h
+oproti prevádzkovému limitu 6 h pre malý hlavný model. Čas sa zaznamenáva.
+
+AKTUÁLNA ÚLOHA
+143807: 1 H200 na gpu23, tri väčšie modely postupne na tej istej GPU.
+Najprv samostatná technická skúška s 2 epochami a seed320101; čerstvé
+400-epochové modely z jej váh nepokračujú. Táto skúška nie je výsledok
+porovnania presnosti. Všetkých 24 hlavných tréningov pokračuje.
+
+Aby sme zachovali limit štyroch rezervovaných uzlov, dodatočná GPU úloha
+zároveň vykonáva pôvodný zber účtovania troch hlavných dávok na voľnom CPU.
+Zachytí ich konce každých 30 sekúnd, aby sa nestratila 2h história Slurmu.
+Ďalšia hlavná 24-GPU dávka nadviaže po ukončení tejto skupiny aj kapacitného
+testu. Môže to posunúť začiatok ďalšej dávky. Surová skutočná alokácia
+tejto zmiešanej prevádzkovej/kapacitnej úlohy sa účtuje iba raz.
+
+HISTÓRIA TECHNICKEJ OPRAVY
+Prvý nový spúšťač V37 nemal správne argumenty pre dátový Store. Tri
+procesy skončili pred vytvorením modelu alebo učením. Záznamy zostali
+uložené; nevydávajú sa za tri natrénované siete ani výsledok presnosti.
+V39 opravuje len tento spúšťač a pred plnými behmi vyžaduje skutočnú
+2-epochovú skúšku. Pôvodné zmrazené vedecké súbory sa nemenili.
+Úloha V37 143805 sa kontrolovane ukončila a nahradila V39 143807.
+Skutočná alokácia 143805: 293 s, 1 GPU a 5 CPU; zachovaná v účtovaní,
+vrátane vytvárania zálohy na jej pridelenom výpočtovom uzle.
+Tri prevádzkové testy V37 aj V39 prešli. V39 výpočtová skúška už
+potvrdila H200, 481482 parametrov a prvých 320 aktualizácií.
+
+Perun: results/ldc_capacity_20261105_v39.
+Účtovanie a nadväzovanie: results/ldc_main_20261104_v33/operational_pool_v36.
+Veľké polia a váhy sa lokálne neukladajú.

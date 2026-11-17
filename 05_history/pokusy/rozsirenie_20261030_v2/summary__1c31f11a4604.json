@@ -1,0 +1,139 @@
+{
+  "status": "DEVELOPMENT_TRAINING_EVALUATED",
+  "config": {
+    "seed": 20261030,
+    "width": 96,
+    "depth": 4,
+    "latent": 32,
+    "lr": 0.001,
+    "batch": 2048,
+    "collocation": 256,
+    "warmup": 1000,
+    "ramp": 4000,
+    "validate_every": 1000,
+    "bc_weight": 0.1,
+    "ic_weight": 0.2,
+    "conditional": true,
+    "pde_weight": 0.01,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "name": "conditional_fourier_50000",
+    "steps": 50000
+  },
+  "selected_step": 3000,
+  "best_sampled_validation_score": 0.6490829297222686,
+  "training_process_seconds": 470.5782277584076,
+  "validation_seconds": 3.9214672334492207,
+  "peak_cuda_allocated_bytes": 473944064,
+  "device": "NVIDIA H200",
+  "torch_version": "2.12.0+cu130",
+  "train_scenarios": 11,
+  "validation_scenarios": 6,
+  "accuracy": [
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+      "role": "validation",
+      "frames": 240,
+      "velocity_relative_l2": 0.7035841587605763,
+      "pressure_relative_l2": 0.8678215933074576
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_838.npz",
+      "role": "validation",
+      "frames": 240,
+      "velocity_relative_l2": 0.7752219631242608,
+      "pressure_relative_l2": 0.934545439663071
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/nurbs/22/Re_164.npz",
+      "role": "validation",
+      "frames": 240,
+      "velocity_relative_l2": 0.35867032226627477,
+      "pressure_relative_l2": 0.5693040483692182
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/nurbs/22/Re_977.npz",
+      "role": "validation",
+      "frames": 240,
+      "velocity_relative_l2": 0.5360286145173969,
+      "pressure_relative_l2": 0.8247362936733984
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/skelenton/36/Re_209.npz",
+      "role": "validation",
+      "frames": 240,
+      "velocity_relative_l2": 0.3996048836477249,
+      "pressure_relative_l2": 0.5754634385292322
+    },
+    {
+      "path": "FPO_NS_2D_1024x256/skelenton/36/Re_867.npz",
+      "role": "validation",
+      "frames": 240,
+      "velocity_relative_l2": 0.4782856603612861,
+      "pressure_relative_l2": 0.769505699717125
+    }
+  ],
+  "latency": {
+    "grid": [
+      1024,
+      256
+    ],
+    "gpu_resident_rounds_ms": [
+      {
+        "p50": 1.084704041481018,
+        "p95": 1.089958393573761,
+        "p99": 1.0918764567375183
+      },
+      {
+        "p50": 1.0841760039329529,
+        "p95": 1.0887728035449982,
+        "p99": 1.0919082033634187
+      },
+      {
+        "p50": 1.0833919644355774,
+        "p95": 1.0880352079868316,
+        "p99": 1.0904687964916229
+      }
+    ],
+    "samples_per_round": 200,
+    "context_gpu_input_ms": {
+      "p50": 0.11007580906152725,
+      "p99": 0.202187653630972
+    },
+    "host_to_host_ms": {
+      "p50": 1.3758353888988495,
+      "p99": 1.8406994082033636
+    },
+    "context_samples": 30,
+    "includes_rendering": false,
+    "includes_geometry_preprocessing": false,
+    "warmed_gpu": true,
+    "batch_scenarios": 1,
+    "timing_clock": "CUDA events for GPU; perf_counter+synchronize for transfers"
+  },
+  "checkpoint_sha256": "dc8d8c35b7f87d4453a9b05dab4dfd62b54b249054739a45b8ad2c7ff68148c7",
+  "provisional_engineering_gate": {
+    "accuracy_pass": false,
+    "gpu_latency_pass": true,
+    "eligible_for_multi_seed_confirmation": false,
+    "thresholds": {
+      "velocity": 0.1,
+      "pressure": 0.2,
+      "gpu_p99_ms": 5
+    }
+  },
+  "independent_main_test_opened": false,
+  "temporal_interpolation_only": false,
+  "llm_comparison_ready": false,
+  "limitations": [
+    "Data-assisted coordinate reconstruction, not causal rollout",
+    "Time interval is solver-relative, not SI seconds or physical startup",
+    "Only selected development geometries; not the full 775 training scenarios",
+    "Readiness needs additional seeds, residual audit and protocol freeze"
+  ]
+}

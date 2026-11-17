@@ -1,0 +1,85 @@
+AKTUALIZÁCIA — DÁTA ÚSPEŠNE PRIPRAVENÉ — 04.11.2026
+
+Úloha 143101 skončila COMPLETED 0:0, 367 s, 1468 core s. Fronta prípravy
+je dokončená. 1000 prípadov, rozdelenie 640/160/200, 100 tvarov.
+Skutočné kanály: X0 Re, X1 SDF, X2 maska. Y0 u, Y1 v, Y2 p.
+Audit 16 tréningových polí potvrdil viskozitu 1/Re v súradniciach [0,1]^2:
+medián relatívneho NS rezídua 0,0162874, násobok viskozity 0,983426.
+Horná stena sa pohybuje; všetky predpísané kontroly prešli.
+TEST cieľové hodnoty neboli numericky vyhodnocované. Cache a veľké
+pôvodné polia sú iba na Perune. Malé protokoly a výsledky: zaznamy/.
+Nadväzujúci spoločný PINN V26 je odoslaný ako 143115, účtovanie 143116.
+Opis: ../spolocny_ustaleny_pinn_20261104_v26/PRECITAJ_MA.txt.
+Nasleduje pôvodný plán pred dokončením prípravy, zachovaný pre kontext.
+SPOLOČNÝ PINN PRE USTÁLENÉ 2D PRÚDENIE FLOWBENCH — 04.11.2026
+
+Nové rozhodnutie používateľa
+Zastaviť samostatné modely V24 a prejsť na spoločný PINN pre ustálené
+prúdenie, teda na typ úlohy, ktorú autori skutočne hodnotili. Úlohy
+143066 a143067 boli zrušené, ich účtovanie zachytené a priebežné
+výsledky zachované. Toto nie je dokončený experiment ani záver o jeho
+úspešnosti. Nebudú sa obnovovať staré FPO alebo samostatné tréningy.
+
+Čo bude predikcia
+Jedna spoločná sieť dostane geometriu prekážky a Reynoldsovo číslo.
+Predpovie ustálenú rýchlosť u/v a tlak v celej dutine LDC. Horná stena
+sa pohybuje, ostatné steny a prekážka stoja. Čas ani úvodné snímky nie
+sú vstupom. Predikujeme konečné ustálené pole, nie prechodový dej.
+Požiadavka5ms zostáva na výpočet celého poľa z už natrenovaného modelu.
+
+Dáta a porovnateľnosť s autormi
+Použijeme správnu vetvu LDC_NS_2D, nie časové FPO ani starú3DFNOcache.
+Prvý experiment má celú rodinu harmonics:1000prípadov,512×512buniek.
+Ako v štandardnom experimente autorov náhodne oddelíme20% naTEST;
+zvyšných80% rozdelíme80:20 medziTRAIN aVAL:640/160/200prípadov.
+Použijeme vlastný pevný seed, preto nejde o identické nezverejnené
+indexy autorov ani o reprodukciu ich konkrétnych čísel.
+
+Rovnaký tvar pri inomRe môže byť v rôznych častiach dát. Také rozdelenie
+budeme označovať ako štandardný test nových prietokových prípadov,
+nie ako dôkaz generalizácie na úplne nevidené geometrie. Geometrické
+prekryvy presne zaznamenáme. Ďalšie rodiny môžu použiť rovnaký postup.
+
+Príprava a audit
+Úloha143101 sťahuje a overuje dva verejné archívy iba naPerune.
+Účtovanie143102. Hlavičky boli overené: X1000×3×512×512,
+Y1000×4×512×512,float64. Vo vstupoch jeRe,SDF a binárna geometria;
+presné poradie dvoch geometrických kanálov sa preverí numericky.
+Výstupy0,1,2 súu,v,p. Štvrtý je zabalenéCd/Cl, ktorý nevydávame za
+ďalšiu zložku rýchlosti a v prvom modeli ho nepredikujeme.
+
+Archívy sa overia cez úplnéLFS SHA256 aZipCRC. Vytvoríme natívne
+TRAIN/VALpolia, masky, malé geometrické vstupy a normalizáciu iba zTRAIN.
+TESTcieľové hodnoty sa numericky neprehliadajú ani nepoužijú na ladenie.
+Žiadne novéCFDsa negeneruje a veľké dáta sa nesťahujú doPC.
+
+Fyzikálna mierka
+Pôvodná dutina má[0,2]×[0,2]. Autorský generátor pre túto mierku delí
+Reoznačené vo vstupoch dvomi. Navrhnutý model preto používa prepočítané
+súradnice[0,1]×[0,1], kde zodpovedajúci viskózny koeficient je1/Re.
+Túto interpretáciu ešte overí rezíduum referenčných TRAINpolí a odhad
+koeficientu. Bez kontroly nesmieme slepo prebrať starú FPOstratu.
+Predpísané sú aj kontroly orientácie poľa a pohyblivej hornej steny.
+
+Pripravený model
+Vlastný SharedSteadyPINN: geometrický enkóder aRe podmieňujú sieť
+nad súradnicamix,y. Výstupom je prúdová funkcia a tlak; z prúdovej
+funkcie sa odvodí rýchlosť. Tréning bude používať referenčné dáta,
+ustálené Navierove–Stokesove rovnice a okrajové podmienky. Ide o PINN,
+nie premenovaný FNO. Žiadne osobitné váhy pre každú simuláciu.
+Pripravený prototyp je test/training/ldc_shared_pinn_v26.py.
+Tri analytické testy prešli: zhoda bodového/mriežkového výstupu,
+vnútorná divergencia a gradienty fyzikálnej straty do enkódera.
+Tento prototyp ešte nie je natrenovaný ani výkonovo overený naGPU.
+
+Čo budeme vykazovať
+MSE a relatívnuL2 podľa benchmarku, samostatné chyby rýchlosti a tlaku,
+fyzikálne rezíduá oproti referenčnej numerickej úrovni, chyby pri stenách
+a čas výpočtu celého512×512poľa. Naše pracovné limity presnosti nie sú
+automaticky limity autorov. Po kontrole dát sa zmrazí konkrétny tréningový
+protokol spoločného PINN; potom nadviaže porovnávanie konfiguráciíLLM.
+
+Aktuálny stav
+Staré GPUtréningy sú zastavené. Beží príprava a fyzikálny auditLDCdát.
+Štyri testy prípravy dát a tri testy prototypuPINN prešli. Nový GPUtréning
+sa ešte nespustil; čaká na overenie skutočných dát a ich fyzikálnej mierky.

@@ -1,0 +1,90 @@
+V18 – VÝSLEDKY CIELENÉHO AUDITU, 03.11.2026
+
+Úloha142584 COMPLETED0:0, účtovanie142585uložené, freezeOK.
+4checkpointyV17 – primitive/curlbest100k a last600k – bezozmenyváh.
+3TRAINmonitory a6VAL,8časov/case,512fixnýchinteriorbodov.
+Dokončených288case-timekombinácií,147456matchedcentrepoints.
+Samostatneajrovnakýpočetjitterbodov. Žiadnytréning,mainTESTzatvorený.
+
+ČO SA POTVRDILO
+Pri novompsi/p modeli sa výrazne odlišujú priestorové derivácie
+spojitého výstupu používaného pri tréningu a reálneho FDgridvýstupu.
+Samotné rýchlosti pritom môžu byť takmer rovnaké. Kontrola tréningovej
+fyziky preto nie je zameniteľná s kontrolou fyziky vydaného poľa.
+Pri pôvodnomu/v/p je tento rozdiel podstatne menší, ale aj jeho
+predikcie sú na odlišných prípadoch nepresné. Nesúlad nie je jediným
+vysvetlením nepresnosti a audit nedokazuje, že jehooprava vyrieši prenos.
+
+ČÍSLA PRE6VAL x8vybranýchčasov x512bodov
+Normalizovaná strednáštvorcováhybnostnáodchýlka, rovnakémiesta/časy:
+checkpoint           autograd vcentre   FDgrid(dt.0025)   FDgrid(dt.025)
+primitivebest100k        2,715705           2,690156          2,690345
+primitivelast600k        2,908458           2,897481          2,897520
+curlbest100k            17,101523           4,655657          4,655403
+curllast600k            10,276568           4,187128          4,186960
+Normalizácia: mean(r_u²+r_v²)/mean(trainStd_u,trainStd_v)².
+Niepercentáchyby polí. Referenčný okamžitýFDfloor v rovnakýchbodoch
+je0,01200919 pri natívnom dátovomčasovomkroku.05. Niepresnáspojitápravda.
+NeurálnyFD používa inýčasovýkrok; desaťnásobnézmenšenie z.025 na.0025
+výsledok takmernemení. ČasovýFDkrok teda v tejto skúške nevysvetľuje
+veľkýADvsFDrozdiel. Výsledky ostávajú viazané na preskúmanévzorky/FP32.
+
+ČLENY PREcurlbest100k,6VAL – priemer RMS rozdieluADvsFD
+Samotná rýchlosť:             0,000432948
+Časová derivácia:             0,002335987
+Advekcia:                     0,692764458
+Gradient tlaku:               0,001104659
+Difúzia/viskóznyčlen:          0,287765859
+Výsledná hybnosť:             0,905860428
+Pri primitivebest je rozdielhybnosti iba0,020407067 a rozdielrýchlosti
+0,000000118. Rozdiely členov sa vektorovosčítavajú, nie sú percentá
+príspevku alebo nezávisléaditívnechyby.
+
+AJFYZIKA V ZNÁMYCH PRÍPADOCH NIE JE VYRIEŠENÁ
+Curlbest3TRAIN: ADcentre6,943466 vsFD1,059159; curllast2,749211 vsFD0,488919.
+ReferenčnýFDfloor3TRAIN0,00420021. Tietočísla sú ďaleko odreferencie.
+Autogradna jittermiestach pri curlbestVAL9,474729, vcentroch17,101523.
+Súto odlišnémiesta; rozdiel sámnepreukazuje chybu konkrétnehobodu,
+ale ukazuje závislosť diagnostiky od vzorkovania priestoru.
+
+ČO TO HOVORÍ O PRENOSE A DLHOM HORIZONTE
+Na3TRAINmonitoroch sa last600k zlepšil oprotibest100k, na6VALsa to
+neprenieslo. Napr.curlchybaU/p cez8auditnýchčasov:
+TRAINbest9,15%/21,79%,TRAINlast5,54%/12,38%;
+VALbest26,95%/39,88%,VALlast27,77%/41,32%.
+VkrátkomVALhorizonte.05/.25/.5 malcurlbestU7,34%/p13,63%,
+vdlhom4/8/11.9 užU45,87%/p61,19%. Nepresnosťdlhéhohorizontupretrváva.
+
+POZOR NA ROZSAH ČÍSEL
+Audit vzorkuje iba8časov, s výraznýmzastúpenímzačiatku. Jeho priemerné
+poľovéchyby nenahrádzajú výsledokV17 cezvšetkých238snímok.
+V17fulltrajectory na6VAL ostáva primitiveU37,11%/p55,12% a
+curlU39,43%/p55,07%; tentoaudit nezlepšil váhy ani finálnu presnosť.
+Rovnako okamžitéFDmeranie nie je totožné sV17midpointmetrikou,
+ktorá je vJSON uloženáosobitne. Crop nie sústeny/periodickéhranice.
+Ide opakovane používanúvývojovúVAL,jedenseed,niekonečnýtesthypotéz.
+
+PRÍČINA A ĎALŠÍ KONTROLOVANÝ KROK
+Potvrdený je numerickýnesúladderivácií. Mechanizmus môže súvisieť s
+interpolovanýmiúvodnýmipoľami a následnými vyššímideriváciami prúdovej
+funkcie; tentoaudit však neoddelil vplyv interpolácie/rozlíšenia/
+architektúry samostatnouabláciou. Neoznačujemejedinúpríčinu zadokázanú.
+Navrhovaný ďalšítest: zachovať aktuálnyautogradPINN a pridať kontrolu
+zhodyfyziky skutočnéhogridvýstupu; porovnať s kontrolnouvetvou zo
+zhodnýchváh/rovnakéhodátového cyklu. PôvodnéspojitéNSrezíduum zachovať,
+aby sa metodika potichu nezmenila na výlučneFDučenú sieť.
+Oddelene meraťpoľovúpresnosť,hybnosť,kontinuitu aprenos, nie ibaloss.
+Konkrétnaváha/budget musia byťurčenépredďalšímtréningom; audit sám
+nepreukázal ichoptimálnuhodnotu ani nezaručuje splneniepresnosti.
+Žiadnyďalšítréning zatiaľnespustený.
+
+OVERENIE A ULOŽENIE
+3analytickétesty prešli, zmrazenézdroje/protokol/všetky4checkpointSHA
+poaudite opäťoverené. Výstupnýmanifest76súborov overenýpoSHA/veľkosti.
+36bodovýchNPZspolus39593980B ostávaibaPerun,súradnice/členyzachované.
+Skutočnáspotreba73GPU*s/292pridelenýchCPU*s,beznovýchCFD/downloadov.
+Lokálne54malýchJSON/logov/zdrojreview,530285Bzip,SHA256overený:
+86b77ca753f556a291d64e90b0e62dfc4f409c6c5330e543abf410ed9cd9632d
+Rozbalené:vysledky_142584/. Kompaktné čísla sú v priečinku
+review_20261103/analysis.json a pôvod výpočtu v provenance.json.
+Starézmrazené súbory/váhy sa nemenili, veľképolia nebolistiahnuté.

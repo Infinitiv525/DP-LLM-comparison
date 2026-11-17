@@ -1,0 +1,118 @@
+FLOWBENCH A PINN: CO HOVORIA AUTORI A AKY EXPERIMENT Z TOHO VYPLYVA
+Overene 03.11.2026. Tento dokument je audit a odporucanie; novy trening
+ani zmena zmrazeneho protokolu neboli vykonane.
+
+Preskumane podklady
+Oficialna stranka vratane Datasets a Experimental Results bola precitana
+v prehliadaci so zapnutym JavaScriptom. Webovy textovy nastroj z homepage
+vracal iba poziadavku na JavaScript; z nej sa zavery nevyvodzovali.
+https://baskargroup.bitbucket.io/#/problems
+https://baskargroup.bitbucket.io/#/experimentalresults
+
+Stiahnuty a textovo precitany aj Paper a Supplemental priamo z odkazov
+homepage. PDF paper.pdf, supplementary.pdf, textove extrakcie a presne
+SHA256/URL/velkosti su v tomto priecinku a sources_manifest.json.
+Ide spolu o cca13.5MB vedeckych podkladov, nie o simulacne polia.
+Skontrolovana aj HTML verzia arXiv a autorsky treningovy/pripravny kod
+na pinned commite6877099b8883232138c73b2b6056ff01f7d3697b.
+Autorsky kod bol iba precitany a archivovany, nie spusteny/prevzaty do modelu.
+
+Co je skutocne dolozene
+1. FlowBench je benchmark na trenovanie a hodnotenie neuronovych riesicov.
+   Kvalitne referencne data nie su zarukou konvergencie kazdej architektury.
+2. Konkretne tabulky na Experimental Results sa tykaju ustaleneho2D LDC-NS,
+   nie casovo premenliveho FPO okolo prekazky. Rovnako sekcia4 clanku.
+3. Training/README.md, riadky2..4: kod je pre ustalene ulohy. Pre transient
+   autori opisuju minulu sekvenciu poli -> buducu sekvenciu; cas mozno
+   splostit do vstupnych/vystupnych kanalov. Nedavaju pevny pocet snimok.
+4. Training/codes/train_FNO.py, riadky21..28: priklad trenuje cez MSE na
+   referencnych vystupoch. PDE rezidua v README, riadok50, su dalsia metrika.
+5. V precitanom FlowBench treningovom kode/clanku nie je hotovyPINN pre FPO.
+   Nahrada FNO/CNO vlastnym PINN je nasa metodicka adaptacia, nie reprodukcia
+   uz publikovaneho FlowBench-PINN experimentu.
+
+Detaily, ktore nesmieme nespravne citovat
+README ma in_channels20/out_channels5 preFNO a obdobne CNO. Su to
+POCTY KANALOV, nie predpis20vstupnych a5vystupnych snimok. Pri u/v/p
+ma Ksnimok po splosteni3*Kkanalov; mozu pribudnut ine vstupy.
+DataPrep/fpo2d.py, riadky5..8, podporuje seq-to-seq a vynechanie0,1.
+Kod je schematicky/starsi (512x128, nehotove identifikatory); nekopirovat
+ho ako hotovy funkcny pipeline pre aktualne1024x256.
+Tabulka vstupov/vystupov v prilohe je opis balenia dat, nie dokaz uspesnej
+predikcie celeho nestacionarneho priebehu len zRe a geometrie.
+
+Verzie podkladov
+Webovy PDF je starsia verzia s3hlavnymi operatorovymi baseline;
+arXivHTML/webExperimental Results uz uvadzaju aj dalsie modely.
+Ich spolocny relevantny fakt je ustaleny2DLDC benchmark. Rozdielne
+verzie/pocty/resolutions/uvadzane splits sa nemaju miesat do jedneho presneho
+replikacneho protokolu. PinnedHF revizia a nasa numericka kontrola ostavaju.
+https://arxiv.org/html/2409.18032v1
+https://github.com/baskargroup/flowbench-tools/tree/6877099b8883232138c73b2b6056ff01f7d3697b/Training
+
+Ako pouzit dostupne FPO data s klasickym PINN
+Toto je ODPORUCANIE pre nasu aplikaciu; FlowBenchautori takyto recept
+nepublikovali. Princip datovej+PDEstraty je dolozeny povodnouPINN literaturou:
+https://maziarraissi.github.io/PINNs/
+Navier-Stokes priklad tam rekonstruuje prudenie z rozptylenych rychlostnych
+pozorovani pomocou rovnic. Nie je to FlowBench vysledok ani dokaz uspechu
+na nasich zlozitych geometriach aRe.
+
+Jedna simulacia urci domenu, geometriu,Re a240ramecov2..241.
+PINN prijima x,y,t a predpoveda u,v,p; Re/geometriu mozno v tomto rezime
+povazovat za parametre konkretneho rieseneho pripadu. Pouzit mozno nasu
+vlastnu bodovu siet a fyzikalnu stratu bez cudzej sablony.
+Trenuje sa z vopred urcenej vzorky bodov rozlozenej v celom dostupnom case,
+so stratou voci referencii a reziduami nestacionarnych Navier-Stokes rovnic
+a kontinuity. Poskytnuty pociatocny stav a geometricke podmienky su explicitne.
+Na hranice vyrezu sa nevnucuju steny celej domeny.
+Ak sa pouziju casove priebehy cropokrajov zCFD, su to deklarovane dodane
+podmienky, nie skryte cielove vnutorne hodnoty. Pozor na bunkove priemery
+oproti presnym hodnotam na matematickej hranicnej ploche.
+
+Treningove, vyberove a hodnotiace body/snimky v danom pripade musia byt
+urcene pred treningom a bez prekryvu cielov. Mozno vyhradit aj cele casy
+na kontrolu interpolacie; ziadne tvrdenie o extrapolacii za poslednyramec.
+Zvoleny podiel/rozlozenie pozorovani bude sucastou noveho protokolu,
+nebude sa menit potichu podla uspesnostiLLM. Data-assimilacnyPINN moze
+mat pozorovania z neskorsich casov, preto sa neoznacuje za predikciu
+celej buducnosti iba z pociatocneho stavu.
+
+Co by bolo vysledkom a co by to tvrdilo
+Po natrenovani dostaneme rychlo vyhodnotitelnu reprezentaciu celeho
+ulozeneho priebehu pre dany pripad. 5ms sa meria na full-field query
+po treningu; cas pripravy/treninguLLMkonfiguracie sa vykazuje osobitne.
+Nie je to5ms na vyriesenie novej geometrie vratane treningu.
+Pri novom pripade sa klasickyPINN znovu trenuje. To je materialny rozdiel
+oproti doterajsiemu univerzalnemu prediktoru69TRAIN ->6novychVAL.
+Zmenu na tento rezim nemoze text predstierat ako identicku replikaciu
+operatoroveho benchmarku autorov alebo ako uz schvaleny/spusteny pokus.
+
+Ako z toho zostava experiment oLLM
+Na skupine vyvojovychCFDpripadov sa porovnavaju rovnake rozpocty vyberu
+konfiguracie manual/random/TPE a lokalneLLM. Kazdy kandidat trenujePINN
+na rovnako poskytnutych pozorovaniach a fyzike konkretnej simulacie.
+Vyber cez vnutornu vyvojovuVAL, zaverecne hodnotenie na nedotknutych
+scenaroch/seeds aj nezobrazenych hodnotiacich bodoch. Pri takomto rezime
+moze finalny scenar dodat svoj vopred definovany treningovy vstup, ale jeho
+hodnotiace cielove body nie su dostupne vyberu konfiguracie. Je to benchmark
+riesenia pripadov, niezero-shot predikcia noveho pripadu jednym fixnymNN.
+Merat presnost poli, fyziku, cenu/cas konfiguracie a treningu, latenciu,
+robustnost opakovani; datovy-only ablacny model je uzitocna kontrola,
+aby sa vedelo posudit, ci fyzikalna cast pomaha. To nie je hlavnaLLM metoda.
+
+Ak sa zachova poziadavka jedenNN -> nove pripady bez dotrenovania
+Treba podmienenyPINN/physics-informedoperator so vstupnou funkciou stavu
+a geometriou/Re. Pri treningu ma cele TRAIN trajektorie a priVAL iba
+deklarovanu znamu informaciu. To je legitimna, tazsia uloha. Uz ju skusame,
+ale nie je tu hotovy autorskyPINN, ktory by sa dal jednoducho prehodit.
+PouzitieFNO a pridaniePDE by bolo physics-informedoperator; bez vysvetlenia
+ho nevydavat za klasicky bodovyPINN pozadovany pouzivatelom.
+
+Rozhodnutie pre aktualny stav prace
+Pouzivatel odmietol automaticky pokracovat v navrhu20/5. Ten sa nespusti.
+Najprv treba jasne oddelit klasickyPINN pre jednotlive pripady od uceneho
+operatora. Odporucanie pri casovej tiesni je prvy rezim pre hlavnyLLM
+konfiguracny experiment, ale s explicitne priznanou zmenou rozsahu tvrdeni.
+Uzavrety hlavnyTEST, stare zdroje, protokoly a checkpointy ostali nedotknute.
+Tymto auditom sa ziadna alternativa netrenovala ani neodoslala naPerun.

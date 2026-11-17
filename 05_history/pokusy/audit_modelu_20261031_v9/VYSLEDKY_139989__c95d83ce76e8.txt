@@ -1,0 +1,27 @@
+READ-ONLY AUDIT139989 –31.10.2026
+COMPLETED0:0,22GPU*s/88core*s,9kontroljadraprešlo,V9výsledkyhotové.
+ObaV8checkpointy,8trueTRAINokien+4ownstavy na model, žiadnyoptimizer.
+
+PreD32 naTRUETRAINpriemer gradientnorm: data2.69258, váženáPDE0.00802,
+BC0.00000749,FDmomentum0.62160,FDcontinuity3.22e-10. Kosínusdata/PDE
+0.726,data/momentum0.747: v priemere kladné, nie silný protismer.
+NaOWNstavochdata12.1781/PDE0.3857/momentum2.8969, priemerné cosine
+data/PDE0.167,data/momentum0.246. Jednotlivé stavy sa môžu líšiť.
+Malýgradientkontinuity je očakávateľný pri curlidentite, nie dôkaz
+pokazenéhoautogradu. Fyzikálne členy tu nedominujú dátam vgradientnorm.
+
+AnalyticvsFDgridvýstupRMS/štandardnáodchýlka,D32TRUETRAIN:
+u0.00014893,v0.00000969,p4.06e-8; naOWNu0.00014527,v0.00064759.
+Vtomto vzorkovaní nejde o veľkú nezhodu diskretizácií schopnú sama
+vysvetliť desiatkypercent chyby. Nie exaktné globálne ohraničeniechyby.
+ReferenčnýFDmomentumfloorTRUE0.0064153,continuity0.0016400(normalized).
+Váženýmodelmomentum.122965 vs.1*reference.006415=.0006415. Model
+má podstatne väčšiu chybu hybnosti než táto referencia; nie ibaCFDfloor.
+Jednokrokovýgain pri malomšume~1.048TRUE/~1.046OWN. Nie veľké
+jednokrokovézosilnenie vtomto šumovomteste, nie dôkaz dlhodobejstability.
+
+Príčina nebola definitívne určená. Inventár vstupov ukázal chýbajúce
+explicitné priestorovégradientfeatures, hoci existujú CNN a curlstencil.
+Nasleduje ohraničená hypotéza: rovnakýmodel sFDlokálnymi informáciami
+oproti nulovýmkanálom pri rovnakýchváhach/pláne. Nejde o dokázanú opravu.
+PôvodnéauditJSON aúčtovanie lokálne v zaznamy/, veľképolia ibaPerun.

@@ -1,0 +1,85 @@
+NOVŠÍ STAV — 04.11.2026
+Súbeh zvýšený na 24 GPU. Tri dávky 143342 / 143656 / 143684 a jeden
+spoločný CPU zberač 143685. Vedecké pravidlá sa nemenia. Aktuálny opis:
+../paralelizacia_24gpu_20261104_v36/STAV.txt.
+
+HISTORICKÝ ZÁZNAM
+
+AKTUÁLNE DOPLNENIE — 04.11.2026
+Na pokyn používateľa zvýšené na 16 súbežných GPU. Dávky 143342 a
+143656, nadväzujúce úlohy 143655 a 143657. Nový aktuálny opis:
+../paralelizacia_16gpu_20261104_v35/STAV.txt. Vedecké pravidlá V33
+zostávajú rovnaké; nasledujúce veľké dávky budú cez dva uzly.
+
+HISTORICKÝ ZÁZNAM ŠTARTU
+
+SPUSTENÁ HLAVNÁ SÉRIA — 04.11.2026 — V33
+
+Prvá hlavná GPU úloha: 143342, 8 fyzicky odlišných H200, uzol gpu26.
+Nadväzujúce účtovanie a pokračovanie: 143353, čaká na skončenie GPU dávky.
+Pri poslednej kontrole 8 tréningov RUNNING, 387 ešte PENDING, žiadna
+úloha nevyžaduje zásah. Všetkých prvých osem má skutočný config pre
+400 epoch a už uložené hodnotenie po 20 epochách (1600 aktualizácií).
+Celý experiment ešte neskončil a prvé plné kandidátske tréningy sa
+zatiaľ nedokončili. Toto je okamžitý záznam, nie živá stránka stavu.
+
+Najprv sa učia základné východiskové konfigurácie. Až ich skutočné
+400-epochové výsledky dostanú príslušné LLM či TPE; nasledujúce návrhy
+budú nadväzovať na vlastnú históriu. Váhy LLM zostávajú fixné, učí sa PINN.
+
+Plán: najviac 395 tréningových pokusov hlavnej série. Štyri LLM,
+random a TPE: každá metóda 5 hľadaní × 8 kandidátskych miest a po každom
+hľadaní 5 nových tréningov vybranej konfigurácie; navyše 5 pevný základ.
+Každý platný kandidát aj opakovaný tréning má 400 epoch na celých
+640 TRAIN / 160 VAL. Záverečný TEST s 200 prípadmi je zatiaľ uzavretý.
+
+Dávky nadväzujú automaticky
+Prvý batch má limit 36 hodín a s nedostatočnou rezervou už nezačne
+ďalší tréning. Nadväzujúca CPU úloha uloží skutočnú spotrebu, preverí
+výsledky a pokrok a pri čistom priebehu zaregistruje ďalší batch.
+Pri chybe, nevybavenom rozpracovanom pokuse alebo nulovom pokroku sa
+reťaz zastaví na kontrolu. Bez tichého opakovania. Stráži sa aj limit
+odoslaných úloh a strop 16 hlavných dávok. Po dokončení plánu sa zastaví
+pred samostatným záverečným TEST. Nejde o automatické správy v chate.
+
+Čo prešlo pred spustením
+V33 prípravná úloha 143328 a účtovanie 143329 skončili úspešne.
+25/25 skutočných krátkych tréningov, 251/251 kontrol pôvodu, dát,
+vzoriek, parametrov, spätnej väzby a výberu konfigurácie. Všetky štyri
+LLM prešli dvoma návrhmi a následným novým tréningom víťaza.
+14 kontrol kontraktu/poradovníka/samplerov a 9 prevádzkových testov
+nadväzovania tiež prešli. Na hlavnom uzle sa 14 kontrol znovu vykonalo
+za 73,372 s. Rôzne úrovne opakovaní sú v údajoch oddelené.
+
+V32 predchodca sa zastavil v chybnom časovom limite kontrolného testu
+pred akýmkoľvek NN tréningom. Je zachovaný spolu so spotrebou. V33
+opravuje test a nečinné zápisy fronty, vedecké pravidlá nemení.
+
+Dokumentácia a súbory
+protokol.txt — ľudsky čitateľné pravidlá a dôvody porovnania.
+AKO_POKRACOVAT.txt — kontrola reťaze a obnovenie pri prerušení.
+zaznamy/integration_review.json — 251 kontrol prípravnej reťaze.
+zaznamy/launch_verification_143342.json — skutočné spustenie 8 × 400 epoch.
+zaznamy/submission_main_143342.json — ID a registrácia pred release.
+zaznamy/protocol.json a freeze.json — zmrazené strojové pravidlá/130 súborov.
+zaznamy/operational_manifest.json — zvlášť zmrazená prevádzková reťaz.
+zaznamy/integration_and_launch_receipts.zip — všetky malé podklady skúšky.
+Archív 7,32 MB, SHA/CRC a každý zo 477 súborov po prenose overené.
+Žiadne dátové polia ani modelové váhy sa do PC nekopírovali.
+
+Skutočná prípravná spotreba
+Úspešná V33 integračná dávka: 683 s × 8 GPU = 5464 GPU s;
+32 CPU = 21856 core s. Neúspešná V32: 744 GPU s a 2976 core s.
+Hlavná dávka stále beží, jej konečná spotreba bude uložená po skončení.
+Tieto údaje nie sú celkovou spotrebou projektu; drobné účtovacie CPU
+úlohy nie sú započítané v uvedených GPU dávkach.
+
+Všetky veľké výstupy iba na Perune:
+/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33
+
+Prevádzková revízia V34: nadväzovanie kontroluje aktuálny zoznam našich
+úloh, pretože plánovač po čase odstráni staré ID. Pôvodná čakajúca
+účtovacia 143343 bola pred spustením nahradená 143353; GPU 143342 ani
+tréningy sa nemenili. Staré registračné záznamy zostali zachované,
+zmenu dokladá zaznamy/operational_migration_143342_v34.json.
+Vedecký experiment a tréningové zdroje zostávajú V33.

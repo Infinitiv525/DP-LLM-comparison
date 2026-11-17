@@ -1,0 +1,54 @@
+FLOWBENCH: CO VIEME REPLIKOVAT A CO DOSTAVA NAS MODEL
+Overenie 03.11.2026 na otazku pouzivatela; nejde o zmenu protokolu V21.
+
+Oprava vysvetlenia
+Tvrdenie, ze spravanie FlowBench alebo jeho okrajove podmienky nepozname,
+bolo prilis siroke. Nie je dokaz, ze problem presnosti sposobuje nedostatok
+zverejnenych dat. Nezistili sme ani to, ze povodny CFD experiment nemozno
+replikovat. Je potrebne rozlisovat publikovane data a vstupy nasho modelu.
+
+Primarne zdroje znovu overene
+1. Clanok, sekcia 3.2: povodna domena [0,64] x [0,16], parabolicky vstup
+   vlavo, no-slip hore/dole, nulovy tlak vpravo; zverejneny priestorovy vyrez.
+   Priloha A.3: bezrozmerny vystupny interval 0.05, obdobie cca 392..404.
+   https://arxiv.org/html/2409.18032v1
+2. Autorsky exportny priklad: bounds [4,20] x [6,10], prevod bodovych dat
+   na bunkove hodnoty, u/v/p. Priklad je pre starsie rozlisenie 512x128;
+   sam osebe nie je metadatovy certifikat kazdeho aktualneho NPZ.
+   https://raw.githubusercontent.com/baskargroup/flowbench-tools/6877099b8883232138c73b2b6056ff01f7d3697b/DownSampling/FPOdownsampling2D.py
+3. Autorsky DataPrep/fpo2d.py opisuje ulohu minule snimky -> buduce snimky
+   a vynechanie prvych dvoch. Neurcuje povinnost pouzit presne dva vstupy.
+   https://raw.githubusercontent.com/baskargroup/flowbench-tools/6877099b8883232138c73b2b6056ff01f7d3697b/DataPrep/fpo2d.py
+4. Generator FPO: posledny dt_V=0.005 a OutputSpan_V=10 -> interval 0.05.
+   Clanok uvadza integracny krok 0.01; rozdiel verzii zaznamenavame,
+   oba zdroje podporuju vystupny interval 0.05. Nemeni sa pouzivany krok.
+   https://raw.githubusercontent.com/baskargroup/flowbench-tools/6877099b8883232138c73b2b6056ff01f7d3697b/CaseGenerator/Harmonic/FPO/config_generator.py
+
+Co je dostupne a co je vstup
+V ulozenych referencnych snimkach mame aj u/v/p v krajnych bunkach vyrezu.
+Ich casovy priebeh teda mozno precitat pre ulozene casy. Nejde automaticky
+o presne hodnoty na matematickej hranicnej ploche: export je bunkovy a casovo
+diskretny. Steny povodnej domeny sa nesmu preniest na hranice vyrezu.
+
+Nas V21 predictor dostava iba originalne snimky 2,3, geometriu a Re.
+Predikuje originalne snimky 4..241. Buduce TRAIN polia su v datovej strate;
+buduce VAL polia su iba pre skore. BC strata v train_fpo_spatial_context_v21.py
+vynucuje nulovu rychlost na odhadnutej hranici prekazky, nie na crop hranici.
+
+Interpretacia
+Predikcia celeho zostavajuceho casoveho okna z dvoch vstupov je nasa volba
+ulohy. Clanky a data samy nezarucuju uspech tejto architektury ani presnost.
+Reprodukcia benchmarkoveho vyhodnotenia nad zverejnenymi datami je odlisna
+od noveho vypoctu presne tych istych CFD snimok. Druhu moznost sme tu
+kompletne neoverovali; nemozno tvrdit, ze je nemozna alebo zarucena.
+
+Buduce hranicne hodnoty mozno pouzit v osobitne vymedzenej ulohe s dodanymi
+hranicnymi datami. Takato uloha ma ine vstupy a jej skore sa nesmie miesat
+s predikciou iba z prefixu. Potajomky ich dodat do terajsej VAL by zmenilo
+protokol a znamenalo pristup k casti cielovych dat.
+
+Nemame dokaz, ze chybajuce buduce hranicne vstupy su hlavnou pricinou
+39-percentnej chyby rychlosti. Potvrdene su problemy prenosu na nove pripady
+a nesulad casti AD/FD fyzikalnych kontrol; priciny mozu byt viacere.
+Beziaci zmrazeny V21 sa touto poznamkou nemeni. Nove GPU ulohy nespustene,
+CFD ani velke data nestahovane. Toto je oprava interpretacie dokazov.

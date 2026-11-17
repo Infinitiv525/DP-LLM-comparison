@@ -1,0 +1,65 @@
+{
+  "status": "MAIN_RUNNING_AND_CONTINUATION_V34_VERIFIED",
+  "counts": {
+    "RUNNING": 8,
+    "PENDING": 387
+  },
+  "rows": [
+    {
+      "task": "qwen3_8b_r00_c00",
+      "seed": 140001,
+      "epochs": 400,
+      "latest_update": 3200
+    },
+    {
+      "task": "ministral3_8b_r00_c00",
+      "seed": 140001,
+      "epochs": 400,
+      "latest_update": 3200
+    },
+    {
+      "task": "phi4_mini_r00_c00",
+      "seed": 140001,
+      "epochs": 400,
+      "latest_update": 3200
+    },
+    {
+      "task": "granite33_8b_r00_c00",
+      "seed": 140001,
+      "epochs": 400,
+      "latest_update": 3200
+    },
+    {
+      "task": "random_r00_c00",
+      "seed": 140001,
+      "epochs": 400,
+      "latest_update": 3200
+    },
+    {
+      "task": "tpe_r00_c00",
+      "seed": 140001,
+      "epochs": 400,
+      "latest_update": 3200
+    },
+    {
+      "task": "qwen3_8b_r01_c00",
+      "seed": 140002,
+      "epochs": 400,
+      "latest_update": 3200
+    },
+    {
+      "task": "ministral3_8b_r01_c00",
+      "seed": 140002,
+      "epochs": 400,
+      "latest_update": 3200
+    }
+  ],
+  "accounting_and_continuation_job": "143353",
+  "dependency_query": "JobId=143353 JobName=dp-ldc33-account-next34 UserId=lutoke823(507402392) GroupId=domain users(507400513) MCS_label=N/A Priority=908 Nice=0 Account=perun2601449 QOS=perun2601449 JobState=PENDING Reason=Dependency Dependency=afterany:143342(unfulfilled) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=00:03:00 TimeMin=N/A SubmitTime=2026-11-04T16:30:17 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-04T16:30:17 Scheduler=Main Partition=cpu_short AllocNode:Sid=login01:1382474 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=1,mem=512M,node=1,billing=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=1 MinMemoryNode=512M MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/project/perun2601449/dp_llm_cfd/test/scripts/256_ldc_main_continue_v34.sbatch SubmitLine=sbatch --hold --parsable --dependency=afterany:143342 test/scripts/256_ldc_main_continue_v34.sbatch 143342 WorkDir=/mnt/project/perun2601449/dp_llm_cfd StdErr=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc33-account-next34_143353.err StdIn=/dev/null StdOut=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc33-account-next34_143353.out TresPerTask=cpu=1\n",
+  "unix": 1793806352.407394,
+  "scientific_freeze_unchanged": true,
+  "both_operational_manifests_unchanged": true,
+  "main_test_opened": false,
+  "main_experiment_started": true,
+  "full_experiment_finished": false
+}

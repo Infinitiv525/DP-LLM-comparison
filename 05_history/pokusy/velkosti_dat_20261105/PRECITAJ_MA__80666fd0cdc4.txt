@@ -1,0 +1,42 @@
+VEĽKOSŤ PODSTATNÝCH DÁT NA PERUNE — 05.11.2026
+
+Merané iba cez metadata súborov, bez čítania váh alebo veľkých polí.
+Bežiace tréningy neboli prerušené. Veľké súbory sa lokálne nesťahovali.
+Použité jednotky: MB = 1 000 000 bajtov, GB = 1 000 000 000 bajtov.
+Ide o okamžitý stav, počas výpočtu výsledky pribúdajú.
+
+Samotná natrénovaná PINN (best.pt): 547 219 bajtov, približne 0,55 MB.
+Obsahuje naučené váhy, konfiguráciu, normalizáciu a metadáta modelu.
+Súbor pre pokračovanie učenia (training_state.pt): približne 1,65 MB.
+Na opätovné použitie modelu treba aj jeho zdrojový kód a vhodné prostredie.
+
+Jeden dokončený hlavný tréning vrátane priebežných čísel, všetkých troch
+checkpointov a záverečných meraní: 17 979 559 bajtov, približne 18 MB.
+Príklad: main/executions/qwen3_8b_r00_c00/143342/training.
+
+Celý aktuálny hlavný experiment V33 vrátane integračnej skúšky, návrhov,
+histórií, číselných vyhodnotení, váh a prevádzkových záznamov:
+969 636 214 bajtov, približne 970 MB (0,97 GB).
+Vývojový model V26 aj s jeho tréningovými záznamami: 19 366 236 bajtov.
+Audit kvality V31 vrátane piatich uložených ukážok polí, grafiky a archívov:
+32 834 565 bajtov.
+Spolu tieto tri aktuálne výsledkové priečinky: približne 1,02 GB.
+Nejde o súčet všetkých starších 2D a 3D pokusov v projekte.
+
+Vstupné dáta FlowBench V25 spolu s pripravenou cache: 24 781 758 100 bajtov,
+približne 24,8 GB. Z toho raw 21,97 GB a cache 2,81 GB; sú to podmnožiny,
+nesmú sa druhýkrát pripočítať k celku.
+Priečinok public_models so štyrmi lokálnymi LLM: 61 324 581 364 bajtov,
+približne 61,3 GB. Toto sú modely navrhujúce konfiguráciu, nie naša PINN.
+
+Jedno celé predpovedané pole u, v, p na 512 x 512 vo float32 by malo
+3 145 728 bajtov (3 MiB, približne 3,15 MB) bez obalu a kompresie.
+Pri väčšine tréningov sa uchovávajú váhy a podrobné číselné metriky,
+nie všetky validačné polia z každého priebežného hodnotenia. Polia možno
+znova vypočítať z uložených váh a príslušných vstupov. Audit V31 má navyše
+päť komprimovaných príkladov s predikciou a referenciou.
+
+Presné záznamy: storage_sizes_20261105_1793839619.json v tomto priečinku.
+Originál: results/ldc_main_20261104_v33/exports/ na Perune.
+Súčet logických veľkostí pravidelných súborov, symlinky neduplikované.
+Skutočne pridelené bloky sú tiež uvedené v JSON a môžu byť mierne väčšie.

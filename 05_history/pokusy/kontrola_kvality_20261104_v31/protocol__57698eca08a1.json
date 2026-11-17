@@ -1,0 +1,58 @@
+{
+  "phase": "read_only_baseline_quality_audit",
+  "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_shared_pinn_20261104_v26/training/143115/best.pt",
+  "checkpoint_sha256": "1382f540a0fbaa72060ba40165161ffd059607e7aba607740b3f1fd539cfc421",
+  "selected_update": 62400,
+  "prepared_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_pinn_prepare_20261104_v25/prepared.json",
+  "split_path": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_pinn_prepare_20261104_v25/split.json",
+  "fixed_model": "V26 epoch390 selected by frozen minimum VAL MSE; no optimizer or retraining",
+  "all_validation_cases": 160,
+  "sealed_test_cases": 200,
+  "main_test_opened": false,
+  "timing": {
+    "warmup": 30,
+    "repeats": 200,
+    "p99_limit_ms": 5.0,
+    "precision": "original FP32",
+    "inputs_gpu": true,
+    "includes": "Native geometry pooling, encoder, MLP, interpolation, curl, gauge and mask",
+    "excludes": "Host transfer, rendering and input-independent coordinate stencil setup"
+  },
+  "boundary": {
+    "outer_points_per_side": 256,
+    "corner_exclusion": 0.001953125,
+    "obstacle": "All native-mask half-cell faces, same approximation as training",
+    "target": "Top wall (1,0), other outer walls and obstacle (0,0); unit lid velocity",
+    "reference_note": "First/last pixel centres are not the mathematical wall. Compare prediction/reference there separately."
+  },
+  "differential": {
+    "points_per_case": 512,
+    "seed": 310001,
+    "interior_margin_cells": 3,
+    "coordinates": "Same cell centres for continuous autograd and float64 FD",
+    "stencil_relative_tolerance": 0.001,
+    "stencil_max_absolute_tolerance": 0.001,
+    "description": "Sampled-prediction must match native-grid stencil; AD vs FD curl/NS are separately reported, no invented accuracy threshold"
+  },
+  "examples": {
+    "341": [
+      "first_validation_case"
+    ],
+    "283": [
+      "lowest_reynolds",
+      "worst_pressure_error"
+    ],
+    "424": [
+      "highest_reynolds"
+    ],
+    "396": [
+      "median_velocity_error"
+    ],
+    "956": [
+      "worst_velocity_error"
+    ]
+  },
+  "reporting": "All cases, raw repeated timings, fresh errors/physics, exact-wall and pixel-centre diagnostics, AD/FD consistency and representative/worst images. No new accuracy acceptance threshold.",
+  "large_files": "Only on Perun. Local export limited to JSON/TXT/LOG/PNG ZIP.",
+  "main_experiment_started": false
+}

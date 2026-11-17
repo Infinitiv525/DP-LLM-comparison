@@ -1,0 +1,23 @@
+KAPACITA NAD 16 GPU — overenie 04.11.2026
+
+Aktuálne naozaj beží 16 tréningov. Účet má podľa živého assoc_mgr
+limit 32 GPU a 1024 CPU, aktuálne 16 GPU a 64 CPU. Voľné GPU uzly
+sú dostupné, ale pridelenie plánovačom sa tým nezaručuje.
+
+Súčasné rezervácie: GPU143342 jeden uzol, GPU143656 jeden uzol,
+čakajúce účtovacie143655 a143657 po jednom uzle. Spolu4rezervovanéuzly.
+Skutočný submit limit centra už v predošlej skúške odmietol piaty uzol.
+Preto teraz nemožno pridať tretí GPU batch tým istým spôsobom.
+
+Ďalší praktický stupeň je24GPU:3GPUuzly a1účtovací/riadiaciCPUuzol.
+Vyžaduje prevádzkovú úpravu: spoločné zbieranie účtovania aktuálnych
+GPU dávok a pri nadväzovaní objednať účtovaciu CPU úlohu až po štarte
+novej3uzlovejGPUdávky, keď sa uvoľní predchádzajúci CPU uzol. Inak by
+aj pri odovzdaní dávky vzniklo5rezervovanýchuzlov. Nestačí zmeniť číslo
+GPU v existujúcom skripte; pôvodné tréningy by sa nemenili a pokusy by
+sa znovu neprideľovali. Počet395/seedy/400epoch a TEST bez zmeny.
+
+32GPU by obsadilo všetky4GPUuzly a nezostal by samostatný rezervovaný
+CPU uzol pre naše automatické účtovanie/nadväzovanie. Takýto súbeh by
+potreboval ďalšiu zmenu riadenia alebo zvýšenie uzlového limitu centra.
+Toto overenie nič ďalšie nespustilo a nemenilo bežiacu reťazV35.

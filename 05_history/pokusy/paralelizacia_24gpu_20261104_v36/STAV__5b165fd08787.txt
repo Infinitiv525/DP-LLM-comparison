@@ -1,0 +1,75 @@
+SÚBEH JE ZVÝŠENÝ NA 24 GPU — 04.11.2026
+
+Skutočný overený stav
+143342: pôvodných 8 H200 na gpu26, tréningy pokračujú bez prerušenia.
+143656: ďalších 8 H200 na gpu10, tréningy pokračujú bez prerušenia.
+143684: nových 8 H200 na gpu17, všetky už absolvovali prvých 10 epoch.
+Spolu 24 rôznych GPU a 24 rôznych logických tréningových položiek.
+Pri overení 24 RUNNING / 371 PENDING. V každom skutočnom configu
+400 epoch a správny seed, uložená tréningová história a H200 prostredie.
+Ide o okamžitý záznam. Konečné výsledky experimentu sa ešte nevyhlasujú.
+
+Vedecké pravidlá zostávajú rovnaké
+Najviac 395 tréningových pokusov. Rovnaká spoločná PINN architektúra,
+seedy, päť povolených konfiguračných parametrov, 640 TRAIN / 160 VAL,
+400 epoch na platný tréning a rovnaké metriky. Rozbehnuté modely sa
+nereštartovali. Logický pokus sa neprideľuje dvakrát. Spoločné základné
+nastavenia sa zámerne opakujú podľa pôvodného párovaného plánu.
+Záverečných 200 TEST prípadov zostáva uzavretých. Veľké dáta a váhy
+ostávajú iba na Perune. Pôvodných 130 zmrazených vedeckých súborov
+nebolo zmenených; prevádzkový dodatok odkazuje na ich pôvodný SHA.
+
+Ako sme sa zmestili do štyroch uzlov
+Teraz sú rezervované tri GPU uzly a jedna spoločná CPU úloha 143685.
+Dve pôvodné čakajúce účtovacie úlohy 143655 a 143657 sa po overení
+vlastníctva, stavu a správnych závislostí nahradili spoločným zberačom.
+Zrušené boli iba tieto čakajúce CPU úlohy. GPU dávky pokračovali.
+Nová GPU dávka aj spoločný zberač boli registrované pred uvoľnením.
+
+Zberač CPU sa spustí po skončení ktorejkoľvek z troch dávok. Hneď uloží
+jej skutočnú GPU a pridruženú CPU spotrebu. Potom v pridelenej CPU úlohe
+čaká na zvyšné dávky a každých 30 sekúnd overí ich stav. To je potrebné,
+pretože živá história Perunu má retenciu 7200 sekúnd. Počíta sa aj
+skutočne pridelený čas tohto CPU riadenia, nielen samotné tréningy.
+CPU úloha má strop 48 hodín; beží iba tak dlho, ako treba na zber.
+
+Po dobehnutí skupiny sa pripravia ďalšie veľké dávky s 24 GPU na
+3 uzloch. Nová GPU dávka čaká na úspešné skončenie predchádzajúceho CPU
+zberača. Až keď naozaj začne, najprv si objedná svojho CPU zberača,
+a až potom spustí kontroly a neurónové tréningy. Tak sa aj pri odovzdaní
+medzi dávkami neprekročia 4 rezervované uzly. V aktuálnej tretej dávke
+už táto úvodná kontrola potvrdila účtovanie pred tréningom.
+Pri krátkom úplnom zvyšku môžu ďalšie dávky použiť 16 alebo 8 GPU.
+
+Prvé tri dávky začali v rôznom čase. Skoršia sa môže skončiť prvá a jej
+GPU sa uvoľnia, kým dobehnú ostatné. Uvoľnené GPU v tejto medzere
+nerezervujeme. Nasledujúce veľké dávky už bežia spoločne cez tri uzly;
+na portáli sa môžu zobrazovať ako JEDNA úloha, hoci trénujú 24 modelov.
+
+Spoľahlivosť a účtovanie
+Prešlo 12 nových prevádzkových kontrol: limit štyroch uzlov, strop
+24 aktívnych GPU, ochrana pred stale tréningmi, pripojenie účtovania
+pred učením, zachytenie každého konca dávky, stop pri chybe, neotvorenie
+TEST a čítanie starých už uložených záznamov bez dotazu na zmazané ID.
+Pridelenie nových GPU medzi uzlami používa ten istý už overený NFS
+poradovník. V tretej dávke prešlo aj 14 pôvodných produkčných testov.
+Každý worker zostáva na jednej H200 a štyroch CPU ako predtým.
+
+Pridelená GPU a pridružená tréningová CPU spotreba sa zachytí po každom
+skončení dávky. Čas riadiaceho CPU sa doplní pri štarte nasledujúcej GPU
+dávky. Ak by jeho starý záznam po dlhom čakaní vo fronte už nebol dostupný,
+uloží sa výslovné UNKNOWN, nikdy vymyslená nula. Posledný CPU zberač má
+samostatnú následnú účtovaciu úlohu. Pri technickej chybe sa zaznamená
+hold a ďalšie dávky sa nepustia bez kontroly; výsledky sa potichu
+neopakujú ani neopravujú.
+
+Podklady
+zaznamy/launch_verification_24.json — skutočných 24 tréningov a GPU.
+zaznamy/operational_manifest_v36.json — odtlačky novej prevádzky.
+zaznamy/parallelism_amendment_v36.json — dodatok k súbehu.
+zaznamy/migration_intent.json a migration_completed.json — výmena čakajúcich CPU úloh.
+zaznamy/submission_143684.json a submission_collector_143685.json — registrácie.
+
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v33
+Prevádzkový stav zberača bude v operational_pool_v36/collector_status/.
+Pôvodný vedecký protokol je pri velky_test_ustaleneho_pinn_20261104_v33.

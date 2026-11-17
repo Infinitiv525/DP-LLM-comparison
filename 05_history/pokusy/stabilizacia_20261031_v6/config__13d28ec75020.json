@@ -1,0 +1,33 @@
+{
+  "seed": 20261031,
+  "state_conditioning": true,
+  "width": 96,
+  "depth": 4,
+  "latent": 32,
+  "frequencies": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0
+  ],
+  "one_step_updates": 12000,
+  "rollout_updates": 3000,
+  "rollout_length": 8,
+  "lr": 0.0003,
+  "rollout_lr": 0.0001,
+  "batch": 2048,
+  "collocation": 256,
+  "validate_every": 1000,
+  "warmup": 1000,
+  "ramp": 3000,
+  "pde_weight": 0.01,
+  "bc_weight": 0.01,
+  "data_loss_scale": 0.05,
+  "divergence_limit": 1000.0,
+  "divergence_score_penalty": 1000000.0,
+  "name": "B_first_order_soft",
+  "state_update": "first_order",
+  "own_momentum_weight": 0.0,
+  "own_divergence_weight": 0.0
+}

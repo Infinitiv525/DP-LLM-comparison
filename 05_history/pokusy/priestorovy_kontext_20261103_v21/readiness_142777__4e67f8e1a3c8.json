@@ -1,0 +1,61 @@
+{
+  "status": "SPATIAL_CONTEXT_READINESS_EVALUATED",
+  "results": [
+    {
+      "name": "zero_spatial_control",
+      "cases": [
+        {
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "query_gpu_ms": {
+            "p50": 2.989504098892212,
+            "p95": 2.9979024648666384,
+            "p99": 3.0002869367599487
+          }
+        },
+        {
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "query_gpu_ms": {
+            "p50": 2.9873119592666626,
+            "p95": 2.9962032318115233,
+            "p99": 2.9997219038009644
+          }
+        }
+      ],
+      "numerical": null,
+      "p99_pass": true
+    },
+    {
+      "name": "learned_spatial_context",
+      "cases": [
+        {
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "query_gpu_ms": {
+            "p50": 3.048959970474243,
+            "p95": 3.0577744126319883,
+            "p99": 3.06155259847641
+          }
+        },
+        {
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "query_gpu_ms": {
+            "p50": 3.0490241050720215,
+            "p95": 3.057611274719238,
+            "p99": 3.061288318634033
+          }
+        }
+      ],
+      "numerical": {
+        "nonzero_spatial_weight": 0.01,
+        "max_abs_sparse_grid_error": 2.5317072868347168e-05,
+        "tolerance": 0.0005
+      },
+      "p99_pass": true
+    }
+  ],
+  "readiness_pass": true,
+  "initial_fields_gpu": true,
+  "includes_cnn_and_spatial_feature_computation": true,
+  "cached": "Only input-independent regular-grid interpolation matrices; every query recomputes CNN and feature-map contractions",
+  "excludes": "CPUtransfer/rendering,30warmup,one-time constantstencilsetup",
+  "source_checkpoint_sha256": "223cab8d4273c49a2d9161ede3fec25ff6fd618f797b3dfbcebfb58400ef1845"
+}

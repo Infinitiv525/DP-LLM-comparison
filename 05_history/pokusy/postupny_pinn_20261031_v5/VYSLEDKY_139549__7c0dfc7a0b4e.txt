@@ -1,0 +1,92 @@
+Výsledok postupného PINN V5a — 139549, kontrola 31.10.2026
+
+Beh úspešne skončil: COMPLETED, exit0:0. Prebehlo 40 000 aktualizácií
+jednokrokového tréningu a 10 000 aktualizácií štvor-krokového tréningu.
+V prvej fáze boli navštívené všetky dostupné prechody všetkých 69
+tréningových scenárov. Vybral sa checkpoint z druhej fázy, aktualizácie
+2 000; ďalšie učenie validačný priebeh zhoršovalo.
+
+VALIDÁCIA: rovnakých 6 scenárov s troma nevidenými geometriami.
+Známe vstupy boli iba snímky2,3; všetkých238budúcich stavov4..241 sa
+počítalo z vlastných predpovedí. Žiadny budúci referenčný stav nebol
+vstupom. Hodnotenie celá fluidná mriežka1024x256,dt0.05solverunits.
+Žiadny prípad sa nevyradil. Hlavná testovacia sada zostala zatvorená.
+
+Priemer relatívnych L2 chýb po snímkach a potom cez 6 scenárov:
+Horizont                 PINN rýchlosť / tlak      Nezmenený stav
+Všetkých238krokov          107,59 % /235,17 %        60,32 % /81,15 %
+Kroky1..10                   6,26 % /  6,98 %        15,64 % /23,90 %
+Kroky11..40                 31,69 % / 66,26 %        56,72 % /77,37 %
+Kroky41..120                72,33 % /151,25 %        66,04 % /88,02 %
+Kroky121..238              159,38 % /354,35 %        61,14 % /82,30 %
+
+Chyba nad100% je možná: norma rozdielu môže byť väčšia než norma
+referenčného poľa. Nejde o percento nesprávnych buniek.
+Tlak sa porovnáva po odstránení ľubovoľnej konštanty po snímkach.
+
+Celý priebeh jednotlivých scenárov — rýchlosť / tlak:
+harmonics/87/Re_292       161,20 % /335,90 %
+harmonics/87/Re_838       243,18 % /387,92 %
+nurbs/22/Re_164            32,02 % /105,20 %
+nurbs/22/Re_977           124,86 % /354,88 %
+skelenton/36/Re_209        37,68 % /107,57 %
+skelenton/36/Re_867        46,62 % /119,58 %
+
+Nová postupná verzia je za celý priebeh horšia než persistence baseline.
+Najlepší doterajší model celého horizontu ostáva V4 s priamymi časovými
+dotazmi:40,11%U/56,84%p. Ani V4 nesplnil pracovné ciele presnosti.
+Jeho checkpoint aj pôvodné výsledky zostávajú zachované.
+Prvých10krokov V5 má dobrý priemer, ale nie každý scenár spĺňa10%U;
+tento sekundárny horizont nenahrádza hlavné hodnotenie238krokov.
+
+Všetky238krokov boli numericky konečné a neprekročili ochranný limit1000.
+To NIE JE dôkaz fyzikálnej stability. Presnosť a fyzikálne diagnostiky
+ukazujú veľké odchýlky. Model nie je pripravený na hlavné LLM porovnanie.
+
+RÝCHLOSŤ NA H200:
+Najhoršie p99 v troch meraniach po200celýchGPUkrokoch:1,337ms.
+Najhoršie p99 skutočných krokov šiestich trajektórií:1,850ms.
+Zahrnuté: nové stavové príznaky,encoder,predikcia,tlakový gauge,solidmaska.
+Vstupy už naGPU; bez vykresľovania a prvotnej prípravy vstupov.
+Krok s kópiou výstupu doCPU mal osobitne p991,569ms/30vzoriek.
+Nejde o rovnaké vzorky ako pri trajektóriách, preto tieto čísla nesčítame.
+Hranica5ms bola splnená; prekážkou je presnosť a stabilita.
+
+ZDROJE:
+Skutočný Slurm runtime2919s,1GPU/4CPU=2919GPU*s(~0,811GPU*h),
+11676core*s. Tréningové fázy s priebežným hodnotením2591,68s.
+Peak torch GPUalokácia54349680128bajtov. Tréningové trajektórie
+boli dočasne vGPU,nie stiahnuté doPC. Pôvodné referencie nezmenené.
+Malé pôvodné JSON,history,coverage a scheduler sú vo vysledky_139549/.
+
+DODATOČNÁ DIAGNOSTIKA BEZ UČENIA — 139757:
+6tréningových prípadov zvolených vopred podľa min/maxRe každejrodiny,
+plus rovnakých6val. Pri samostatnom kroku z pravdivých TRÉNINGOVÝCH
+stavov je priemerná chyba za jednotlivý prípad0,112–0,537%U a
+0,178–0,783%p. Tieto tréningové chyby NIE SÚ nezávislá presnosť.
+Pri reťazení vlastných predpovedí je zlý aj priebeh známych prípadov.
+Problém sa preto netýka iba prenosu na nevidené geometrie.
+
+V posledných118krokoch harmonics/87/Re_838 má predikcia v priemere
+16,13-násobnú kinetickú energiu referencie a6,13-násobné tlakovéRMS.
+Vzorkovaná vnútorná FDdivergencia RMS68,72 oproti referencii0,0225.
+Ide o diskretizovanú diagnostiku vo vnútri fluidu,nie presné analytické
+derivácie. Ukazuje výrazné porušovanie nestlačiteľnosti pri reťazení.
+
+Kontrola bez neurónovej korekcie — samotná dvojstavová lineárna
+extrapolácia — je dlhodobo ešte horšia. PINN jej chybu čiastočne tlmí,
+ale nedosahuje spoľahlivý celý priebeh. Riadená skalárna rekurencia
+tiež potvrdila, že konštantná malá chyba v aktualizácii2x(n)-x(n-1)
+môže po238krokoch narásť faktorom28441. Nie je to dôkaz jedinej príčiny
+všetkých chýb reálneho modelu.
+
+KONTROLA STARÉHO V4 BEZ DOTRÉNOVANIA — 139761:
+Pri použití jeho nezmenených váh opakovane na lokálny krok0.05 namiesto
+priamych vzdialených časov vyšlo75,18%U/119,14%p. Ani tento jednoduchý
+preklad inference problém nevyriešil. V4 nebol trénovaný na meniacich
+sa prefixových oknách; výsledok je oddelená prieskumná kontrola.
+
+Diagnostika139757:204GPU*s/816core*s; kontrola139761:59GPU*s/236core*s.
+Obe COMPLETED exit0:0,žiadne váhy sa nezmenili. Malé podklady a hashe
+sú v diagnostika_stability_20261031/.
+Ďalší postup: DALSI_POSTUP.txt. Riadne2DLLM porovnanie ešte nezačalo.

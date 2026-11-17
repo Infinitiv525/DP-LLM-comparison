@@ -1,0 +1,33 @@
+V21 – PRIESTOROVY KONTEXT: UZAVRETE VYSLEDKY, 03.11.2026
+
+142777 COMPLETED0:0,142778 zachytil uctovanie. Zmrazene zdroje overene.
+Obe vetvy rovnaky zdroj/initialtensor/sampling,30k pridanych aktualizacii,
+69TRAIN/6VAL,434alebo435aktualizacii naTRAINpripad, vsetky238ciele navstivene.
+
+Pri rovnakom koncovom rozpocte30k, priemer po238snimkach a6VALpripadoch:
+                           nulovypriestorovykontext   ucenypriestorovykontext
+RelativnaL2rychlost                39.315%                    38.119%
+RelativnaL2tlak                    55.246%                    55.252%
+FDmomentumloss                      8.12420                    6.13703
+Maxp99fullfieldquery                 3.607ms                    3.760ms
+Presnost cez obe brany               0/6                       0/6
+Kontrola hmoty                       6/6                       6/6
+FDmomentum sa znizil o24.460%; nejde o relativne zlepsenie presnosti poli.
+
+Vybranecheckpointy podlaVAL: control0update,spatial20000update.
+Na nichrychlost39.161%vs38.151%,tlak54.981%vs55.165%,
+FDmomentum8.66200vs6.29183,p99max3.612vs3.765ms. Tieto dve vybrane
+checkpointy maju rozne pridane rozpocty, preto ich nemiesat s30kporovnanim.
+
+Zaver: mierne zlepsenie rychlosti, tlak nezlepseny, fyzikalnaFDmetrika
+lepsia. Model stale nema pouzitelnu presnost na novychVALpripadoch.
+Ziadny dokaz statistickej vyznamnosti, nezavislyTESTneotvoreny,LLMreadyFalse.
+
+Skutocnaalokacia9497GPUsekund,37988pridelenychCPUsekund.
+347malychsuborov varchive3713135B, lokalySHAovereny:
+58df2d0ac37927c5cbef57c13b0c88d5a53bb0c0f6572257a9cf7cc1e560d673
+Rozbalene: vysledky_142777/. BodoveNPZ36suborov39570332B a vahy ibaPerun.
+Vstupne/vystupneSHA,perframe,history,fyzikaa zdroje archivovane.
+
+Dalsikrokpodlapouzivatela: jedna skuska dlhsieho vstupu spolocnejNN.
+Ak spolocnaNNstale nesplni brany, povoleny prechod simulacia<->model.

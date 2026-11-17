@@ -1,0 +1,387 @@
+{
+  "status": "SMOKE_COMPLETE",
+  "results": [
+    {
+      "status": "DIRECT_CURL_TRAIN_FIT_EVALUATED",
+      "config": {
+        "name": "direct_primitive",
+        "representation": "primitive",
+        "train_count": 3,
+        "state_conditioning": true,
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261102,
+        "updates": 3,
+        "lr": 0.0003,
+        "warmup": 0,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 3
+      },
+      "accuracy": [
+        {
+          "score": 0.7719101834602341,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5696214681379027,
+            "pressure_relative_l2": 0.9741988987825655
+          },
+          "interior_div_rms": 0.014130078768748947,
+          "direct_query_gpu_ms": {
+            "p50": 3.531167984008789,
+            "p95": 3.5513455629348756,
+            "p99": 3.563011133670807
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 1.7606284508184225,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.4213930970358029,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.36531013157961945,
+            "pressure_relative_l2": 0.4774760624919864
+          },
+          "interior_div_rms": 0.005684813046280076,
+          "direct_query_gpu_ms": {
+            "p50": 3.526416063308716,
+            "p95": 3.542622470855713,
+            "p99": 3.5472963142395018
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 0.9221726645942495,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.4987130970024092,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5088090827446666,
+            "pressure_relative_l2": 0.4886171112601518
+          },
+          "interior_div_rms": 0.00948313413532216,
+          "direct_query_gpu_ms": {
+            "p50": 3.5268959999084473,
+            "p95": 3.5427952289581297,
+            "p99": 3.5563724994659425
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 1.582189010471857,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.7719101834602341,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5696214681379027,
+            "pressure_relative_l2": 0.9741988987825655
+          },
+          "interior_div_rms": 0.014130078768748947,
+          "direct_query_gpu_ms": {
+            "p50": 3.5260159969329834,
+            "p95": 3.544019114971161,
+            "p99": 3.5686841773986817
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 1.7606284508184225,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.4213930970358029,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.36531013157961945,
+            "pressure_relative_l2": 0.4774760624919864
+          },
+          "interior_div_rms": 0.005684813046280076,
+          "direct_query_gpu_ms": {
+            "p50": 3.524832010269165,
+            "p95": 3.540463995933533,
+            "p99": 3.5474912762641906
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 0.9221726645942495,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.4987130970024092,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5088090827446666,
+            "pressure_relative_l2": 0.4886171112601518
+          },
+          "interior_div_rms": 0.00948313413532216,
+          "direct_query_gpu_ms": {
+            "p50": 3.5235519409179688,
+            "p95": 3.5363487005233765,
+            "p99": 3.5431135797500612
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 1.582189010471857,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ],
+      "selected_update": 3,
+      "all238_training_frames_visited": false,
+      "training_seconds": 107.3276409409882,
+      "peak_cuda_allocated_bytes": 2873892352,
+      "checkpoint_sha256": "7993e1593d8a438d7df1fc524b02486831819c8ee0c0d56f0f733a12524d87db",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 3,
+      "validation_scenarios": 0,
+      "train_selection_scenarios": 3,
+      "training_case_updates": [
+        1,
+        1,
+        1
+      ],
+      "working_gate": {
+        "accuracy_pass": false,
+        "mass_pass": true,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+        "Same trunk/CNN but final primitive3 versus streamfunction-pressure2 head differs",
+        "Curl increment preserves initial discrete div only on eroded fluid interior after masking",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Direct time query, continuous-autograd PDE versus matching FD-data/grid output"
+      ]
+    },
+    {
+      "status": "DIRECT_CURL_TRAIN_FIT_EVALUATED",
+      "config": {
+        "name": "direct_curl",
+        "representation": "curl",
+        "train_count": 3,
+        "state_conditioning": true,
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261102,
+        "updates": 3,
+        "lr": 0.0003,
+        "warmup": 0,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 3
+      },
+      "accuracy": [
+        {
+          "score": 0.7720231088294578,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5698562651868199,
+            "pressure_relative_l2": 0.9741899524720956
+          },
+          "interior_div_rms": 0.014042903567437365,
+          "direct_query_gpu_ms": {
+            "p50": 3.617392063140869,
+            "p95": 3.632230305671692,
+            "p99": 3.6489584064483642
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 1.7645129606503398,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.42146075675082806,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.36546339482881574,
+            "pressure_relative_l2": 0.4774581186728403
+          },
+          "interior_div_rms": 0.00544016482112851,
+          "direct_query_gpu_ms": {
+            "p50": 3.6166239976882935,
+            "p95": 3.633372759819031,
+            "p99": 3.6524016165733335
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 0.9245291522571019,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.4988119781597922,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5090158069978151,
+            "pressure_relative_l2": 0.4886081493217693
+          },
+          "interior_div_rms": 0.009336897117250106,
+          "direct_query_gpu_ms": {
+            "p50": 3.6096800565719604,
+            "p95": 3.626728045940399,
+            "p99": 3.6549677658081055
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 1.585975792227673,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.7720231088294578,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5698562651868199,
+            "pressure_relative_l2": 0.9741899524720956
+          },
+          "interior_div_rms": 0.014042903567437365,
+          "direct_query_gpu_ms": {
+            "p50": 3.6145119667053223,
+            "p95": 3.628862464427948,
+            "p99": 3.6426924061775208
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 1.7645129606503398,
+          "mean_reference_fd_momentum_loss": 0.00640134365462205
+        },
+        {
+          "score": 0.42146075675082806,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.36546339482881574,
+            "pressure_relative_l2": 0.4774581186728403
+          },
+          "interior_div_rms": 0.00544016482112851,
+          "direct_query_gpu_ms": {
+            "p50": 3.6189279556274414,
+            "p95": 3.6365840315818785,
+            "p99": 3.686199934482574
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 0.9245291522571019,
+          "mean_reference_fd_momentum_loss": 0.002707435834581549
+        },
+        {
+          "score": 0.4988119781597922,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5090158069978151,
+            "pressure_relative_l2": 0.4886081493217693
+          },
+          "interior_div_rms": 0.009336897117250106,
+          "direct_query_gpu_ms": {
+            "p50": 3.6137280464172363,
+            "p95": 3.6281984090805053,
+            "p99": 3.6411416912078858
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": true,
+          "mean_fd_momentum_loss": 1.585975792227673,
+          "mean_reference_fd_momentum_loss": 0.0036672904232454276
+        }
+      ],
+      "selected_update": 3,
+      "all238_training_frames_visited": false,
+      "training_seconds": 105.89075852400856,
+      "peak_cuda_allocated_bytes": 2873887232,
+      "checkpoint_sha256": "e6ef3b3fb90c97a05e0002e8b18a656a83e552d655a9c5150e3c5600d608a4bc",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 3,
+      "validation_scenarios": 0,
+      "train_selection_scenarios": 3,
+      "training_case_updates": [
+        1,
+        1,
+        1
+      ],
+      "working_gate": {
+        "accuracy_pass": false,
+        "mass_pass": true,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+        "Same trunk/CNN but final primitive3 versus streamfunction-pressure2 head differs",
+        "Curl increment preserves initial discrete div only on eroded fluid interior after masking",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Direct time query, continuous-autograd PDE versus matching FD-data/grid output"
+      ]
+    }
+  ],
+  "causal_stepper": false,
+  "independent_validation": false
+}

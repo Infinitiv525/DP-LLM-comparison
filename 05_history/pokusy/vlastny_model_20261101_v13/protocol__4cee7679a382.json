@@ -1,0 +1,113 @@
+{
+  "status": "OWN_CONDITIONAL_PINN_FIT_PROTOCOL_FROZEN",
+  "candidates": [
+    {
+      "name": "baseline_1train",
+      "model_kind": "baseline",
+      "train_count": 1,
+      "state_conditioning": true,
+      "width": 192,
+      "depth": 4,
+      "latent": 32,
+      "frequencies": [
+        1.0,
+        2.0,
+        4.0,
+        8.0,
+        16.0
+      ],
+      "seed": 20261101,
+      "updates": 50000,
+      "lr": 0.0003,
+      "warmup": 1000,
+      "batch": 2048,
+      "collocation": 256,
+      "assess_every": 5000
+    },
+    {
+      "name": "own_1train",
+      "model_kind": "own",
+      "train_count": 1,
+      "state_conditioning": true,
+      "width": 128,
+      "depth": 3,
+      "latent": 64,
+      "frequencies": [
+        1.0,
+        2.0,
+        4.0,
+        8.0,
+        16.0
+      ],
+      "seed": 20261101,
+      "updates": 50000,
+      "lr": 0.0003,
+      "warmup": 1000,
+      "batch": 2048,
+      "collocation": 256,
+      "assess_every": 5000
+    },
+    {
+      "name": "baseline_3train",
+      "model_kind": "baseline",
+      "train_count": 3,
+      "state_conditioning": true,
+      "width": 192,
+      "depth": 4,
+      "latent": 32,
+      "frequencies": [
+        1.0,
+        2.0,
+        4.0,
+        8.0,
+        16.0
+      ],
+      "seed": 20261101,
+      "updates": 150000,
+      "lr": 0.0003,
+      "warmup": 1000,
+      "batch": 2048,
+      "collocation": 256,
+      "assess_every": 15000
+    },
+    {
+      "name": "own_3train",
+      "model_kind": "own",
+      "train_count": 3,
+      "state_conditioning": true,
+      "width": 128,
+      "depth": 3,
+      "latent": 64,
+      "frequencies": [
+        1.0,
+        2.0,
+        4.0,
+        8.0,
+        16.0
+      ],
+      "seed": 20261101,
+      "updates": 150000,
+      "lr": 0.0003,
+      "warmup": 1000,
+      "batch": 2048,
+      "collocation": 256,
+      "assess_every": 15000
+    }
+  ],
+  "user_scope": "Own PINN solution, no mixing additional template implementations. JAXPI reviewed as methodological reference only; no external template code imported or executed.",
+  "question": "Does our repeated case-conditioning/residual architecture improve one-case and shared3TRAINfit?",
+  "architecture": "Own PyTorch implementation: inherited known-prefixCNN with latent64; localprefix6+coordinateFourier entry128;3residualblocks,each2linear+Tanh and boundedcontext scale/shift. Casecontext+Re injected in everyblock. Primitive3outputs, original hardIC formula.",
+  "comparison": "Architecture bundle vs originalStatePINN192x4/latent32, same seed/data/order/updates-per-case/loss/Adam/schedule. Not parameter-count matched or isolated single-change ablation, not a novel-architecture priority claim.",
+  "sampling": "1case harmonicspilot then3predeclaredTRAINcases,oneperfamily. Balanced casecycles and238framecycles.50kupdates/case for each candidate,400ktotal updates over4cells.",
+  "data": "No validation/test records loaded. Same initial2,3 always inputs, future4..241TRAINlabels losses ONLY. Directtimequeries,notcausalstep. Original69TRAINnormalizer retained for both architectures.",
+  "objectives": "Unchanged V12 data/trainStd,NS.01,BC.01,warm1000/ramp1000,gradclip1,Adam3e-4cosine1.5e-5. No adaptiveweighting/multipletemplatebundle.",
+  "selection": "Full238sameTRAINfit scores every5000updates-per-case,checkpoint meanEu/Ep. Roles explicitly TRAIN,validation_scenarios0; not generalization evidence. Keep best/last/history/perframe/actualresources.",
+  "prospective_gates": "Every fittedcaseEu<=10%,Ep<=20%,oldmassgrowthscreen,directqueryp99<=5ms. Report separately; do not launch69/6 automatically. Need evaluate sharedTRAINfit first.",
+  "smoke": "Own model3TRAINcases,3updatesactivePDE,full238fitchecks;hardICassert. Beforehand hardIC/cache consistency,finitephysicalgradients toencoder/eachconditioningblock,context affects future but notinitial.",
+  "main_test_opened": false,
+  "new_CFD": false,
+  "new_downloads": false,
+  "validation_scenarios": 0,
+  "causal_stepper": false,
+  "llm_ready": false
+}

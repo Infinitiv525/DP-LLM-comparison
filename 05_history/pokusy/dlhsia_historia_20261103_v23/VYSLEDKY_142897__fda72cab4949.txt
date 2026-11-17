@@ -1,0 +1,45 @@
+V23 — VÝSLEDOK ROZŠÍRENEJ HISTÓRIE, 04.11.2026
+
+Úloha 142897 skončila COMPLETED, exit 0:0. Účtovanie zachytila 142898.
+Overené zmrazené zdroje, SHA váh, zhodný štart a celé vzorkovanie.
+Každá vetva dostala 60 000 aktualizácií na 69 TRAIN prípadoch, teda
+869 alebo 870 na prípad. Všetkých 220 cieľových časov sa navštívilo.
+Na každom zo 6 VAL prípadov sa overilo poradie snímok 22 až 241.
+
+Vybrané checkpointy: v oboch vetvách update 40 000.
+                           2 vstupné snímky    20 vstupných snímok
+Relatívna L2 chyba rýchlosti     35,8883 %              35,3353 %
+Relatívna L2 chyba tlaku         53,9380 %              54,7874 %
+Najvyššie p99 celého poľa         3,92484 ms             3,92095 ms
+Presnosť cez naše brány           0 zo 6                 0 zo 6
+Kontrola hmoty                   6 zo 6                 6 zo 6
+Kontrola rýchlosti výpočtu        6 zo 6                 6 zo 6
+
+Pri rovnakom konci 60 000 aktualizácií:
+Rýchlosť                        35,9104 %              35,3536 %
+Tlak                            54,6063 %              55,1829 %
+Chyba rýchlosti klesla o 0,5568 percentuálneho bodu, tlak sa zhoršil
+o 0,5766 bodu. FD rezíduum hybnosti sa zlepšilo o približne 11,22 %;
+to nie je percentuálne zlepšenie presnosti rýchlosti alebo tlaku.
+
+ZÁVER A ROZHODNUTIE
+Dlhšia história nepriniesla potrebnú presnosť. Ide o malý vývojový
+rozdiel, nie dôkaz štatistickej významnosti. Brány U10 %/p20 % neprešli.
+Podľa už udeleného pokynu používateľa nasleduje jedna simulácia — jeden
+PINN. Nebude ďalšia automatická séria univerzálnych architektúr.
+
+Hranice výsledku
+Tieto dve vetvy majú rovnaký začiatok 21 a ciele 22..241; neporovnávať
+ich ako jedinú zmenu proti starému 238-snímkovému headline.
+VAL sa používala na výber checkpointu; hlavný TEST zostal uzavretý.
+Rýchlosť je priamy dotaz na celé pole 1024×256 so vstupmi na H200,
+vrátane spracovania histórie a siete, bez prenosu do PC a zobrazovania.
+Samostatný bodový audit AD/FD z V18 sa v tomto behu neopakoval.
+
+Archív a skutočné zdroje
+19 664 GPU sekúnd a 78 656 pridelených CPU sekúnd.
+305 malých súborov, archív 2 989 252 B; lokálny SHA256 overený:
+1a517af24c99c7657bb3bcb9272a769f654240b151a2cd973cf827f9798a991a
+review_142897_small.zip, rozbalené vysledky_142897/.
+Kontrolný skript: test/analysis/review_fpo_history_v23_20261104.py.
+Veľké polia a váhy zostávajú na Perune.

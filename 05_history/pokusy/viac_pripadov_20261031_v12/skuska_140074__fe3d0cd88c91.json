@@ -1,0 +1,98 @@
+{
+  "status": "SMOKE_COMPLETE",
+  "results": [
+    {
+      "status": "DIRECT_MULTICASE_DEVELOPMENT_EVALUATED",
+      "config": {
+        "name": "direct_multicase_width192",
+        "state_conditioning": true,
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261031,
+        "updates": 3,
+        "lr": 0.0003,
+        "warmup": 0,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 3
+      },
+      "accuracy": [
+        {
+          "score": 0.9210262171303307,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.749716522415817,
+            "pressure_relative_l2": 1.0923359118448446
+          },
+          "interior_div_rms": 0.09008944317103684,
+          "direct_query_gpu_ms": {
+            "p50": 3.196352005004883,
+            "p95": 3.2112095236778258,
+            "p99": 3.2165040135383607
+          },
+          "causal_step_latency": false,
+          "scope": "validation",
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": false
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.7649328138369043,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5652104887182097,
+            "pressure_relative_l2": 0.9646551389555987
+          },
+          "interior_div_rms": 0.09158109312391832,
+          "direct_query_gpu_ms": {
+            "p50": 3.197424054145813,
+            "p95": 3.208718407154083,
+            "p99": 3.2133772349357606
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        }
+      ],
+      "selected_update": 3,
+      "all238_training_frames_visited": false,
+      "training_seconds": 35.035810803994536,
+      "peak_cuda_allocated_bytes": 1365478400,
+      "checkpoint_sha256": "feffd111b0301f70ce2081f58d4b8f9a05da46c7d8280a2665a1abdbd8848a70",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 1,
+      "validation_scenarios": 1,
+      "training_case_updates": [
+        3
+      ],
+      "working_gate": {
+        "accuracy_pass": false,
+        "mass_pass": false,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Geometry-disjoint development validation used for checkpoint selection; not final independent test",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    }
+  ],
+  "causal_stepper": false,
+  "independent_validation": false
+}

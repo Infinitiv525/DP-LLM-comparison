@@ -1,0 +1,68 @@
+PRIAMY PINN NA69TRAIN/6VAL – V12,31.10.2026
+
+AKTUÁLNE PO KONTROLE01.11.2026
+140074COMPLETED0:0,600kaktualizácií dokončených,bestpri70000.
+Mean6VALU32.72%/p52.36%;accuracy/fyzikagate nesplnené,
+directqueryp99~3.26ms vyhovuje5ms. Ani3TRAINmonitory neprešli
+všetkýmiprahmi. Výsledky:VYSLEDKY_140074.txt. Novýtréningnespustený,
+frontaprázdna. Nižšie zachovaný pôvodnýplán a záznamštartu.
+
+GPU140074,účtovanie140075. Používateľ odsúhlasil prechod na viacprípadový
+tréning a overenie na oddelených geometriách. Výslednápresnosťneznáma.
+
+MODEL A ÚLOHA
+StatePINNv4,šírka192,4skrytévrstvy,latent32,FF1/2/4/8/16.
+Vstup:geometria,Re,rovnakéznámeprefixsnímky2,3 a požadovanýrelatívnyčas.
+Výstup:priame u,v,p po celé238budúcich snímok4..241,dt.05solverunit.
+Nie reťazenýčasovýstepper alebo potvrdenéSIsekundy. Rýchlosť sa označí
+ako priamydotaznapole, nie pôvodnýcausalstepbenchmark.
+
+DÁTA A OCHRANA VALIDÁCIE
+69TRAINscenárov/36geometrií,6VALscenárov/3geometrie, geometriezásadne
+disjunktné. Existujúca overená sada, beznovýchCFD alebo downloadov.
+Hlavnýtest zostáva zatvorený. Iba budúceTRAINpolia sa kopírujú naGPU
+preloss. NaGPU preVALvstup len geometria a známy prefix; budúceVAL
+referencie zostávajúCPUscoreru. ŽiadneVALlabels vloss/backprop.
+ŠesťVALscenárov používaných na vývoj/výbercheckpointu už nieje nový
+konečný nezávislý test; nezamieňať sfinálnym dôkazom hypotézy.
+
+TRÉNING
+Freshseed20261031, rovnakýtrain-onlynormalizer zo69scenárov,
+600000aktualizácií. Vyvážené miešané cyklyprípadov a samostatne miešané
+238framecykly prekaždýcase;2048fluidbodov/update. Zaznamenajú sa počty
+aktualizácií každéhocase a pokrytievšetkých238TRAINframes.
+Adam3e-4cosine1.5e-5,gradclip1;data/trainStd,NS.01,obstacleBC.01,
+256interiorPDEbodov,128BCbodov,warm1000+ramp1000. Primitívne3výstupy
+amákkáfyzika, bez tvrdéhocurlobmedzenia. Fyzikálnu kvalitu preto meriame
+osobitne, automatickyju nepovažujemezasplnenú.
+
+KAŽDÝCH10000AKTUALIZÁCIÍ A NAZAČIATKU/KONCI
+Vyhodnotiťvšetkých238časovvšetkých6VALcases, celýfluidgrid1024x256.
+Výberbest podľa priemeruEu/Ep rovnakocez6cases. Žiadnevracanie
+prebiehajúcehotréningu nabest. Uchovaťbest/last/history/perframe/config.
+Po tréninguajkontrola jednéhoTRAINcase zkaždejrodiny, aby sme
+rozlíšili schopnosťfitovaťTRAIN odpresnosti naVAL; nievýberváh.
+Prahy každéhoVALcase:meanEu<=10%,Ep<=20%,meaninteriorFDdiv<=
+max(3prefixDiv,3refDiv,.001),directqueryp99<=5ms. Tieto brány oddelené;
+llmreadyzostávaFalse aždo ďalšieho overenia a opakovaní.
+
+KONTEXT A OBMEDZENIA
+StaršíV4width96už69/6testoval s vysokouVALchybou. V11width192
+dosiahol~3%U/5%pna jednom známomcase. V12testuje, či väčšia rodina
+s upravenýmtréningom/fullfieldsamplovaním prenesiepresnosť na6VAL;
+niečistáabláciašírkyani garantovanýúspech. Novéúlohynezamieňať.
+
+SPUSTENIE
+Freezevstupov/zdrojov/protokolu predsubmission; AST/bash-nOK.
+GPU najprv9fyzikálnychunit a1TRAIN/1VALsmoke3updates sPDE/hardIC,
+celým238VALscoringom. Potom načítanie celej69/6sady a plnýtréning.
+Veľképolia/váhy zostávajúPerun, lokálneiba maléJSON/texty.
+Perun:/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicase_20261031_v12
+
+POTVRDENÝ ŠTART
+140074RUNNINGgpu11.9kontrolOK1.196s. SMOKE_COMPLETE na1TRAIN/1VAL,
+3gradientupdates/PDE/hardIC a238VALscoring bezguardfail; potom sa začalo
+načítavaniecelej69/6sady prehlavnýbeh. Skúšobná vysokáVALchyba po3
+updates nieje výsledok naučeného modelu ani splnenie fyziky/presnosti.
+Maléprotocol/freeze/prepared/submission/smokesummary lokálne vzaznamy/.
+Veľképolia sa doPC nesťahujú. Výslednápresnosťneznáma.

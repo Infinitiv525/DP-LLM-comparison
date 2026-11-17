@@ -1,0 +1,64 @@
+VÁHY FYZIKY V14 – výsledky overené 02.11.2026
+
+ZÁVER
+Vyššia váha fyziky zlepšila fyzikálne rezíduá, s miernym zhoršením
+presnosti polí. Ani 100-násobný postih však zatiaľ nesplnil náš limit
+vnútornej divergencie na žiadnom z troch prípadov. Všetky vetvy splnili
+U10%/p20% a directquery5ms. Nie hotový model pre nezávislý forecast.
+
+CELÝCH238ČASOV, ROVNAKÁ VÁHA KAŽDÉHO Z3TRAINPRÍPADOV
+Koeficient PDE       meanU       meanp       meanFDdiv     meanFDmom
+0.01(pôvodný)        1.7171%     3.8646%     0.0662852     0.0737643
+0.1(10x)             1.7854%     3.9322%     0.0553204     0.0549074
+1.0(100x)            2.2510%     5.1307%     0.0477151     0.0429761
+100x vs kontrola: mean divergencia približne -28.0%, meanFDmomentum
+loss približne -41.7%. Momentum je normalizovaná kvadratická strata,
+nie percentuálna chyba rýchlosti. Nezamieňať jej percentuálny pokles
+s percentuálnou presnosťou polí. Tlak hodnotený po odstránení konštanty.
+
+NAJSILNEJŠÍ POSTIH, PODROBNE
+harmonics/1/Re382:U3.3939%,p6.3086%,div0.0682767,limit0.0435389.
+nurbs/11/Re107:U1.5508%,p4.8143%,div0.0342285,limit0.0163205.
+skelenton/57/Re168:U1.8083%,p4.2691%,div0.0406402,limit0.0280107.
+Nijaký masspass. Vyhodnotiť každý vlastný limit, nie iba priemer div.
+Referenčné FDmomentumloss .0064013/.0027074/.0036673; model100x
+.0802427/.0196075/.0290782. Fyzikálne rezíduá stále nad FDreferenciou.
+Kontrola meanFDmomentum model.0737643;100x.0429761 nie nulová fyzika.
+
+RÝCHLOSŤ A DOKONČENIE
+Actual238directqueryp99max medzi3cases:
+0.01:3.482365ms;0.1:3.417563ms;1.0:3.388966ms.
+H200,1024x256,initialfieldsGPU,bezrenderingu. Nie kauzálny časovýstep;
+čas dotazu neobsahuje dodatočný výpočet fyzikálnych hodnotiacich metrík.
+Všetky3vetvy dokončili30kupdate,10k/case. Vybranýcheckpointvždy30000.
+Výber preferoval masspass; keďže žiadny neprešiel, vybral najmenšie
+najhoršie div/limit a následne chybu polí. Best_accuracy a last sa
+uchovávajú osobitne, horší kompromis sa nezamlčuje.
+
+OVERENÁ ZHODA A MEDZE ZÁVEROV
+PHYSICS_WEIGHT_PROBES_COMPLETE,matched_sampling=True. Rovnaké warm
+V13baseline3best,architektúra,TRAINcases,seed,data/collocation,schedule,
+LR3e-5 a početupdate. Jediný menenýfaktor PDEkoeficient. BC.01rovnaký.
+SamplingSHA všetkých:
+564b0fbdc7c8b1c30012a83599045b2e72e87c6cb4b034ac1e1ae7c95fa56f3f.
+Známy prefix2,3,targets4..241,dt.05solverunit. Žiadne neskoršie polia
+vstupom. TRAINfit a výber na tých istých3prípadoch, nie nezávislá
+validácia alebo štatistická významnosť. Nejde o tvrdenie rovnakého
+zlepšenia na69/6. Žiadne newCFD/download/externépredlohy/mainTest.
+
+ČO ĎALEJ
+Smer s väčším fyzikálnympostihom je na tejto skúške podložený.
+Ďalšia cielená možnosť je samostatné váhovanie kontinuity a hybnosti,
+keďže v tomto teste rástli ich koeficienty spolu. Tak možno skúsiť
+obmedziť divergenciu bez zbytočného tlaku na ostatné členy. Je to
+ďalšia hypotéza, nie zaručený výsledok alebo už spustený beh.
+Naďalej kontrolovať celé polia aj fyziku; malá PDEstrata sama nestačí.
+Fronta pri kontrole prázdna, nový tréning v tomto kroku nespustený.
+
+INTEGRITA A SPOTREBA
+140890COMPLETED0:0,140891accountingOK,V14freezeoverený.
+Skutočné4103GPU*s=1.139722GPU*h,16412core*s vrátane skúšky/assessmentov.
+Perun:results/fpo_pinn_physics_weights_20261102_v14/training/140890/.
+Lokálne:vysledky_140890/,45malýchJSON/logov263457B,overenýSHAzip
+214133fbb643d160309318160427dfb25e4cb4e9279ea6e73206d8d34267b61c.
+Veľké polia/váhy,best_accuracy/last a úplné priebežné assessmenty Perun.

@@ -1,0 +1,71 @@
+DOKONČENIE TECHNICKEJ SKÚŠKY — 04.11.2026
+
+Body 2 a 3 sú technicky overené. Úloha 143245 skončila COMPLETED 0:0,
+účtovanie 143246 tiež dobehlo. Na Perune teraz z tohto chatu nič nebeží.
+Qwen3-8B, Ministral-3-8B, Phi-4-mini a Granite-3.3-8B každý urobil dva
+návrhy, každý návrh sa skutočne použil v novom krátkom tréningu PINN.
+Druhý návrh dostal skutočné validačné výsledky prvého. Všetkých osem
+odpovedí bolo platných na prvý pokus, nebola potrebná opravná odpoveď.
+
+Pripravené pravidlá
+Konfigurátor vyberá rýchlosť učenia, váhu tlaku, váhu fyziky, váhu okrajov
+a odklad zapnutia fyziky. Architektúra a dátový i výpočtový rozpočet sú
+rovnaké. Automatická schéma stráži zápis, čísla vyberá LLM; žiadna ručná
+náhrada konfigurácie. Schéma nevynucuje kvalitné uvažovanie. Stručné
+deklarované dôvody, očakávanie a riziko sa uchovávajú so surovou odpoveďou.
+Niektoré vety končia na limite 120 znakov; neprepisovali sa za model.
+
+Čo reálne zbehlo
+Jeden spoločný základ, osem tréningov podľa LLM a dva kontrolné tréningy
+pre random a TPE: spolu 11 nových tréningov. Každý má dve celé epochy,
+640 TRAIN / 160 VAL, rovnaké počiatočné váhy a body. Je to skúška zapojenia,
+nie nezávislé štatistické opakovanie ani hotové hlavné porovnanie kvality.
+Hlavný TEST (200 prípadov) zostal uzavretý.
+
+Vstavaná kontrola prešla 70/70 bodmi. Dodatočný audit skutočných súborov
+prešiel 136/136 bodmi: porovnal aj navrhnuté parametre s config.json
+tréningu, presné indexy dát, nadväznosť spätnej väzby, zdroje, aktívnu
+fyziku, vzorkovanie a časové záznamy. Tento audit nenačítal váhy ani polia.
+
+Pozorovanie z návrhov
+6 z 8 návrhov zopakovalo spoločné základné nastavenie. Qwen, Phi a
+Granite ho ponechali v oboch kolách; Ministral zvolil dve odlišné
+konfigurácie. Aj opakované návrhy absolvovali nový tréning a spotrebovali
+plný pokus. Rovnaké výsledky opakovaných konfigurácií sú očakávané pri
+rovnakom seede. Z týchto dvoch epoch nemožno určiť najlepší LLM.
+Text zdôvodnenia nie vždy presne opisuje zmenu čísel; rozhodujú uložené
+parametre a skutočné merania. Odkaz na spätnú väzbu je riadený schémou.
+
+Namerané časy a pamäť
+Návrh vrátane načítania a schémy: 33.4–46.8 s;
+celý samostatný proces návrhu: 40.0–53.9 s.
+Jeden dvojepochový tréning s validáciami a záverečným meraním:
+94.8–102.3 s, mimo štartu procesu a prípravy dát.
+Vzorkované maximum pamäte procesu LLM na GPU: 8.01–19.38 GiB.
+P99 celej predikcie 512 × 512 v ôsmich LLM tréningoch:
+2.896–2.919 ms. Ide o H200, vstupy na GPU, dve merané
+vstupné geometrie, 200 opakovaní každej; prenos do PC a vykreslenie mimo.
+
+Skutočná alokácia úspešnej úlohy: 648 s na 4 GPU = 0,7200 GPU h,
+16 CPU = 2,8800 core h. Zahŕňa aj rezervované nevyužité GPU pri spoločnom
+základe a dobiehaní workerov. Predošlé V27–V29 zostávajú zachované:
+spolu s V30 ide o 2,4167 GPU h a 9,6667 core h hlavných výpočtových úloh.
+Toto nie je spotreba celého projektu; drobné CPU účtovacie úlohy sú mimo.
+
+Kde sú údaje
+zaznamy/integration_audit.json — čísla, konfigurácie, dôvody, kontroly.
+zaznamy/review.json — výsledok vstavanej kontroly.
+zaznamy/small_preflight.zip — všetky malé JSON/TXT/log záznamy vrátane
+promptov, surových odpovedí, prostriedkov a validačných tabuliek.
+SHA a CRC archívu boli po prenose overené. Archív má približne 2,46 MB.
+Veľké polia a váhy zostali na Perune:
+/mnt/project/perun2601449/dp_llm_cfd/results/ldc_llm_preflight_20261104_v30
+
+Čo nasleduje
+Hlavný pilot 143115 už tiež skončil; jeho číselný audit je v susednom
+spolocny_ustaleny_pinn_20261104_v26/VYSLEDOK.txt. Pred hromadným
+porovnaním ostáva podrobná kontrola jeho okrajov, kontinuálnej a mriežkovej
+fyziky a obrazových rozdielov. Potom uzamknúť hlavný rozsah hľadaní,
+tréningový rozpočet a seedy a pripraviť produkčný spúšťač. Súčasný spúšťač
+zámerne povoľuje iba dvojepochovú technickú skúšku; stovky tréningov sa
+ním nespustili. Hlavné LLM porovnávanie zatiaľ nezačalo.

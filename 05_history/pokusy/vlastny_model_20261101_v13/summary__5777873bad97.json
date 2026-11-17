@@ -1,0 +1,177 @@
+{
+  "status": "OWN_MODEL_TRAIN_FIT_PROBE_EVALUATED",
+  "config": {
+    "name": "baseline_3train",
+    "model_kind": "baseline",
+    "train_count": 3,
+    "state_conditioning": true,
+    "width": 192,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "seed": 20261101,
+    "updates": 150000,
+    "lr": 0.0003,
+    "warmup": 1000,
+    "batch": 2048,
+    "collocation": 256,
+    "assess_every": 15000
+  },
+  "accuracy": [
+    {
+      "score": 0.03531666215056177,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.0266511511615905,
+        "pressure_relative_l2": 0.04398217313953304
+      },
+      "interior_div_rms": 0.10332544759197645,
+      "direct_query_gpu_ms": {
+        "p50": 3.319200038909912,
+        "p95": 3.3612623333930967,
+        "p99": 3.4011282205581663
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": false
+    },
+    {
+      "score": 0.02791722327239293,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.012991318212994927,
+        "pressure_relative_l2": 0.04284312833179093
+      },
+      "interior_div_rms": 0.04681250441060284,
+      "direct_query_gpu_ms": {
+        "p50": 3.3262879848480225,
+        "p95": 3.3504928946495056,
+        "p99": 3.366268458366394
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "mass_limit": 0.016320491675287485,
+      "mass_pass": false
+    },
+    {
+      "score": 0.025194477279156104,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.014735227834146573,
+        "pressure_relative_l2": 0.035653726724165634
+      },
+      "interior_div_rms": 0.05761577166272562,
+      "direct_query_gpu_ms": {
+        "p50": 3.3316320180892944,
+        "p95": 3.343878436088562,
+        "p99": 3.3552400064468384
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "mass_limit": 0.02801069151610136,
+      "mass_pass": false
+    }
+  ],
+  "training_monitor": [
+    {
+      "score": 0.03531666215056177,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.0266511511615905,
+        "pressure_relative_l2": 0.04398217313953304
+      },
+      "interior_div_rms": 0.10332544759197645,
+      "direct_query_gpu_ms": {
+        "p50": 3.3327200412750244,
+        "p95": 3.365683150291443,
+        "p99": 3.3719551372528076
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": false
+    },
+    {
+      "score": 0.02791722327239293,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.012991318212994927,
+        "pressure_relative_l2": 0.04284312833179093
+      },
+      "interior_div_rms": 0.04681250441060284,
+      "direct_query_gpu_ms": {
+        "p50": 3.332592010498047,
+        "p95": 3.359940731525421,
+        "p99": 3.3744015955924986
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "mass_limit": 0.016320491675287485,
+      "mass_pass": false
+    },
+    {
+      "score": 0.025194477279156104,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.014735227834146573,
+        "pressure_relative_l2": 0.035653726724165634
+      },
+      "interior_div_rms": 0.05761577166272562,
+      "direct_query_gpu_ms": {
+        "p50": 3.332144021987915,
+        "p95": 3.3726447463035583,
+        "p99": 3.398826856613159
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "mass_limit": 0.02801069151610136,
+      "mass_pass": false
+    }
+  ],
+  "selected_update": 150000,
+  "all238_training_frames_visited": true,
+  "training_seconds": 5444.474625812843,
+  "peak_cuda_allocated_bytes": 2873887744,
+  "checkpoint_sha256": "62123717b4e9cd1f9a06ef65a149bf1725a475abafa425c034f56e47ade4be24",
+  "independent_validation": false,
+  "causal_stepper": false,
+  "llm_ready": false,
+  "train_scenarios": 3,
+  "validation_scenarios": 0,
+  "train_selection_scenarios": 3,
+  "training_case_updates": [
+    50000,
+    50000,
+    50000
+  ],
+  "working_gate": {
+    "accuracy_pass": true,
+    "mass_pass": false,
+    "direct_query_latency_pass": true
+  },
+  "limitations": [
+    "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+    "Architecture bundle changes conditioning, latent and residual path; not pure parameter-matched ablation",
+    "Absolute time query, no recurrent own states; not directly comparable causal latency",
+    "Primitive output PINN soft physics; different representation bundle from curl stepper"
+  ]
+}

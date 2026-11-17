@@ -1,0 +1,37 @@
+V16 – PRENOS NA ODLIŠNÉ VÝVOJOVÉ SIMULÁCIE, 02.11.2026
+
+DOKONČENÉ:141354COMPLETED0:0, freezeOK, všetkých238snímok6VAL overených.
+Prenos presnosti zlyhal: pôvodný U58,87%/p77,79%, novýU82,49%/p104,52%.
+Nový síce masspass6/6 aqueryp99max3,612ms, ale nesprávna dynamika.
+Podrobnosti:VYSLEDKY_141354.txt. Nasleduje historický opis prípravy.
+
+Po súhlase používateľa pokračujeme kontrolou prenosu pred rozšírením
+tréningu. Dva hotové checkpointy V15 (pôvodný u/v/p a nový psi/p)
+z troch TRAIN simulácií vyhodnotíme na šiestich existujúcich VAL.
+Žiadny ďalší tréning, zmena váh, výber checkpointu alebo ladenie na VAL.
+Geometrie VAL sú odlišné od troch TRAIN; ide však o opakovane používanú
+vývojovú validáciu, nie o konečný nezávislý test hypotéz.
+
+VAL: harmonics87/Re292,838; nurbs22/Re164,977; skelenton36/Re209,867.
+Vstupy siete: známe snímky2,3, geometria,Re a relatívnyčas.
+Samostatný predictor nedostáva budúce polia. Referencia zostáva v CPU
+hodnotení; žiadna budúca VAL trajektória sa nenahráva do GPU modelu.
+Vyhodnotí sa všetkých238 snímok4..241, krok0.05 v jednotkách solvera.
+PresnosťU/p, perzistencia, vnútornádivergencia, FDhybnosť aj referenčný
+FDfloor, per-frameJSON a p50/p95/p99 sa uchovajú pre každý prípad.
+5ms je priamy querycelého1024x256poľa naH200, vstupyGPU, bezrenderingu
+aCPUprenosu. Nie kauzálny krok. 20warm-upqueries pred meraním.
+Žiadne nové CFD/datasety, hlavnýTEST zostáva zatvorený.
+
+Samostatné nové súbory: fpo_common_v16,evaluate_fpo_transfer_v16,
+initialize_fpo_transfer_v16,capture_fpo_transfer_v23,scripts216/217.
+Staré zmrazené zdroje a váhy nemeníme. SyntaxPython/bash overená,
+V15freeze overený; nové zdroje/protokol/receipt/checkpointSHA zmrazené.
+Veľké polia a váhy zostávajú naPerune; lokálne iba malé texty/JSON.
+Perun:results/fpo_pinn_transfer_20261102_v16.
+Nasleduje GPUkontrola existujúcich3unitov a hodnotenie obochmodelov.
+OVERENÉ SPUSTENIE
+GPU141354, účtovanie141355afterany. RegistráciaID predrelease.
+141354RUNNINGgpu03, tri existujúce technické testy prešli1.904s.
+Prebieha načítanie/overenie prefixov a hodnotenie. Presnosť zatiaľ neznáma.
+Malé protocol/freeze/prepared/submission uložené aj lokálne v zaznamy/.

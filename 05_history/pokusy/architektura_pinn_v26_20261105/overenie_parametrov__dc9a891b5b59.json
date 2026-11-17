@@ -1,0 +1,50 @@
+{
+  "total_parameters": 134922,
+  "learned_layers": 8,
+  "mlp_hidden_layers": 4,
+  "mlp_width": 192,
+  "layers": [
+    {
+      "name": "encoder.0",
+      "kind": "Conv2d",
+      "parameters": 152
+    },
+    {
+      "name": "encoder.3",
+      "kind": "Conv2d",
+      "parameters": 1168
+    },
+    {
+      "name": "global_head.2",
+      "kind": "Linear",
+      "parameters": 8224
+    },
+    {
+      "name": "net.0",
+      "kind": "Linear",
+      "parameters": 13824
+    },
+    {
+      "name": "net.2",
+      "kind": "Linear",
+      "parameters": 37056
+    },
+    {
+      "name": "net.4",
+      "kind": "Linear",
+      "parameters": 37056
+    },
+    {
+      "name": "net.6",
+      "kind": "Linear",
+      "parameters": 37056
+    },
+    {
+      "name": "net.8",
+      "kind": "Linear",
+      "parameters": 386
+    }
+  ],
+  "architecture": "SharedSteadyPINN(\n  (encoder): Sequential(\n    (0): Conv2d(2, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n    (1): Tanh()\n    (2): AvgPool2d(kernel_size=2, stride=2, padding=0)\n    (3): Conv2d(8, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n    (4): Tanh()\n    (5): AvgPool2d(kernel_size=2, stride=2, padding=0)\n  )\n  (global_head): Sequential(\n    (0): AdaptiveAvgPool2d(output_size=(4, 4))\n    (1): Flatten(start_dim=1, end_dim=-1)\n    (2): Linear(in_features=256, out_features=32, bias=True)\n    (3): Tanh()\n  )\n  (net): Sequential(\n    (0): Linear(in_features=71, out_features=192, bias=True)\n    (1): Tanh()\n    (2): Linear(in_features=192, out_features=192, bias=True)\n    (3): Tanh()\n    (4): Linear(in_features=192, out_features=192, bias=True)\n    (5): Tanh()\n    (6): Linear(in_features=192, out_features=192, bias=True)\n    (7): Tanh()\n    (8): Linear(in_features=192, out_features=2, bias=True)\n  )\n)",
+  "device": "CPU instantiation on allocated compute node, no weights/training/TEST read"
+}

@@ -1,0 +1,63 @@
+SPOLOCNY FYZIKALNE INFORMOVANY MODEL – 03.11.2026
+ZAVAZNE SPRESNENIE POUZIVATELA: ziadna osobitna siet pre kazdu simulaciu.
+Pokracovat len so spolocnymi vahami pre viac pripadov. Predosle odporucanie
+case-specificPINN sa pre dalsiu pracu neuplatnuje. Navrh20/5 ostava odlozeny.
+Pouzivatel sa pyta na zachovanie jedneho modelu pre viac simulacii.
+Novy trening sa touto odpovedou nespusta;20/5 zostava odlozene.
+
+Co uz mame dokazatelne
+V15job140949 je jeden spolocnycurlPINN pre3TRAINpripady, nie3samostatneNN.
+Na tychto naucenych pripadoch: priemerU1.116%,p3.313%,p99max3.529ms.
+Je to fit rovnakych trenovacich pripadov, bez nezavisleho dokazovania
+presnosti. V16prenos na6inychVAL zlyhal; neskorsi69TRAIN vyvoj ma stale
+velke chyby na6geometrickyodlisnychVAL. Nasa aktualna siet je uz
+podmienena, takze samotne pridanieRe/prefixu alebo premenovanie na
+parametrickyPINN nie je nova oprava.
+
+Relevantne primarne studie skontrolovane teraz
+1. Naderibeni, Reinders, Wu, Tax (2024), Learning solutions of parametric
+Navier-Stokes with physics-informed neural networks, arXiv2402.03153.
+https://arxiv.org/html/2402.03153v1
+Sekcia3: jedenPINN (x,y,t,Re)->(u,v,p), trening referencnymiCFDdatami
+aNSreziduami, valec s pevnougeometriou. Sekcia4: noveRe maju vacsiechyby
+a casovyposun; fyzika zlepsuje derivacie, nie automaticky chybu poli.
+Je to relevantny precedens spolocnehoPINN, nieFlowBenchbenchmark ani
+zaruka prenosu na nove tvary, ani zaruka5ms na nasejmriezke.
+2. Wang, Wang, Perdikaris (2021), Learning the solution operator of
+parametric partial differential equations with physics-informed DeepOnets.
+https://arxiv.org/abs/2103.10974
+doi:10.1126/sciadv.abi8605
+Physics-informedDeepONet je moznost ucit rodinuPDErieseni zfunkcnych
+vstupov a suradnic s fyzikalnou stratou. Priklady v tejto praci nie su
+nas FlowBenchFPO Navier-Stokes. Operatorovy variant pomenovat presne,
+neprehlasit hociktory FNO za klasickyPINN. Cudzi kod sa nepreberal.
+
+Prakticky tvar vlastneho spolocnehoPINN
+Vstup: x,y,t,Re, popisgeometrie a deklarovany znamy pociatocnystav /
+historia / dodaneBC podla zvolenej ulohy. Vystup: u,v,p.
+Vahy su spolocne pre vsetky pripady. Pocas treningu su dovolene
+vsetky urceneTRAINtrajektorie. Pri predikcii noveho pripadu buduce
+cielove vnutorne polia nie su vstupom. Novy pripad musi dodat svoje
+zname podmienky, inak nemoze model jednoznacne vybrat fazu prudenia.
+Neskorsie pozorovania noveho pripadu by znamenali osobitnu ulohu
+rekonstrukcie/asimilacie alebo dotrenovanie; explicitne rozlisit.
+
+Ako odlisit realisticke cielove schopnosti
+A. JedenNN rekonstruuje viac simulacii, z ktorych dostal cast pozorovani
+v celom casovom rozsahu. Overovat rezervovane body a cele casove snimky.
+Nejde o predpoved neznamej simulacie bez jej pozorovani.
+B. JedenNN predpoveda nenauceneRe pri znamejgeometrii zo znamychpodmienok.
+C. JedenNN predpoveda uplne novugeometriu aRe zo znamychpodmienok.
+B aC treba hodnotit samostatne; su to odlisne druhy generalizacie.
+Nase6VAL aktualne testujeC. Vytvorenie pripadneho vyvojoveho splituB
+vyzaduje preverit skutocnu hustotu dostupnychRe pri kazdom tvare;
+hlavnyTEST pritom ostava uzavrety. Vhodne rozdelenie sa nesmie slubit
+bez kontroly existujucich69pripadov a ichRe. NoveCFDdata sa neplanuju.
+
+Odporucanie
+Spolocny model je vedecky legitimny ciel. Pri casovej tiesni najprv
+presne urcit, ci vysledok ma dokazovatA,B aleboC, a porovnavatLLM
+v stabilnom protokole. Zachovat cely dostupny casovy priebeh a5ms,
+nevydavat zlepsenie kratkeho horizontu alebo TRAINfit za uspechC.
+Ak ma byt cielC, samotna zmena architektury naDeepONet nie je zaruka;
+potrebne overit vhodne podmienenie, casovu fazu a generalizaciu.

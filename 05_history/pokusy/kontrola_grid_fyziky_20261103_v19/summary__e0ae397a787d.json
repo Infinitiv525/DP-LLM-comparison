@@ -1,0 +1,2166 @@
+{
+  "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+  "scope": "train",
+  "rows": [
+    {
+      "offset": 1,
+      "frame": 4,
+      "time": 0.05,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "field_errors": {
+        "velocity_relative_l2": 0.011985517277838002,
+        "pressure_relative_l2": 0.030638321190768307
+      },
+      "reference_instantaneous_fd": {
+        "velocity": {
+          "rms": 0.8880288600921631,
+          "mean_square_over_velocity_scale2": 6.209244600138079
+        },
+        "temporal": {
+          "rms": 0.4479062557220459,
+          "mean_square_over_velocity_scale2": 1.5796425456234393
+        },
+        "advection": {
+          "rms": 0.6583820581436157,
+          "mean_square_over_velocity_scale2": 3.413033293859972
+        },
+        "pressure_gradient": {
+          "rms": 0.5229002237319946,
+          "mean_square_over_velocity_scale2": 2.1528917789992232
+        },
+        "diffusion": {
+          "rms": 0.03259577602148056,
+          "mean_square_over_velocity_scale2": 0.008365795703566247
+        },
+        "momentum": {
+          "rms": 0.03911559283733368,
+          "mean_square_over_velocity_scale2": 0.012047153200782035
+        },
+        "divergence": {
+          "rms": 0.014405636116862297,
+          "mean_square_over_velocity_scale2": 0.0016339901760200586
+        }
+      },
+      "reference_fd_time_step": 0.05,
+      "reference_backward_second_order": false,
+      "v17_midpoint_fd_momentum_loss_full_interior": 0.39118334650993347,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.00605896906927228,
+      "midpoint_time": 0.025,
+      "continuous_centre": {
+        "velocity": {
+          "rms": 0.8861552476882935,
+          "mean_square_over_velocity_scale2": 6.183070887971894
+        },
+        "temporal": {
+          "rms": 0.48479798436164856,
+          "mean_square_over_velocity_scale2": 1.8505727319677165
+        },
+        "advection": {
+          "rms": 0.6548632383346558,
+          "mean_square_over_velocity_scale2": 3.376647750906195
+        },
+        "pressure_gradient": {
+          "rms": 0.5117741227149963,
+          "mean_square_over_velocity_scale2": 2.062249637226938
+        },
+        "diffusion": {
+          "rms": 0.06347402185201645,
+          "mean_square_over_velocity_scale2": 0.03172317081442613
+        },
+        "momentum": {
+          "rms": 0.2552536725997925,
+          "mean_square_over_velocity_scale2": 0.5130132647963408
+        },
+        "divergence": {
+          "rms": 0.014526193961501122,
+          "mean_square_over_velocity_scale2": 0.001661453712270826
+        }
+      },
+      "continuous_jitter": {
+        "velocity": {
+          "rms": 0.8860803246498108,
+          "mean_square_over_velocity_scale2": 6.182024784252719
+        },
+        "temporal": {
+          "rms": 0.4853369891643524,
+          "mean_square_over_velocity_scale2": 1.8546900347619417
+        },
+        "advection": {
+          "rms": 0.6500383019447327,
+          "mean_square_over_velocity_scale2": 3.327073979772717
+        },
+        "pressure_gradient": {
+          "rms": 0.5118725299835205,
+          "mean_square_over_velocity_scale2": 2.0630427800198525
+        },
+        "diffusion": {
+          "rms": 0.04976557940244675,
+          "mean_square_over_velocity_scale2": 0.019500362627340204
+        },
+        "momentum": {
+          "rms": 0.2391778528690338,
+          "mean_square_over_velocity_scale2": 0.4504291359674896
+        },
+        "divergence": {
+          "rms": 0.018742576241493225,
+          "mean_square_over_velocity_scale2": 0.0027659427249538777
+        }
+      },
+      "fd_0.025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8861549496650696,
+            "mean_square_over_velocity_scale2": 6.183066194819274
+          },
+          "temporal": {
+            "rms": 0.4848080575466156,
+            "mean_square_over_velocity_scale2": 1.8506496996706976
+          },
+          "advection": {
+            "rms": 0.6465184688568115,
+            "mean_square_over_velocity_scale2": 3.2911403874163234
+          },
+          "pressure_gradient": {
+            "rms": 0.5117713809013367,
+            "mean_square_over_velocity_scale2": 2.06222757940962
+          },
+          "diffusion": {
+            "rms": 0.03451443836092949,
+            "mean_square_over_velocity_scale2": 0.009379640414893503
+          },
+          "momentum": {
+            "rms": 0.219866082072258,
+            "mean_square_over_velocity_scale2": 0.38062828768923124
+          },
+          "divergence": {
+            "rms": 0.014526322484016418,
+            "mean_square_over_velocity_scale2": 0.001661483044474706
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 1.749903276504483e-05,
+            "relative_l2": 1.974713995878119e-05
+          },
+          "temporal": {
+            "difference_rms": 0.0004205679288133979,
+            "relative_l2": 0.0008675117860548198
+          },
+          "advection": {
+            "difference_rms": 0.06222222372889519,
+            "relative_l2": 0.09501560777425766
+          },
+          "pressure_gradient": {
+            "difference_rms": 5.625776611850597e-05,
+            "relative_l2": 0.00010992693569278345
+          },
+          "diffusion": {
+            "difference_rms": 0.04747141897678375,
+            "relative_l2": 0.7478874325752258
+          },
+          "momentum": {
+            "difference_rms": 0.09910640120506287,
+            "relative_l2": 0.38826626539230347
+          },
+          "divergence": {
+            "difference_rms": 2.723754050748539e-06,
+            "relative_l2": 0.00018750638992059976
+          }
+        },
+        "time_stencil": [
+          0.025,
+          0.07500000000000001
+        ],
+        "backward_second_order": false
+      },
+      "fd_0.0025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8861549496650696,
+            "mean_square_over_velocity_scale2": 6.183066194819274
+          },
+          "temporal": {
+            "rms": 0.48472434282302856,
+            "mean_square_over_velocity_scale2": 1.8500106096125606
+          },
+          "advection": {
+            "rms": 0.6465184688568115,
+            "mean_square_over_velocity_scale2": 3.2911403874163234
+          },
+          "pressure_gradient": {
+            "rms": 0.5117713809013367,
+            "mean_square_over_velocity_scale2": 2.06222757940962
+          },
+          "diffusion": {
+            "rms": 0.03451443836092949,
+            "mean_square_over_velocity_scale2": 0.009379640414893503
+          },
+          "momentum": {
+            "rms": 0.2197568118572235,
+            "mean_square_over_velocity_scale2": 0.38025004892019887
+          },
+          "divergence": {
+            "rms": 0.014526322484016418,
+            "mean_square_over_velocity_scale2": 0.001661483044474706
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 1.749903276504483e-05,
+            "relative_l2": 1.974713995878119e-05
+          },
+          "temporal": {
+            "difference_rms": 0.00035410080454312265,
+            "relative_l2": 0.0007304090540856123
+          },
+          "advection": {
+            "difference_rms": 0.06222222372889519,
+            "relative_l2": 0.09501560777425766
+          },
+          "pressure_gradient": {
+            "difference_rms": 5.625776611850597e-05,
+            "relative_l2": 0.00010992693569278345
+          },
+          "diffusion": {
+            "difference_rms": 0.04747141897678375,
+            "relative_l2": 0.7478874325752258
+          },
+          "momentum": {
+            "difference_rms": 0.09911860525608063,
+            "relative_l2": 0.3883141279220581
+          },
+          "divergence": {
+            "difference_rms": 2.723754050748539e-06,
+            "relative_l2": 0.00018750638992059976
+          }
+        },
+        "time_stencil": [
+          0.0475,
+          0.052500000000000005
+        ],
+        "backward_second_order": false
+      },
+      "coarse_to_fine_fd": {
+        "velocity": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "temporal": {
+          "difference_rms": 0.0002499166294001043,
+          "relative_l2": 0.000515496009029448
+        },
+        "advection": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "pressure_gradient": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "diffusion": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "momentum": {
+          "difference_rms": 0.00024991686223074794,
+          "relative_l2": 0.001136677572503686
+        },
+        "divergence": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        }
+      }
+    },
+    {
+      "offset": 5,
+      "frame": 8,
+      "time": 0.25,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "field_errors": {
+        "velocity_relative_l2": 0.045264954426321904,
+        "pressure_relative_l2": 0.11940831889104325
+      },
+      "reference_instantaneous_fd": {
+        "velocity": {
+          "rms": 0.8865609169006348,
+          "mean_square_over_velocity_scale2": 6.188732707293624
+        },
+        "temporal": {
+          "rms": 0.47951439023017883,
+          "mean_square_over_velocity_scale2": 1.8104556633651443
+        },
+        "advection": {
+          "rms": 0.7006937861442566,
+          "mean_square_over_velocity_scale2": 3.865815517887121
+        },
+        "pressure_gradient": {
+          "rms": 0.5256146788597107,
+          "mean_square_over_velocity_scale2": 2.175302052078791
+        },
+        "diffusion": {
+          "rms": 0.029836202040314674,
+          "mean_square_over_velocity_scale2": 0.007009251396417036
+        },
+        "momentum": {
+          "rms": 0.030310340225696564,
+          "mean_square_over_velocity_scale2": 0.007233794458590831
+        },
+        "divergence": {
+          "rms": 0.01283180620521307,
+          "mean_square_over_velocity_scale2": 0.0012964630164471413
+        }
+      },
+      "reference_fd_time_step": 0.05,
+      "reference_backward_second_order": false,
+      "v17_midpoint_fd_momentum_loss_full_interior": 0.37975966930389404,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.0058083562180399895,
+      "midpoint_time": 0.225,
+      "continuous_centre": {
+        "velocity": {
+          "rms": 0.8839478492736816,
+          "mean_square_over_velocity_scale2": 6.152305395281522
+        },
+        "temporal": {
+          "rms": 0.4475659132003784,
+          "mean_square_over_velocity_scale2": 1.5772428193596102
+        },
+        "advection": {
+          "rms": 0.747435450553894,
+          "mean_square_over_velocity_scale2": 4.398777438549014
+        },
+        "pressure_gradient": {
+          "rms": 0.49791303277015686,
+          "mean_square_over_velocity_scale2": 1.9520527710872084
+        },
+        "diffusion": {
+          "rms": 0.203836590051651,
+          "mean_square_over_velocity_scale2": 0.3271514561786675
+        },
+        "momentum": {
+          "rms": 0.5545719265937805,
+          "mean_square_over_velocity_scale2": 2.421588611340079
+        },
+        "divergence": {
+          "rms": 0.014526224695146084,
+          "mean_square_over_velocity_scale2": 0.0016614608161639533
+        }
+      },
+      "continuous_jitter": {
+        "velocity": {
+          "rms": 0.8838692903518677,
+          "mean_square_over_velocity_scale2": 6.151211421405614
+        },
+        "temporal": {
+          "rms": 0.4480915367603302,
+          "mean_square_over_velocity_scale2": 1.5809497059571467
+        },
+        "advection": {
+          "rms": 0.7065526247024536,
+          "mean_square_over_velocity_scale2": 3.9307335515142947
+        },
+        "pressure_gradient": {
+          "rms": 0.4985913932323456,
+          "mean_square_over_velocity_scale2": 1.9573755101320853
+        },
+        "diffusion": {
+          "rms": 0.17394396662712097,
+          "mean_square_over_velocity_scale2": 0.2382337840046898
+        },
+        "momentum": {
+          "rms": 0.3952719271183014,
+          "mean_square_over_velocity_scale2": 1.2302022516892674
+        },
+        "divergence": {
+          "rms": 0.01874188333749771,
+          "mean_square_over_velocity_scale2": 0.0027657378578424033
+        }
+      },
+      "fd_0.025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.883944034576416,
+            "mean_square_over_velocity_scale2": 6.152251893341645
+          },
+          "temporal": {
+            "rms": 0.44752463698387146,
+            "mean_square_over_velocity_scale2": 1.576952078554752
+          },
+          "advection": {
+            "rms": 0.6636810898780823,
+            "mean_square_over_velocity_scale2": 3.4681947325037705
+          },
+          "pressure_gradient": {
+            "rms": 0.49787598848342896,
+            "mean_square_over_velocity_scale2": 1.9517622649399813
+          },
+          "diffusion": {
+            "rms": 0.053757909685373306,
+            "mean_square_over_velocity_scale2": 0.022754607487439994
+          },
+          "momentum": {
+            "rms": 0.254271924495697,
+            "mean_square_over_velocity_scale2": 0.509074536459337
+          },
+          "divergence": {
+            "rms": 0.014526275917887688,
+            "mean_square_over_velocity_scale2": 0.0016614725032139367
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 8.704495849087834e-05,
+            "relative_l2": 9.847295586951077e-05
+          },
+          "temporal": {
+            "difference_rms": 0.0004758054856210947,
+            "relative_l2": 0.0010630958713591099
+          },
+          "advection": {
+            "difference_rms": 0.27320581674575806,
+            "relative_l2": 0.3655242919921875
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0002875473292078823,
+            "relative_l2": 0.0005775051540695131
+          },
+          "diffusion": {
+            "difference_rms": 0.16954730451107025,
+            "relative_l2": 0.8317804932594299
+          },
+          "momentum": {
+            "difference_rms": 0.40334880352020264,
+            "relative_l2": 0.7273155450820923
+          },
+          "divergence": {
+            "difference_rms": 2.797705519697047e-06,
+            "relative_l2": 0.00019259688269812614
+          }
+        },
+        "time_stencil": [
+          0.225,
+          0.275
+        ],
+        "backward_second_order": false
+      },
+      "fd_0.0025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.883944034576416,
+            "mean_square_over_velocity_scale2": 6.152251893341645
+          },
+          "temporal": {
+            "rms": 0.44752246141433716,
+            "mean_square_over_velocity_scale2": 1.5769367084799188
+          },
+          "advection": {
+            "rms": 0.6636810898780823,
+            "mean_square_over_velocity_scale2": 3.4681947325037705
+          },
+          "pressure_gradient": {
+            "rms": 0.49787598848342896,
+            "mean_square_over_velocity_scale2": 1.9517622649399813
+          },
+          "diffusion": {
+            "rms": 0.053757909685373306,
+            "mean_square_over_velocity_scale2": 0.022754607487439994
+          },
+          "momentum": {
+            "rms": 0.2543077766895294,
+            "mean_square_over_velocity_scale2": 0.5092181469295334
+          },
+          "divergence": {
+            "rms": 0.014526275917887688,
+            "mean_square_over_velocity_scale2": 0.0016614725032139367
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 8.704495849087834e-05,
+            "relative_l2": 9.847295586951077e-05
+          },
+          "temporal": {
+            "difference_rms": 0.0005528464680537581,
+            "relative_l2": 0.0012352291960269213
+          },
+          "advection": {
+            "difference_rms": 0.27320581674575806,
+            "relative_l2": 0.3655242919921875
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0002875473292078823,
+            "relative_l2": 0.0005775051540695131
+          },
+          "diffusion": {
+            "difference_rms": 0.16954730451107025,
+            "relative_l2": 0.8317804932594299
+          },
+          "momentum": {
+            "difference_rms": 0.4033442437648773,
+            "relative_l2": 0.7273073196411133
+          },
+          "divergence": {
+            "difference_rms": 2.797705519697047e-06,
+            "relative_l2": 0.00019259688269812614
+          }
+        },
+        "time_stencil": [
+          0.2475,
+          0.2525
+        ],
+        "backward_second_order": false
+      },
+      "coarse_to_fine_fd": {
+        "velocity": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "temporal": {
+          "difference_rms": 0.00046943227062001824,
+          "relative_l2": 0.0010489530395716429
+        },
+        "advection": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "pressure_gradient": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "diffusion": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "momentum": {
+          "difference_rms": 0.0004694323579315096,
+          "relative_l2": 0.0018461823929101229
+        },
+        "divergence": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        }
+      }
+    },
+    {
+      "offset": 10,
+      "frame": 13,
+      "time": 0.5,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "field_errors": {
+        "velocity_relative_l2": 0.07697440799940972,
+        "pressure_relative_l2": 0.17810301438709264
+      },
+      "reference_instantaneous_fd": {
+        "velocity": {
+          "rms": 0.8851974606513977,
+          "mean_square_over_velocity_scale2": 6.169711829036796
+        },
+        "temporal": {
+          "rms": 0.48948195576667786,
+          "mean_square_over_velocity_scale2": 1.886504916378324
+        },
+        "advection": {
+          "rms": 0.7264280915260315,
+          "mean_square_over_velocity_scale2": 4.154988340454882
+        },
+        "pressure_gradient": {
+          "rms": 0.5212842226028442,
+          "mean_square_over_velocity_scale2": 2.139605463929747
+        },
+        "diffusion": {
+          "rms": 0.02977295033633709,
+          "mean_square_over_velocity_scale2": 0.006979563997880696
+        },
+        "momentum": {
+          "rms": 0.0250942911952734,
+          "mean_square_over_velocity_scale2": 0.004958318493766069
+        },
+        "divergence": {
+          "rms": 0.012103192508220673,
+          "mean_square_over_velocity_scale2": 0.0011534119205450601
+        }
+      },
+      "reference_fd_time_step": 0.05,
+      "reference_backward_second_order": false,
+      "v17_midpoint_fd_momentum_loss_full_interior": 0.888663649559021,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.005758329760283232,
+      "midpoint_time": 0.475,
+      "continuous_centre": {
+        "velocity": {
+          "rms": 0.8873422741889954,
+          "mean_square_over_velocity_scale2": 6.199646633713287
+        },
+        "temporal": {
+          "rms": 0.43982750177383423,
+          "mean_square_over_velocity_scale2": 1.5231733600018555
+        },
+        "advection": {
+          "rms": 0.9388615489006042,
+          "mean_square_over_velocity_scale2": 6.940450919285579
+        },
+        "pressure_gradient": {
+          "rms": 0.5154591798782349,
+          "mean_square_over_velocity_scale2": 2.092055380206357
+        },
+        "diffusion": {
+          "rms": 0.3398583233356476,
+          "mean_square_over_velocity_scale2": 0.9094533116447067
+        },
+        "momentum": {
+          "rms": 0.9120244383811951,
+          "mean_square_over_velocity_scale2": 6.549339536587273
+        },
+        "divergence": {
+          "rms": 0.014526156708598137,
+          "mean_square_over_velocity_scale2": 0.0016614452334306421
+        }
+      },
+      "continuous_jitter": {
+        "velocity": {
+          "rms": 0.8873401284217834,
+          "mean_square_over_velocity_scale2": 6.199616128221252
+        },
+        "temporal": {
+          "rms": 0.44031375646591187,
+          "mean_square_over_velocity_scale2": 1.5265430435835876
+        },
+        "advection": {
+          "rms": 0.8502084016799927,
+          "mean_square_over_velocity_scale2": 5.6916133318272815
+        },
+        "pressure_gradient": {
+          "rms": 0.51657634973526,
+          "mean_square_over_velocity_scale2": 2.1011331106631332
+        },
+        "diffusion": {
+          "rms": 0.2979552149772644,
+          "mean_square_over_velocity_scale2": 0.699015164019745
+        },
+        "momentum": {
+          "rms": 0.6301133632659912,
+          "mean_square_over_velocity_scale2": 3.126237553094644
+        },
+        "divergence": {
+          "rms": 0.01874367706477642,
+          "mean_square_over_velocity_scale2": 0.002766267441617143
+        }
+      },
+      "fd_0.025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8873327374458313,
+            "mean_square_over_velocity_scale2": 6.199512878863595
+          },
+          "temporal": {
+            "rms": 0.4397187829017639,
+            "mean_square_over_velocity_scale2": 1.5224204609926641
+          },
+          "advection": {
+            "rms": 0.7484896779060364,
+            "mean_square_over_velocity_scale2": 4.411194581753118
+          },
+          "pressure_gradient": {
+            "rms": 0.5153659582138062,
+            "mean_square_over_velocity_scale2": 2.0912983746886225
+          },
+          "diffusion": {
+            "rms": 0.08015827089548111,
+            "mean_square_over_velocity_scale2": 0.050591932261932426
+          },
+          "momentum": {
+            "rms": 0.3831588625907898,
+            "mean_square_over_velocity_scale2": 1.1559588064757549
+          },
+          "divergence": {
+            "rms": 0.014526194892823696,
+            "mean_square_over_velocity_scale2": 0.001661453941428669
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.00017733016284182668,
+            "relative_l2": 0.00019984415848739445
+          },
+          "temporal": {
+            "difference_rms": 0.0005842785467393696,
+            "relative_l2": 0.0013284265296533704
+          },
+          "advection": {
+            "difference_rms": 0.4700208008289337,
+            "relative_l2": 0.5006284117698669
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0005207681679166853,
+            "relative_l2": 0.0010102995438501239
+          },
+          "diffusion": {
+            "difference_rms": 0.28531673550605774,
+            "relative_l2": 0.8395166397094727
+          },
+          "momentum": {
+            "difference_rms": 0.682380735874176,
+            "relative_l2": 0.7482044100761414
+          },
+          "divergence": {
+            "difference_rms": 2.5258837013097946e-06,
+            "relative_l2": 0.00017388521519023925
+          }
+        },
+        "time_stencil": [
+          0.475,
+          0.525
+        ],
+        "backward_second_order": false
+      },
+      "fd_0.0025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8873327374458313,
+            "mean_square_over_velocity_scale2": 6.199512878863595
+          },
+          "temporal": {
+            "rms": 0.43978771567344666,
+            "mean_square_over_velocity_scale2": 1.522897754614199
+          },
+          "advection": {
+            "rms": 0.7484896779060364,
+            "mean_square_over_velocity_scale2": 4.411194581753118
+          },
+          "pressure_gradient": {
+            "rms": 0.5153659582138062,
+            "mean_square_over_velocity_scale2": 2.0912983746886225
+          },
+          "diffusion": {
+            "rms": 0.08015827089548111,
+            "mean_square_over_velocity_scale2": 0.050591932261932426
+          },
+          "momentum": {
+            "rms": 0.3832213878631592,
+            "mean_square_over_velocity_scale2": 1.1563360186176515
+          },
+          "divergence": {
+            "rms": 0.014526194892823696,
+            "mean_square_over_velocity_scale2": 0.001661453941428669
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.00017733016284182668,
+            "relative_l2": 0.00019984415848739445
+          },
+          "temporal": {
+            "difference_rms": 0.0008764625526964664,
+            "relative_l2": 0.0019927415996789932
+          },
+          "advection": {
+            "difference_rms": 0.4700208008289337,
+            "relative_l2": 0.5006284117698669
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0005207681679166853,
+            "relative_l2": 0.0010102995438501239
+          },
+          "diffusion": {
+            "difference_rms": 0.28531673550605774,
+            "relative_l2": 0.8395166397094727
+          },
+          "momentum": {
+            "difference_rms": 0.6823571920394897,
+            "relative_l2": 0.7481786012649536
+          },
+          "divergence": {
+            "difference_rms": 2.5258837013097946e-06,
+            "relative_l2": 0.00017388521519023925
+          }
+        },
+        "time_stencil": [
+          0.4975,
+          0.5025
+        ],
+        "backward_second_order": false
+      },
+      "coarse_to_fine_fd": {
+        "velocity": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "temporal": {
+          "difference_rms": 0.0007971125305630267,
+          "relative_l2": 0.0018127779476344585
+        },
+        "advection": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "pressure_gradient": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "diffusion": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "momentum": {
+          "difference_rms": 0.0007971128216013312,
+          "relative_l2": 0.002080371603369713
+        },
+        "divergence": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        }
+      }
+    },
+    {
+      "offset": 20,
+      "frame": 23,
+      "time": 1.0,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "field_errors": {
+        "velocity_relative_l2": 0.11946357772200314,
+        "pressure_relative_l2": 0.215409913459794
+      },
+      "reference_instantaneous_fd": {
+        "velocity": {
+          "rms": 0.8902261853218079,
+          "mean_square_over_velocity_scale2": 6.240010092828451
+        },
+        "temporal": {
+          "rms": 0.45360979437828064,
+          "mean_square_over_velocity_scale2": 1.6201283786931906
+        },
+        "advection": {
+          "rms": 0.6688138246536255,
+          "mean_square_over_velocity_scale2": 3.522046546908736
+        },
+        "pressure_gradient": {
+          "rms": 0.5390540361404419,
+          "mean_square_over_velocity_scale2": 2.2879639966325933
+        },
+        "diffusion": {
+          "rms": 0.03404700756072998,
+          "mean_square_over_velocity_scale2": 0.00912730371459637
+        },
+        "momentum": {
+          "rms": 0.02387329190969467,
+          "mean_square_over_velocity_scale2": 0.004487548996015889
+        },
+        "divergence": {
+          "rms": 0.012434865348041058,
+          "mean_square_over_velocity_scale2": 0.0012174938488669486
+        }
+      },
+      "reference_fd_time_step": 0.05,
+      "reference_backward_second_order": false,
+      "v17_midpoint_fd_momentum_loss_full_interior": 1.866331934928894,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.006452491506934166,
+      "midpoint_time": 0.975,
+      "continuous_centre": {
+        "velocity": {
+          "rms": 0.893108606338501,
+          "mean_square_over_velocity_scale2": 6.280483841030204
+        },
+        "temporal": {
+          "rms": 0.4485429525375366,
+          "mean_square_over_velocity_scale2": 1.5841365912442988
+        },
+        "advection": {
+          "rms": 1.2378100156784058,
+          "mean_square_over_velocity_scale2": 12.064034155437849
+        },
+        "pressure_gradient": {
+          "rms": 0.5859904885292053,
+          "mean_square_over_velocity_scale2": 2.703744701424487
+        },
+        "diffusion": {
+          "rms": 0.5179025530815125,
+          "mean_square_over_velocity_scale2": 2.1119355747080526
+        },
+        "momentum": {
+          "rms": 1.3245514631271362,
+          "mean_square_over_velocity_scale2": 13.814089179230969
+        },
+        "divergence": {
+          "rms": 0.014526340179145336,
+          "mean_square_over_velocity_scale2": 0.0016614871693158768
+        }
+      },
+      "continuous_jitter": {
+        "velocity": {
+          "rms": 0.8932453393936157,
+          "mean_square_over_velocity_scale2": 6.282407094974206
+        },
+        "temporal": {
+          "rms": 0.4480922222137451,
+          "mean_square_over_velocity_scale2": 1.5809546337673985
+        },
+        "advection": {
+          "rms": 1.0287195444107056,
+          "mean_square_over_velocity_scale2": 8.332561069951565
+        },
+        "pressure_gradient": {
+          "rms": 0.5862913727760315,
+          "mean_square_over_velocity_scale2": 2.7065218744878434
+        },
+        "diffusion": {
+          "rms": 0.42784249782562256,
+          "mean_square_over_velocity_scale2": 1.4412934515014133
+        },
+        "momentum": {
+          "rms": 0.8625948429107666,
+          "mean_square_over_velocity_scale2": 5.858659528950879
+        },
+        "divergence": {
+          "rms": 0.01873880811035633,
+          "mean_square_over_velocity_scale2": 0.0027648301636270236
+        }
+      },
+      "fd_0.025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8931030035018921,
+            "mean_square_over_velocity_scale2": 6.280404996066174
+          },
+          "temporal": {
+            "rms": 0.44800224900245667,
+            "mean_square_over_velocity_scale2": 1.5803196502178047
+          },
+          "advection": {
+            "rms": 0.836003303527832,
+            "mean_square_over_velocity_scale2": 5.503013361977413
+          },
+          "pressure_gradient": {
+            "rms": 0.5857873558998108,
+            "mean_square_over_velocity_scale2": 2.7018709602406337
+          },
+          "diffusion": {
+            "rms": 0.11500374972820282,
+            "mean_square_over_velocity_scale2": 0.10413784477915898
+          },
+          "momentum": {
+            "rms": 0.49068957567214966,
+            "mean_square_over_velocity_scale2": 1.8958249308391493
+          },
+          "divergence": {
+            "rms": 0.014526228420436382,
+            "mean_square_over_velocity_scale2": 0.0016614616182164031
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.00036277499748393893,
+            "relative_l2": 0.000406193605158478
+          },
+          "temporal": {
+            "difference_rms": 0.0011243647895753384,
+            "relative_l2": 0.0025067050009965897
+          },
+          "advection": {
+            "difference_rms": 0.7144325971603394,
+            "relative_l2": 0.577174723148346
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.000725861988030374,
+            "relative_l2": 0.0012386924354359508
+          },
+          "diffusion": {
+            "difference_rms": 0.4365445077419281,
+            "relative_l2": 0.8429086208343506
+          },
+          "momentum": {
+            "difference_rms": 1.0299214124679565,
+            "relative_l2": 0.7775624990463257
+          },
+          "divergence": {
+            "difference_rms": 2.4966832370409975e-06,
+            "relative_l2": 0.0001718728308333084
+          }
+        },
+        "time_stencil": [
+          0.975,
+          1.025
+        ],
+        "backward_second_order": false
+      },
+      "fd_0.0025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8931030035018921,
+            "mean_square_over_velocity_scale2": 6.280404996066174
+          },
+          "temporal": {
+            "rms": 0.44823551177978516,
+            "mean_square_over_velocity_scale2": 1.5819657734995494
+          },
+          "advection": {
+            "rms": 0.836003303527832,
+            "mean_square_over_velocity_scale2": 5.503013361977413
+          },
+          "pressure_gradient": {
+            "rms": 0.5857873558998108,
+            "mean_square_over_velocity_scale2": 2.7018709602406337
+          },
+          "diffusion": {
+            "rms": 0.11500374972820282,
+            "mean_square_over_velocity_scale2": 0.10413784477915898
+          },
+          "momentum": {
+            "rms": 0.49074333906173706,
+            "mean_square_over_velocity_scale2": 1.8962403921749051
+          },
+          "divergence": {
+            "rms": 0.014526228420436382,
+            "mean_square_over_velocity_scale2": 0.0016614616182164031
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.00036277499748393893,
+            "relative_l2": 0.000406193605158478
+          },
+          "temporal": {
+            "difference_rms": 0.0015042813029140234,
+            "relative_l2": 0.0033537065610289574
+          },
+          "advection": {
+            "difference_rms": 0.7144325971603394,
+            "relative_l2": 0.577174723148346
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.000725861988030374,
+            "relative_l2": 0.0012386924354359508
+          },
+          "diffusion": {
+            "difference_rms": 0.4365445077419281,
+            "relative_l2": 0.8429086208343506
+          },
+          "momentum": {
+            "difference_rms": 1.0298776626586914,
+            "relative_l2": 0.7775294184684753
+          },
+          "divergence": {
+            "difference_rms": 2.4966832370409975e-06,
+            "relative_l2": 0.0001718728308333084
+          }
+        },
+        "time_stencil": [
+          0.9975,
+          1.0025
+        ],
+        "backward_second_order": false
+      },
+      "coarse_to_fine_fd": {
+        "velocity": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "temporal": {
+          "difference_rms": 0.0013877635356038809,
+          "relative_l2": 0.003097670618444681
+        },
+        "advection": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "pressure_gradient": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "diffusion": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "momentum": {
+          "difference_rms": 0.0013877643505111337,
+          "relative_l2": 0.002828192198649049
+        },
+        "divergence": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        }
+      }
+    },
+    {
+      "offset": 40,
+      "frame": 43,
+      "time": 2.0,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "field_errors": {
+        "velocity_relative_l2": 0.14308116615929353,
+        "pressure_relative_l2": 0.24113293416260945
+      },
+      "reference_instantaneous_fd": {
+        "velocity": {
+          "rms": 0.904259443283081,
+          "mean_square_over_velocity_scale2": 6.438292505850287
+        },
+        "temporal": {
+          "rms": 0.45368337631225586,
+          "mean_square_over_velocity_scale2": 1.6206540117867199
+        },
+        "advection": {
+          "rms": 0.757545530796051,
+          "mean_square_over_velocity_scale2": 4.518580953445883
+        },
+        "pressure_gradient": {
+          "rms": 0.5560824275016785,
+          "mean_square_over_velocity_scale2": 2.434797958706574
+        },
+        "diffusion": {
+          "rms": 0.042023275047540665,
+          "mean_square_over_velocity_scale2": 0.013904788254810984
+        },
+        "momentum": {
+          "rms": 0.028091521933674812,
+          "mean_square_over_velocity_scale2": 0.006213482912939411
+        },
+        "divergence": {
+          "rms": 0.0125862592831254,
+          "mean_square_over_velocity_scale2": 0.0012473201170560327
+        }
+      },
+      "reference_fd_time_step": 0.05,
+      "reference_backward_second_order": false,
+      "v17_midpoint_fd_momentum_loss_full_interior": 2.2038075923919678,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.005543756764382124,
+      "midpoint_time": 1.975,
+      "continuous_centre": {
+        "velocity": {
+          "rms": 0.8955209255218506,
+          "mean_square_over_velocity_scale2": 6.314457572852153
+        },
+        "temporal": {
+          "rms": 0.509696900844574,
+          "mean_square_over_velocity_scale2": 2.0455427178697936
+        },
+        "advection": {
+          "rms": 1.291768193244934,
+          "mean_square_over_velocity_scale2": 13.13873982394567
+        },
+        "pressure_gradient": {
+          "rms": 0.5460603833198547,
+          "mean_square_over_velocity_scale2": 2.3478260969413824
+        },
+        "diffusion": {
+          "rms": 0.5889366269111633,
+          "mean_square_over_velocity_scale2": 2.730999950612134
+        },
+        "momentum": {
+          "rms": 1.501522421836853,
+          "mean_square_over_velocity_scale2": 17.752037514269215
+        },
+        "divergence": {
+          "rms": 0.014526336453855038,
+          "mean_square_over_velocity_scale2": 0.001661486367263427
+        }
+      },
+      "continuous_jitter": {
+        "velocity": {
+          "rms": 0.8954077363014221,
+          "mean_square_over_velocity_scale2": 6.312861431645819
+        },
+        "temporal": {
+          "rms": 0.5098093748092651,
+          "mean_square_over_velocity_scale2": 2.046445680434035
+        },
+        "advection": {
+          "rms": 1.038697361946106,
+          "mean_square_over_velocity_scale2": 8.494985450374202
+        },
+        "pressure_gradient": {
+          "rms": 0.5476794838905334,
+          "mean_square_over_velocity_scale2": 2.3617694533777702
+        },
+        "diffusion": {
+          "rms": 0.47630998492240906,
+          "mean_square_over_velocity_scale2": 1.7863391946502862
+        },
+        "momentum": {
+          "rms": 0.9693126678466797,
+          "mean_square_over_velocity_scale2": 7.397966657046064
+        },
+        "divergence": {
+          "rms": 0.018741048872470856,
+          "mean_square_over_velocity_scale2": 0.0027654917423192227
+        }
+      },
+      "fd_0.025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8954815864562988,
+            "mean_square_over_velocity_scale2": 6.313902842212374
+          },
+          "temporal": {
+            "rms": 0.5091803073883057,
+            "mean_square_over_velocity_scale2": 2.041398429447999
+          },
+          "advection": {
+            "rms": 0.8251659274101257,
+            "mean_square_over_velocity_scale2": 5.36126325747991
+          },
+          "pressure_gradient": {
+            "rms": 0.5458729267120361,
+            "mean_square_over_velocity_scale2": 2.346214468331401
+          },
+          "diffusion": {
+            "rms": 0.13039100170135498,
+            "mean_square_over_velocity_scale2": 0.13386893729970364
+          },
+          "momentum": {
+            "rms": 0.5225224494934082,
+            "mean_square_over_velocity_scale2": 2.1497820960726832
+          },
+          "divergence": {
+            "rms": 0.01452633086591959,
+            "mean_square_over_velocity_scale2": 0.0016614851068952913
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.0004884671652689576,
+            "relative_l2": 0.000545455957762897
+          },
+          "temporal": {
+            "difference_rms": 0.0013285706518217921,
+            "relative_l2": 0.0026065895799547434
+          },
+          "advection": {
+            "difference_rms": 0.797919750213623,
+            "relative_l2": 0.6176958084106445
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0011009080335497856,
+            "relative_l2": 0.00201609218493104
+          },
+          "diffusion": {
+            "difference_rms": 0.495907723903656,
+            "relative_l2": 0.842039167881012
+          },
+          "momentum": {
+            "difference_rms": 1.1912764310836792,
+            "relative_l2": 0.7933790683746338
+          },
+          "divergence": {
+            "difference_rms": 2.550902536313515e-06,
+            "relative_l2": 0.00017560536798555404
+          }
+        },
+        "time_stencil": [
+          1.975,
+          2.025
+        ],
+        "backward_second_order": false
+      },
+      "fd_0.0025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8954815864562988,
+            "mean_square_over_velocity_scale2": 6.313902842212374
+          },
+          "temporal": {
+            "rms": 0.5095301270484924,
+            "mean_square_over_velocity_scale2": 2.0442044653999734
+          },
+          "advection": {
+            "rms": 0.8251659274101257,
+            "mean_square_over_velocity_scale2": 5.36126325747991
+          },
+          "pressure_gradient": {
+            "rms": 0.5458729267120361,
+            "mean_square_over_velocity_scale2": 2.346214468331401
+          },
+          "diffusion": {
+            "rms": 0.13039100170135498,
+            "mean_square_over_velocity_scale2": 0.13386893729970364
+          },
+          "momentum": {
+            "rms": 0.5224034786224365,
+            "mean_square_over_velocity_scale2": 2.148803339093616
+          },
+          "divergence": {
+            "rms": 0.01452633086591959,
+            "mean_square_over_velocity_scale2": 0.0016614851068952913
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.0004884671652689576,
+            "relative_l2": 0.000545455957762897
+          },
+          "temporal": {
+            "difference_rms": 0.002346050925552845,
+            "relative_l2": 0.004602835513651371
+          },
+          "advection": {
+            "difference_rms": 0.797919750213623,
+            "relative_l2": 0.6176958084106445
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0011009080335497856,
+            "relative_l2": 0.00201609218493104
+          },
+          "diffusion": {
+            "difference_rms": 0.495907723903656,
+            "relative_l2": 0.842039167881012
+          },
+          "momentum": {
+            "difference_rms": 1.1913833618164062,
+            "relative_l2": 0.7934502959251404
+          },
+          "divergence": {
+            "difference_rms": 2.550902536313515e-06,
+            "relative_l2": 0.00017560536798555404
+          }
+        },
+        "time_stencil": [
+          1.9975,
+          2.0025
+        ],
+        "backward_second_order": false
+      },
+      "coarse_to_fine_fd": {
+        "velocity": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "temporal": {
+          "difference_rms": 0.0022234811913222075,
+          "relative_l2": 0.004366785753518343
+        },
+        "advection": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "pressure_gradient": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "diffusion": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "momentum": {
+          "difference_rms": 0.002223481424152851,
+          "relative_l2": 0.004255284089595079
+        },
+        "divergence": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        }
+      }
+    },
+    {
+      "offset": 80,
+      "frame": 83,
+      "time": 4.0,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "field_errors": {
+        "velocity_relative_l2": 0.12205750599693037,
+        "pressure_relative_l2": 0.3089240900143505
+      },
+      "reference_instantaneous_fd": {
+        "velocity": {
+          "rms": 0.8926264643669128,
+          "mean_square_over_velocity_scale2": 6.273705520699987
+        },
+        "temporal": {
+          "rms": 0.4711771607398987,
+          "mean_square_over_velocity_scale2": 1.7480467064578644
+        },
+        "advection": {
+          "rms": 0.6605569124221802,
+          "mean_square_over_velocity_scale2": 3.435619325505188
+        },
+        "pressure_gradient": {
+          "rms": 0.5371797680854797,
+          "mean_square_over_velocity_scale2": 2.2720814295332925
+        },
+        "diffusion": {
+          "rms": 0.0317082516849041,
+          "mean_square_over_velocity_scale2": 0.00791642542349357
+        },
+        "momentum": {
+          "rms": 0.02226226031780243,
+          "mean_square_over_velocity_scale2": 0.0039023215722005385
+        },
+        "divergence": {
+          "rms": 0.011124872602522373,
+          "mean_square_over_velocity_scale2": 0.0009744838727722776
+        }
+      },
+      "reference_fd_time_step": 0.05,
+      "reference_backward_second_order": false,
+      "v17_midpoint_fd_momentum_loss_full_interior": 1.5835273265838623,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.007403816562145948,
+      "midpoint_time": 3.975,
+      "continuous_centre": {
+        "velocity": {
+          "rms": 0.8974510431289673,
+          "mean_square_over_velocity_scale2": 6.3417060169685
+        },
+        "temporal": {
+          "rms": 0.4386453628540039,
+          "mean_square_over_velocity_scale2": 1.5149965975194566
+        },
+        "advection": {
+          "rms": 1.0554511547088623,
+          "mean_square_over_velocity_scale2": 8.771237554461646
+        },
+        "pressure_gradient": {
+          "rms": 0.5003255605697632,
+          "mean_square_over_velocity_scale2": 1.9710152195939075
+        },
+        "diffusion": {
+          "rms": 0.4927102029323578,
+          "mean_square_over_velocity_scale2": 1.9114708457175464
+        },
+        "momentum": {
+          "rms": 1.2333199977874756,
+          "mean_square_over_velocity_scale2": 11.97667018077119
+        },
+        "divergence": {
+          "rms": 0.014526362530887127,
+          "mean_square_over_velocity_scale2": 0.0016614922107884185
+        }
+      },
+      "continuous_jitter": {
+        "velocity": {
+          "rms": 0.8973827362060547,
+          "mean_square_over_velocity_scale2": 6.340740635474402
+        },
+        "temporal": {
+          "rms": 0.437495619058609,
+          "mean_square_over_velocity_scale2": 1.5070649349326786
+        },
+        "advection": {
+          "rms": 0.8190081715583801,
+          "mean_square_over_velocity_scale2": 5.281545367063053
+        },
+        "pressure_gradient": {
+          "rms": 0.5015443563461304,
+          "mean_square_over_velocity_scale2": 1.9806296120528721
+        },
+        "diffusion": {
+          "rms": 0.30444878339767456,
+          "mean_square_over_velocity_scale2": 0.7298155033683266
+        },
+        "momentum": {
+          "rms": 0.6813700199127197,
+          "mean_square_over_velocity_scale2": 3.6555322442986458
+        },
+        "divergence": {
+          "rms": 0.018742453306913376,
+          "mean_square_over_velocity_scale2": 0.0027659062888568705
+        }
+      },
+      "fd_0.025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8974423408508301,
+            "mean_square_over_velocity_scale2": 6.341583056369835
+          },
+          "temporal": {
+            "rms": 0.43859124183654785,
+            "mean_square_over_velocity_scale2": 1.51462278791321
+          },
+          "advection": {
+            "rms": 0.687913179397583,
+            "mean_square_over_velocity_scale2": 3.7260773679181547
+          },
+          "pressure_gradient": {
+            "rms": 0.500230073928833,
+            "mean_square_over_velocity_scale2": 1.9702626725711627
+          },
+          "diffusion": {
+            "rms": 0.10323543101549149,
+            "mean_square_over_velocity_scale2": 0.08391548278615225
+          },
+          "momentum": {
+            "rms": 0.4708772301673889,
+            "mean_square_over_velocity_scale2": 1.7458220347867912
+          },
+          "divergence": {
+            "rms": 0.014526247046887875,
+            "mean_square_over_velocity_scale2": 0.001661465857636495
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.00018916287808679044,
+            "relative_l2": 0.00021077792916912585
+          },
+          "temporal": {
+            "difference_rms": 0.0009501175372861326,
+            "relative_l2": 0.0021660265047103167
+          },
+          "advection": {
+            "difference_rms": 0.5867354869842529,
+            "relative_l2": 0.5559096336364746
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.00033123986213468015,
+            "relative_l2": 0.0006620486383326352
+          },
+          "diffusion": {
+            "difference_rms": 0.41387853026390076,
+            "relative_l2": 0.840004026889801
+          },
+          "momentum": {
+            "difference_rms": 0.9232373833656311,
+            "relative_l2": 0.7485789656639099
+          },
+          "divergence": {
+            "difference_rms": 2.5832928258751053e-06,
+            "relative_l2": 0.0001778348087100312
+          }
+        },
+        "time_stencil": [
+          3.975,
+          4.025
+        ],
+        "backward_second_order": false
+      },
+      "fd_0.0025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8974423408508301,
+            "mean_square_over_velocity_scale2": 6.341583056369835
+          },
+          "temporal": {
+            "rms": 0.43858882784843445,
+            "mean_square_over_velocity_scale2": 1.5146061272214062
+          },
+          "advection": {
+            "rms": 0.687913179397583,
+            "mean_square_over_velocity_scale2": 3.7260773679181547
+          },
+          "pressure_gradient": {
+            "rms": 0.500230073928833,
+            "mean_square_over_velocity_scale2": 1.9702626725711627
+          },
+          "diffusion": {
+            "rms": 0.10323543101549149,
+            "mean_square_over_velocity_scale2": 0.08391548278615225
+          },
+          "momentum": {
+            "rms": 0.4708876311779022,
+            "mean_square_over_velocity_scale2": 1.7458991198185878
+          },
+          "divergence": {
+            "rms": 0.014526247046887875,
+            "mean_square_over_velocity_scale2": 0.001661465857636495
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.00018916287808679044,
+            "relative_l2": 0.00021077792916912585
+          },
+          "temporal": {
+            "difference_rms": 0.0024166570510715246,
+            "relative_l2": 0.005509363953024149
+          },
+          "advection": {
+            "difference_rms": 0.5867354869842529,
+            "relative_l2": 0.5559096336364746
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.00033123986213468015,
+            "relative_l2": 0.0006620486383326352
+          },
+          "diffusion": {
+            "difference_rms": 0.41387853026390076,
+            "relative_l2": 0.840004026889801
+          },
+          "momentum": {
+            "difference_rms": 0.9233506321907043,
+            "relative_l2": 0.7486708760261536
+          },
+          "divergence": {
+            "difference_rms": 2.5832928258751053e-06,
+            "relative_l2": 0.0001778348087100312
+          }
+        },
+        "time_stencil": [
+          3.9975,
+          4.0025
+        ],
+        "backward_second_order": false
+      },
+      "coarse_to_fine_fd": {
+        "velocity": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "temporal": {
+          "difference_rms": 0.0023793026339262724,
+          "relative_l2": 0.00542487483471632
+        },
+        "advection": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "pressure_gradient": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "diffusion": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "momentum": {
+          "difference_rms": 0.0023793024010956287,
+          "relative_l2": 0.005052914377301931
+        },
+        "divergence": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        }
+      }
+    },
+    {
+      "offset": 160,
+      "frame": 163,
+      "time": 8.0,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "field_errors": {
+        "velocity_relative_l2": 0.16365434561806877,
+        "pressure_relative_l2": 0.2944308478277794
+      },
+      "reference_instantaneous_fd": {
+        "velocity": {
+          "rms": 0.8991173505783081,
+          "mean_square_over_velocity_scale2": 6.36527690669119
+        },
+        "temporal": {
+          "rms": 0.5063503980636597,
+          "mean_square_over_velocity_scale2": 2.0187701594291956
+        },
+        "advection": {
+          "rms": 0.7175272107124329,
+          "mean_square_over_velocity_scale2": 4.053790829123162
+        },
+        "pressure_gradient": {
+          "rms": 0.5128256678581238,
+          "mean_square_over_velocity_scale2": 2.07073297990429
+        },
+        "diffusion": {
+          "rms": 0.040967587381601334,
+          "mean_square_over_velocity_scale2": 0.013214944317647883
+        },
+        "momentum": {
+          "rms": 0.023886170238256454,
+          "mean_square_over_velocity_scale2": 0.0044923920178658846
+        },
+        "divergence": {
+          "rms": 0.01238891202956438,
+          "mean_square_over_velocity_scale2": 0.001208511892638997
+        }
+      },
+      "reference_fd_time_step": 0.05,
+      "reference_backward_second_order": false,
+      "v17_midpoint_fd_momentum_loss_full_interior": 1.7854511737823486,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.008098570629954338,
+      "midpoint_time": 7.975,
+      "continuous_centre": {
+        "velocity": {
+          "rms": 0.877498984336853,
+          "mean_square_over_velocity_scale2": 6.062863761949637
+        },
+        "temporal": {
+          "rms": 0.3834525942802429,
+          "mean_square_over_velocity_scale2": 1.157731644878261
+        },
+        "advection": {
+          "rms": 1.229515790939331,
+          "mean_square_over_velocity_scale2": 11.902899453355408
+        },
+        "pressure_gradient": {
+          "rms": 0.47621241211891174,
+          "mean_square_over_velocity_scale2": 1.785607532156704
+        },
+        "diffusion": {
+          "rms": 0.564723789691925,
+          "mean_square_over_velocity_scale2": 2.511058168930058
+        },
+        "momentum": {
+          "rms": 1.48306405544281,
+          "mean_square_over_velocity_scale2": 17.31826443561734
+        },
+        "divergence": {
+          "rms": 0.014526129700243473,
+          "mean_square_over_velocity_scale2": 0.001661439046168886
+        }
+      },
+      "continuous_jitter": {
+        "velocity": {
+          "rms": 0.8774766325950623,
+          "mean_square_over_velocity_scale2": 6.062554952507188
+        },
+        "temporal": {
+          "rms": 0.38378098607063293,
+          "mean_square_over_velocity_scale2": 1.1597155578198874
+        },
+        "advection": {
+          "rms": 0.9005039930343628,
+          "mean_square_over_velocity_scale2": 6.384926198083943
+        },
+        "pressure_gradient": {
+          "rms": 0.47699883580207825,
+          "mean_square_over_velocity_scale2": 1.7915099928790648
+        },
+        "diffusion": {
+          "rms": 0.4307655394077301,
+          "mean_square_over_velocity_scale2": 1.4610546745841717
+        },
+        "momentum": {
+          "rms": 0.8386351466178894,
+          "mean_square_over_velocity_scale2": 5.537716409716633
+        },
+        "divergence": {
+          "rms": 0.018745576962828636,
+          "mean_square_over_velocity_scale2": 0.0027668279617006617
+        }
+      },
+      "fd_0.025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8774880766868591,
+            "mean_square_over_velocity_scale2": 6.062713111750509
+          },
+          "temporal": {
+            "rms": 0.38326939940452576,
+            "mean_square_over_velocity_scale2": 1.1566258207919857
+          },
+          "advection": {
+            "rms": 0.698986828327179,
+            "mean_square_over_velocity_scale2": 3.847003250264288
+          },
+          "pressure_gradient": {
+            "rms": 0.4761168360710144,
+            "mean_square_over_velocity_scale2": 1.7848907704226928
+          },
+          "diffusion": {
+            "rms": 0.12042701244354248,
+            "mean_square_over_velocity_scale2": 0.11419113500477973
+          },
+          "momentum": {
+            "rms": 0.5033922791481018,
+            "mean_square_over_velocity_scale2": 1.995251598358227
+          },
+          "divergence": {
+            "rms": 0.014526279643177986,
+            "mean_square_over_velocity_scale2": 0.001661473419845308
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.000379382778191939,
+            "relative_l2": 0.00043234555050730705
+          },
+          "temporal": {
+            "difference_rms": 0.0007237245445139706,
+            "relative_l2": 0.001887389924377203
+          },
+          "advection": {
+            "difference_rms": 0.7851420044898987,
+            "relative_l2": 0.6385782361030579
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0006929552182555199,
+            "relative_l2": 0.0014551389031112194
+          },
+          "diffusion": {
+            "difference_rms": 0.47706058621406555,
+            "relative_l2": 0.8447679877281189
+          },
+          "momentum": {
+            "difference_rms": 1.1548670530319214,
+            "relative_l2": 0.7787033319473267
+          },
+          "divergence": {
+            "difference_rms": 2.6810139388544485e-06,
+            "relative_l2": 0.00018456490943208337
+          }
+        },
+        "time_stencil": [
+          7.975,
+          8.025
+        ],
+        "backward_second_order": false
+      },
+      "fd_0.0025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8774880766868591,
+            "mean_square_over_velocity_scale2": 6.062713111750509
+          },
+          "temporal": {
+            "rms": 0.3834407329559326,
+            "mean_square_over_velocity_scale2": 1.1576601916296094
+          },
+          "advection": {
+            "rms": 0.698986828327179,
+            "mean_square_over_velocity_scale2": 3.847003250264288
+          },
+          "pressure_gradient": {
+            "rms": 0.4761168360710144,
+            "mean_square_over_velocity_scale2": 1.7848907704226928
+          },
+          "diffusion": {
+            "rms": 0.12042701244354248,
+            "mean_square_over_velocity_scale2": 0.11419113500477973
+          },
+          "momentum": {
+            "rms": 0.5033840537071228,
+            "mean_square_over_velocity_scale2": 1.995186363536798
+          },
+          "divergence": {
+            "rms": 0.014526279643177986,
+            "mean_square_over_velocity_scale2": 0.001661473419845308
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.000379382778191939,
+            "relative_l2": 0.00043234555050730705
+          },
+          "temporal": {
+            "difference_rms": 0.0021610260009765625,
+            "relative_l2": 0.005635705776512623
+          },
+          "advection": {
+            "difference_rms": 0.7851420044898987,
+            "relative_l2": 0.6385782361030579
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0006929552182555199,
+            "relative_l2": 0.0014551389031112194
+          },
+          "diffusion": {
+            "difference_rms": 0.47706058621406555,
+            "relative_l2": 0.8447679877281189
+          },
+          "momentum": {
+            "difference_rms": 1.154910922050476,
+            "relative_l2": 0.77873295545578
+          },
+          "divergence": {
+            "difference_rms": 2.6810139388544485e-06,
+            "relative_l2": 0.00018456490943208337
+          }
+        },
+        "time_stencil": [
+          7.9975,
+          8.0025
+        ],
+        "backward_second_order": false
+      },
+      "coarse_to_fine_fd": {
+        "velocity": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "temporal": {
+          "difference_rms": 0.00208879797719419,
+          "relative_l2": 0.005449946969747543
+        },
+        "advection": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "pressure_gradient": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "diffusion": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "momentum": {
+          "difference_rms": 0.002088798675686121,
+          "relative_l2": 0.004149444866925478
+        },
+        "divergence": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        }
+      }
+    },
+    {
+      "offset": 238,
+      "frame": 241,
+      "time": 11.9,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "field_errors": {
+        "velocity_relative_l2": 0.27796724270974965,
+        "pressure_relative_l2": 0.5089207980553307
+      },
+      "reference_instantaneous_fd": {
+        "velocity": {
+          "rms": 0.907247006893158,
+          "mean_square_over_velocity_scale2": 6.480905393016599
+        },
+        "temporal": {
+          "rms": 0.530428409576416,
+          "mean_square_over_velocity_scale2": 2.2153285428357816
+        },
+        "advection": {
+          "rms": 0.7577338814735413,
+          "mean_square_over_velocity_scale2": 4.52082803492072
+        },
+        "pressure_gradient": {
+          "rms": 0.5716212391853333,
+          "mean_square_over_velocity_scale2": 2.572771717947752
+        },
+        "diffusion": {
+          "rms": 0.045103367418050766,
+          "mean_square_over_velocity_scale2": 0.016017786725924934
+        },
+        "momentum": {
+          "rms": 0.029255300760269165,
+          "mean_square_over_velocity_scale2": 0.006738973470290437
+        },
+        "divergence": {
+          "rms": 0.01262237224727869,
+          "mean_square_over_velocity_scale2": 0.0012544880598002817
+        }
+      },
+      "reference_fd_time_step": 0.05,
+      "reference_backward_second_order": true,
+      "v17_midpoint_fd_momentum_loss_full_interior": 4.627270698547363,
+      "reference_midpoint_fd_momentum_loss_full_interior": 0.00644171005114913,
+      "midpoint_time": 11.875,
+      "continuous_centre": {
+        "velocity": {
+          "rms": 0.8898887038230896,
+          "mean_square_over_velocity_scale2": 6.235280333617212
+        },
+        "temporal": {
+          "rms": 0.3125317096710205,
+          "mean_square_over_velocity_scale2": 0.7690821727160102
+        },
+        "advection": {
+          "rms": 1.4490097761154175,
+          "mean_square_over_velocity_scale2": 16.532069385842487
+        },
+        "pressure_gradient": {
+          "rms": 0.48685988783836365,
+          "mean_square_over_velocity_scale2": 1.8663478258720012
+        },
+        "diffusion": {
+          "rms": 0.7964924573898315,
+          "mean_square_over_velocity_scale2": 4.995142912487348
+        },
+        "momentum": {
+          "rms": 1.975218653678894,
+          "mean_square_over_velocity_scale2": 30.719556112519825
+        },
+        "divergence": {
+          "rms": 0.014526248909533024,
+          "mean_square_over_velocity_scale2": 0.0016614662013732593
+        }
+      },
+      "continuous_jitter": {
+        "velocity": {
+          "rms": 0.8898071050643921,
+          "mean_square_over_velocity_scale2": 6.234136612323524
+        },
+        "temporal": {
+          "rms": 0.31286346912384033,
+          "mean_square_over_velocity_scale2": 0.7707158591433096
+        },
+        "advection": {
+          "rms": 1.054931640625,
+          "mean_square_over_velocity_scale2": 8.762604030900428
+        },
+        "pressure_gradient": {
+          "rms": 0.48642128705978394,
+          "mean_square_over_velocity_scale2": 1.8629865899649865
+        },
+        "diffusion": {
+          "rms": 0.5205660462379456,
+          "mean_square_over_velocity_scale2": 2.133714149444861
+        },
+        "momentum": {
+          "rms": 1.1303093433380127,
+          "mean_square_over_velocity_scale2": 10.0595661439629
+        },
+        "divergence": {
+          "rms": 0.018742617219686508,
+          "mean_square_over_velocity_scale2": 0.0027659546411617037
+        }
+      },
+      "fd_0.025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8898537755012512,
+            "mean_square_over_velocity_scale2": 6.234790368483601
+          },
+          "temporal": {
+            "rms": 0.31301257014274597,
+            "mean_square_over_velocity_scale2": 0.7714506308505031
+          },
+          "advection": {
+            "rms": 0.8352726101875305,
+            "mean_square_over_velocity_scale2": 5.493398030887923
+          },
+          "pressure_gradient": {
+            "rms": 0.4867105782032013,
+            "mean_square_over_velocity_scale2": 1.8652031659477888
+          },
+          "diffusion": {
+            "rms": 0.1584659218788147,
+            "mean_square_over_velocity_scale2": 0.1977225932446843
+          },
+          "momentum": {
+            "rms": 0.8143519759178162,
+            "mean_square_over_velocity_scale2": 5.221663555513257
+          },
+          "divergence": {
+            "rms": 0.014526254497468472,
+            "mean_square_over_velocity_scale2": 0.0016614675763203161
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.0003993604623246938,
+            "relative_l2": 0.00044877571053802967
+          },
+          "temporal": {
+            "difference_rms": 0.001423920737579465,
+            "relative_l2": 0.004556083586066961
+          },
+          "advection": {
+            "difference_rms": 0.9853065609931946,
+            "relative_l2": 0.6799861192703247
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0007557460339739919,
+            "relative_l2": 0.0015522864414379
+          },
+          "diffusion": {
+            "difference_rms": 0.6708439588546753,
+            "relative_l2": 0.8422477841377258
+          },
+          "momentum": {
+            "difference_rms": 1.5384167432785034,
+            "relative_l2": 0.7788589000701904
+          },
+          "divergence": {
+            "difference_rms": 2.647307610459393e-06,
+            "relative_l2": 0.0001822430349420756
+          }
+        },
+        "time_stencil": [
+          11.875,
+          11.85
+        ],
+        "backward_second_order": true
+      },
+      "fd_0.0025": {
+        "terms": {
+          "velocity": {
+            "rms": 0.8898537755012512,
+            "mean_square_over_velocity_scale2": 6.234790368483601
+          },
+          "temporal": {
+            "rms": 0.31257885694503784,
+            "mean_square_over_velocity_scale2": 0.7693141904487009
+          },
+          "advection": {
+            "rms": 0.8352726101875305,
+            "mean_square_over_velocity_scale2": 5.493398030887923
+          },
+          "pressure_gradient": {
+            "rms": 0.4867105782032013,
+            "mean_square_over_velocity_scale2": 1.8652031659477888
+          },
+          "diffusion": {
+            "rms": 0.1584659218788147,
+            "mean_square_over_velocity_scale2": 0.1977225932446843
+          },
+          "momentum": {
+            "rms": 0.8136346936225891,
+            "mean_square_over_velocity_scale2": 5.212468730898592
+          },
+          "divergence": {
+            "rms": 0.014526254497468472,
+            "mean_square_over_velocity_scale2": 0.0016614675763203161
+          }
+        },
+        "versus_continuous": {
+          "velocity": {
+            "difference_rms": 0.0003993604623246938,
+            "relative_l2": 0.00044877571053802967
+          },
+          "temporal": {
+            "difference_rms": 0.009680935181677341,
+            "relative_l2": 0.03097584843635559
+          },
+          "advection": {
+            "difference_rms": 0.9853065609931946,
+            "relative_l2": 0.6799861192703247
+          },
+          "pressure_gradient": {
+            "difference_rms": 0.0007557460339739919,
+            "relative_l2": 0.0015522864414379
+          },
+          "diffusion": {
+            "difference_rms": 0.6708439588546753,
+            "relative_l2": 0.8422477841377258
+          },
+          "momentum": {
+            "difference_rms": 1.5389174222946167,
+            "relative_l2": 0.7791124582290649
+          },
+          "divergence": {
+            "difference_rms": 2.647307610459393e-06,
+            "relative_l2": 0.0001822430349420756
+          }
+        },
+        "time_stencil": [
+          11.8975,
+          11.895
+        ],
+        "backward_second_order": true
+      },
+      "coarse_to_fine_fd": {
+        "velocity": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "temporal": {
+          "difference_rms": 0.009433886967599392,
+          "relative_l2": 0.030139002948999405
+        },
+        "advection": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "pressure_gradient": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "diffusion": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        },
+        "momentum": {
+          "difference_rms": 0.009433886967599392,
+          "relative_l2": 0.011584533378481865
+        },
+        "divergence": {
+          "difference_rms": 0.0,
+          "relative_l2": 0.0
+        }
+      }
+    }
+  ]
+}

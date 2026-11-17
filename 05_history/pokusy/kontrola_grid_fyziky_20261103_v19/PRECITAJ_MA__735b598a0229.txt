@@ -1,0 +1,89 @@
+V19 – KONTROLA FYZIKY SKUTOČNÉHO VÝSTUPU, 03.11.2026
+
+DOKONČENÉ A OVERENÉ
+142615COMPLETED0:0, obe30kvetvyhotové, matchedstart/samplingTrue,freezeOK.
+Po rovnakých30k je FDmomentumloss o26,28%nižší, ale chybaUstále39,20%.
+Vybranéváhy: kontrola0/U39,43%/p55,07%; gridNS20k/U39,16%/p54,98%.
+Obe mass6/6 aqueryp99pod5ms; žiadnyVALcaseaccuracyPass.
+Fyzikazlepšená, poľovápresnosťzatiaľnevyhovuje. Podrobnosti
+VYSLEDKY_142615.txt; JSON/logy/proveniencia vo vysledky_142615/.
+ĎalšiaGPUúloha vtejto kontrole nespustená. Nižšiehistorickápríprava.
+
+ČO SKÚŠAME
+Audit V18 ukázal nesúlad medzi fyzikou spojitého PINN a fyzikou poľa,
+ktoré vydáva jeho verzia s prúdovou funkciou. Teraz vyskúšame pridať
+do tréningu postih rovníc hybnosti na tomto skutočnom výstupnom poli.
+Pôvodný spojitý Navierov–Stokesov postih cez autograd zachováme.
+Metóda ostáva dátovo podporovaný PINN s doplnkovou FD podmienkou.
+Nie je to priama penalizácia rozdielu AD-FD; ten samostatne meriame.
+
+FÉROVÉ POROVNANIE
+Dve vetvy toho istého psi/p modelu. Obe začnú z rovnakého vybraného
+checkpointu V17 po100000 aktualizáciách. Kontrola používa doterajšie
+straty; druhá vetva navyše postih hybnosti skutočného gridvýstupu.
+Obe dostanú 30000 ďalších aktualizácií na existujúcich69TRAIN/6VAL.
+To je434/435 aktualizácií na TRAINprípad, rovnaké vzorky aj seed20261103.
+V oboch nový Adam a rovnaký malý learningrate; nejde o presné
+pokračovanie starého optimizeru zo100k. Rozdielny bude čas tréningu,
+nie architektúra ani vstupy. Štartovacie váhy aj celý sampler overí SHA.
+
+STRATY A NASTAVENIA
+L=data/trainStd +0.01*continuousNS +0.01*obstacleBC +lambdaFD*FDmomentum.
+Kontrola lambdaFD0; nová vetva lambdaFD0.01 s nábehom počas2000update.
+Pôvodný autogradNS je aktívny od začiatku, nevypína sa.
+FDmomentum je mean(ru²+rv²)/mean(trainStd_u,trainStd_v)²; spojitéNS
+má pôvodnú nenormalizovanú mierku. Rovnaké číselné koeficienty preto
+neznamenajú rovnaký príspevok alebo gradient. Nová váha je pilotná
+voľba určená vopred, nie hodnota dokázaná ako optimálna.
+FD:128 vnútorných bodov z rovnakej ADvzorky, ale v centrách buniek;
+čas z ADvzorky obmedzený na[.025,11.875], centrálne query t±.025.
+Žiadne nové CFD ani referenčné budúce vstupy. Tlaková gaugekonštanta
+sa v priestorových deriváciách ruší; všetky stencilbody sú vo fluide.
+Cropokraje nemeníme na steny ani periodické hranice.
+192x4/CNN32/FF1..16, LR3e-5cosine1.5e-6, gradientclip1,
+batch2048/PDE256/BC128, rovnaký zmrazený TRAINnormalizer.
+
+VYHODNOTENIE A OCHRANA PRED SKRYTÝM ZHORŠENÍM
+Vyhodnotíme aj update0, teda pôvodný stav pred doučením. Každých5000
+a na konci všetkých238 snímok všetkých6VAL. Best podľa rovnakého
+priemeru chybyU/p môže zostať na update0, ak sa výsledok zhorší.
+Žiadne vracanie tréningu na best počas učenia. Best a last zachované.
+TRAINmonitory3prípady na0/každých10000/koniec; nie audit všetkých69.
+Uložíme aj priemerné straty za intervaly, nielen náhodný poslednýbatch.
+Na selected aj last zopakujeme diagnostikuV18:9prípadov,8časov,512bodov,
+autograd/FD/jitter/členy hybnosti. Tieto8časové priemery nenahrádzajú
+výsledok238snímok. BodovéNPZ a všetky váhy zostanú iba na Perune.
+
+Budúce TRAINpolia sú iba tréningové ciele. Budúce VALpolia len vCPU
+scoreri a výbere checkpointu, nikdy vo vstupe alebo tréningovejstrate.
+Vstupy vždy známe snímky2,3, geometria,Re a požadovaný čas. HlavnýTEST
+zostáva zatvorený. Táto opakovane použitá VAL nie je konečný test hypotéz.
+Presnosť, kontinuita, hybnosť a p99query meriame samostatne. Architektúra
+predikcie sa nemení: 5ms je celé1024x256pole naH200 so vstupmiGPU,
+bezCPUprenosu/renderingu; nejde o kauzálny krok alebo meniacu sa prekážku.
+Úspech fyzikálnej podmienky nemusí priniesť lepšiu poľovú presnosť.
+
+PRÍPRAVA A SPUSTENIE
+3CPUtesty prešli0.812s: sparseFD zhodné s celým projektovaným poľom
+oboch reprezentácií, rôzny čas na bod a numericky overený gradient
+parametra s nenulovým spätným prenosom do encoderu. AST/bash-nOK.
+RodičovskýV18freeze a checkpoint overené, V19protokol/receipt/zdroje
+zmrazené predsubmission. Staré zmrazené zdroje a váhy sa nemenili.
+Najprv krátka skúška obochvetiev3update/1TRAIN/1VAL, s plne aktívnym
+novým FDpostihom, hardIC,238snímkami a overením zhody samplerov.
+Až po matchedSMOKE_COMPLETE automaticky plný69/6test obochvetiev.
+Novécommon19/grid_physics19/tests19/trainer19/init19/capture26/scripts222,223.
+Perun:results/fpo_pinn_grid_physics_20261103_v19.
+Lokálne len malé texty/JSON, žiadny download datasetu/externá predloha.
+OVERENÝ ŠTART
+GPUúloha142615, účtovanie142616afterany. IDregistrované predrelease.
+142615RUNNINGgpu09. Tri testy na výpočtovom uzle prešli0.876s;
+1TRAIN/1VAL načítané, prebieha krátka funkčná skúška obochvetiev.
+Plný69/6test začne automaticky až po matchedSMOKE_COMPLETE.
+Výslednápresnosť zatiaľneznáma. Maléprotocol/freeze/prepared/sampling/
+diagnostic_protocol/submission sú ajlokálne v zaznamy/.
+
+Kontrolná vetva krátkej skúšky už dokončila update0 aj3 s aktívnou
+spojitouPDE. FDdiagnostika aj gradienty konečné; priemerFDloss1.515,
+FDkoeficient0 podľa protokolu. Nová vetva ešte dokončuje svoju skúšku.
+Tieto3aktualizácie nie sú výsledok kvality ani splnenie presnosti.

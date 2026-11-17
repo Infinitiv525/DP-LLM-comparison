@@ -1,0 +1,30 @@
+NOVŠÍ STAV — 04.11.2026
+Súbeh zvýšený na 24 GPU. Tri dávky 143342 / 143656 / 143684 a jeden
+spoločný CPU zberač 143685. Vedecké pravidlá sa nemenia. Aktuálny opis:
+../paralelizacia_24gpu_20261104_v36/STAV.txt.
+
+HISTORICKÝ ZÁZNAM
+
+AKTUÁLNE DOPLNENIE — 04.11.2026
+Na pokyn používateľa zvýšené na 16 súbežných GPU. Dávky 143342 a
+143656, nadväzujúce úlohy 143655 a 143657. Nový aktuálny opis:
+../paralelizacia_16gpu_20261104_v35/STAV.txt. Vedecké pravidlá V33
+zostávajú rovnaké; nasledujúce veľké dávky budú cez dva uzly.
+
+HISTORICKÝ ZÁZNAM ŠTARTU
+
+HLAVNÁ SÉRIA JE SPUSTENÁ — V33 — 04.11.2026
+
+143342 beží na 8 H200, 143353 zabezpečí účtovanie a automatické
+nadväzovanie ďalšej dávky. Overených prvých 8 tréningov po 20 epochách;
+každý má celkový rozpočet 400 epoch. Plán spolu 395 tréningových pokusov.
+Prípravná reťaz 25/25 a 251/251 kontrol prešla. TEST zostáva uzavretý.
+
+Čítaj STAV.txt a protokol.txt. Veľké dáta a váhy zostali na Perune.
+
+Prevádzková revízia V34: nadväzovanie kontroluje aktuálny zoznam našich
+úloh, pretože plánovač po čase odstráni staré ID. Pôvodná čakajúca
+účtovacia 143343 bola pred spustením nahradená 143353; GPU 143342 ani
+tréningy sa nemenili. Staré registračné záznamy zostali zachované,
+zmenu dokladá zaznamy/operational_migration_143342_v34.json.
+Vedecký experiment a tréningové zdroje zostávajú V33.

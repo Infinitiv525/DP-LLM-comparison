@@ -1,0 +1,113 @@
+DLHŠÍ VLASTNÝ PRIEBEH PINN V7 – 31.10.2026
+
+AKTUÁLNE PO DOKONČENÍ
+139916COMPLETED0:0. Oba varianty dokončili celý plán300priebehov,
+5550aktualizácií vrátane125priebehov dĺžky238. Presnosť celého forecastu:
+C36.70%U/68.01%p,D52.35%U/68.34%p. Presnosť lepšia než perzistencia
+na tomto známom TRAINprípade, ale prahy10%/20% neprešli.
+D drží vnútornú divergenciu, C jej limit nespĺňa. P99krokuC1.83ms,
+D1.94ms; s FDmonitorom2.30/2.42ms. Rýchlostný prah splnený.
+Hlavný LLMexperiment stále nepripravený, generalizáciaV7 neoverená.
+Podrobnosti:VYSLEDKY_139916.txt; malé výsledky:vysledky_139916/.
+Pri poslednej kontrole fronta prázdna. Nasledujúci text je pôvodný
+plán a záznam spustenia; neznamená aktuálne bežiaci výpočet.
+
+ČO SA SPUSTILO
+Používateľ schválil spustenie ďalšieho tréningu. GPU úloha139916;
+účtovanie po jej skončení139917. Najprv automatické kontroly a krátka
+funkčná skúška oboch variantov, potom celý vývojový pilot.
+Nejde o hotový výsledok ani hlavné porovnanie LLM.
+
+PREČO
+V6 sa naučil pomerne presné samostatné zmeny zo známych tréningových
+stavov. Pri dlhom vlastnom priebehu však rástla chyba; samotná
+nestlačiteľnosť nepostačila. Výber checkpointu navyše často uprednostnil
+takmer nemenný model a z neho začínala ďalšia tréningová fáza.
+
+ČO SA MENÍ
+Učenie postupne pokrýva32,64,128 a všetkých238budúcich krokov.
+Na každom horizonte je50,50,75 a125celých tréningových priebehov.
+Každý priebeh začína z rovnakých známych snímok2 a3. Potom sa až do
+konca používajú vlastné predikcie; medzi blokmi sa nedosadzujú neskoršie
+pravdivé stavy. Budúce TRÉNINGOVÉ snímky slúžia iba ako ciele chyby.
+
+Kvôli pamäti sa gradient počíta cez8krokov naraz. Po bloku sa preruší
+gradientová história, ale zachová sa jeho skutočný predikovaný stav.
+Váhy sa aktualizujú medzi blokmi. Nejde o gradient cez celých238krokov
+naraz; tento rozdiel je súčasťou protokolu. Pri hodnotení celej trajektórie
+sa už váhy vôbec nemenia.
+
+Tréning pokračuje z POSLEDNÝCH naučených váh V6, nie z jeho vybraného
+takmer nemenného modelu. Medzi horizontmi pokračujú váhy aj stav
+optimalizátora. Najlepší výsledný checkpoint sa uchováva oddelene
+a počas učenia sa nenahráva späť. Použije sa až na záverečné hodnotenie.
+
+DVA VARIANTY
+C_long_rollout: prírastok bez pevnej extrapolácie + fyzikálne straty.
+D_long_rollout: prírastok rýchlosti z prúdovej funkcie + fyzikálne straty.
+Ide o pokračovanie konkrétnych modelovC/D, nie čistý dôkaz vplyvu jednej
+zmeny reprezentácie. Líšia sa reprezentáciou a pôvodnými naučenými váhami.
+
+Rovnaký plán pre obe ramená: pri bezchybnom priebehu44150predikovaných
+tréningových krokov a5550aktualizácií optimalizátora na rameno. Menšia
+počiatočná rýchlosť učenia3e-5, kosínový pokles na3e-6, gradientclip0.25.
+Clip sa týka gradientu učenia, nie orezávania predikovaných polí.
+
+FYZIKÁLNA KONTROLA
+Zachované váhy strát zV6: dáta škálované0.05*trainStd, kontinuálne
+NS0.01, podmienka prekážky0.01, vlastná FDhybnosť0.1 a kontinuita0.1.
+Kontinuálna PDE sa teraz počíta na vlastnom počiatočnom stave každého
+bloku, FDrezíduá na každom jeho vlastnom kroku. Pomer energie rýchlosti
+oproti tréningovému cieľu sa zaznamenáva; nepridáva sa ďalšia energystrata.
+Malá divergencia sa naďalej nepovažuje za záruku celej dynamiky.
+Okraje výrezu nie sú steny ani periodické fyzikálne hranice.
+
+AKO SA VYHODNOTÍ
+Stále všetkých238krokov zo známych2,3; kontrola pred učením, každých
+10priebehov a na začiatku/konci každého horizontu. Výber checkpointu:
+splnenie pôvodného limitu rastu vnútornej divergencie, potom chybaU/p.
+Pri výbere sa používa len tento známy tréningový prípad: pozitívna
+kontrola, nie nezávislá validácia alebo test generalizácie.
+Technické prahyU<=10%,p<=20%,p99GPUkroku<=5ms sa nemenia.
+Meria sa aj krok s FDmonitorom a zahriaty benchmark3x200.
+
+ZLYHANIA SA ZACHOVAJÚ
+Nonfinite alebo abs>1000 ukončí príslušný tréningový priebeh a zapíše
+neúspech. Ďalší začne z pôvodného prefixu, nikdy z neskoršieho pravdivého
+stavu. Neorezávajú sa hodnoty ani nenahrádzajú chyby referenciou.
+Neplatný gradient ukončí príslušné rameno a zachová výsledky; druhé
+rameno sa spracuje osobitne. Počty dokončených priebehov, úspešných
+aktualizácií a pokrytie cieľových snímok sa zaznamenajú.
+
+DÁTA A SÚBORY
+Rovnaký existujúci TRAIN harmonics/1/Re382, rovnaká geometria,
+úvodné stavy, dt0.05solverových jednotiek a zmrazená normalizácia.
+Žiadne nové CFD, sťahovanie dát alebo otvorenie hlavnej testovacej sady.
+Staré V6/V5a/V4 výsledky a3D archív zostávajú nezmenené.
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_long_rollout_20261031_v7
+Uchovajú sa best/last, posledné váhy každého horizontu, pokračovací
+checkpoint s optimalizátorom a náhodnými stavmi, tréningová história,
+úplné per-frame assessmenty, protokol, kontrolné súčty a účtovanie.
+Veľké polia a váhy zostávajú na Perune; lokálne iba malé JSON/texty.
+
+OVERENIE PRED SPUSTENÍM
+Prešli4nové testy zachovania vlastných stavov cez aktualizáciu váh,
+odpojenia starej gradientovej histórie, presnej dvojstavovej rekurencie
+a neúplného posledného bloku. Zopakovaných9fyzikálnych kontrolV6prešlo.
+Syntax nových súborov a plánovacích skriptov overená. Zdroje/protokol/
+vstupy aj pôvodné váhy sú zafixované SHA256 pred odoslaním.
+GPU skúška overí16+32vlastných krokov oboch ramien s aktívnou fyzikou
+a všetkými očakávanými aktualizáciami; až potom začne plný tréning.
+Konečná presnosť novej verzie zatiaľ neznáma.
+
+POTVRDENÝ ŠTART
+Úloha139916 beží na gpu11. Na GPU uzle znovu prešlo9fyzikálnych
+a4nové kontroly. Funkčná skúška SMOKE_COMPLETE: obe ramená vykonali
+všetkých6očakávaných aktualizácií v16+32vlastných krokoch s aktívnou
+fyzikou bez zlyhania tréningového gradientu. Následne už začal plný
+tréningC_long_rollout; D sa spracuje po ňom v tej istej GPU úlohe.
+Funkčná skúška nepreukazuje kvalitu forecastu: D pri plnom238hodnotení
+po niektorých skúšobných aktualizáciách prekročilo signálovýguard.
+Toto zlyhanie ostáva vassessmentoch a nie je zamieňané za presný model.
+Malé pôvodné protokol/freezereceipt/submission a skúšobnýsummaryJSON
+sú lokálne v zaznamy/. Veľké polia ani váhy sa doPC nesťahovali.

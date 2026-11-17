@@ -1,0 +1,207 @@
+{
+  "status": "POSTHOC_DEVELOPMENT_HORIZON_DIAGNOSTIC",
+  "job": 142777,
+  "checkpoint_selection": "Previously selected using full238-frame development validation; not reselected here",
+  "scope": "Means over first N predictions from original prefix2,3; six equally weighted development cases",
+  "limitations": [
+    "Not a causal rollout with model feedback",
+    "Not a longer-history model",
+    "Not an independent final test or proof of an optimal horizon",
+    "Short horizon success does not establish full trajectory accuracy",
+    "V21 main job may still be completing diagnostics; this is not its final results archive"
+  ],
+  "source_files": [
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/zero_spatial_control/selected_checkpoint/0/per_frame.json",
+      "bytes": 120486,
+      "sha256": "54ddec3e603f6b592f61d3ce176b68b3f2e6281b63250780460b24e41064daae"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/zero_spatial_control/selected_checkpoint/1/per_frame.json",
+      "bytes": 120273,
+      "sha256": "cea0fbf6f6ea008b58f006b144f9947ac21e9b972baa731b4139ac9c64dd68dc"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/zero_spatial_control/selected_checkpoint/2/per_frame.json",
+      "bytes": 121400,
+      "sha256": "05b0a419d398a79a0022a5d6a33db0a66ee0e74e7c6ebf830af9ee74f7d86664"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/zero_spatial_control/selected_checkpoint/3/per_frame.json",
+      "bytes": 120492,
+      "sha256": "d110dcaf8055bbed92d1a5da74ccc3b9c36ebaba9c3c6eb51a86ea87e9a7dec4"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/zero_spatial_control/selected_checkpoint/4/per_frame.json",
+      "bytes": 121264,
+      "sha256": "d24489a76b3c41cb4ec431f509253103c25ba01986cb4fb00d086f4986ea0e1c"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/zero_spatial_control/selected_checkpoint/5/per_frame.json",
+      "bytes": 120625,
+      "sha256": "bed67badca20c20ce2751bef6b236885642a72d4f29c8b0da3b4d45b89d5b037"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/learned_spatial_context/selected_checkpoint/0/per_frame.json",
+      "bytes": 120485,
+      "sha256": "43f92c4578c73ee80c1b1465d9182040168c12f1d8c75f7600a0c6e78e310aed"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/learned_spatial_context/selected_checkpoint/1/per_frame.json",
+      "bytes": 120312,
+      "sha256": "36db7ac95fc09da0f5c722a931249836e372a485af94cd4da5cfa4bf4ec96a94"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/learned_spatial_context/selected_checkpoint/2/per_frame.json",
+      "bytes": 121456,
+      "sha256": "31de76bcd8bf0ff7971113180a2528fb3b04f1a63869c606e499f893cc9a5d56"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/learned_spatial_context/selected_checkpoint/3/per_frame.json",
+      "bytes": 120482,
+      "sha256": "66c2cff9e92ee76a9f4582040414417d9cdaf7ad64b78cab96be23b0d6fad079"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/learned_spatial_context/selected_checkpoint/4/per_frame.json",
+      "bytes": 121296,
+      "sha256": "831b37d508f5fac606c65d9bc654cd3c2dfbe951ac1e03a35c06b0572ad46e32"
+    },
+    {
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_spatial_context_20261103_v21/training/142777/learned_spatial_context/selected_checkpoint/5/per_frame.json",
+      "bytes": 120657,
+      "sha256": "de39fd8c3827552e3cb54b13885f10cf0eb5122be6adc5398d05640f762cb289"
+    }
+  ],
+  "results": {
+    "zero_spatial_control": [
+      {
+        "first_predicted_frames": 1,
+        "solver_time_horizon": 0.05,
+        "mean_velocity": 0.017112432366244077,
+        "mean_pressure": 0.030381181925090584,
+        "max_case_velocity": 0.02828957326475267,
+        "max_case_pressure": 0.0416230036981465,
+        "field_accuracy_pass_cases": 6
+      },
+      {
+        "first_predicted_frames": 5,
+        "solver_time_horizon": 0.25,
+        "mean_velocity": 0.046089061837988145,
+        "mean_pressure": 0.08360088936465603,
+        "max_case_velocity": 0.0715244187906227,
+        "max_case_pressure": 0.1156958878252515,
+        "field_accuracy_pass_cases": 6
+      },
+      {
+        "first_predicted_frames": 10,
+        "solver_time_horizon": 0.5,
+        "mean_velocity": 0.07649525978364155,
+        "mean_pressure": 0.14215803152878204,
+        "max_case_velocity": 0.10920171558045262,
+        "max_case_pressure": 0.1990592827813061,
+        "field_accuracy_pass_cases": 4
+      },
+      {
+        "first_predicted_frames": 20,
+        "solver_time_horizon": 1.0,
+        "mean_velocity": 0.12704353364698637,
+        "mean_pressure": 0.2386796898400407,
+        "max_case_velocity": 0.19520781186094208,
+        "max_case_pressure": 0.331745547192349,
+        "field_accuracy_pass_cases": 2
+      },
+      {
+        "first_predicted_frames": 40,
+        "solver_time_horizon": 2.0,
+        "mean_velocity": 0.2038478850649321,
+        "mean_pressure": 0.3548320532568429,
+        "max_case_velocity": 0.3397720279210349,
+        "max_case_pressure": 0.48182110801560984,
+        "field_accuracy_pass_cases": 0
+      },
+      {
+        "first_predicted_frames": 80,
+        "solver_time_horizon": 4.0,
+        "mean_velocity": 0.2903117337374114,
+        "mean_pressure": 0.45137722968167937,
+        "max_case_velocity": 0.4519326953230222,
+        "max_case_pressure": 0.5965123274298769,
+        "field_accuracy_pass_cases": 0
+      },
+      {
+        "first_predicted_frames": 238,
+        "solver_time_horizon": 11.9,
+        "mean_velocity": 0.39160859287567257,
+        "mean_pressure": 0.5498091526342459,
+        "max_case_velocity": 0.6656715320489548,
+        "max_case_pressure": 0.8129383031401001,
+        "field_accuracy_pass_cases": 0
+      }
+    ],
+    "learned_spatial_context": [
+      {
+        "first_predicted_frames": 1,
+        "solver_time_horizon": 0.05,
+        "mean_velocity": 0.01718649115795652,
+        "mean_pressure": 0.030542722541937867,
+        "max_case_velocity": 0.027740361141413074,
+        "max_case_pressure": 0.04103848558143884,
+        "field_accuracy_pass_cases": 6
+      },
+      {
+        "first_predicted_frames": 5,
+        "solver_time_horizon": 0.25,
+        "mean_velocity": 0.045968103322862296,
+        "mean_pressure": 0.08409674042073846,
+        "max_case_velocity": 0.0697932529533534,
+        "max_case_pressure": 0.11369585483775377,
+        "field_accuracy_pass_cases": 6
+      },
+      {
+        "first_predicted_frames": 10,
+        "solver_time_horizon": 0.5,
+        "mean_velocity": 0.07550524535117299,
+        "mean_pressure": 0.14312090010655104,
+        "max_case_velocity": 0.10961852405729866,
+        "max_case_pressure": 0.1951013587685641,
+        "field_accuracy_pass_cases": 4
+      },
+      {
+        "first_predicted_frames": 20,
+        "solver_time_horizon": 1.0,
+        "mean_velocity": 0.12342464787840875,
+        "mean_pressure": 0.24043264920497176,
+        "max_case_velocity": 0.19004526843688987,
+        "max_case_pressure": 0.3249918098772496,
+        "field_accuracy_pass_cases": 2
+      },
+      {
+        "first_predicted_frames": 40,
+        "solver_time_horizon": 2.0,
+        "mean_velocity": 0.19511041270692656,
+        "mean_pressure": 0.35819901783926195,
+        "max_case_velocity": 0.31949577615107777,
+        "max_case_pressure": 0.49501989264957924,
+        "field_accuracy_pass_cases": 0
+      },
+      {
+        "first_predicted_frames": 80,
+        "solver_time_horizon": 4.0,
+        "mean_velocity": 0.27852610377140236,
+        "mean_pressure": 0.4544159478162865,
+        "max_case_velocity": 0.42507689274082894,
+        "max_case_pressure": 0.6051601623864712,
+        "field_accuracy_pass_cases": 0
+      },
+      {
+        "first_predicted_frames": 238,
+        "solver_time_horizon": 11.9,
+        "mean_velocity": 0.3815094004055706,
+        "mean_pressure": 0.5516471107915359,
+        "max_case_velocity": 0.658220497496821,
+        "max_case_pressure": 0.8153358381245802,
+        "field_accuracy_pass_cases": 0
+      }
+    ]
+  }
+}

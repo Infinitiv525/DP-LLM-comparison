@@ -1,0 +1,376 @@
+{
+  "status": "PASS",
+  "at": "2026-11-06T17:28:39.129091+01:00",
+  "added_main_job": "145176",
+  "added_gpus": 16,
+  "existing_main_job": "144649",
+  "cpu_collector": "145175",
+  "replaced_cpu_collector": "144648",
+  "assigned_distinct_H200": 24,
+  "reserved_nodes": 4,
+  "counts": {
+    "DONE": 225,
+    "RUNNING": 24,
+    "PENDING": 146
+  },
+  "new_owned_tasks": [
+    {
+      "id": "random_r00_k01",
+      "task": {
+        "id": "random_r00_k01",
+        "kind": "retrain",
+        "method": "random",
+        "run": 0,
+        "repeat": 1,
+        "seed": 150002,
+        "dependencies": [
+          "random_r00_c00",
+          "random_r00_c01",
+          "random_r00_c02",
+          "random_r00_c03",
+          "random_r00_c04",
+          "random_r00_c05",
+          "random_r00_c06",
+          "random_r00_c07"
+        ]
+      },
+      "worker": 7
+    },
+    {
+      "id": "tpe_r00_k01",
+      "task": {
+        "id": "tpe_r00_k01",
+        "kind": "retrain",
+        "method": "tpe",
+        "run": 0,
+        "repeat": 1,
+        "seed": 150002,
+        "dependencies": [
+          "tpe_r00_c00",
+          "tpe_r00_c01",
+          "tpe_r00_c02",
+          "tpe_r00_c03",
+          "tpe_r00_c04",
+          "tpe_r00_c05",
+          "tpe_r00_c06",
+          "tpe_r00_c07"
+        ]
+      },
+      "worker": 5
+    },
+    {
+      "id": "qwen3_8b_r00_k02",
+      "task": {
+        "id": "qwen3_8b_r00_k02",
+        "kind": "retrain",
+        "method": "qwen3_8b",
+        "run": 0,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "qwen3_8b_r00_c00",
+          "qwen3_8b_r00_c01",
+          "qwen3_8b_r00_c02",
+          "qwen3_8b_r00_c03",
+          "qwen3_8b_r00_c04",
+          "qwen3_8b_r00_c05",
+          "qwen3_8b_r00_c06",
+          "qwen3_8b_r00_c07"
+        ]
+      },
+      "worker": 2
+    },
+    {
+      "id": "ministral3_8b_r00_k02",
+      "task": {
+        "id": "ministral3_8b_r00_k02",
+        "kind": "retrain",
+        "method": "ministral3_8b",
+        "run": 0,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "ministral3_8b_r00_c00",
+          "ministral3_8b_r00_c01",
+          "ministral3_8b_r00_c02",
+          "ministral3_8b_r00_c03",
+          "ministral3_8b_r00_c04",
+          "ministral3_8b_r00_c05",
+          "ministral3_8b_r00_c06",
+          "ministral3_8b_r00_c07"
+        ]
+      },
+      "worker": 6
+    },
+    {
+      "id": "phi4_mini_r00_k02",
+      "task": {
+        "id": "phi4_mini_r00_k02",
+        "kind": "retrain",
+        "method": "phi4_mini",
+        "run": 0,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "phi4_mini_r00_c00",
+          "phi4_mini_r00_c01",
+          "phi4_mini_r00_c02",
+          "phi4_mini_r00_c03",
+          "phi4_mini_r00_c04",
+          "phi4_mini_r00_c05",
+          "phi4_mini_r00_c06",
+          "phi4_mini_r00_c07"
+        ]
+      },
+      "worker": 1
+    },
+    {
+      "id": "granite33_8b_r00_k02",
+      "task": {
+        "id": "granite33_8b_r00_k02",
+        "kind": "retrain",
+        "method": "granite33_8b",
+        "run": 0,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "granite33_8b_r00_c00",
+          "granite33_8b_r00_c01",
+          "granite33_8b_r00_c02",
+          "granite33_8b_r00_c03",
+          "granite33_8b_r00_c04",
+          "granite33_8b_r00_c05",
+          "granite33_8b_r00_c06",
+          "granite33_8b_r00_c07"
+        ]
+      },
+      "worker": 4
+    },
+    {
+      "id": "random_r00_k02",
+      "task": {
+        "id": "random_r00_k02",
+        "kind": "retrain",
+        "method": "random",
+        "run": 0,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "random_r00_c00",
+          "random_r00_c01",
+          "random_r00_c02",
+          "random_r00_c03",
+          "random_r00_c04",
+          "random_r00_c05",
+          "random_r00_c06",
+          "random_r00_c07"
+        ]
+      },
+      "worker": 0
+    },
+    {
+      "id": "tpe_r00_k02",
+      "task": {
+        "id": "tpe_r00_k02",
+        "kind": "retrain",
+        "method": "tpe",
+        "run": 0,
+        "repeat": 2,
+        "seed": 150003,
+        "dependencies": [
+          "tpe_r00_c00",
+          "tpe_r00_c01",
+          "tpe_r00_c02",
+          "tpe_r00_c03",
+          "tpe_r00_c04",
+          "tpe_r00_c05",
+          "tpe_r00_c06",
+          "tpe_r00_c07"
+        ]
+      },
+      "worker": 3
+    },
+    {
+      "id": "qwen3_8b_r00_k03",
+      "task": {
+        "id": "qwen3_8b_r00_k03",
+        "kind": "retrain",
+        "method": "qwen3_8b",
+        "run": 0,
+        "repeat": 3,
+        "seed": 150004,
+        "dependencies": [
+          "qwen3_8b_r00_c00",
+          "qwen3_8b_r00_c01",
+          "qwen3_8b_r00_c02",
+          "qwen3_8b_r00_c03",
+          "qwen3_8b_r00_c04",
+          "qwen3_8b_r00_c05",
+          "qwen3_8b_r00_c06",
+          "qwen3_8b_r00_c07"
+        ]
+      },
+      "worker": 12
+    },
+    {
+      "id": "phi4_mini_r00_k03",
+      "task": {
+        "id": "phi4_mini_r00_k03",
+        "kind": "retrain",
+        "method": "phi4_mini",
+        "run": 0,
+        "repeat": 3,
+        "seed": 150004,
+        "dependencies": [
+          "phi4_mini_r00_c00",
+          "phi4_mini_r00_c01",
+          "phi4_mini_r00_c02",
+          "phi4_mini_r00_c03",
+          "phi4_mini_r00_c04",
+          "phi4_mini_r00_c05",
+          "phi4_mini_r00_c06",
+          "phi4_mini_r00_c07"
+        ]
+      },
+      "worker": 8
+    },
+    {
+      "id": "granite33_8b_r00_k03",
+      "task": {
+        "id": "granite33_8b_r00_k03",
+        "kind": "retrain",
+        "method": "granite33_8b",
+        "run": 0,
+        "repeat": 3,
+        "seed": 150004,
+        "dependencies": [
+          "granite33_8b_r00_c00",
+          "granite33_8b_r00_c01",
+          "granite33_8b_r00_c02",
+          "granite33_8b_r00_c03",
+          "granite33_8b_r00_c04",
+          "granite33_8b_r00_c05",
+          "granite33_8b_r00_c06",
+          "granite33_8b_r00_c07"
+        ]
+      },
+      "worker": 14
+    },
+    {
+      "id": "random_r00_k03",
+      "task": {
+        "id": "random_r00_k03",
+        "kind": "retrain",
+        "method": "random",
+        "run": 0,
+        "repeat": 3,
+        "seed": 150004,
+        "dependencies": [
+          "random_r00_c00",
+          "random_r00_c01",
+          "random_r00_c02",
+          "random_r00_c03",
+          "random_r00_c04",
+          "random_r00_c05",
+          "random_r00_c06",
+          "random_r00_c07"
+        ]
+      },
+      "worker": 10
+    },
+    {
+      "id": "tpe_r00_k03",
+      "task": {
+        "id": "tpe_r00_k03",
+        "kind": "retrain",
+        "method": "tpe",
+        "run": 0,
+        "repeat": 3,
+        "seed": 150004,
+        "dependencies": [
+          "tpe_r00_c00",
+          "tpe_r00_c01",
+          "tpe_r00_c02",
+          "tpe_r00_c03",
+          "tpe_r00_c04",
+          "tpe_r00_c05",
+          "tpe_r00_c06",
+          "tpe_r00_c07"
+        ]
+      },
+      "worker": 11
+    },
+    {
+      "id": "qwen3_8b_r00_k04",
+      "task": {
+        "id": "qwen3_8b_r00_k04",
+        "kind": "retrain",
+        "method": "qwen3_8b",
+        "run": 0,
+        "repeat": 4,
+        "seed": 150005,
+        "dependencies": [
+          "qwen3_8b_r00_c00",
+          "qwen3_8b_r00_c01",
+          "qwen3_8b_r00_c02",
+          "qwen3_8b_r00_c03",
+          "qwen3_8b_r00_c04",
+          "qwen3_8b_r00_c05",
+          "qwen3_8b_r00_c06",
+          "qwen3_8b_r00_c07"
+        ]
+      },
+      "worker": 15
+    },
+    {
+      "id": "ministral3_8b_r00_k04",
+      "task": {
+        "id": "ministral3_8b_r00_k04",
+        "kind": "retrain",
+        "method": "ministral3_8b",
+        "run": 0,
+        "repeat": 4,
+        "seed": 150005,
+        "dependencies": [
+          "ministral3_8b_r00_c00",
+          "ministral3_8b_r00_c01",
+          "ministral3_8b_r00_c02",
+          "ministral3_8b_r00_c03",
+          "ministral3_8b_r00_c04",
+          "ministral3_8b_r00_c05",
+          "ministral3_8b_r00_c06",
+          "ministral3_8b_r00_c07"
+        ]
+      },
+      "worker": 9
+    },
+    {
+      "id": "phi4_mini_r00_k04",
+      "task": {
+        "id": "phi4_mini_r00_k04",
+        "kind": "retrain",
+        "method": "phi4_mini",
+        "run": 0,
+        "repeat": 4,
+        "seed": 150005,
+        "dependencies": [
+          "phi4_mini_r00_c00",
+          "phi4_mini_r00_c01",
+          "phi4_mini_r00_c02",
+          "phi4_mini_r00_c03",
+          "phi4_mini_r00_c04",
+          "phi4_mini_r00_c05",
+          "phi4_mini_r00_c06",
+          "phi4_mini_r00_c07"
+        ]
+      },
+      "worker": 13
+    }
+  ],
+  "main_395_attempts_unchanged": true,
+  "frozen_sources_unchanged": true,
+  "existing_trainings_interrupted": false,
+  "larger_network_training": false,
+  "TEST_opened": false,
+  "source_sha256": "53effe82ab0674f341b3173b85ff9e1d08e7b1f7e595e22bb15cdff261d963a9"
+}

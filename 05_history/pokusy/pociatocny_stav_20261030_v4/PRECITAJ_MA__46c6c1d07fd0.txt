@@ -1,0 +1,101 @@
+PINN SO ZNAMYM POCIATOCNYM STAVOM - NOVY PROTOKOL V4
+30. 10. 2026
+
+Preco opravujeme formulaciu
+Dosial model pre nove geometrie dostaval tvar prekazky, Re a cas,
+ale nepoznal aktualny stav prudenia. Autorsky postup FlowBench pocita
+s tym, ze skorsie snimky su vstupom a neskorsie sa predpovedaju.
+Dosavadne v2/v3 testy geometria+Re su zachovane ako samostatne vysledky;
+neprepisujeme ich na uspech inej ulohy. Nova formulacia sa teraz len
+overuje. Chybajuci vstupny stav nevyhlasujeme za dokazanu jedinu
+pricinu neuspechu ani neslubujeme, ze tym bude vsetko vyriesene.
+
+Presne vstupy a vystupy
+Rovnako vynechavame povodne indexy 0 a 1. Zo zvysnych 240 snimkov
+su indexy 2 a 3 zname vstupy: rychlost u,v a tlak. Model predpoveda
+iba neskorsie indexy 4..241, teda 238 buducich snimkov. Ziadna neskorsia
+validacna snimka sa nesmie dostat do vstupnych priznakov.
+Relativny cas nula je teraz posledny znamy vstupny index3; predpovede
+su v casoch0.05..11.9 jednotiek solvera. Nejde o potvrdene SIsekundy
+ani o skutocny fyzikalny zaciatok simulacie.
+
+Co ostava rovnake
+69 treningovych a 6 validacnych scenarov; 36/3 geometrie; povodny split
+celeho inventara775/160/169. Ziadne hlavne testovacie polia, nove CFD
+ani dalsie stahovanie referencii. Vsetky velke data uz su na Perune.
+Okraje vyrezu nepovazujeme za steny. Geometria a Re ostavaju vstupmi.
+
+Co je nove
+PINN dostane opis prveho znameho prudenia, posledneho znameho prudenia
+a ich rozdielu. Presnejsie uklada posledny stav a jeho rozdiel oproti
+predoslemu. Z toho sa tvori lokalna informacia v danom bode a globalny
+opis pre CNN. Pri relativnom case0 sa stavova verzia siete rovna
+poslednemu znamemu vstupu. Neskor predpoveda naucenu zmenu stavu.
+Rovnice Navier-Stokes a autograd zostavaju sucastou treningu.
+Priepustnost, casovy rozsah a fyzikalne rezidua stale treba overit.
+Je to koordinatovy PINN s Fourierovymi priznakmi, nie nahradenie
+experimentu uz hotovym FNO. Nie je to vsak autoregresivny krokovac;
+ide o priame otazky na buduci cas pri danej vstupnej historii.
+
+Kontroly, aby sa nedal vysledok nespravne interpretovat
+Porovnavame rovnako velku siet bez vstupneho stavu a siet so stavom.
+Obe maju sirku96,hlbku4,rovnaky pocet parametrov,seed,data,buduceciele,
+optimizer,straty,rozpocet300000krokov a rovnaku validaciu. Vetva bez
+stavu ma stavove vstupne kanaly nulove a nema pevne vynutenieIC.
+Ide o porovnanie dvoch formulacii; vplyv samotnych priznakov a pevnej
+pociatocnej podmienky sa v tomto kroku neoddeluje.
+Obe siete maju aj train-only supervision pociatocnych stavov.
+
+Okrem toho rátame jednoduchy persistence odhad: buduce prudenie je
+rovnake ako posledny znamy vstup. PINN musi zlepsit aj tento odhad.
+Presnost vykazujeme pre kazdu z238 snimkov a cely fluidny grid,
+samostatne za kazdy scenar; aj podla horizontov1..10,11..40,41..120,
+121..238. Tlak sa porovnava po odstraneni jeho lubovolnej konstanty.
+Vyvojove ciele10%U/20%p pre kazdy val scenar a GPU p99<=5ms ostavaju.
+
+Meranie casu
+Pre celu1024x256mriezku meriame3x200GPUdotazov s ulozenymi presnymi
+vstupnymi priznakmi na mriezke aj s ich opakovanym bicubickym vypoctom.
+Pri fyzikalnych derivaciach sa vstupny stav interpoluje diferenciovatelnymi
+polynomami; jeho priestorovy vplyv sa neodstrihne od autogradu.
+Samostatne su casy encoderu a prenosu medziCPU/GPU. Tvorba vstupnych
+stavov a vykreslovanie nie su sucastou5ms; vstupne tenzory uz su naGPU.
+Preprocessing cas kazdeho scenara sa uklada osobitne.
+
+Spustenie
+139482 pripravi iba vstupne stavy z indexov2,3 uz existujucich suborov.
+139483 potom overi funkcnost oboch vetiev na3krokoch s aktivnymPDE,
+jeden train a jeden val pripad; az potom spusti dva plne treningy.
+Taketo kratke smoke skore nie je dokazom presnosti.
+139484/139485 archivuju skutocne CPU/GPU zdroje.
+
+Pred spustenim preslo5kontrol: vstupny citac smie pristupit iba k2,3;
+bicubicka interpolacia a fyzikalne druhe derivacie znameho polynomu;
+zhoda ulozenych priznakov s interpolaciou a presna pociatocna podmienka;
+kontrolna vetva nevie precitat vstupne prudenie; NS reziduum sa spatne
+prenasa do encoderu. Zdrojovy freeze a protokol su ulozene pred treningom.
+
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_state_20261030_v4
+Lokalne: iba male JSON, zdroje a tento opis. Zatial ziadne nove skore,
+ziadne otvorenie hlavneho testu a ziadne LLM porovnanie.
+
+KONTROLA PO SPUSTENI
+Vstupy vsetkych75scenarov pripravene; CPUjob139482 COMPLETED za38s.
+Obe3stepfunkcne skusky naGPU presli vratanePDE,checkpointov,plnej
+buducejvalmriezky a merania casu. Hlavny139483trening uz bezi.
+Ziadne funkcne smoke skore sa nevydava za dosiahnutu presnost.
+quality_checks.json a nemennehashe su ulozene. zdroj_autora_fpo2d.txt
+je presna textova kopia povodneho autorskeho opisu; nie nas spustitelny
+datovy adapter. Plne vysledky zatial nie su hotove.
+
+DODATOK PO POTVRDENI POUZIVATELOM
+Zname vstupne stavy budu vzdy poskytnute vsetkym porovnavanym PINN
+modelom. Hlavne pravidlo je v ../pravidla_vstupov.txt.
+Rozbehnuty pomocny geometry_only_control bol zastaveny spolu s jobom
+139483; jeho vahy/logy ostavaju zachovane. Plna stavova vetva v tomto
+jobe este nezacala. Novy job139486 spusta PRIAMO prefix_conditioned
+s rovnako zmrazenymi nastaveniami a rovnakymi pripravenymi vstupmi.
+139487 po skonceni ulozi skutocnu spotrebu. Nemeni sa model ani jeho
+vstupne/cielove snimky. Povodny dvojvetvovy protokol je historicky
+zachovany; state_only_freeze_v1 a state_only_submission_v1 dokladaju
+tento dodatok bez jeho ticheho prepisovania.

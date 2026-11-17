@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "observed_at": "2026-11-06T02:05:45.457806+01:00",
+  "elapsed_seconds": 75.73532352698385,
+  "checks_total": 8662,
+  "checks_passed": 8662,
+  "problem_count": 0,
+  "completed_audited": 186,
+  "snapshot_counts": {
+    "DONE": 186,
+    "RUNNING": 16,
+    "PENDING": 193
+  },
+  "latest_counts": {
+    "DONE": 186,
+    "RUNNING": 16,
+    "PENDING": 193
+  },
+  "source_sha256": "46042ae79e546f5686a7b44f710ced62d512104145e716380f12d7b3d139494d",
+  "state_sha256": "d3a1ca08a6e35481eb52a856c4a310d033ed79cc5516d187cae16aa4939d8dd0",
+  "full_checkpoint_and_resume_checks": true,
+  "full_raw_timing_quantiles_recomputed": true,
+  "TRAIN_normalization_recomputed": true,
+  "cache_hashes_rechecked": true,
+  "CPU_only": true,
+  "TEST_targets_opened": false,
+  "new_training": false,
+  "existing_files_modified": false,
+  "operational_overview_needs_update": true,
+  "limitations": [
+    "Steady fields only, not temporal rollout",
+    "Flowcase split shares geometries across splits; no unseen-geometry claim",
+    "NS and wall residuals are measured and nonzero; PINN is not an exact PDE solution",
+    "5ms is GPU full-field query timing, not end-to-end rendering or physical timestep",
+    "LLM weight full-hash receipts and current frozen fingerprints checked; 61GB weights not rehashed again",
+    "GitHub model release is a point-in-time snapshot; final models require a new final export"
+  ]
+}

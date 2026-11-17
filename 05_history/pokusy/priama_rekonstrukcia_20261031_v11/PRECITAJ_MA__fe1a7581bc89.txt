@@ -1,0 +1,62 @@
+PRIAMA REKONŠTRUKCIA AKO DIAGNOSTIKA V11 –31.10.2026
+AKTUÁLNE:Dokončené140041COMPLETED0:0,obe50kupdate.
+Šírka96U6.08%/p10.77%,šírka192U2.94%/p4.79%, directqueryp991.49/2.89ms.
+Presná rekonštrukcia známehoTRAINpriebehu, nie nezávislýforecast alebo
+potvrdenýcausalstep5ms. Vnútornádivergencia zatiaľ nadpôvodnýmmasslimitom.
+Podrobnosti:VYSLEDKY_140041.txt. Frontaprázdna, novýtréningnespustený.
+Nižšie pôvodný plán a záznamspustenia.
+GPU140041,účtovanie140042. Dva modelyStatePINNv4:šírka96a192,
+4skrytévrstvy,50kaktualizácií každý. Rovnaký známyTRAIN harmonics1/Re382.
+
+OTÁZKA
+Dokáže táto prefix-conditioned rodina siete vôbec presne reprezentovať
+náš tréningový priebeh, keď odstránime hromadenie vlastných krokov?
+Starší jednoduchý single-case coordinatePINN už mal~5%U/8%p na
+časovom heldoutvýreze; tento úspech nezabúdame ani nevyhlasujeme
+V11za prvý taký test. Teraz cielime na aktuálnu rodinu s povinným
+prefixom, dve kapacity a ten istý prípad ako zlyhávajúce steppery.
+
+VSTUP A VÝSTUP
+Stále známe snímky2,3,tvarprekážky,Re. Navyše relatívny čas t.
+Pre každý čas sieť priamo vypočíta u,v,p, nezreťazuje neskoršiepredikcie.
+Celý rozsah238časov od.05do11.9solverunit; nie potvrdenéSIsekundy.
+Pri t0je vynútený známy frame3 a overená numerická zhoda.
+Žiadne neskoršie pravdivé polia ako vstup, iba tréningové ciele chyby.
+
+TRÉNING
+Od začiatku,freshseed20261031,bezpreberaniarecurrentweights.
+Uniformne miešanýcyklus238futureTRAINframes,2048fluidbodov/update.
+DatascalingtrainStd (nie stepperových.05trainStd). PDE.01,BC.01,
+256jitterinteriorcollocationbodov,128obstacleboundarybodov.
+Warmup1000+ramp1000,Adam3e-4cosine1.5e-5,gradclip1.
+Primitívne3výstupy s mäkkýmiNSrezíduami, nie curlreprezentáciaD.
+Teda nejde o čistúabláciu iba rekurencie; mení sa balík reprezentácie,
+časovejformulácie a škálydátovejstraty. Nevyvodzovať jedinúpríčinu.
+
+HODNOTENIE
+Po update1,každých5000a na konci priame dotazy na všetkých238časov.
+Výberbest podľa priemeruEu/Ep na tom istom známomTRAINpriebehu.
+Perframe chyby,divergencia a directqueryGPUtiming, scontextencoding
+a projection/mask, initialdataGPU. Čas nieje causal-stepbenchmark
+ani automatické splnenie pôvodnej požiadavky5msnasimulačnýkrok.
+Nie nezávislávalidácia,novýgeometrickýforecast,LLMporovnanie alebo
+potvrdený samostatnýsimulátor. Po úspechu tohto testu ešte musí
+nasledovať nezávislé overenie zvolenej úlohy.
+
+KONTROLA A SÚBORY
+Freeze všetkýchzdrojov/protokolu/vstupreceipt predsubmission;
+AST/bash-nprešli, GPU najprv9fyzikálnychunit,3updatefunkčnáskúška
+obochšírok saktívnouPDE/hardICkontrolou a celým238scoringom.
+Potom plných50kaktualizácií. Žiadne novéCFD/download alebo mainTest.
+Váhy,best/last,histories,fullperframe a skutočnéúčtovanie ibaPerun;
+lokálne malétexty/JSON. Pôvodné výsledky a zmrazenézdroje zachované.
+Perun:/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_direct_probe_20261031_v11
+Výsledná presnosť tejto novej skúšky zatiaľ neznáma.
+
+OVERENÝ ŠTART
+140041RUNNINGgpu02,9unitOK1.494s. Funkčnáskúška obochšírok
+dokončila3update sPDE,hardIC a celé238timequeries bezguardfail.
+SMOKE_COMPLETE, následne začal plnýtréningdirect_width_96.
+Šírka192 nasledujevsamejob. Konečnúpresnosť ani causalstepúspech
+z krátkejskúšky nevyvodzujeme. Maléprotokol/receipt/freeze/submission/
+smokesummary uložené ajlokálne vzaznamy/.

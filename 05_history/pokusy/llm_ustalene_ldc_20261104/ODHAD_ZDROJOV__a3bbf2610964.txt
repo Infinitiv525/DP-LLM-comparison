@@ -1,0 +1,57 @@
+PREDBEŽNÝ ODHAD ZDROJOV — 04.11.2026
+Ide o odhad na výslovnú otázku používateľa, nie o nameranú konečnú
+spotrebu a nie o spustenie celej série. Všetky staršie hrubé odhady
+pre iné modely, najmä 3D FNO, sa na tento PINN neprenášajú.
+
+Nameraný podklad
+Aktuálna úloha143115: H200,1GPU,4CPU,32GB rezervovanej RAM.
+Tréning640TRAIN,160VAL,400epoch=64000aktualizácií. Zdrojom je kópia
+histórie meranie_tempo_143115.json. Pri update3200 uplynulo333,660453s,
+pri update4800 670,176486s. Rozdiel336,516034s na1600aktualizácií
+zodpovedá3,739067GPUh na64000aktualizácií. Interval už používa PDE
+výpočet vrátane jej derivácií; koeficient sa ešte čiastočne zvyšoval.
+Prvých10epoch bez PDE je výrazne rýchlejších a nebolo by správne z nich
+lineárne extrapolovať celý tréning. Odhad bude spresnený po ukončení
+pilota a po overení rozsahov povolených konfiguračných parametrov.
+
+Počet plných tréningov podľa návrhu5hľadaní,8kandidátov,5finálnychseedov
+LLM kandidátske tréningy:4 x5 x8 =160.
+LLM finálne opakovania:4 x5 x5 =100.
+Random aTPE kandidáti:2 x5 x8 =80.
+Random aTPE finálne opakovania:2 x5 x5 =50.
+Pevný základ:5novýchseedov =5.
+Spolu395plnýchtréningov. Samotných100uvedených v návrhu označovalo iba
+finálne LLM opakovania, nie celý experiment. Spoločné štarty tu počítame
+konzervatívne v každom behu,bez odpočítania prípadného bezpečného zdieľania.
+
+Bodový odhad pri súčasnej architektúre a výpočtovom objeme
+4LLM vrátane kandidátov a finálnych opakovaní:260 x3,739067 =972,16GPUh.
+Random+TPE vrátane hľadania a finálnych opakovaní:130 x3,739067 =486,08GPUh.
+Pevný základ:5 x3,739067 =18,70GPUh.
+Samotné učenie PINN spolu1476,93GPUh,pri4CPU približne5907,73coreh.
+Navyše samotná práca LLM a štarty procesov: predbežne5–10GPUh.
+Podkladom sú staršie skutočné technické skúšky lokálnych modelov:
+priemerný návrh približne19–31s,najdlhší meraný47,3s,načítanie21–42s.
+Nový prompt/stochastické generovanie/opravy ešte môžu časy zmeniť.
+Model LLM sa nebude držať na samostatnej alokovanej GPU počas dlhého
+čakania na tréning PINN; takýto nečinný server by spotrebu zvyšoval.
+
+Praktický plán
+Zaokrúhlene asi1500GPUh pre celý uvedený rozsah; s rezervou na skúšky,
+opakovania technických zlyhaní a prevádzkovú réžiu plánovať1800–2000GPUh.
+Pri tom istom4CPU/GPU približne6000coreh základ,7200–8000coreh s rezervou.
+Nie je zaručené, že výsledok ostane do2000GPUh. Platí to pre súčasnú sieť
+a približne rovnaký počet dátových/PDE/BC bodov a400epoch. Zväčšenie
+počtu bodov alebo siete, dlhšie učenie či iné rozsahy hľadania si vyžiada
+nový odhad. Rovnaký počet epoch s odlišne náročným PDE samplerom nie je
+automaticky rovnaký výpočtový náklad. Finálny kontrakt rozpočtu sa určí
+pred hlavným porovnaním; tento odhad ho nenahrádza.
+
+Kalendár
+1500GPUh znamená asi62,5dňa na1GPU alebo31,25dňa na2GPU súbežne,
+bez čakacích dôb vo fronte. Rezerva1800–2000GPUh znamená37,5–41,7dňa
+na2GPU. Dostupnosť paralelných GPU a účtovanie fronty sa nesmú zameniť
+so súčtomGPUh. Pri porovnaní s používateľom uvádzanými asi2000GPUh
+ide o približný dostupný rozpočet, nie dnešné overenie zostatku portálu.
+Zdieľané dáta a váhy LLM zostávajú iba naPerune; každému tréningu sa
+nevytvára samostatná kópia datasetu ani LLM. Do PC len malé prehľady.

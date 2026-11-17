@@ -1,0 +1,41 @@
+STAV EXPERIMENTU — 08.11.2026
+
+Tréningová časť je hotová: 395 z 395 úspešných tréningov.
+Z toho 240 bolo hľadanie konfigurácií, 150 finálne opakovania vybraných
+konfigurácií a 5 opakovaní pevnej základnej konfigurácie.
+Všetky štyri lokálne LLM aj kontroly random/TPE sú zahrnuté.
+
+Posledných osem tréningov prešlo 1 044 kontrolami bez nálezu. Manifest
+models.json presne určuje 155 finálnych sietí, ich váhy, konfigurácie a seedy.
+Pri každej metóde ide o 5 hľadaní a 5 finálnych tréningov vybranej konfigurácie;
+25 sietí preto neznamená 25 nezávislých hľadaní. Fixed baseline má 5 sietí.
+
+Finálny TEST už beží ako úloha 145677 na 4 rôznych GPU H200.
+Pred prvým otvorením TEST prešli 4 kontroly zhody s uloženou VAL predikciou.
+Pred nimi prešlo aj 5 samostatných CPU testov výpočtu metrík a kanonizácie dát.
+Zdrojové súbory, modelový manifest a protokol boli uzamknuté ešte pred TEST.
+
+Každá zo 155 sietí sa vyhodnotí na všetkých 200 odložených prípadoch:
+spolu 31 000 dvojíc sieť/prípad. Získame chyby u/v/p, fyzikálne rezíduá,
+chyby na okrajoch a 200 surových meraní času na každú dvojicu.
+Požiadavku p99 <= 5 ms overujeme pre celé natívne pole 512 x 512 na GPU.
+Už nič netrénujeme, nepýtame nové návrhy LLM a nevyberáme podľa TEST.
+
+Po dokončení vznikne tabuľka po jednotlivých prípadoch, súhrn metód a
+vopred určené štatistické porovnanie každého LLM s TPE. Päť finálnych seedov
+sa najprv priemeruje. Párový bootstrap zohľadní 5 hľadaní a 85 geometrických
+zhlukov; nebudeme predstierať nezávislosť buniek či všetkých 25 tréningov.
+Intervaly sú približné a malý počet hľadaní zostáva obmedzením.
+
+CPU zberač 145678 priebežne čaká na koniec GPU úlohy a uloží skutočné
+účtovanie skôr, ako ho Perun vymaže z krátkej histórie. Úloha 145679 zachytí
+ukončenie zberača. Nejde o ďalšie tréningy. Pilot odhadu spotreby sa nespúšťal.
+
+Podrobný postup: PROTOKOL.txt a protocol.json.
+Doklady: training_closeout/, unit_tests.txt, preflight/review.json,
+start_confirmation.json. Súbory opisujú stav pri spustení, nie živý dashboard.
+
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/ldc_final_test_20261108_v49
+Váhy, veľké polia a surové časové polia zostávajú na Perune.
+Do PC sa stiahli iba malé textové doklady a metadáta.
+Rozpracovaný 3D článok sa nemenil a nie je súčasťou tejto zálohy na GitHub.

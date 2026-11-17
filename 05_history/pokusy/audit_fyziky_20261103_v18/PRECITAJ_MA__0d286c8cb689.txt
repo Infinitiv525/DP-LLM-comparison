@@ -1,0 +1,70 @@
+V18 – CIELENÝ AUDIT FYZIKY A PRENOSU, 03.11.2026
+
+AKTUALIZÁCIA – DOKONČENÉ
+142584COMPLETED0:0,freezeOK,všetky4váhynezmenené,manifest76výstupovOK.
+PotvrdenýveľkýADvsFDnesúladpriestorovýchderiváciípri novomcurlmodeli,
+časovýFDkrok to nevysvetlil. Prenos naodlišnéprípady všakstáleslabý
+aj pripôvodnommodeli,kdejenesúladmenší. Nie jedinádokázanápríčina.
+PodrobnostiVYSLEDKY_142584.txt,maléčíslavvysledky_142584/.
+Nezamieňať8auditnýchčasov za238snímokV17. Ďalšítréningnespustený.
+Nižšiehistorickýopisprípravy/štartu.
+
+POVOLENÝ POSTUP
+Používateľ odsúhlasil audit po neúspešnej presnosti V17. Nejde o ďalší
+tréning: žiadny optimizer, úprava váh alebo výber nového checkpointu.
+Skontrolujeme pôvodnýu/v/p aj novýpsi/p model, pri každom vybraný
+checkpoint100k a posledný600k zV17. Celkom4nezmenené checkpointy.
+
+ČO AUDITUJEME
+Na rovnakých512vnútornýchbodoch tekutiny a8časoch každého prípadu
+porovnáme fyzikálne členy vypočítanéautogradom so skutočným FDpoľom,
+ktoré model vydáva. Oddelene časováderivácia, advekcia, gradienttlaku,
+viskozita, výslednáhybnosť a divergencia. Zaznamenáme absolútnuRMS
+odchýlku aj relatívneL2; pri malýchmenovateľoch rozhoduje aj absolútna.
+Overíme ajautograd pri fixných posunoch[-.4,.4]bunky, podobne ako boli
+vzorkované tréningovéfyzikálnebody; sú to inémiesta, reportovanézvlášť.
+
+Rozdiely v čase skutočnéhopoľa spočítame s dvoma krokmi.025 a.0025.
+Centrálna druhého rádu, na poslednomčase jednostrannáspätná druhého
+rádu. Všetky queries ostávajú v0..11.9, žiadna extrapolácia mimo dát.
+MenšíFDkrok môže zvýrazniť numerickúchybuFP32, preto neprehlasujeme
+automaticky každúodchýlku za chybu architektúry alebo dôkazpríčiny.
+Zvlášť uchováme aj pôvodnéV17midpointFDmomentum na celejvnútornejmaske;
+jeho strednýčas t-.025 odlíšime od okamžitéhomerania včase t.
+
+PRÍPADY A DÁTA
+3pôvodnéTRAINmonitory harmonics1/Re382,nurbs11/Re107,skelenton57/Re168
+a6odlišnýchvývojovýchVAL. Nie úplnýaudit69TRAIN ani hlavnýTEST.
+Časovéindexy1,5,10,20,40,80,160,238 po známom úvode – pôvodnésnímky
+4,8,13,23,43,83,163,241. Relatívnyčas.05,.25,.5,1,2,4,8,11.9
+vjednotkáchsolvera,niepotvrdenéSIsekundy.
+Krátkyhorizontindexy1/5/10,stred20/40,dlhý80/160/238.
+Porovnáme aj chybuplnéhopoľaU/p v týchto8snímkach areferenčnýFDfloor.
+Je to diagnostickévzorkovanie, nie novýtest všetkých238snímok/bránpresnosti.
+
+Prediktor dostane iba známesnímky2,3,geometriu,Re a čas. Vlastnýloader
+nenahráva budúceTRAINaniVALtrajektórie naGPU; referenčnépolia lenCPU
+scorer, vrátanehybnostireferencie. Cropokraje nie sústeny/periodické,
+porovnávame stenčenúfluidnúmasku. Kontinuita neznamená správnucelúNS.
+
+OVERENIE A UCHOVANIE
+3analytickéCPUtesty prešli1.043s: známapolynomiálnaNSrovnica,
+presnosťFDpriestorových/centrálnych/spätnýchčasovýchderivácií,
+zhodaaudituspôvodnýmrezíduomobochreprezentáciívrátanetretíchpsiderivácií.
+PythonAST/bash-nOK. RodičovskýV17freeze aSHAcheckpointov overené,
+novýprotokol/sampling/receipt/zdroje/4checkpointSHA zmrazenépredsubmission.
+Vzorkovanie512bodov/jitter zmrazené, rovnaképre4checkpointy/8časov.
+
+Novésúborycommon18/physics_audit18/test18/audit18/init18/capture25,
+scripts220/221. Starézdroje/protokoly/váhy nemeníme.
+MaléagregovanéJSON ostanúdostupnéajlokálne. BodovéNPZsúradnice/členy
+aSHAmanifest ibanaPerune; žiadneveľképolia/weights doPC.
+Perun:results/fpo_pinn_physics_audit_20261103_v18.
+ŽiadneCFD/download/externépredlohy/mainTEST. Audit sámnemeria5ms;
+diagnostikaderivácií nie je časbežnejpredikcie. Výsledokniejeistý.
+OVERENÝ ŠTART
+GPUaudit142584,účtovanie142585afterany. IDregistrované predrelease.
+142584RUNNINGgpu09,3analytickétesty ajnauzleprešli1.402s.
+Prvýčas prvéhoprípadu primitive_best úspešnespracovaný, ďalšiebežia.
+Zatiaľžiadnyvyhodnotenýzáveropríčine. Maléprotocol/freeze/prepared/
+sampling/submission ajlokálne vzaznamy/. Váhynezmenené,0tréningov.

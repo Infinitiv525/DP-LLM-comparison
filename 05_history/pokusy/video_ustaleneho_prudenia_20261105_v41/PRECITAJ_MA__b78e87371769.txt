@@ -1,0 +1,17 @@
+VIDEO: referencia CFD vľavo, spoločný malý PINN V26 vpravo.
+FlowBench LDC harmonics, prípad 341, Re=903, existujúca VAL vzorka.
+Ide o pohyb pasívnych značkovacích častíc v dvoch nemenných ustálených poliach.
+Nie je to rozbeh kvapaliny, vývoj predikcie siete v čase ani simulácia ustálenia.
+LDC dáta nemajú uložené prechodové stavy; aktuálny PINN nemá časový vstup.
+Animácia preto nemení vedecký rozsah experimentu a nepreukazuje dynamickú presnosť.
+Oba panely majú zhodné počiatočné častice, farebnú škálu aj časový postup.
+Farba zobrazuje veľkosť rýchlosti. Sivá plocha je pevná prekážka.
+Častice: RK4, bilineárne vzorkovanie pôvodného poľa 512x512, bez úprav rýchlosti.
+Pri dotyku neplatnej/pevnej interpolačnej oblasti sa častica skryje bez opätovného vloženia.
+20 sekúnd videa je čas prehrávania; trajektórie pokrývajú pomocný čas tau=0..10,
+kde tau=t*U_veka/L_nádoby. Netvrdíme, že dataset poskytol časové snímky.
+Surové polia a trajektórie zostávajú na Perune. Do PC len video, náhľady a dokumentácia.
+Pôvod dát: BGLab/FlowBench, Tali a kol., FlowBench (2024), licencia CC-BY-NC-4.0.
+https://huggingface.co/datasets/BGLab/FlowBench/tree/main/LDC_NS_2D/512x512
+Druhé vykreslenie opravuje rozloženie titulkov. Prvé aj jeho zdroj zostávajú zachované na Perune.
+Pôvodné vstupy overené SHA256 pred/po; žiadny nový tréning, CFD ani otvorenie TEST.

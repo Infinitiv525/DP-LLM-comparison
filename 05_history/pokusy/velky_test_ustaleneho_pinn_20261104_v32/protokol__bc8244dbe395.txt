@@ -1,0 +1,147 @@
+PROTOKOL VEĽKÉHO POROVNANIA LLM PRE SPOLOČNÝ USTÁLENÝ PINN
+04.11.2026 — V32 — pravidlá zmrazené pred hlavným experimentom
+
+Čo skúmame
+Či niektorý zo štyroch konkrétnych lokálnych LLM dokáže v rovnakom
+počte pokusov navrhnúť lepšie nastavenia jedného spoločného PINN než
+náhodné hľadanie, TPE a pevné základné nastavenie. Ide o ustálené 2D
+FlowBench LDC: vstupom je geometria a Reynoldsovo číslo, výstupom
+je celé pole rýchlosti a tlaku 512 × 512. Nie je to časová animácia
+ani predikcia fyzikálneho časového kroku. Limit 5 ms sa týka času
+jednej predikcie ustáleného poľa na H200, so vstupmi už na GPU.
+
+Dáta a sieť
+Používame existujúcich 1000 prípadov harmonics z auditovanej a pripnutej
+verzie FlowBench: 640 TRAIN / 160 VAL / 200 zatiaľ uzavretý TEST.
+Rovnaké tvary prekážok sa môžu objaviť vo viacerých množinách; nebudeme
+tvrdiť, že hodnotíme iba nové geometrie. Žiadne nové CFD dáta nevzniknú.
+Architektúra je naša spoločná sieť V26: geometrický enkóder a hladká
+súradnicová sieť s prúdovou funkciou a tlakom. Fyzikálna strata obsahuje
+skutočné ustálené Navierove–Stokesove rovnice, viskozitu 1/Re a okrajové
+podmienky. Nie je to samostatná sieť pre každý prípad. Starý 3D FNO
+experiment zostáva oddelený.
+
+Porovnávané metódy
+Qwen/Qwen3-8B; mistralai/Ministral-3-8B-Instruct-2512;
+microsoft/Phi-4-mini-instruct; ibm-granite/granite-3.3-8b-instruct;
+náhodné hľadanie; Optuna TPE; navyše pevné základné nastavenie.
+Modely sú lokálne, konkrétne revízie a pôvodné licencie v protocol.json.
+Qwen a Granite bez thinking. Ministral pôvodne FP8, dekvantizovaný do
+BF16; nejde o obnovenie pôvodnej presnosti pred FP8. Phi je menší model.
+Výsledok sa týka týchto checkpointov a nastavení, nie všetkých LLM.
+
+Rozsah: spolu 395 hlavných tréningov
+Každá zo 6 hľadacích metód má 5 nezávislých hľadaní. Každé má presne
+8 kandidátskych miest vrátane prvého rovnakého základného nastavenia.
+Prvé nastavenie sa fyzicky znovu trénuje pri každom hľadaní a metóde.
+Nasleduje najviac 7 návrhov podľa vlastnej dovtedajšej histórie.
+Z hľadania sa podľa VAL vyberie 1 konfigurácia a tú znovu natrénujeme
+s 5 novými seedmi. Výsledkom je 25 záverečných tréningov na metódu.
+Pevný základ má navyše 5 tréningov s rovnakými finálnymi seedmi.
+6 × 5 × (8 + 5) + 5 = 395 plánovaných tréningov. Každý hlavný tréning
+má 400 celých epoch TRAIN, teda 64 000 aktualizácií. Bez predčasného
+ukončenia podľa priebežného skóre a bez prenosu už naučených váh.
+
+Seedy a férovosť
+Hľadania používajú tréningové seedy 140001–140005. V rámci rovnakého
+hľadania má každý kandidát a každá metóda rovnaký tréningový seed,
+počiatočné váhy a vzorkované body. Poradie prípadov, dátové body, PDE
+body a okraje majú oddelené generátory náhody; PDE body sa spotrebujú
+aj počas warmupu. Zmena nastavenia tak nesmie zmeniť náhodný výber bodov.
+Finálne tréningy používajú 150001–150005, zdieľané medzi metódami,
+vybranými konfiguráciami a pevným základom. Vyhodnotia sa všetky seedy,
+nevyberá sa najlepší finálny seed. Päť opakovaných tréningov v rámci
+hľadania nie je päť ďalších nezávislých hľadaní. Rozdelenie týchto úrovní
+sa zachová v údajoch; 25 riadkov sa nebude vydávať za 25 nezávislých
+optimalizácií. Počet opakovaní sám nezaručuje štatistickú významnosť.
+Formálne znenie hypotéz a štatistického vyhodnotenia doplníme neskôr.
+
+Čo sa môže meniť
+Rýchlosť učenia: 0,0001 až 0,002, číslo v spojitom intervale.
+Váha tlaku: 0,5 / 1 / 2.
+Váha fyziky: 0,0001 / 0,0003 / 0,001 / 0,003 / 0,01.
+Váha okrajov: 0,001 / 0,003 / 0,01 / 0,03 / 0,1.
+Podiel warmupu fyziky: 0 / 0,03125 / 0,0625.
+Rovnaký priestor pre LLM, random a TPE. Fyziku nemožno vypnúť. Po
+warmupe je pevný nábeh 0,03125 z počtu aktualizácií. Architektúra,
+Adam/cosine, veľkosť dávky 4, 2048 dátových / 64 PDE / 128 okrajových
+bodov na prípad, normovanie TRAIN a orezanie normy gradientu na 1
+zostávajú rovnaké. Výstupné fyzikálne polia sa umelo neorezávajú.
+
+Výber a spätná väzba
+Počas tréningu sa na všetkých 160 VAL každých 10 epoch a na konci
+vypočíta nezmenená priemerná nevážená MSE u/v/p na celom poli. Podľa
+nej sa vyberie checkpoint a potom konfigurácia. Pri zhode vyhrá skorší
+kandidát. Rozdielne váhy tlaku v tréningu nemenia hodnotiacu metriku.
+LLM dostáva iba vlastné predchádzajúce výsledky daného hľadania:
+MSE, relatívne chyby rýchlosti/tlaku, NS rezíduum, divergenciu, priemernú
+chybu okrajov a tréningový čas. Žiadna história iných metód, pilotné
+skóre alebo TEST. Priemerná chyba okrajov je priemer RMS veľkosti chyby
+na piatich povrchoch, potom spriemerovaný cez VAL, v jednotkách veka.
+Základ V26 z auditu sa nevydáva za nový finálny porovnávací baseline.
+
+Generovanie a neúspechy
+Všetky štyri LLM majú rovnaký opis, povolené číselné nastavenia a JSON
+schému. Schéma stráži formát; čísla vyberá model. Najviac jedna opravná
+odpoveď od modelu. Žiadne ručné nahrádzanie alebo upravovanie hodnôt.
+Každý návrh má krátky deklarovaný dôvod, očakávanie a riziko, každý
+najviac 120 znakov. Uchovávajú sa originály. Nie je to skrytá myšlienková
+stopa. Odkaz na posledný výsledok riadi schéma a nedokazuje porozumenie.
+Duplicita spotrebuje miesto a celý nový tréning. Neplatný návrh tiež
+spotrebuje miesto a nevyvolá náhradný žreb. Neúspešné merania majú null,
+nevymyslí sa náhradná MSE. Pre TPE je zvlášť označený prevádzkový postih
+1e6 pri neúspešnom platnom nastavení; nie je to nameraná fyzikálna chyba.
+Pre každý tréning je rovnaký strop 6 hodín. Numerická nestabilita alebo
+vyčerpanie tohto stropu sa zaznamená ako neúspech. Iné programové,
+integritné alebo infraštruktúrne chyby zastavia prideľovanie nových
+úloh na kontrolu. Pokusy sa nebudú potichu opakovať ani vymazávať.
+
+Presnosť, fyzika a rýchlosť
+Uchováme aj chyby pri prekážke, celé mriežkové fyzikálne rezíduá,
+divergenciu a chyby okrajov. Nízka divergencia sama nepotvrdzuje hybnosť.
+Známe nedostatky pilota sa priznávajú a žiadny nový prah fyzikálnej
+presnosti sa nevymýšľa. Pred tréningom je krátky rýchlostný gate;
+po výbere hlavného modelu sa na všetkých 160 VAL urobí 30 zahrievacích
+a 200 meraných predikcií. P99 má byť do 5 ms na každom. Zahŕňa geometrický
+enkóder aj celý výstup, bez pamäte závislej od konkrétnej geometrie.
+Prenos medzi PC/GPU a vykresľovanie mimo merania. Surové časy sa uložia.
+
+Prípravná integračná skúška sa do hlavného výsledku nepočíta
+Pred prvou veľkou dávkou beží 25 skutočných dvojepochových tréningov
+cez ten istý nový spúšťač: všetkých 6 metód, po 3 kandidátoch a jednom
+novom tréningu vybranej konfigurácie, plus jeden pevný základ.
+Štyri LLM tak urobia každý dva nadväzujúce návrhy s reálnou spätnou
+väzbou. Seedy 320001 / 330001 sa v hlavnom experimente nepoužijú.
+Učenie aj chyby používajú celých 640/160; iba záverečné opakované
+časovanie tejto technickej skúšky má 2 VAL vstupy namiesto 160.
+Hlavná séria sa nespustí, kým neprejdú všetky kontroly tejto skúšky.
+
+Spúšťanie, nadväzovanie a dokumentovanie
+Na ôsmich fyzicky odlišných H200 beží po jednom nezávislom procese.
+Spoločný uložený poradovník s uzamykaním zabráni duplicitnému priradeniu
+a nepustí ďalší kandidát bez výsledku predchádzajúceho. Nezávislé
+hľadania a tréningy sa tým môžu vykonávať súbežne. Jeden hlavný batch
+má najviac 36 hodín; s nedostatočnou rezervou sa nový tréning nezačne.
+Zvyšné úlohy ostanú pripravené pre ďalšiu registrovanú dávku. Nedokončené
+RUNNING alebo ATTENTION záznamy vyžadujú kontrolu pred obnovou.
+Nie je to automatické monitorovanie chatu; ďalšie dávky sa registrujú
+cez pripravený spúšťač pri pokračovaní práce. Do skončenia všetkých
+395 tréningov tak bude potrebných viac nadväzujúcich dávok.
+Pred uvoľnením batchu sa zapíše jeho ID a afterany účtovanie. Zachováme
+aj pridelené GPU/CPU sekundy vrátane nečinného konca workerov, náklady
+na LLM, opravy, pamäť a načítanie. Súčty časov podprocesov nenahradia
+skutočnú alokovanú spotrebu Perunu. Zdroje a protokol majú zmrazené SHA.
+Veľké polia, váhy a obnoviteľné tréningové stavy zostanú iba na Perune.
+Lokálne budú malé protokoly, čísla, logy a obrázky. Podstatné kroky sú
+aj v experiment_3d_llm_flow/dokumentacia.txt.
+
+Záverečný TEST
+Všetkých 200 testovacích cieľov zostáva uzavretých počas hľadania,
+výberu konfigurácií aj opakovaného tréningu. Po zmrazení všetkých
+výberov a výsledných checkpointov vykonáme samostatné záverečné
+hodnotenie všetkých vybraných/fixných seedov. Test nebude vstupom
+pre ďalšie návrhy LLM ani dodatočné ladenie. Tento testovací krok a
+štatistické zhrnutie sú ďalšia etapa po dokončení tréningovej série.
+
+Presné strojové pravidlá: zaznamy/protocol.json, freeze.json.
+Perun: /mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_20261104_v32

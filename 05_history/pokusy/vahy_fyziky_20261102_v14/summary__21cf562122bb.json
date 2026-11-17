@@ -1,0 +1,194 @@
+{
+  "status": "PHYSICS_WEIGHT_TRAIN_FIT_EVALUATED",
+  "config": {
+    "name": "pde_0p01",
+    "model_kind": "baseline",
+    "train_count": 3,
+    "state_conditioning": true,
+    "width": 192,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "seed": 20261102,
+    "updates": 30000,
+    "lr": 3e-05,
+    "warmup": -1000,
+    "batch": 2048,
+    "collocation": 256,
+    "assess_every": 5000,
+    "pde_weight": 0.01,
+    "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_own_conditioning_20261101_v13/training/140676/baseline_3train/best.pt",
+    "warm_start_sha256": "62123717b4e9cd1f9a06ef65a149bf1725a475abafa425c034f56e47ade4be24"
+  },
+  "accuracy": [
+    {
+      "score": 0.03347680829133225,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.02538038718132478,
+        "pressure_relative_l2": 0.04157322940133972
+      },
+      "interior_div_rms": 0.09888183086046151,
+      "direct_query_gpu_ms": {
+        "p50": 3.4035680294036865,
+        "p95": 3.419991970062256,
+        "p99": 3.43247353553772
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": false,
+      "mean_fd_momentum_loss": 0.14314175970038445,
+      "mean_reference_fd_momentum_loss": 0.00640134365462205
+    },
+    {
+      "score": 0.026368808055240583,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.012151492177157384,
+        "pressure_relative_l2": 0.04058612393332378
+      },
+      "interior_div_rms": 0.044770800316815865,
+      "direct_query_gpu_ms": {
+        "p50": 3.4023839235305786,
+        "p95": 3.4174718856811523,
+        "p99": 3.4220828366279603
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "mass_limit": 0.016320491675287485,
+      "mass_pass": false,
+      "mean_fd_momentum_loss": 0.0306346539814933,
+      "mean_reference_fd_momentum_loss": 0.002707435834581549
+    },
+    {
+      "score": 0.02387965784428286,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.013981363781681036,
+        "pressure_relative_l2": 0.033777951906884686
+      },
+      "interior_div_rms": 0.055203080502096095,
+      "direct_query_gpu_ms": {
+        "p50": 3.421776056289673,
+        "p95": 3.441529631614685,
+        "p99": 3.48236540555954
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "mass_limit": 0.02801069151610136,
+      "mass_pass": false,
+      "mean_fd_momentum_loss": 0.04751644962850739,
+      "mean_reference_fd_momentum_loss": 0.0036672904232454276
+    }
+  ],
+  "training_monitor": [
+    {
+      "score": 0.03347680829133225,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.02538038718132478,
+        "pressure_relative_l2": 0.04157322940133972
+      },
+      "interior_div_rms": 0.09888183086046151,
+      "direct_query_gpu_ms": {
+        "p50": 3.40339195728302,
+        "p95": 3.420472061634064,
+        "p99": 3.4276221632957458
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": false,
+      "mean_fd_momentum_loss": 0.14314175970038445,
+      "mean_reference_fd_momentum_loss": 0.00640134365462205
+    },
+    {
+      "score": 0.026368808055240583,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.012151492177157384,
+        "pressure_relative_l2": 0.04058612393332378
+      },
+      "interior_div_rms": 0.044770800316815865,
+      "direct_query_gpu_ms": {
+        "p50": 3.3993279933929443,
+        "p95": 3.414545512199402,
+        "p99": 3.4186536979675295
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+      "mass_limit": 0.016320491675287485,
+      "mass_pass": false,
+      "mean_fd_momentum_loss": 0.0306346539814933,
+      "mean_reference_fd_momentum_loss": 0.002707435834581549
+    },
+    {
+      "score": 0.02387965784428286,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.013981363781681036,
+        "pressure_relative_l2": 0.033777951906884686
+      },
+      "interior_div_rms": 0.055203080502096095,
+      "direct_query_gpu_ms": {
+        "p50": 3.3973920345306396,
+        "p95": 3.4104848861694337,
+        "p99": 3.416450912952423
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+      "mass_limit": 0.02801069151610136,
+      "mass_pass": false,
+      "mean_fd_momentum_loss": 0.04751644962850739,
+      "mean_reference_fd_momentum_loss": 0.0036672904232454276
+    }
+  ],
+  "selected_update": 30000,
+  "all238_training_frames_visited": true,
+  "training_seconds": 1321.253396725282,
+  "peak_cuda_allocated_bytes": 2873890304,
+  "checkpoint_sha256": "3996f1f17a7b5f65ee1c762826c8fe08c70e7104a73965ae8ffd72fd84d3b1eb",
+  "independent_validation": false,
+  "causal_stepper": false,
+  "llm_ready": false,
+  "train_scenarios": 3,
+  "validation_scenarios": 0,
+  "train_selection_scenarios": 3,
+  "training_case_updates": [
+    10000,
+    10000,
+    10000
+  ],
+  "sampling_sha256": "564b0fbdc7c8b1c30012a83599045b2e72e87c6cb4b034ac1e1ae7c95fa56f3f",
+  "best_accuracy_checkpoint_sha256": "0038fbce298d6136f6e44b327b9a32b32201562f61ca11873ac822e1f5d7e6d9",
+  "working_gate": {
+    "accuracy_pass": true,
+    "mass_pass": false,
+    "direct_query_latency_pass": true
+  },
+  "limitations": [
+    "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+    "Only fixed PDE coefficient differs across arms; physics-first selection may select a less accurate field fit",
+    "Absolute time query, no recurrent own states; not directly comparable causal latency",
+    "Primitive output PINN soft physics; different representation bundle from curl stepper"
+  ]
+}

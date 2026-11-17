@@ -1,0 +1,26 @@
+{
+  "unix": 1793817192.808959,
+  "status": "24_GPU_RUNNING_CONFIRMED",
+  "jobs": [
+    "143342",
+    "143656",
+    "143684"
+  ],
+  "collector_job": "143685",
+  "counts": {
+    "RUNNING": 24,
+    "PENDING": 371
+  },
+  "owners": {
+    "143342": 8,
+    "143656": 8,
+    "143684": 8
+  },
+  "queue": "143685|PENDING|1|N/A|\n143684|RUNNING|1|gres/gpu:8|gpu17\n143342|RUNNING|1|gres/gpu:8|gpu26\n143656|RUNNING|1|gres/gpu:8|gpu10\n",
+  "collector_scontrol": "JobId=143685 JobName=dp-ldc36-collector UserId=lutoke823(507402392) GroupId=domain users(507400513) MCS_label=N/A Priority=908 Nice=0 Account=perun2601449 QOS=perun2601449 JobState=PENDING Reason=Dependency Dependency=afterany:143342(unfulfilled)?afterany:143656(unfulfilled)?afterany:143684(unfulfilled) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-04T19:22:50 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-04T19:22:50 Scheduler=Main Partition=cpu_short AllocNode:Sid=login01:1952238 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=1,mem=512M,node=1,billing=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=1 MinMemoryNode=512M MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/project/perun2601449/dp_llm_cfd/test/scripts/263_ldc24_collector_v36.sbatch SubmitLine=sbatch --parsable --dependency=afterany:143342?afterany:143656?afterany:143684 --hold test/scripts/263_ldc24_collector_v36.sbatch group_000 WorkDir=/mnt/project/perun2601449/dp_llm_cfd StdErr=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc36-collector_143685.err StdIn=/dev/null StdOut=/mnt/project/perun2601449/dp_llm_cfd/logs/dp-ldc36-collector_143685.out TresPerTask=cpu=1",
+  "scientific_and_operational_hashes_pass": true,
+  "freeze_sha256": "c61230aa43a09ae18ac2f7b79a53dac33934227c42746bc31dfb3499e8f24e6b",
+  "operational_manifest_sha256": "c858137861a9bb8fd241046cdd4a3014d8976675cc6dcdb568798f19963eb7da",
+  "launch_proof_sha256": "5af85517afaa49e2140fb88bf562913ab98beeee8adc54b79443b6c21ac70900",
+  "test_targets_opened": false
+}

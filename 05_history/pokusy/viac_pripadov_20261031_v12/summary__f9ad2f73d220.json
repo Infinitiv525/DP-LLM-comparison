@@ -1,0 +1,306 @@
+{
+  "status": "MULTICASE_DEVELOPMENT_COMPLETE",
+  "results": [
+    {
+      "status": "DIRECT_MULTICASE_DEVELOPMENT_EVALUATED",
+      "config": {
+        "name": "direct_multicase_width192",
+        "state_conditioning": true,
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261031,
+        "updates": 600000,
+        "lr": 0.0003,
+        "warmup": 1000,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 10000
+      },
+      "accuracy": [
+        {
+          "score": 0.5092767569635446,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.4328952083529682,
+            "pressure_relative_l2": 0.5856583055741209
+          },
+          "interior_div_rms": 0.4539005129887652,
+          "direct_query_gpu_ms": {
+            "p50": 3.2294880151748657,
+            "p95": 3.2517504572868345,
+            "p99": 3.2572482800483704
+          },
+          "causal_step_latency": false,
+          "scope": "validation",
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": false
+        },
+        {
+          "score": 0.6534920017457371,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.5924910466898426,
+            "pressure_relative_l2": 0.7144929568016316
+          },
+          "interior_div_rms": 0.770128037279644,
+          "direct_query_gpu_ms": {
+            "p50": 3.237007975578308,
+            "p95": 3.2510432839393615,
+            "p99": 3.258081612586975
+          },
+          "causal_step_latency": false,
+          "scope": "validation",
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_838.npz",
+          "mass_limit": 0.07750541344285011,
+          "mass_pass": false
+        },
+        {
+          "score": 0.20966984696738983,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.1319920487917898,
+            "pressure_relative_l2": 0.2873476451429899
+          },
+          "interior_div_rms": 0.1722755679398963,
+          "direct_query_gpu_ms": {
+            "p50": 3.2363040447235107,
+            "p95": 3.2529712200164793,
+            "p99": 3.2588140964508057
+          },
+          "causal_step_latency": false,
+          "scope": "validation",
+          "path": "FPO_NS_2D_1024x256/nurbs/22/Re_164.npz",
+          "mass_limit": 0.02194801764562726,
+          "mass_pass": false
+        },
+        {
+          "score": 0.5849721099189937,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.4560764134075716,
+            "pressure_relative_l2": 0.7138678064304159
+          },
+          "interior_div_rms": 0.4715029786364371,
+          "direct_query_gpu_ms": {
+            "p50": 3.230736017227173,
+            "p95": 3.2502768278121947,
+            "p99": 3.25339866399765
+          },
+          "causal_step_latency": false,
+          "scope": "validation",
+          "path": "FPO_NS_2D_1024x256/nurbs/22/Re_977.npz",
+          "mass_limit": 0.06768260161945164,
+          "mass_pass": false
+        },
+        {
+          "score": 0.19672521719900712,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.11050760300335279,
+            "pressure_relative_l2": 0.2829428313946615
+          },
+          "interior_div_rms": 0.20550392277757912,
+          "direct_query_gpu_ms": {
+            "p50": 3.2372639179229736,
+            "p95": 3.2506879806518554,
+            "p99": 3.2549561738967894
+          },
+          "causal_step_latency": false,
+          "scope": "validation",
+          "path": "FPO_NS_2D_1024x256/skelenton/36/Re_209.npz",
+          "mass_limit": 0.02889989409595728,
+          "mass_pass": false
+        },
+        {
+          "score": 0.39809324364252857,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.23904568256259293,
+            "pressure_relative_l2": 0.5571408047224642
+          },
+          "interior_div_rms": 0.40572217534131866,
+          "direct_query_gpu_ms": {
+            "p50": 3.23143994808197,
+            "p95": 3.250502419471741,
+            "p99": 3.2566600847244263
+          },
+          "causal_step_latency": false,
+          "scope": "validation",
+          "path": "FPO_NS_2D_1024x256/skelenton/36/Re_867.npz",
+          "mass_limit": 0.06294631617567345,
+          "mass_pass": false
+        }
+      ],
+      "training_monitor": [
+        {
+          "score": 0.3429277804033257,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.25353351459200507,
+            "pressure_relative_l2": 0.4323220462146463
+          },
+          "interior_div_rms": 0.3493555144273809,
+          "direct_query_gpu_ms": {
+            "p50": 3.235071897506714,
+            "p95": 3.2529551148414613,
+            "p99": 3.255620892047882
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": false
+        },
+        {
+          "score": 0.1676149127737822,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.09184199350673189,
+            "pressure_relative_l2": 0.24338783204083256
+          },
+          "interior_div_rms": 0.14846862442478412,
+          "direct_query_gpu_ms": {
+            "p50": 3.2321759462356567,
+            "p95": 3.249440097808838,
+            "p99": 3.253476793766022
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/nurbs/11/Re_107.npz",
+          "mass_limit": 0.016320491675287485,
+          "mass_pass": false
+        },
+        {
+          "score": 0.1804802650349104,
+          "failure": false,
+          "predicted_frames": 238,
+          "mean_errors": {
+            "velocity_relative_l2": 0.11065528609940385,
+            "pressure_relative_l2": 0.250305243970417
+          },
+          "interior_div_rms": 0.17873392010718084,
+          "direct_query_gpu_ms": {
+            "p50": 3.233936071395874,
+            "p95": 3.2528208255767823,
+            "p99": 3.2601125979423524
+          },
+          "causal_step_latency": false,
+          "scope": "train",
+          "path": "FPO_NS_2D_1024x256/skelenton/57/Re_168.npz",
+          "mass_limit": 0.02801069151610136,
+          "mass_pass": false
+        }
+      ],
+      "selected_update": 70000,
+      "all238_training_frames_visited": true,
+      "training_seconds": 22510.984352905303,
+      "peak_cuda_allocated_bytes": 53251935232,
+      "checkpoint_sha256": "6ea8f3e841d3d5559387aca8e15f1b15a606baae43e9516e8239bbf8b50b72b0",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 69,
+      "validation_scenarios": 6,
+      "training_case_updates": [
+        8696,
+        8695,
+        8696,
+        8696,
+        8696,
+        8696,
+        8696,
+        8696,
+        8696,
+        8695,
+        8696,
+        8696,
+        8696,
+        8696,
+        8695,
+        8695,
+        8696,
+        8695,
+        8695,
+        8695,
+        8695,
+        8695,
+        8695,
+        8696,
+        8695,
+        8696,
+        8696,
+        8695,
+        8696,
+        8695,
+        8696,
+        8696,
+        8695,
+        8696,
+        8695,
+        8696,
+        8696,
+        8695,
+        8696,
+        8696,
+        8696,
+        8695,
+        8696,
+        8696,
+        8696,
+        8696,
+        8695,
+        8695,
+        8696,
+        8695,
+        8696,
+        8696,
+        8696,
+        8696,
+        8696,
+        8696,
+        8695,
+        8696,
+        8696,
+        8696,
+        8695,
+        8696,
+        8695,
+        8696,
+        8696,
+        8696,
+        8695,
+        8696,
+        8696
+      ],
+      "working_gate": {
+        "accuracy_pass": false,
+        "mass_pass": false,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "Geometry-disjoint development validation used for checkpoint selection; not final independent test",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Primitive output PINN soft physics; different representation bundle from curl stepper"
+      ]
+    }
+  ],
+  "causal_stepper": false,
+  "independent_validation": false
+}

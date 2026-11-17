@@ -1,0 +1,367 @@
+{
+  "status": "SMOKE_COMPLETE",
+  "results": [
+    {
+      "status": "KNOWN_CASE_MATCHED_GRADIENT_EVALUATED",
+      "config": {
+        "seed": 20261031,
+        "state_conditioning": true,
+        "width": 96,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "state_update": "curl",
+        "collocation": 256,
+        "pde_weight": 0.01,
+        "bc_weight": 0.01,
+        "data_loss_scale": 0.05,
+        "own_momentum_weight": 0.1,
+        "own_divergence_weight": 0.1,
+        "divergence_limit": 1000.0,
+        "divergence_score_penalty": 1000000.0,
+        "name": "D_gradient_08",
+        "gradient_horizon": 8,
+        "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_long_rollout_20261031_v7/training/139916/D_long_rollout/last.pt",
+        "warm_start_sha256": "97ba72e522f17bdc3102d388f7ae75b86e7109e283dbb3015f1b24d9a7f5dbf4",
+        "horizon": 46,
+        "epochs": 1,
+        "lr": 1e-05,
+        "gradient_clip": 0.25,
+        "assess_every_epochs": 1
+      },
+      "accuracy": {
+        "score": 0.6033999297702046,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.5236640528133304,
+              "pressure_relative_l2": 0.6831358067270789
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5698721496859207,
+              "pressure_relative_l2": 0.9745848419801173
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.08769623510352283,
+              "pressure_relative_l2": 0.1287514093990981
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.1383124573116147,
+              "pressure_relative_l2": 0.26184009682653586
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.3670396285438848,
+              "pressure_relative_l2": 0.3939210381046072
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5169503865428401,
+              "pressure_relative_l2": 0.973268673396553
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.6022760808192832,
+              "pressure_relative_l2": 0.7395717075216858
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5923710946347213,
+              "pressure_relative_l2": 1.0378516572149905
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.5471339567515102,
+              "pressure_relative_l2": 0.7653850861201756
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6046461685175428,
+              "pressure_relative_l2": 0.992428802067006
+            }
+          }
+        },
+        "divergence": null,
+        "predicted_steps": 238,
+        "mass": {
+          "initial_rms": 0.014042903669178486,
+          "mean_model_rms": 0.014042909319723854,
+          "mean_reference_rms": 0.014512970961901307,
+          "prospective_limit": 0.04353891288570392,
+          "pass_gate": true
+        },
+        "gpu_step_ms": {
+          "p50": 1.9167360067367554,
+          "p95": 1.9316624522209167,
+          "p99": 1.9391299510002136
+        },
+        "gpu_step_plus_fd_monitor_ms": {
+          "p50": 2.3870400190353394,
+          "p95": 2.404094398021698,
+          "p99": 2.4150582361221313
+        },
+        "reference_future_as_input": false,
+        "scope": "KNOWN_TRAINING_SCENARIO_POSITIVE_CONTROL"
+      },
+      "latency": {
+        "grid": [
+          1024,
+          256
+        ],
+        "whole_gpu_step_rounds_ms": [
+          {
+            "p50": 1.443615972995758,
+            "p95": 1.451716810464859,
+            "p99": 1.4567773151397705
+          },
+          {
+            "p50": 1.442944049835205,
+            "p95": 1.4503375828266143,
+            "p99": 1.4549497747421265
+          },
+          {
+            "p50": 1.442192018032074,
+            "p95": 1.449763160943985,
+            "p99": 1.4533660674095155
+          }
+        ],
+        "step_plus_fd_monitor_rounds_ms": [
+          {
+            "p50": 1.8669599890708923,
+            "p95": 1.876241636276245,
+            "p99": 1.8824972796440125
+          },
+          {
+            "p50": 1.8660320043563843,
+            "p95": 1.8758527517318726,
+            "p99": 1.8795427775382996
+          },
+          {
+            "p50": 1.8650559782981873,
+            "p95": 1.8735728561878204,
+            "p99": 1.8790873110294342
+          }
+        ],
+        "samples_per_round": 200,
+        "rendering_included": false,
+        "initial_tensors_gpu": true
+      },
+      "selected_phase": "full238_matched_updates",
+      "selected_epoch": 1,
+      "actual_optimizer_updates": 2,
+      "expected_optimizer_updates": 2,
+      "all238_training_targets_visited": false,
+      "completed_episodes": 1,
+      "sampling_trace_sha256": "ee45fbb3afcd2ecba56936c28c97579ed4fd0a49ad3edfbeefb2ec940d2558ba",
+      "training_seconds": 14.526496279984713,
+      "peak_cuda_allocated_bytes": 16553531904,
+      "gpu": "NVIDIA H200",
+      "working_gate": {
+        "accuracy_pass": false,
+        "latency_pass": true,
+        "mass_growth_pass": true
+      },
+      "checkpoint_sha256": "dd16b3558f27fac3abeccb1dc32b05f16e078403276cc2d5083e99811fb84a56",
+      "training_failure": null,
+      "independent_validation": false,
+      "main_test_opened": false,
+      "llm_comparison_ready": false,
+      "limitations": [
+        "Known TRAIN positive control only; same trajectory used for checkpoint selection",
+        "Both update weights every32 own steps; detach gradient every8 versus32",
+        "Common8step objectives/collocation schedule; own numerical states carry onward",
+        "Only interior curl increment has divergence identity; not global NS stability"
+      ]
+    },
+    {
+      "status": "KNOWN_CASE_MATCHED_GRADIENT_EVALUATED",
+      "config": {
+        "seed": 20261031,
+        "state_conditioning": true,
+        "width": 96,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "state_update": "curl",
+        "collocation": 256,
+        "pde_weight": 0.01,
+        "bc_weight": 0.01,
+        "data_loss_scale": 0.05,
+        "own_momentum_weight": 0.1,
+        "own_divergence_weight": 0.1,
+        "divergence_limit": 1000.0,
+        "divergence_score_penalty": 1000000.0,
+        "name": "D_gradient_32",
+        "gradient_horizon": 32,
+        "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_long_rollout_20261031_v7/training/139916/D_long_rollout/last.pt",
+        "warm_start_sha256": "97ba72e522f17bdc3102d388f7ae75b86e7109e283dbb3015f1b24d9a7f5dbf4",
+        "horizon": 46,
+        "epochs": 1,
+        "lr": 1e-05,
+        "gradient_clip": 0.25,
+        "assess_every_epochs": 1
+      },
+      "accuracy": {
+        "score": 0.6033320294769364,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.5235273706657149,
+              "pressure_relative_l2": 0.6831366882881581
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5698721496859207,
+              "pressure_relative_l2": 0.9745848419801173
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.08773401218808821,
+              "pressure_relative_l2": 0.1290637543124199
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.1383124573116147,
+              "pressure_relative_l2": 0.26184009682653586
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.36708227203051924,
+              "pressure_relative_l2": 0.39404586809995484
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5169503865428401,
+              "pressure_relative_l2": 0.973268673396553
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.6021618181813287,
+              "pressure_relative_l2": 0.7394245551372576
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5923710946347213,
+              "pressure_relative_l2": 1.0378516572149905
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.5469216989926897,
+              "pressure_relative_l2": 0.7654284221650693
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6046461685175428,
+              "pressure_relative_l2": 0.992428802067006
+            }
+          }
+        },
+        "divergence": null,
+        "predicted_steps": 238,
+        "mass": {
+          "initial_rms": 0.014042903669178486,
+          "mean_model_rms": 0.014042887754519196,
+          "mean_reference_rms": 0.014512970961901307,
+          "prospective_limit": 0.04353891288570392,
+          "pass_gate": true
+        },
+        "gpu_step_ms": {
+          "p50": 1.921392023563385,
+          "p95": 1.932671946287155,
+          "p99": 1.9407945609092712
+        },
+        "gpu_step_plus_fd_monitor_ms": {
+          "p50": 2.3916640281677246,
+          "p95": 2.40485759973526,
+          "p99": 2.4121935629844664
+        },
+        "reference_future_as_input": false,
+        "scope": "KNOWN_TRAINING_SCENARIO_POSITIVE_CONTROL"
+      },
+      "latency": {
+        "grid": [
+          1024,
+          256
+        ],
+        "whole_gpu_step_rounds_ms": [
+          {
+            "p50": 1.4437440037727356,
+            "p95": 1.4507279574871064,
+            "p99": 1.4532287573814393
+          },
+          {
+            "p50": 1.443615972995758,
+            "p95": 1.4516272485256194,
+            "p99": 1.4555014073848724
+          },
+          {
+            "p50": 1.4429919719696045,
+            "p95": 1.4499887585639955,
+            "p99": 1.4539877951145173
+          }
+        ],
+        "step_plus_fd_monitor_rounds_ms": [
+          {
+            "p50": 1.8680000305175781,
+            "p95": 1.8762272417545318,
+            "p99": 1.8811689937114715
+          },
+          {
+            "p50": 1.8672959804534912,
+            "p95": 1.8760080456733703,
+            "p99": 1.8823052334785462
+          },
+          {
+            "p50": 1.8664640188217163,
+            "p95": 1.8736816227436066,
+            "p99": 1.8774890029430389
+          }
+        ],
+        "samples_per_round": 200,
+        "rendering_included": false,
+        "initial_tensors_gpu": true
+      },
+      "selected_phase": "full238_matched_updates",
+      "selected_epoch": 1,
+      "actual_optimizer_updates": 2,
+      "expected_optimizer_updates": 2,
+      "all238_training_targets_visited": false,
+      "completed_episodes": 1,
+      "sampling_trace_sha256": "ee45fbb3afcd2ecba56936c28c97579ed4fd0a49ad3edfbeefb2ec940d2558ba",
+      "training_seconds": 14.278075622394681,
+      "peak_cuda_allocated_bytes": 16560345600,
+      "gpu": "NVIDIA H200",
+      "working_gate": {
+        "accuracy_pass": false,
+        "latency_pass": true,
+        "mass_growth_pass": true
+      },
+      "checkpoint_sha256": "3db09fdcb71bca352f7a744f960da2c3158c8fb6adc9b3690ed830714fb7f0fb",
+      "training_failure": null,
+      "independent_validation": false,
+      "main_test_opened": false,
+      "llm_comparison_ready": false,
+      "limitations": [
+        "Known TRAIN positive control only; same trajectory used for checkpoint selection",
+        "Both update weights every32 own steps; detach gradient every8 versus32",
+        "Common8step objectives/collocation schedule; own numerical states carry onward",
+        "Only interior curl increment has divergence identity; not global NS stability"
+      ]
+    }
+  ],
+  "matched_execution": true,
+  "independent_validation": false
+}

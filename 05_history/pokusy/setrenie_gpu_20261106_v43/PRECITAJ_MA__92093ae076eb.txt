@@ -1,0 +1,41 @@
+PRESUN ZBERU VÝSLEDKOV NA CPU A POKRAČOVANIE HLAVNÉHO EXPERIMENTU
+06.11.2026
+
+Používateľ uzavrel ďalšie skúšanie väčšej siete. Existujúce výsledky troch
+kapacitných tréningov sú zachované. Žiadny ďalší kapacitný tréning sa nespúšťa.
+
+Čo sa urobilo:
+1. Overené, že úloha 143807 má všetky tri kapacitné tréningy dokončené
+   a nezostáva v nej žiadny iný aktívny analytický krok.
+2. Najprv zaregistrovaná držaná náhradná CPU úloha 144648, potom ukončená
+   pôvodná GPU úloha 143807, ktorá už iba čakala a zbierala účtovné doklady.
+   Jej skutočný koncový stav a spotreba sú v old_gpu_accounting.json.
+3. Registrovaná nová 8-GPU dávka 144649 z pôvodného hlavného plánu.
+   Pridaná do skupiny ešte pred spustením CPU zberača, aby ju zberač
+   od začiatku sledoval. Tým sa zachová automatické pokračovanie aj účtovanie.
+4. CPU zberač 144648 bol spustený a overený pred uvoľnením novej GPU dávky.
+   Zber a čakanie na výsledky už nevyhradzujú GPU.
+5. Hlavné úlohy 143656 a 143684 pokračujú bez prerušenia. S novou dávkou
+   144649 majú spolu pridelených 24 GPU; počet práve aktívnych tréningov
+   závisí od priebehu úloh a ich závislostí.
+
+Pôvodný plán 395 pokusov, 400 epoch na tréning, seedy, konfigurácie,
+LLM spätná väzba, výber podľa VAL a uzavretý TEST sa nemenili.
+Žiadne nové vedecké porovnanie ani ďalšie opakovania neboli pridané.
+Nová dávka vykonáva ďalšie pripravené vyhľadávania a finálne opakovania
+vybraných konfigurácií podľa rovnakého spoločného plánovača.
+
+Rozpočet oznámený používateľom podľa portálu Perun: 2246 GPU-h pridelených,
+865 GPU-h použitých, teda 1381 GPU-h zostáva. Ide o stav oznámený používateľom,
+nie o nezávisle načítaný priebežný zostatok. Súbeh neurčuje celkový počet
+tréningov; presun zberača na CPU odstraňuje ďalšie účtovanie jeho čakajúcej GPU.
+
+Doklady: intent.json, progress.json, closeout.json, old_gpu_accounting.json
+a launch_verification.json. Posledný súbor zachytáva skutočné priradenie
+ôsmich odlišných H200 a prevzatie úloh novými pracovníkmi.
+Nová dávka prešla všetkými 14 povinnými úvodnými kontrolami.
+Pôvodné zmrazené vedecké aj prevádzkové zdroje sú bez zmeny.
+
+Na Perune: results/ldc_budget_rebalance_20261106_v43.
+Nový prevádzkový skript: test/analysis/ldc_budget_rebalance_v43.py.
+Váhy, referenčné polia a veľké výsledky ostávajú na Perune.

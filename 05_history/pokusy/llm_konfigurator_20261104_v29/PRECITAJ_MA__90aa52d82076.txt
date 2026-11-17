@@ -1,0 +1,66 @@
+V29 JE UZAVRETÁ: Qwen, Ministral a obe kontrolné metódy prešli. Phi a Granite vrátili neplatný formát; nejde o úspech všetkých štyroch rodín. Úloha 143193 FAILED po 653 s, spotreba 2612 GPU s a 10448 core s. Aktuálna spoločná skúška V30 používa riadenú JSON schému pre všetky rodiny.
+
+HISTORICKÝ OPIS
+
+STRUČNÝ KONFIGURÁTOR A TECHNICKÁ SKÚŠKA ŠTYROCH LLM — V29 — 04.11.2026
+
+Účel
+Pripraviť lokálneLLM pre nový spoločnýPINN a overiť dva nadväzujúce
+návrhy každého modelu so skutočnou spätnou väzbou. Toto je technická
+skúška; základný400epochovýpilot V26 beží ďalej bez zmien. Hlavný
+experiment ani jeho výsledky sa týmto ešte nespúšťajú a nevyhlasujú.
+
+Prečo táto verzia
+V27 zastavila ochrana pred chýbajúcim offline nastavením; opravenévoV28.
+V28 už má správny prenos prostredia,overené4odlišnéH200 a skutočné
+nadväzujúce tréningy Qwen/Granite. Ministral aPhi prekročili dĺžku
+odpovede pri90slimite a odovzdali nedokončenéJSON. OpravaV29 sa týka
+spoločného formátu a generovania všetkých4modelov,nie dodatočného
+výberu podľa toho,ktorý PINN mal lepšie skóre. Pôvodné pokusy sa zachovajú.
+
+Čo je rovnaké
+Štyri lokálne presne určené revízieQwen3-8B,Ministral3-8B,Phi4-mini,
+Granite3.3-8B. Všetky váhy naPerune,bez sieťovýchAPI. ÚplnéSHApredpoužitím.
+Rovnaký640TRAIN/160VAL/200uzavretýTEST,rovnakýTRAINnormalizer.
+Jeden spoločnýPINN,geometria/Re -> ustálenéu/v/p. Rovnaká architektúra,
+početdátových/PDE/BCbodov,početepoch,optimizer,hodnotenie a tréningovýseed.
+Povolených5parametrov:lr[0,0001;0,002],váhatlaku0,5/1/2,kladnáváhaPDE
+0,0001/0,0003/0,001/0,003/0,01,váhaBC0,001/0,003/0,01/0,03/0,1,
+začiatokPDE0/3,125/6,25%tréningu. Pevný nábehPDE3,125%tréningu.
+Pre2epochy320updatezáklad10warmup+10ramp;PDEsa naozaj precvičí.
+
+Čo sa upravilo
+Kratšíspoločnýprompt,kompaktnýjednoriadkovýJSON,tri stručnédeklarované
+zdôvodnenia(reason/expected_effect/risk),každénajviac20slov.
+Samplingtemperature0,6,top_p0,9,top_k40 a repetition_penalty1,1
+pre všetky4modely. Najviac512novýchtokenov/120sgenerovania,jednapovolená
+opravaodLLM. Celýnávrhovýprocesmá360s,tréningovýproces600s.
+Nikto ručne nemení navrhnutéparametre. NeplatnéJSONsa neorezáva na časť,
+nevymýšľajúsa chýbajúcehodnoty a opravnépokusysa evidujúajspotrebou.
+Celý pôvodnýprompt,surováodpoveď,tokeny,čas,zdôvodnenie,RAM/VRAM ostávajú.
+
+Postup na4GPU
+Predvšetkýmoverenienastaveníofflinea4odlišnýchGPUUUID. Potomjeden
+spoločnýreferenčnýdvojepochovýtréning na640TRAIN/160VAL. Štyriprocesy:
+prvýnávrhLLM -> nový2epochovýPINN -> skutočnáVAL -> druhýnávrhLLM ->
+nový2epochovýPINN. Druhýnávrhmusícitovať predchádzajúcivlastnýpokus.
+Qwenworker navyše1skutočnýrandom ask/train/tell,Ministralworker1TPE.
+Spolu11krátkychtréningov. ŽiadneprenášanieváhPINNmedzikonfiguráciami.
+Všetkykrátketréningymajúseed270001;nepredstavujúštatistickéopakovania.
+SamplingjednotlivýchLLM máseedy270101/270102. Nováoptimalizácia
+nastaveniaLLMnesmiepretiecť do neskoršieho hlavnéhoTESTvyhodnotenia.
+
+Overenie
+7CPUtestovprešloza0,409s. Zmrazenýprotokol,úplnáimportnáuzávierka,
+odtlačkydát/modelov. SkutočnéSHAmodelovpredprvýmnávrhom naalokovanomuzle.
+Audit po skončení kontroluje8reálnychLLMtréningov,spätnúväzbu,zhodné
+počiatočnéváhyasamplervšetkýchpokusov,p99celéhopoľa<=5ms aobekontrolné
+metódy. Hodnoteniesa vyberápodľaVALMSE,nie podľadojmu zodpovedeLLM.
+RozdielyMSEpo2epocháchnepredstavujúhlavnédôkazy,konečnúpresnosťaniporadieLLM.
+
+Dokumentácia
+Perunresults/ldc_llm_preflight_20261104_v29;lokálnemalépotvrdenia
+zaznamy/. Všetkyveľkédáta,váhy acheckpointy zostávajúnaPerune.
+CeláGPUalokáciaje vSlurmúčtovaní ajpočasspoločnéhoštartu/čakaniaworkerov.
+ZlyhaniaV27aV28majúsamostatnézáznamy aichspotrebasaz vývojanevymaže.
+HlavnýPINNpilot a200TEST cieľovéhodnoty zostávajúoddelenéod tejtoskúšky.

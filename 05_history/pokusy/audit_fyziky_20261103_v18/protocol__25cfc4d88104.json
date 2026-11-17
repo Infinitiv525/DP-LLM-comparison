@@ -1,0 +1,68 @@
+{
+  "status": "READ_ONLY_PHYSICS_DIAGNOSIS_FROZEN",
+  "checkpoints": [
+    {
+      "name": "primitive_best",
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/best.pt",
+      "sha256": "1f8b9276407b6fe6fc126c6a8fe2e1f0a3ece0d4c51161af75a11ec8bb80b980",
+      "update": 100000
+    },
+    {
+      "name": "primitive_last",
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141545/multicase_primitive/last.pt",
+      "sha256": "57bb719d7e9d6d106abbf34983dc55c4c4a95b2c16dc1d77099eecb2c63f6f12",
+      "update": 600000
+    },
+    {
+      "name": "curl_best",
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141546/multicase_curl/best.pt",
+      "sha256": "fdc8c9b595f132496a87751a5947c22e48d9fe4a0a47bbad72b2e17d05960b59",
+      "update": 100000
+    },
+    {
+      "name": "curl_last",
+      "path": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_multicurl_20261102_v17/training/141546/multicase_curl/last.pt",
+      "sha256": "13890762adbcd25ccfd2985e79f5b65f7d63fcbac765dfb3bd2d275cdc742d4d",
+      "update": 600000
+    }
+  ],
+  "question": "At matched physical locations/times, is the trained continuous PINN consistent with its emitted FD grid and does the gap differ by seen/unseen cases, horizon and training duration?",
+  "offsets": [
+    1,
+    5,
+    10,
+    20,
+    40,
+    80,
+    160,
+    238
+  ],
+  "neural_fd_time_steps": [
+    0.025,
+    0.0025
+  ],
+  "input_frames": [
+    2,
+    3
+  ],
+  "dt": 0.05,
+  "coordinates": "512 fixed erodedinterior cells percase; samepointlist acrossall4checkpoints/times. Same frozen jitter[-.4,.4]cells for training-like offgridPDE, separately reported.",
+  "checkpoints_description": "V17primitive/curl best100k andlast600k; no new training or checkpoint selection.3TRAINmonitors+all6developmentVAL,not all69TRAIN.",
+  "derivatives": "Autogradinstantaneous NS atcellcentres; FDinstantaneous NS atsamecells/time using actualemittedfullgrid and2neural timeincrements. Secondorder central exceptfinaltime secondorderbackward. Allquerieswithin0..11.9.",
+  "comparisons": "Reportvelocity,temporal,advection,pressuregradient,diffusion,momentum,divergence,absoluteRMS differences andrelativeL2. Smallrelative denominators requireabsoluteRMS context. FDtimesensitivity may include FP32cancellation.",
+  "original_metric": "Also originalV17midpointFDmomentum onwholeinterior withpreviousdirectquery at t-.05; its midpointtime t-.025 differs from instantaneousaudit, explicitlymarked.",
+  "reference": "ExistingCFDframes CPUscoreronly; instantaneousFD atnative.05 samecentre/time,backwardfinaltime;CPUfloat32gauge/mask. FullfluidfieldU/p atselected8frames. NativeFDreference not exactcontinuousPDEtruth.",
+  "isolation": "Customprefix-onlyloader forTRAINandVAL: nofuturetrajectoryGPUload. Predictor dictionaryknownprefix/geometry/Re/fluid only. No referenceframes passed toforward/PDE.",
+  "limits": "8selectedtimesx9casesx4checkpoints; diagnosticnotfull238framevalidation,newaccuracygate,statisticalsignificance or definitivecausalproof. Cropnotwalls/periodic;erodedinterioronly.",
+  "preservation": "AggregatedJSONsmalllocal;pointwiseNPZwithcoords/termsstayPerun,manifestSHA. Weights/freezeunchanged,optimizerupdates0. No rendering/latencybenchmarkinthisaudit.",
+  "tests": "ManufacturedpolynomialNSknownterms;FDspace+central/backwardtimeexactness;agreementwithfrozenresidualforbothrepresentations includingthirdpsi derivatives.",
+  "train_cases": 3,
+  "validation_cases": 6,
+  "time_units": "solver-relative, notconfirmedSIseconds",
+  "optimizer_updates": 0,
+  "new_CFD": false,
+  "new_downloads": false,
+  "main_test_opened": false,
+  "independent_final_test": false,
+  "llm_ready": false
+}

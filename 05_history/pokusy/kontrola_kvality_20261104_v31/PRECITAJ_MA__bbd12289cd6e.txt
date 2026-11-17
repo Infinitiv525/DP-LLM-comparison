@@ -1,0 +1,35 @@
+AUDIT DOKONČENÝ A POSÚDENÝ — 04.11.2026
+
+Všetkých 160 VAL prešlo. Najvyššie p99 2,910 ms; 32 000 meraní,
+žiadne nad 5 ms. Pôvodné chyby sa reprodukovali. Steny a fyzika
+majú vyčíslené nedostatky. Záver: vhodné východisko na kontrolované
+LLM porovnanie, bez tvrdenia presného splnenia fyziky.
+Podrobnosti a odkazy na obrázky: VYSLEDOK.txt. TEST ostal uzavretý.
+
+PÔVODNÝ PLÁN AUDITU
+
+GPU audit 143299, následné účtovanie 143300.
+
+AUDIT KVALITY SPOLOČNÉHO PINN — V31 — 04.11.2026
+
+Ide o kontrolu už uloženého najlepšieho modelu V26 z epochy 390.
+Netrénuje sa nový model a pôvodné zdroje, váhy ani výsledky sa nemenia.
+Na všetkých 160 validačných prípadoch sa zopakuje natívna predikcia,
+30 zahrievacích a 200 meraných opakovaní celého poľa, chyba rýchlosti
+na presných vonkajších stenách a aproximovanom povrchu prekážky.
+Osobitne sa porovnajú hodnoty v krajných bunkách s referenciou; nie sú
+to matematické steny. Kontrola fyziky porovná autograd a mriežkové
+derivácie na rovnakých 512 vnútorných bodoch každého prípadu.
+
+Predikcia zo vzorkovaného tréningového stencilu sa musí zhodovať
+s natívnym mriežkovým výstupom (vopred daná relatívna/absolútna
+tolerancia 0,001). Rozdiel AD/FD fyziky sa číselne prizná, nenahrádza
+sa novým prahom presnosti. Skontroluje sa reprodukcia validačných chýb.
+Pribudnú obrázky u/v/p: referencia, model, rozdiel; typické a najhoršie
+prípady sú vybrané z už existujúcej VAL tabuľky pred spustením auditu.
+
+TEST zostáva uzavretý. Všetky polia zostávajú na Perune. Do PC sa budú
+kopírovať iba JSON/TXT/log a PNG. Zdroj, protokol a vstupný checkpoint
+majú záznamy integrity. Nové dve analytické kontroly FD derivácií prešli.
+Samotný audit: results/ldc_baseline_quality_20261104_v31 na Perune.
+Veľké hlavné LLM porovnávanie sa týmto ešte nespúšťa.

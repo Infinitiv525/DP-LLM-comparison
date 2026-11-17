@@ -1,0 +1,89 @@
+ROZSIRENIE PINN A ZLEPSENIE PRESNOSTI - 30. 10. 2026
+
+Ciel
+Pripravit spolocny model prudenia, ktoremu neskor budu rozne lokalne LLM
+navrhovat nastavenia treningu. Najprv musi fungovat samotny model a jeho
+vyhodnocovanie. Povodny jednopripadovy pilot mal chyby priblizne 38 %
+v rychlosti a 70 % v tlaku; nizka latencia sama osebe preto nestacila.
+
+Co je nove
+Model dostane polohu, relativny cas, opis celej prekazky a Reynoldsovo
+cislo. Opis prekazky sa uci zo zmensenej masky a odvodenej vzdialenosti
+od prekazky. Nepouzivame identifikator pripadu ani referencne prudenie
+ako vstup pri predikcii. Siet predpoveda u, v a tlak v danom bode.
+Trening kombinuje pozorovane hodnoty a rovnice Navier-Stokes; pri
+spolocnom modeli aj nulovu rychlost na pribliznej hranici prekazky
+a pozorovany prvy ponechany snimok TRENINGOVYCH pripadov.
+Okraje vyrezu nepovazujeme za steny.
+
+Rozsah tvrdenia
+Je to datami podporeny parametricky PINN na rekonstrukciu priebehov.
+Nie je to postupny vypocet dalsieho stavu z predchadzajuceho stavu.
+Predikcia casoveho bodu znamena priamy dotaz na siet, nie fyzikalny krok
+CFD solvera. Nevidena geometria nema pri predikcii pristup k jej
+referencnym rychlostiam, tlaku ani pociatocnemu snimku.
+
+Data
+Ponechavame 240 snimkov, indexy 2 az 241. Relativny cas je
+(index - 2) * 0,05, rozsah 0 az 11,95 v jednotkach solvera.
+Nejde o potvrdene SI sekundy ani o skutocny zaciatok prudenia.
+Ziadne nove CFD data sa negeneruju.
+
+Schvaleny kandidatny split celeho inventara je zmrazeny:
+775 treningovych / 160 validacnych / 169 testovacich scenarov.
+Geometrie su medzi skupinami oddelene; vsetky Re jednej geometrie
+zostavaju spolu. To neznamena, ze vsetky subory su uz stiahnute,
+numericky overene alebo natrenovane. Testovacie numericke polia
+teraz vobec neotvarame.
+
+Prva vyvojova sada ma 11 treningovych scenarov na 6 geometriach
+a 6 validacnych scenarov na 3 inych geometriach. Zastupene su rodiny
+harmonics, nurbs a skelenton. Vyber je deterministicky podla identifikatorov,
+bez znalosti vysledkov. Uz preskumany pilot harmonics/1 patri do treningu.
+
+Poradie vypoctov
+1. Overit a pripravit tychto 17 existujucich simulacii na Perune.
+2. Na pilote porovnat siet bez Fourierovych priznakov pri 2 000 a 20 000
+   krokoch, siet s priznakmi pri 20 000 krokoch a rovnaku siet bez PDE
+   straty. Novy kratky kontrolny beh pouziva rovnake data a nastavenia
+   ako jeho dlhsia verzia; povodny checkpoint sa nemeni.
+3. Trenovat spolocny podmieneny PINN 50 000 krokov na 11 scenaroch
+   a vyberat checkpoint podla 6 samostatnych validacnych scenarov.
+4. Vyhodnotit vsetky fluidne bunky vsetkych 240 snimkov validacnych
+   scenarov. Pri pilote oddelit treningove, validacne a ostatne casy.
+5. Podla vysledkov pokracovat v ladeni a rozsirovani dat. Pred hlavnym
+   LLM porovnanim treba potvrdit stabilitu na dalsich seedoch,
+   nezavisle skontrolovat fyzikalne rezidua a uzavriet spolocny protokol.
+
+Co meriame
+Chybu celeho vektora rychlosti a chybu tlaku po odstraneni jeho
+lubovolnej konstanty. Metriky sa rataju po snimkoch, potom sa priemeruju;
+kazdy scenar sa vykazuje samostatne. Nejde o percento zlych buniek.
+Pracovne vyvojove ciele stanovene PRED tymto treningom: najviac 10 %
+chyba rychlosti a 20 % chyba tlaku v kazdom validacnom scenari;
+p99 predikcie celej mriezky najviac 5 ms v kazdom z troch merani.
+Su to vyvojove ciele, nie zavery ani konecne hypotezy dizertacie.
+
+Latencia sa mera pre celu 1024 x 256 snimku, jeden scenar, tri merania
+po 200 vzorkach na zahriatom GPU. Osobitne sa zaznamena vypocet opisu
+geometrie a prenos vstupu/vystupu medzi CPU a GPU. Priprava geometrie,
+vykreslovanie a neustaleny start GPU nie su sucastou 5 ms merania.
+
+Kde su vysledky
+Velke referencie, checkpointy a cache ostavaju LEN na Perune:
+/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_conditioned_20261030_v2
+Lokalne su iba zdroje, protokol a male prehlady. Po treningu vzniknu
+history.json, per_frame_accuracy.json, summary.json, best.pt a last.pt.
+Slurm zaznamy uchovaju skutocne CPU/GPU sekundy a konecny stav ulohy.
+
+Stav spustenia
+Prvy CPU pokus 139114 zlyhal hned na chybajucej SciPy; zavisly GPU
+139115 sa nespustil. Zachovane su logy aj uctovanie (0 GPU sekund).
+Obnova pouziva osobitne prostredie s pevnymi verziami NumPy/SciPy;
+povodne zmrazene vedecke skripty ani protokol sa nemenili.
+Obnovene ulohy: 139134 priprava, 139135 styri kontrolne treningy
+a nasledne spolocny model, 139136/139137 archivacia skutocnej spotreby.
+Pripravenost na LLM testy ZATIAL NIE JE PREUKAZANA.
+
+Podrobnosti: protocol.json, development_manifest.json, freeze.json,
+recovery_freeze_v1.json, submission.json a recovery_submission_v1.json.

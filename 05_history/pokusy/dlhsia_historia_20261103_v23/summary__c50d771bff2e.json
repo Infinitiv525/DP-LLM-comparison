@@ -1,0 +1,127 @@
+{
+  "status": "KNOWN_HISTORY_EVALUATED",
+  "config": {
+    "name": "history20",
+    "history_enabled": true,
+    "representation": "curl",
+    "local_context": true,
+    "state_conditioning": true,
+    "width": 192,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "seed": 20261103,
+    "updates": 3,
+    "lr": 0.0001,
+    "batch": 2048,
+    "collocation": 256,
+    "assess_every": 3,
+    "monitor_every": 3,
+    "continuous_weight": 0.01,
+    "boundary_weight": 0.01,
+    "fd_weight": 0.01,
+    "fd_points": 128,
+    "fd_dt": 0.025,
+    "fd_ramp_updates": 1
+  },
+  "accuracy": [
+    {
+      "failure": false,
+      "predicted_frames": 220,
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+      "scope": "validation",
+      "mean_errors": {
+        "velocity_relative_l2": 0.5381140361297759,
+        "pressure_relative_l2": 0.6886958041146276
+      },
+      "score": 0.6134049201222018,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.7338423966006226,
+        "pressure_relative_l2": 1.081434717682664
+      },
+      "interior_div_rms": 0.011557683111591773,
+      "prefix_div_rms": 0.011557680554687977,
+      "mass_limit": 0.03467304166406393,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 4.136431932449341,
+        "p95": 4.166064190864563,
+        "p99": 4.181172199249268
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 5.758968503366817,
+      "mean_reference_fd_momentum_loss": 0.00530947518365627,
+      "accuracy_pass": false,
+      "latency_pass": true
+    }
+  ],
+  "training_monitor": [
+    {
+      "failure": false,
+      "predicted_frames": 220,
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "scope": "train",
+      "mean_errors": {
+        "velocity_relative_l2": 0.3310476688640271,
+        "pressure_relative_l2": 0.5619247190944264
+      },
+      "score": 0.44648619397922673,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.5592395197466167,
+        "pressure_relative_l2": 0.9435484341290228
+      },
+      "interior_div_rms": 0.014552157617766749,
+      "prefix_div_rms": 0.014552158303558826,
+      "mass_limit": 0.04365647491067648,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 4.140239953994751,
+        "p95": 4.16910228729248,
+        "p99": 4.181171450614929
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 2.169176105342128,
+      "mean_reference_fd_momentum_loss": 0.006443388489159671,
+      "accuracy_pass": false,
+      "latency_pass": true
+    }
+  ],
+  "source_checkpoint_sha256": "23846e649c997ca3f6a0c1bab09ec7b2969c5d7d8950c6ad8324dde7692a7b7e",
+  "source_checkpoint_update": 20000,
+  "source_checkpoint_stage": "V21",
+  "initial_state_sha256": "321786a8741590ec64e76fdffa447ea8a7eb15e4f395359eec0b97626150c0e9",
+  "initial_validation_score": 0.619638709284566,
+  "selected_added_updates": 3,
+  "added_training_case_updates": [
+    3
+  ],
+  "all220_training_frames_visited": false,
+  "sample_schedule_sha256": "c8f3936cb672c06db837578e52a7e6094062a8126e4da00bad6e2fd1b271ccb3",
+  "case_frame_schedule_sha256": "77e60e76e22ee8dc1e8bac6dc8c5f5926851f97979ce3c4ad99b57dbc853cb5e",
+  "train_scenarios": 1,
+  "validation_scenarios": 1,
+  "checkpoint_sha256": "a2884c7d7717a3bee61638fb292a9ea103cf10f7d000f72a0fe9c397561ca6db",
+  "training_seconds": 64.59042852401035,
+  "peak_cuda_allocated_bytes": 1453849600,
+  "physics_last": null,
+  "physics_selected": null,
+  "anchor_frame": 21,
+  "predicted_frames_per_case": 220,
+  "history_length": 20,
+  "diagnostic_scope": "Full220-frame finite-difference momentum and divergence plus recorded continuous-NS training loss; no separate V18 pointwise audit",
+  "working_gate": {
+    "accuracy_pass": false,
+    "mass_pass": true,
+    "direct_query_latency_pass": true
+  },
+  "independent_final_test": false,
+  "main_test_opened": false,
+  "causal_stepper": false,
+  "llm_ready": false
+}

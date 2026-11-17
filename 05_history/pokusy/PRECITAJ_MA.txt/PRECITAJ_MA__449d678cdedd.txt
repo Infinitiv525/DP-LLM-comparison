@@ -1,0 +1,417 @@
+AKTUÁLNE — 24 GPU, VEDECKÁ V33 / PREVÁDZKOVÁ V36 — 04.11.2026
+
+Dávky 143342, 143656 a 143684 bežia po 8 H200. Overených 24 rôznych
+GPU a tréningových položiek; spoločný CPU zberač 143685 zachytí každú
+dávku a nadviaže ďalšími veľkými 24-GPU dávkami. Všetko v limite
+4 rezervovaných uzlov. Plán stále najviac 395 pokusov po 400 epochách.
+TEST uzavretý. Aktuálny opis: paralelizacia_24gpu_20261104_v36/STAV.txt.
+
+HISTORICKÉ ZÁZNAMY
+
+AKTUÁLNE — 16 GPU, VEDECKÁ V33 / PREVÁDZKOVÁ V35 — 04.11.2026
+
+Dávky 143342 a 143656 bežia po 8 H200, spolu 16 tréningov.
+Nadväzujúce účtovacie úlohy 143655 / 143657. Potom spoločné 16-GPU
+batche na 2 uzloch. Celý plán stále najviac 395 pokusov po 400 epochách,
+seedy a dáta bez zmeny, TEST uzavretý. Nový prehľad:
+paralelizacia_16gpu_20261104_v35/STAV.txt.
+
+HISTORICKÉ ZÁZNAMY
+
+AKTUÁLNE — HLAVNÁ SÉRIA V33, PREVÁDZKA V34 — 04.11.2026
+
+GPU 143342 pokračuje na 8 H200. Správne aktuálne ID nadväzujúceho
+účtovania a automatického pokračovania je 143353. Pôvodné čakajúce
+143343 nahradené pri prevádzkovej oprave, tréningy zostali bez zmeny.
+Stav a pravidlá: velky_test_ustaleneho_pinn_20261104_v33/STAV.txt.
+
+HISTORICKÉ ZÁZNAMY
+
+HLAVNÉ POROVNANIE LLM JE SPUSTENÉ — 04.11.2026 — V33
+
+Prvá hlavná dávka 143342 na 8 H200, účtovanie/nadväzovanie 143343.
+Všetkých prvých 8 tréningov už prešlo 10 epochami z plánovaných 400.
+Celý plán má najviac 395 tréningových pokusov. Ďalšie dávky sa po
+úspešnej kontrole a účtovaní registrujú automaticky; pri chybe stop.
+TEST ostáva uzavretý. Stav a pravidlá:
+velky_test_ustaleneho_pinn_20261104_v33/STAV.txt a protokol.txt.
+
+HISTORICKÉ ZÁZNAMY
+
+AUDIT DOKONČENÝ A POSÚDENÝ — 04.11.2026
+
+Podrobný audit uloženého V26 je hotový: rýchlosť, steny, AD/FD
+a obrazové porovnanie. Najvyššie p99 zo 160 VAL 2,910 ms.
+Záver a 11 obrázkov: kontrola_kvality_20261104_v31/VYSLEDOK.txt.
+Odporúčané prejsť k veľkému kontrolovanému porovnaniu; rezíduá
+fyziky zostávajú priznané. TEST uzavretý, hlavná séria ešte nezačala.
+
+HISTORICKÉ ZÁZNAMY
+
+DOKONČENÉ A OVERENÉ — 04.11.2026
+
+Spoločný ustálený PINN 143115 aj skúška štyroch LLM 143245 skončili.
+Momentálne žiadna naša úloha nebeží. LLM konfigurátor technicky
+overený, 11 krátkych tréningov, kontrola návrh/skutočný config.
+Pilot: VAL rýchlosť 2,465 %, tlak 8,875 %, p99 2,895 ms; fyzikálna
+odchýlka ešte vyššia než referencia. TEST uzavretý, hlavná séria LLM
+nezačala. Čítaj llm_konfigurator_20261104_v30/VYSLEDOK.txt a
+spolocny_ustaleny_pinn_20261104_v26/VYSLEDOK.txt.
+
+HISTORICKÉ ZÁZNAMY — stav v čase ich zápisu
+
+AKTUÁLNA TECHNICKÁ SKÚŠKA KONFIGURÁTORA — V30 — 04.11.2026
+
+143245 skúša všetky štyri lokálne LLM na štyroch GPU s rovnakou JSON
+schémou a skutočnými dvojepochovými tréningmi PINN. Účtovanie 143246.
+Predošlé pokusy sú zachované; neuvádzajú sa ako dokončený experiment
+všetkých rodín. Hlavný spoločný PINN143115 beží ďalej samostatne.
+Opis: llm_konfigurator_20261104_v30/PRECITAJ_MA.txt. TEST ostáva uzavretý.
+OPRAVENÁ TECHNICKÁ SKÚŠKA LLM — AKTUÁLNE V28 — 04.11.2026
+
+143182 beží na štyroch odlišných H200. Príprava konfigurátora prešla
+kontrolami. V27 sa zastavila pre neprenesené nastavenie offline režimu;
+opravuje to V28 s výslovným prenosom prostredia a overením UUID GPU.
+Hlavný ustálený PINN143115 stále pokračuje. Plné porovnávanie LLM sa
+zatiaľ nespúšťa. Nový opis: llm_konfigurator_20261104_v28/PRECITAJ_MA.txt.
+DOPLNENIE AKTUÁLNEHO STAVU — 04.11.2026
+
+Popri hlavnom spoločnom PINN143115užbeží technická skúška konfigurátora
+143171na4GPU,účtovanie143172. NovýPINNkontrakt má5povolenýchparametrov;
+4lokálneLLMkaždývykonajú2návrhy s reálnou spätnouväzbou z krátkeho
+tréningu. Súčasťou je aj kontrola random/TPE. Táto skúška nie je hlavné
+porovnávanie kvality a nemení práve bežiaci pilot. Opis a záznamy:
+llm_konfigurator_20261104_v27/PRECITAJ_MA.txt a zaznamy/.
+AKTUÁLNY STAV — 04.11.2026 — SPOLOČNÝ PINN, USTÁLENÉ LDC
+
+Podľa nového pokynu sú samostatné tréningy V24 zastavené. Teraz riešime
+štandardnú ustálenú úlohu FlowBench LDC: jedna sieť dostane prekážku
+a Re, vypočíta ustálené u/v/p. Časový vývoj sa v tejto úlohe nepredikuje.
+Rodina harmonics: 1000 prípadov, 640 TRAIN / 160 VAL / 200 uzavretý TEST.
+Dáta prešli auditom mierky a fyziky; ostávajú iba na Perune.
+Úloha 143115 je odoslaná: najprv krátka skúška, potom spoločný tréning;
+účtovanie 143116. Cieľ p99 do 5 ms na celé 512 × 512 pole zostáva.
+Nová presnosť ešte nie je známa. Vývojový pilot nie je finálny LLM test.
+
+Aktuálny opis: spolocny_ustaleny_pinn_20261104_v26/PRECITAJ_MA.txt.
+Dátový audit: ustalene_ldc_20261104_v25/PLAN.txt a zaznamy/.
+Zastavené tréningy: samostatne_modely_20261104_v24/zastavene_20261104/.
+
+NIŽŠIE SÚ HISTORICKÉ STAVY, NIE AKTUÁLNE BEŽIACE ÚLOHY
+AKTUÁLNY STAV — 04.11.2026, jedna simulácia — jeden PINN
+
+Skúška dlhšej histórie V23 skončila. Vybrané modely: pri 2 vs20 vstupných
+snímkach chyba U35,888 % vs35,335 %, tlak53,938 % vs54,787 %. Presnosť
+neprešla pri žiadnom zo6 prípadov. Výpočet bol pod5ms; problém je presnosť.
+Výsledky: dlhsia_historia_20261103_v23/VYSLEDKY_142897.txt.
+
+Podľa pokynu používateľa už beží V24 na troch dostupných simuláciách,
+s vlastným PINN pre každú. Úlohy143066 a143067 bežia na H200 gpu03;
+účtovanie143068/143069. Všetky krátke skúšky skončili úspešne, plný
+tréning začal na prípadoch0a2; prípad1 nadviaže po0. Novú presnosť
+zatiaľ nepoznáme. Natívne skúšky p99 približne2,94–3,41ms na celé pole.
+Každý model má160tréningových/39validačných/39auditných snímok.
+Je to rekonštrukcia konkrétnej simulácie, nie univerzálny prediktor nových
+geometrií. Cieľ5ms aj fyzikálna kontrola zostávajú. HlavnýTEST je uzavretý.
+Opis: samostatne_modely_20261104_v24/PRECITAJ_MA.txt.
+Nižšie sú staršie výsledky a historické záznamy.
+V21/142777 je uzavretý: pri rovnakých 30k aktualizáciách U39,315 % vs
+38,119 %, tlak55,246 % vs55,252 %. Presnosť nestačí, hoci fyzika sa zlepšila.
+Výsledky: priestorovy_kontext_20261103_v21/VYSLEDKY_142777.txt.
+V22/142894 sa zastavil pred tréningom na numerickej kontrole; V23 opravuje
+výpočtovú cestu pri nezmenených toleranciách. Pôvodné záznamy sa zachovali.
+Nižšie sú staršie výsledky a historické záznamy.
+
+142743COMPLETED0:0,freezeOK,0tréningov. Chyba nie je iba prístenná;
+96,04%UchybySSEvzóne96,33%plochytekutiny. Závislosť na globálnomúvode
+silná, na samostatnomgeoswapCNNslabšia, aleprefixstáleobsahujetvar.
+Nie dôkazlatentbottleneck/príčiny,fullV19accuracy39%nemení.
+Návrh:kontrolovanýtestpriestorovéhokontextuprekaždýbod,zachovaťPINN,
+rovnaké69/6,hardIC,FDfyziku,5ms ainitiallyidenticalweightscontrol.
+Podrobnosti:audit_geometrie_20261103_v20/VYSLEDKY_142743.txt,
+návrhDALSI_TEST.txt. ŽiadnaďalšiaGPUúloha,nižšiehistorickézáznamy.
+
+142743RUNNINGgpu02,účtovanie142744afterany,3testyOK. Read-onlyaudit
+3checkpointov,9prípadov/8časov/5diagnostickýchvstupnýchvariantov.
+Meria chybypri/ďalejodprekážky a citlivosť na globálnykontext;
+varianty s upravenými vstupmi nie sú fyzikálneplatné novéCFDprípady.
+75známychprefixov pre latentdiagnostiku, žiadnytréning/mainTEST.
+Prvéprípadyoverené, výsledokpríčinyzatiaľneznámy. Podrobnosti:
+audit_geometrie_20261103_v20/PRECITAJ_MA.txt. Nižšiehistorickézáznamy.
+
+142615COMPLETED0:0, obe30kvetvy,matchedinitial/fullsamplerTrue,freezeOK.
+DoplnkovýgridNSpostihznížilFDmomentumloss o26,28% pri rovnakých30k.
+Selectedkontrola0:U39,43%/p55,07%; gridNS20k:U39,16%/p54,98%.
+Obe mass6/6,p99max3,531/3,751ms,accuracy0/6. NiehotovýLLMmodel.
+NesúladAD/FDmenší,nevyriešený;prenosgeometrie/initialstateďalšícieľtestu.
+Podrobnosti:kontrola_grid_fyziky_20261103_v19/VYSLEDKY_142615.txt.
+ŽiadnaďalšiaGPUúloha vtejto kontrole nespustená,nižšiehistorickézáznamy.
+
+142615RUNNINGgpu09, účtovanie142616afterany. RovnakéV17curlbest100k
+váhy vkontrole ajnovejvetve s doplnkovýmFDpostihomhybnostigridvýstupu.
+ADPINNNSzachované,69TRAIN/6VAL,30kextra/vetvu,rovnakýseed/sampler.
+Update0 zahrnutý dobestselection; presnosť/fyzika/latencia osobitne.
+3testy prešli, prebieha1TRAIN/1VALsmoke obochvetiev predhlavnýmbehom.
+Podrobnosti:kontrola_grid_fyziky_20261103_v19/PRECITAJ_MA.txt.
+Nižšie sú dokončené výsledky a historickézáznamy.
+
+142584COMPLETED0:0,freeze/4checkpointSHA/výstupnýmanifestOK.
+Pri novomcurlmodelivýraznýnesúladADvsFDpriestorovýchderivácií,
+necitlivýnazmenučasovéhokroku. Samotnárýchlosť pritomtakmerzhodná.
+Pripôvodnommodelinesúladmalý,aleprenosnepresný – niejedinápríčina.
+VýsledokV17full238nemení,LLMreadyFalse. Navrhnutákontrolovanáoprava
+zhodygridfyziky pri zachovaníautogradNS, zatiaľžiadnynovýtréning.
+Podrobnosti:audit_fyziky_20261103_v18/VYSLEDKY_142584.txt.
+Nižšiesúhistorickézáznamypredošlýchstavov.
+
+142584RUNNINGgpu09,účtovanie142585afterany,3analytickétestyOK.
+Porovnávame4V17checkpointybest100k/last600k,3TRAINmonitory+6VAL,
+8časov/512interiorbodov,continuousPDEvsactualFDgrid. Žiadnytréning.
+Prvýcase/time spracovaný, výsledokpríčinyzatiaľneznámy.
+Podrobnosti:audit_fyziky_20261103_v18/PRECITAJ_MA.txt.
+Nasledujúoverenédokončenévýsledkya historickézáznamy.
+
+141545/141546COMPLETED0:0,600kupdatekaždá,freezeOK,frontaprázdna.
+69TRAIN/6VAL: pôvodnýU37,11%/p55,12%, novýpsi/pU39,43%/p55,07%.
+Oba vybrané100k; počasďalšiehotréninguTRAIN3monitorylepšie,VALnie.
+Novýmass6/6ap99max3,605ms, nohybnosť/presnosťnevyhovuje.
+Ďalšíkrokcielenýaudit fyzikálnychdiskretizácií/aprenosu,nieibaďalšítréning.
+Podrobnosti:rozsireny_trening_20261102_v17/VYSLEDKY_141545_141546.txt.
+Grafpriebehu ajmaléJSONuložené, veľképolia/váhyibaPerun.
+Nižšiesúhistorickézáznamy predchádzajúcichstavov.
+
+141545primitive a141546curl RUNNINGgpu03, účtovanie141547/141548.
+Obevetvyfresh69TRAIN/6VAL,600kupdatekaždá, najprv1TRAIN/1VALsmoke.
+3GPUtechnickétesty prešliobom, presnosťnovéhotréninguzatiaľneznáma.
+Obe1TRAIN/1VALfunkčnéskúšky užSMOKE_COMPLETE; plnénačítanie/tréning69/6.
+Podrobnosti:rozsireny_trening_20261102_v17/PRECITAJ_MA.txt.
+
+V16dokončený: modelyz3TRAINneprenieslipresnosťna6VAL.
+PôvodnýU58,87%/p77,79%, novýU82,49%/p104,52%; novýmass6/6,
+queryp99max3,612ms, alepoľovápresnosťnevyhovuje. Preto69TRAIN,
+nieoznačeniecurlzapripravenýLLMmodel. HlavnýTESTzostávazatvorený.
+Podrobnosti:prenos_20261102_v16/VYSLEDKY_141354.txt.
+Nižšiesúhistoricképriebežnézáznamy.
+
+141354RUNNINGgpu03, účtovanie141355afterany. Dva fixné modelyV15
+vyhodnocujeme bez ďalšieho tréningu na6odlišných vývojovýchVAL.
+Známevstupy2,3; všetkých238cieľov lenCPUscorer; hlavnýTEST zatvorený.
+TriGPUtechnickétesty prešli. Výsledokpresnosti zatiaľneznámy.
+Podrobnosti: prenos_20261102_v16/PRECITAJ_MA.txt.
+
+PREDCHÁDZAJÚCI DOKONČENÝ VÝSLEDOK V15
+
+Priamy psi/p PINN na troch známych TRAIN simuláciách dosiahol priemer
+U1,116 % / p3,313 %, kontrola hmoty3/3 a p99querymax3,529ms.
+Súbežný pôvodný model: U1,792 % / p4,014 %, hmota0/3.
+Hybnosť stále horšia než CFD referencia. Nie nezávislá validácia;
+ďalší krok je overenie prenosu a rozšírenie na 69TRAIN/6VAL.
+Úloha140949COMPLETED0:0, freezeOK, fronta prázdna, nový beh nespustený.
+Podrobnosti: priamy_curl_20261102_v15/VYSLEDKY_140949.txt.
+Nasledujúce odseky zachovávajú predchádzajúce priebežné záznamy.
+
+GPU140949/účtovanie140950: priamyčasový3uvpmodel oproti2psi/pmodelu,
+rovnaké3TRAINcases a150kupdate/vetvu. Curlprírastok zachová vnútornú
+počiatočnúdivergenciu, nie automaticky správnepolia/hybnosť/hranice.
+Nie starýautoregressivestepper.3testyprešli,najprvGPUfunkčnáskúška.
+Výslednápresnosťneznáma. Podrobnosti:priamy_curl_20261102_v15/PRECITAJ_MA.txt.
+
+Na návrh používateľa väčší postih fyziky: GPU140890/účtovanie140891.
+Rovnaký naučený pôvodný model V13, koeficienty PDE0.01/0.1/1.0,
+ostatné nastavenia rovnaké. Uchová sa best fyzika aj best presnosť.
+Najprv krátka skúška, potom3x30k aktualizácií na rovnakých3TRAINcases.
+Výsledok neznámy. Podrobnosti:vahy_fyziky_20261102_v14/PRECITAJ_MA.txt.
+VýsledokV14:100xpostih znížil meanFDdiv~28%,FDmomentumloss~42%,
+meanU2.25%/p5.13%,directqueryp99max3.39ms. OprotikontroleU1.72%/
+p3.86% mierna strata presnosti. Žiadnycase masspass, accuracy/5msano.
+Všetky3vetvy30kupdate,matched_samplingTrue. Podrobnosti
+vahy_fyziky_20261102_v14/VYSLEDKY_140890.txt. Fronta prázdna.
+
+Po súhlasea obmedzení nemiešaťpredlohy vzniklavlastnáúprava:
+kontext64 a podmienenie každého reziduálnehobloku. Bezimportovania
+JAX-PI/ďalšíchframeworkov. Porovnaniepôvodnývsnovýna1a3TRAINcases,
+rovnakýbudget50kupdate/case. GPU140676/účtovanie140677,
+najprvfunkčnáskúška. Presnosťneznáma,nietestgeneralizácie.
+Podrobnosti:vlastny_model_20261101_v13/PRECITAJ_MA.txt.
+V13hotový:baseline3TRAINmeanU1.81%/p4.08%,own2.22%/5.16%,
+baselinep99max3.40ms,own4.19ms. Nováarchitektúra neprinieslavýhodu.
+Obesplnilifitaccuracy/5ms,obe massfail vo všetkýchprípadoch.
+Ide ibao1/3TRAINfit,niegeneralizáciu. Pôvodnýmodel ostáva lepším
+základom prekontrolovanézlepšeniefyziky. Frontaprázdna,novýbehnie.
+Podrobnosti:vlastny_model_20261101_v13/VYSLEDKY_140676.txt.
+
+Auditpredlôh: predlohy_a_audit_20261101/ZAVER_A_POSTUP.txt.
+Najrelevantnejší fyzikálnyzákladJAX-PI/ns_unsteady_cylinder, pripnutý
+sourcecommit+licencia+SHAarchív maléhokódu. Nie hotová69/6predloha:
+rieši jedencase soznámymiokrajmi. NašaFlowBenchúloha navyšezahŕňa
+prenos nageometrie/initialfields a cropnemá všetkyouterBC.
+Odporúčanýďalšívývoj:adaptáciaautorskejModifiedMLP a kontrolovaný
+single/3TRAINfit, ažpotom69/6. Ničnové naGPU vtomtoauditnomkroku
+nespustené; žiadneinštalácie/datasety/publikovaniezdrojov. Zdroje
+aBibTeX súvpodpriečinku; nejdeozárukupresnosti alebo5ms.
+
+Overených je 75 scenárov; vývoj používa 69 tréningových a 6 validačných.
+Kandidátny split 775/160/169 je zmrazený po geometriách; hlavný test zostáva
+zatvorený. Známe vstupy sú vždy snímky 2 a 3, budúce ciele 4 až 241.
+
+Dokončený postupný model V5a: chyba za celý priebeh 107,59 % rýchlosti
+a 235,17 % tlaku. Celý GPU krok p99 najviac 1,85 ms v meraných trajektóriách.
+Rýchlosť spĺňa cieľ; presnosť nie. Na rovnakých šiestich validačných
+prípadoch mal priamy V4 chybu 40,11 % / 56,84 %, tiež nevyhovujúcu.
+
+Doplňujúca diagnostika ukázala presný samostatný krok na vybraných
+tréningových prípadoch, ale zlý vlastný dlhý priebeh aj na nich.
+Rastie porušenie nestlačiteľnosti a pri časti prípadov tlak i energia.
+Kontrola opakovaného použitia starého V4 problém tiež nevyriešila.
+
+Výsledky: postupny_pinn_20261031_v5/VYSLEDKY_139549.txt.
+Ďalší postup: postupny_pinn_20261031_v5/DALSI_POSTUP.txt.
+Malé JSON a diagnostiky sú v podpriečinkoch tejto etapy.
+Nový stabilizačný pilot bol dokončený: príprava 139783, GPU 139784.
+Štyri porovnateľné varianty na jednom známom tréningovom scenári:
+extrapolácia, prírastok, vlastné fyzikálne straty, prúdová funkcia.
+Deväť kontrol jadra prešlo; plný tréning však pri všetkých štyroch
+ramenách zlyhal na prahu presnosti. D udržalo malú vnútornú divergenciu,
+ale vybraný checkpoint takmer kopíruje úvodný stav (U57.03%,p98.11%).
+Celý krok p99<=2.01ms, s dodatočným FDmonitorom<=2.49ms; rýchlosť splnená.
+Diagnostika139881 potvrdila lokálne učenie zmeny, ale zlé dlhé reťazenie
+aj na známom tréningovom scenári. Malá divergencia nezaručuje celú dynamiku.
+Po súhlase používateľa bol dokončený ďalší pilotV7, GPU139916,
+účtovanie139917: vlastné tréningové priebehy32/64/128/238krokov,
+dva variantyC/D. Gradient po8krokoch, predikovaný stav sa zachováva
+bez dosadzovania neskorších pravdivých stavov. Pokračuje z posledných
+váhV6; výber najlepšieho checkpointu už nevracia prebiehajúce učenie späť.
+Oba varianty dokončili300priebehov a5550aktualizácií bez tréningového
+guardfail. Za celý238forecast C36.70%U/68.01%p, D52.35%U/68.34%p;
+lepšie než perzistencia na známom TRAINprípade, ale presnosť stále
+nevyhovuje. D drží malú vnútornú divergenciu; C jej limit nespĺňa.
+P99celéhoGPUkroku1.83/1.94ms, sFDmonitorom2.30/2.42ms, pod5ms.
+V7 nie je nezávislá validácia a nemožno ho priamo porovnávať s V4
+na6val ako dôkaz zlepšenia generalizácie.
+Podrobnosti:dlhy_priebeh_20261031_v7/VYSLEDKY_139916.txt.
+Podrobnosti: stabilizacia_20261031_v6/VYSLEDKY_139784.txt.
+
+Po súhlase používateľa odoslaný V8GPU139944,účtovanie139945:
+rovnaký DcheckpointV7, gradient8vs32, obe vetvy aktualizujú váhy po32
+krokoch a vzorkujú fyziku po8. Rovnaké200priebehov/1600aktualizácií,
+samplingtrace overený kontrolnými súčtami.
+GPU18kontrol aj funkčná skúška prešli; zhodnýsamplingtrace overený,
+matched_execution=True aj po plnom porovnaní. Obe200epochov/1600updates.
+Gradient8 U52.57%/p66.87%,gradient32 U51.87%/p66.80%,iba malýrozdiel.
+Obe spĺňajú limitdivergencie aj5ms, presnosť10%U/20%p nevyhovuje.
+Ďalším smerom je audit reprezentácie/vstupov/škálstrát; novývýpočet
+VYSLEDKY_139944.txt vpodpriečinkuV8.
+Po súhlase spustený read-onlyauditV9,GPU139989/účtovanie139990:
+veľkosť a konfliktgradientovstrát, analytickývsgridvýstup,
+referenčnáFDchyba a citlivosť vstupov. Nové učenie zatiaľ nebeží.
+Audit139989 už skončil:22GPU*s; nepreukázal veľkúsampledanalytic/grid
+nezhodu ani silnýpriemerný protismer dátových/fyzikálnychgradientov.
+Podrobnosti:audit_modelu_20261031_v9/VYSLEDKY_139989.txt.
+Nadväzujúci GPU139993/účtovanie139994: kontrolné nuly oproti9miestnym
+FDpríznakom rýchlosti/tlaku. Rovnaké počiatočnépredikcie, model/budget.
+20kontrol a matchedskúška prešli; plnýtréning dokončený,matched_execution=True.
+Obe200epochov/1600updates. KontrolaU51.58%/p65.66%,FDvstupy49.08%/64.49%.
+Mierne zlepšenie, presnosť10%/20% nevyhovuje. P99celéhoGPUkroku~2.6ms,
+massgatepassoboje. Frontaprázdna, novýtréning zatiaľnespustený.
+Podrobnosti:priestorove_vstupy_20261031_v10/PRECITAJ_MA.txt.
+
+Po súhlase pokračujeV11GPU140041/účtovanie140042: rodinaStatePINNv4
+šírky96/192 priamo rekonštruuje známyTRAINcase z rovnakéhoprefixu2,3
+a relatívnehočasu, bezrekurencie. Cieľ diagnostikareprezentovateľnosti,
+nie novýúspešnýsamostatnýsimulátor. Directquerytiming oddelený od
+causalstep5ms. Starýsingle-case~5%/8%výsledok zachovaný ako precedent.
+Podrobnosti:priama_rekonstrukcia_20261031_v11/PRECITAJ_MA.txt.
+V11dokončený:šírka96U6.08%/p10.77%,šírka192U2.94%/p4.79%,
+directqueryp991.49/2.89ms. ZnámyTRAINpriebeh ajna výberváh,
+nie nezávislávalidácia/causalstep. MeanFDdiv192.1067>pôvodnýlimit.04354.
+Neoznačiť rekonštrukciu za hotovýsimulátor. Frontaprázdna, novýtréningnie.
+Po súhlase používateľa140074GPU/140075účtovanie: width192priamyPINN
+na69TRAIN/6geometry-disjointVAL,600kaktualizácií. Freshtréning,
+futureVALibaCPUscorer,vstupiba známy2,3+geo/Re/time. Testzatvorený.
+Pred hlavnýmbehom1train/1valsmoke, devVALvýberbestkaždých10k.
+Žiadnygarantovanýprenos~3%známehocase naVAL; fyzika oddelene.
+Podrobnosti:viac_pripadov_20261031_v12/PRECITAJ_MA.txt.
+V12celých600kupdate dokončených,vybraný70000. Mean6VALU32.72%/p52.36%,
+všetkyaccuracy/massgates nesplnené,directqueryp99~3.26ms vyhovuje.
+3TRAINmonitory tiežnesplnili všetkyprahy. DlhšítréningnezlepšilVAL
+po70000; nemožno očakávaťautomatickú opravuďalším rovnakýmtréningom.
+Podrobnosti:viac_pripadov_20261031_v12/VYSLEDKY_140074.txt.
+Frontaprázdna,ďalšítréningnespustený,LLMmainzatiaľnepripravený.
+Podrobnosti:gradient_20261031_v8/PRECITAJ_MA.txt.
+
+Hlavné 2D porovnanie LLM ešte nezačalo. Veľké dáta a checkpointy zostávajú
+na Perune; staré výsledky sú zachované.
+
+STARŠIE ZÁPISY JEDNOTLIVÝCH VÝVOJOVÝCH FÁZ
+
+DIZERTACIA – NOVA ODDELENA 2D PINN STUDIA
+Pracovne rozhodnutie pouzivatela30.10.2026, nie zmrazeny treningovy protokol.
+
+Ciel:skumat2Dcasove prudenie pomocou PINN s fyzikalnymi reziduami
+Navier-Stokes a kontinuitou a overit konfiguracny prinos4lokalnychLLM
+oproti manual/Random/TPE pri opakovaniach. Merat presnost aj latenciu
+celeho vystupneho pola, cielp99<=5ms pri vopred urcenom rozliseni/hardveri.
+LLM sa nedotrenovavaju; navrhuju konfiguracie PINN. Zatial ziadnyPINN
+trening tejto novej studie neprebehol.
+
+CASOVY LIMIT PODLA SNIMKOV
+Pouzivatel navrhol koncit po rovnakom pocte snimkov ako referencne data.
+Je to pouzitelne vymedzenie hodnoteneho horizontu: nevytvarat pre hlavny
+experiment nepodlozene predikcie za koncom dostupnej referencie.
+Presny pocet POUZITELNYCH snimkov treba este uzavriet:overena vzorka
+ma242,autorsky kod odporuca prve2vynechat bez dostatocne dolozeneho dovodu.
+Prvy pouzity stav sa nesmie automaticky vydavat za fyzicky zaciatok deja.
+
+SamotneN neurcuje casovu os:ti=t0+i*DeltaT. DeltaT a mapovanie priestoru
+potrebujeme pre korektne casove PDEreziduum. Zatial nebolo potvrdene,
+ze pozname bezrozmerne casy alebo ze ulozene hodnoty maju deklarovane
+bezrozmerne mierky. Znama hodnotaRe to sama nenahradza. Indexramca
+sa nesmie potajomky interpretovat ako sekunda alebo jednotkovy fyzikalnycas.
+
+ROZSAH DAT NIE JE TO ISTE AKO TRENINGOVY ROZSAH
+Casovu extrapolaciu model moze skusat, ale potrebuje dalsiu nezavislu
+referenciu a samostatny test. Pre tento hlavny experiment ju zatial
+neplanujeme. Treningove,validacne a testovacie pripady sa oddelia; rovnaky
+casovy rozsah napriec rozdeleniami neznamena,ze hodnotime iba naucene
+treningove snimky. Pri pripadovychPINN treba osobitne urcit,co sa pri
+novom pripade smie trenovat a co presne znamena generalizacia a5ms.
+
+DATA AUDIT
+audit_flowbench_fpo/obsahuje kopie metadatoveho auditu jednej vzorky
+na revizii937c672604d4c9f39aceedf1fa2f0a603695264b. Nie je to numericna
+kontrola celeho datasetu. Casovamierka a fyzicke inicialne podmienky
+zostavaju neoverene. Urezane hrany nie su steny. Neznamu hranicnu
+historiu testovejCFD trajektorie nesmieme oznacit za znamy vstup bez
+explicitneho vymedzenia ulohy. Bez vyriesenia tychto bodov sa hlavny
+PINN experiment nespusta.
+
+PREDCHADZAJUCE 3D VYSLEDKY
+Su ulozene oddelene v test/publikacia_3d. Nezahadzuju sa, nemenia
+a nepreznacuju na vysledky2DPINN. Povodne zmrazene protokoly ostavaju
+na svojich cestach. Novy2Dprotokol bude samostatny.
+
+AKTUALIZACIA PO HLBKOVOM AUDITE30.10.2026
+FPOgeneratory v CaseGenerator/Harmonic|Nurbs|Skelneton/FPO obsahuju
+dt_V0.005 aOutputSpan_V10v poslednejfaze. Podporeny interval snimkov
+je0.05solverovych casovychjednotiek. Nezavisly odhad z poli ma median
+0.0499625 pri predpokladoch crop[4,20]x[6,10],nu1/382 a tlakovomkoef1.
+SIsekundy a presne absolutne casy ramcov nadalej netvrdime. Relativny
+cas pilotu=(index-2)*0.05; nejde o uplny fyzikalny startup.
+Audit138874 a technickyPINNpilot138875 uspesne skoncili. Nove maleJSON
+su v audit_hlbkovy_20261030. Pilot nie je nezavislytest generalizacie,
+porovnanieLLM ani potvrdeny presny simulator. Podrobnosti:dokumentacia46.
+
+PRESNOST A DOSTUPNE PRIPADY – 30.10.2026
+Overenie zmrazeneho checkpointu138875 na vsetkych240platnych ramcoch
+ukazalo na160heldout-time snimkach priemernu relativnuL2chybu U38.17%
+a tlaku po odstraneni konstanty70.18%. Ide o jeden pripad a interpolaciu,
+nie test nevidenych geometrii. Pilot nemožno vyhlasovat za presny simulator.
+
+Verejna pripnutaFPOvetva obsahuje1104suborovscenarov s prislusnou
+geometriou, spolu251geometrii. Je to metadata/fileinventar, nie numericka
+validacia celej sady. NaPerune je numericky overeny jeden pripad.
+Navrh delenia po geometriách:775train,160validation,169test;
+176/37/38geometrii. Je to navrh, nie uz zmrazeny alebo natrenovany benchmark.
+Auditovana pilotnagéometria je vzdy iba vtrain. Dokonceny pilot pouzival
+iba jeden scenar; jeho40/40/160casovych snimkov nie su pocty scenarov.
+Audity:presnost_a_inventura_20261030/. Podrobnosti:dokumentacia47.

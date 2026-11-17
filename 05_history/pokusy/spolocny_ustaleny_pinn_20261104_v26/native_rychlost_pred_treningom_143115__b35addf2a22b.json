@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "sample": 928,
+      "p50": 2.8786559104919434,
+      "p95": 2.8878240823745727,
+      "p99": 2.8918105936050416
+    },
+    {
+      "sample": 341,
+      "p50": 2.8795679807662964,
+      "p95": 2.890600097179413,
+      "p99": 2.8947977328300474
+    }
+  ],
+  "pass_5ms": true,
+  "fullfield": [
+    512,
+    512
+  ],
+  "inputs_gpu": true,
+  "includes": "Native input pooling, geometry encoder, coordinate MLP, spatial interpolation, curl, gauge, mask; no input-dependent feature cache",
+  "excludes": "CPUtransfer/rendering,30warmup,staticcoordinateweightsetup"
+}

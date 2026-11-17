@@ -1,0 +1,104 @@
+VÝSLEDKY STABILIZAČNÉHO PILOTU V6 – 31.10.2026
+
+ZÁVER
+Úloha sa technicky dokončila, ale ani jeden zo štyroch variantov
+nesplnil požiadavku na presnosť celého priebehu. Model ešte nie je
+pripravený na hlavné porovnanie konfigurácií LLM. Zachovanie malej
+divergencie neznamená správnu rýchlosť, tlak alebo stabilnú dynamiku.
+
+ROZSAH
+Jeden známy pôvodný tréningový scenár harmonics/1/Re382. Vstupy
+snímky2,3; výstup všetkých238 ďalších snímok4..241 vlastnými stavmi.
+dt0.05solverových jednotiek, bez tvrdenia o SI sekundách. Rovnaký
+seed a plán aktualizácií12k jednokrokových +3k osemkrokových.
+Nie nezávislá validácia, OOD výsledok alebo štatistické porovnanie.
+Hlavný test ostal zatvorený; žiadne nové CFD alebo sťahovanie dát.
+
+VYBRANÉ CHECKPOINTY PODĽA VOPRED URČENÉHO PRAVIDLA
+Čísla sú priemery relatívnych L2 chýb jednotlivých budúcich snímok.
+Tlak je pri hodnotení porovnaný po odstránení konštantného posunu.
+Čas je p99 celého GPU kroku počas238krokovej trajektórie, H200,
+1024x256, úvodné polia/geometria naGPU, bez zobrazovania.
+
+Variant                      Chyba U     Chyba p     p99       Divgate
+A extrapolácia               73.42 %     167.72 %    1.916ms   NIE
+B bez extrapolácie           57.27 %      98.21 %    1.909ms   NIE
+C B+vlastné fyzikálne straty  57.27 %      98.21 %    1.923ms   NIE
+D prúdová funkcia            57.03 %      98.11 %    2.005ms   ÁNO
+Ponechanie úvodného stavu     56.99 %      97.46 %    nemerané
+
+Prahy presnosti boli U<=10%,p<=20%; všetky zlyhali.
+Všetky splnili časový prah5ms. P99 kroku vrátane dodatočného vlastného
+FD fyzikálneho monitoru bol2.392/2.384/2.404/2.489ms preA/B/C/D.
+Samostatný zahriaty benchmark3x200 mal maxp99 kroku1.360/1.361/
+1.361/1.462ms; smonitorom1.788/1.790/1.794/1.896ms. Rozdiel oproti
+trajektórii sa zachováva v záznamoch, nepoužíva sa len lepšie meranie.
+
+MeanFDdivRMS: A6.44035,B0.072626,C0.072641,D0.0140431.
+Počiatočná0.0140429, referenčný priemer0.0145130, limit0.0435389.
+Ide o vnútornú stenčenú masku, nie celú hranicu prekážky alebo presné
+kontinuálne PDE. Curlprírastok nemení počiatočnú divergenciu vinteriéri.
+
+DÔLEŽITÉ: VÝBER NEZNAMENÁ ÚSPEŠNÉ NAUČENIE
+A vybral one_step1000. B/C vybrali own_rollout1 po reštarte z
+najlepšieho prvého štádia. D vybral už one_step1, teda takmer
+pôvodnú perzistenciu. Neskoršie modely sa na lokálnych krokoch učili,
+ale plný238krokový forecast sa zhoršoval. Finálne vybrané B/C/D preto
+nevydávame za presné naučené simulátory ani za zlepšenie nad perzistenciu.
+
+Posledný D po3k osemkrokových aktualizáciách mal za238krokov
+Eu69.476786=6947.68%,Ep5.503278=550.33%, hoci jeho meanFDdiv
+ostala0.014059. To priamo ukazuje, že kontrolovaná kontinuita sama
+nepostačuje. V priebehu učenia boli aj checkpointy so zlyhaním guardu
+nonfinite/abs>1000; ostali vhistórii s penalizačným skóre1e6.
+Technický stavCOMPLETED sa nesmie zamieňať za splnenie kvality modelu.
+
+DOPLŇUJÚCA DIAGNOSTIKA139881 – BEZ UČENIA
+Osem zmrazených modelov: best+last každého ramena. Predurčených16
+rovnomerne rozmiestnených tréningových začiatkov1..207 v indexovaní
+240platných rámcov; horizonty1,8,32. Každé diagnostické okno dostane
+iba svoj známy TRAIN prefix, potom vlastné predikcie. Pravdivé neskoršie
+tréningové prefixy slúžia iba diagnostike; nejde o výkon pôvodného
+forecastu z2,3 ani o validačný/testový údaj.
+
+Posledný model A: meanEu/Ep po1kroku0.2300%/0.2553%, po8krokoch
+6.3489%/7.8138%, po32krokoch28.2219%/54.3827%.
+Posledný model D: po1kroku0.9633%/1.2443%, po8krokoch8.1239%/14.7035%,
+po32krokoch2343.40%/202.65%. Všetkých16okien pri každom horizonte
+a každom checkpointe dokončených bez prekročenia guardu.
+
+Vybraný D má priemernú normu prírastku rýchlosti iba0.008075-násobok
+pravdivej zmeny; posledný D0.874848-násobok a kosínovú podobnosť0.937577.
+To podporuje záver: model sa lokálnu zmenu učí, no jeho vlastné dlhé
+reťazenie je nevyhovujúce. Nejde iba o zlé referenčné dáta alebo OOD.
+Nie je to dôkaz jedinej príčiny ani dostatočnosti konkrétnej opravy.
+
+ČO Z TOHO VYPLÝVA PRE ĎALŠÍ KROK
+Ďalší pilot má cieliť na celý vlastný priebeh: postupne predlžovať
+tréningový horizont za8krokov a učiť aj na stavoch vzniknutých ďaleko
+od pravdivého tréningového prefixu. Oddeliť checkpoint pre pokračovanie
+učenia od finálneho checkpointu vybraného podľa dlhého forecastu,
+aby sa pokračovanie automaticky nevracalo k takmer nulovej dynamike.
+Kontrolovať súčasne chyby polí, hybnosť, kontinuitu a amplitúdu/energiu;
+malá divergencia sa nepovažuje za celkovú fyzikálnu stabilitu.
+Nie je dôvod teraz rozšíriť tento nevyhovujúci model na69/6 alebo LLM.
+Nový takto upravený tréning v tomto kontrolnom kroku zatiaľ nespustený.
+
+INTEGRITA A SKUTOČNÁ SPOTREBA
+V6freezeoverený bezozmeny. Úloha139784COMPLETED,exit0:0,
+4768GPU*s=1.32444GPU*h,19072core*s. Zahŕňa unit/skúšku/plnýpilot
+aj vyhodnocovanie; jednotlivé pythontrainingseconds sú vsummaryJSON.
+Diagnostika139881COMPLETED0:0,20GPU*s,80core*s; účtovanie139882.
+CPU príprava139783 bola8s/16core*s. Nepoužívame odhad spotreby.
+V čase záverečnej kontroly je fronta našich úloh prázdna.
+
+KDE SÚ SÚBORY
+Perun: results/fpo_pinn_stabilization_20261031_v6/training/139784/
+obsahuje všetky best/last/one_step_best váhy,17assessmentov na rameno,
+history,config,summary,normalizáciu,per-frame metriky.
+Diagnostika: diagnostics/139881/{summary,per_window}.json.
+Lokálne: vysledky_139784/ obsahuje vybrané malé pôvodnéJSON a logy;
+zaznamy/diagnostika_139881_* obsahuje kompletné malé výsledky diagnostiky.
+Archív review_139784_small.zip:37súborov,133266B,
+SHA256 3c00f15bad28cc66525373fe9ade38cabda87b629679be4d6746323114e50da9.
+Veľké polia a váhy sa nesťahovali doPC. Staré výsledky zachované.

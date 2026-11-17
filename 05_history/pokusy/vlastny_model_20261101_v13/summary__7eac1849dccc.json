@@ -1,0 +1,95 @@
+{
+  "status": "OWN_MODEL_TRAIN_FIT_PROBE_EVALUATED",
+  "config": {
+    "name": "baseline_1train",
+    "model_kind": "baseline",
+    "train_count": 1,
+    "state_conditioning": true,
+    "width": 192,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "seed": 20261101,
+    "updates": 50000,
+    "lr": 0.0003,
+    "warmup": 1000,
+    "batch": 2048,
+    "collocation": 256,
+    "assess_every": 5000
+  },
+  "accuracy": [
+    {
+      "score": 0.03984874873237525,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.030646542913063,
+        "pressure_relative_l2": 0.04905095455168749
+      },
+      "interior_div_rms": 0.1072296356124913,
+      "direct_query_gpu_ms": {
+        "p50": 3.324944019317627,
+        "p95": 3.342427134513855,
+        "p99": 3.3592985796928407
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": false
+    }
+  ],
+  "training_monitor": [
+    {
+      "score": 0.03984874873237525,
+      "failure": false,
+      "predicted_frames": 238,
+      "mean_errors": {
+        "velocity_relative_l2": 0.030646542913063,
+        "pressure_relative_l2": 0.04905095455168749
+      },
+      "interior_div_rms": 0.1072296356124913,
+      "direct_query_gpu_ms": {
+        "p50": 3.3264000415802,
+        "p95": 3.3561903834342957,
+        "p99": 3.3763195848464966
+      },
+      "causal_step_latency": false,
+      "scope": "train",
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": false
+    }
+  ],
+  "selected_update": 50000,
+  "all238_training_frames_visited": true,
+  "training_seconds": 1789.0845323521644,
+  "peak_cuda_allocated_bytes": 2873887744,
+  "checkpoint_sha256": "558938ea1163239ee0bced43f9b6b7c5f5ab4f0d36c5a4d189a0fa4a4122d7f3",
+  "independent_validation": false,
+  "causal_stepper": false,
+  "llm_ready": false,
+  "train_scenarios": 1,
+  "validation_scenarios": 0,
+  "train_selection_scenarios": 1,
+  "training_case_updates": [
+    50000
+  ],
+  "working_gate": {
+    "accuracy_pass": true,
+    "mass_pass": false,
+    "direct_query_latency_pass": true
+  },
+  "limitations": [
+    "Same TRAIN cases used for training and fit-checkpoint selection; not validation/generalization",
+    "Architecture bundle changes conditioning, latent and residual path; not pure parameter-matched ablation",
+    "Absolute time query, no recurrent own states; not directly comparable causal latency",
+    "Primitive output PINN soft physics; different representation bundle from curl stepper"
+  ]
+}

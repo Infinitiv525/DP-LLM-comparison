@@ -1,0 +1,122 @@
+{
+  "status": "SPATIAL_CONTEXT_EVALUATED",
+  "config": {
+    "name": "zero_spatial_control",
+    "representation": "curl",
+    "local_context": false,
+    "state_conditioning": true,
+    "width": 192,
+    "depth": 4,
+    "latent": 32,
+    "frequencies": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ],
+    "seed": 20261103,
+    "updates": 3,
+    "lr": 3e-05,
+    "batch": 2048,
+    "collocation": 256,
+    "assess_every": 3,
+    "monitor_every": 3,
+    "continuous_weight": 0.01,
+    "boundary_weight": 0.01,
+    "fd_weight": 0.01,
+    "fd_points": 128,
+    "fd_dt": 0.025,
+    "fd_ramp_updates": 1
+  },
+  "accuracy": [
+    {
+      "failure": false,
+      "predicted_frames": 238,
+      "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+      "scope": "validation",
+      "mean_errors": {
+        "velocity_relative_l2": 0.6065905706032277,
+        "pressure_relative_l2": 0.6912369791946209
+      },
+      "score": 0.6489137748989243,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.7575628273851636,
+        "pressure_relative_l2": 1.1019513357435289
+      },
+      "interior_div_rms": 0.01226258373764508,
+      "prefix_div_rms": 0.012262583710253239,
+      "mass_limit": 0.036787751130759716,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 3.511568069458008,
+        "p95": 3.544924759864807,
+        "p99": 3.561826846599579
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 5.309623758832948,
+      "mean_reference_fd_momentum_loss": 0.005376385450519684,
+      "accuracy_pass": false,
+      "latency_pass": true
+    }
+  ],
+  "training_monitor": [
+    {
+      "failure": false,
+      "predicted_frames": 238,
+      "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+      "scope": "train",
+      "mean_errors": {
+        "velocity_relative_l2": 0.1506243392313585,
+        "pressure_relative_l2": 0.29617272912967024
+      },
+      "score": 0.22339853418051436,
+      "persistence_mean_errors": {
+        "velocity_relative_l2": 0.5698721496859207,
+        "pressure_relative_l2": 0.9745848419801173
+      },
+      "interior_div_rms": 0.014042903637873526,
+      "prefix_div_rms": 0.014042905531823635,
+      "mass_limit": 0.04353891288570392,
+      "mass_pass": true,
+      "direct_query_gpu_ms": {
+        "p50": 3.5151679515838623,
+        "p95": 3.5453375220298766,
+        "p99": 3.563744602203369
+      },
+      "causal_step_latency": false,
+      "mean_fd_momentum_loss": 1.6903116247233223,
+      "mean_reference_fd_momentum_loss": 0.006401343275049404,
+      "accuracy_pass": false,
+      "latency_pass": true
+    }
+  ],
+  "source_checkpoint_sha256": "223cab8d4273c49a2d9161ede3fec25ff6fd618f797b3dfbcebfb58400ef1845",
+  "source_checkpoint_update": 20000,
+  "source_checkpoint_stage": "V19",
+  "initial_state_sha256": "cb4fcb82ae52ada25ccf8528c8d09df3084e1774f1cff484c61cec72d2725263",
+  "initial_validation_score": 0.6491989672322483,
+  "selected_added_updates": 3,
+  "added_training_case_updates": [
+    3
+  ],
+  "all238_training_frames_visited": false,
+  "sample_schedule_sha256": "f8f15b0a49a43036e1b67d76b73ddcb3c8b7a3724a139d5f0b361fd63820c0b3",
+  "case_frame_schedule_sha256": "0897c7b86c68495d430f0a5ac1bd7af901235de62a47c7a1602edf781a269974",
+  "train_scenarios": 1,
+  "validation_scenarios": 1,
+  "checkpoint_sha256": "48df48f4f419561ff42e5747823e068deaaaa47e76df14a971f27e4b4af0c009",
+  "training_seconds": 71.9312047350104,
+  "peak_cuda_allocated_bytes": 1401202176,
+  "physics_last": null,
+  "physics_selected": null,
+  "working_gate": {
+    "accuracy_pass": false,
+    "mass_pass": true,
+    "direct_query_latency_pass": true
+  },
+  "independent_final_test": false,
+  "main_test_opened": false,
+  "causal_stepper": false,
+  "llm_ready": false
+}

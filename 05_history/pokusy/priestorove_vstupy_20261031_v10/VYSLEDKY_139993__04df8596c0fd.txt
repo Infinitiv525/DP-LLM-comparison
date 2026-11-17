@@ -1,0 +1,59 @@
+VÝSLEDKY PRIESTOROVÝCH VSTUPOV V10 –31.10.2026
+
+ZÁVER
+Explicitné priestorové príznaky pomohli iba mierne. Požadovaná presnosť
+celého priebehu stále nie je splnená. Obe vetvy spĺňajú5ms a držia
+vnútornú divergenciu. Nie je dôvod označiť model za pripravený naLLM.
+
+Celých238vlastných krokov, priemer relatívnejL2chyby po snímkach:
+Kontrolnázero-vetva:U51.579958%,p65.661981%.
+FDlokálnepríznaky:U49.082448%,p64.486739%.
+ZmenaFDoproti kontrole:-2.497510percentuálneho boduU,-1.175242bodup.
+Perzistencia56.987215%U/97.458484%p. PrahyU10%/p20% neprešli.
+Tlak hodnotený po odstránení konštantného posunu.
+Obe vybrali poslednýepoch200. Prvých10krokovzero8.00%U/12.55%p,
+FD6.61%U/14.29%p: tlak vtomto krátkomúsekuFDhorší, nie univerzálne
+zlepšenie všetkých metrík. Neskorých118zero53.66%U/73.39%p,
+FD53.29%U/72.18%p. Primárnym cieľom zostáva celý238priebeh.
+
+MeanvnútornáFDdivRMSzero0.0140429040,FD0.0140429027, limit0.043538913.
+Obe vyhoveli; nejde o záruku celej NS dynamiky alebo hraníc.
+Actual238p99GPUkrokzero2.605901ms,FD2.603944ms.
+Krok+FDmonitorzero3.104539ms,FD3.112065ms. Obe pod5ms.
+H200,1024x256,úvodnépoliaGPU,bezrenderingu. Aj kontrola počíta FDpolia
+a má rovnakú rozšírenú sieť; nejde o timing pôvodnej užšej sieteV8.
+Samostatné3x200warmbenchmarky uchované vsummaryJSON.
+
+FÉROVOSŤ A OBMEDZENIA
+KNOWN_CASE_MATCHED_SPATIAL_COMPLETE,matched_execution=True.
+Obe200epochov/1600aktualizácií/47600tréningových krokov, bez zlyhania
+tréningového gradientu. RovnakýwarmstartV8D32best, počiatočná predikcia,
+parametercount, losses, seed, gradient32/update32,200epochov,lr a dáta.
+SamplingtraceSHA256oboch:
+c48a6d0e124e425b5b3f46f22373a767bedf857e11f9b480892afc60e4ee41c2.
+Rozdiel:9vstupov je nula oproti reálnym FDgradientom/laplaciánu
+aktuálneho poľa. Žiadne budúce referencie ako vstupy. NeskoršieTRAIN
+polia iba cieľmi chyby. Prefix2,3,ciele4..241,dt.05solverunit,nie SI.
+Jeden známy TRAIN harmonics/1/Re382 ajna výber váh, nie nezávislá
+generalizácia alebo viacseedová/štatisticky významná štúdia.
+Výsledok nedokazuje, že vstupy sú dostatočné pre ľubovoľnú situáciu,
+ani že konkrétna iná architektúra problém automaticky vyrieši.
+
+INTEGRITA A SPOTREBA
+139993COMPLETED0:0,139994účtovaniebezchyby,V10freezeoverený.
+Skutočnáalokácia3220GPU*s=0.894444GPU*h,12880core*s vrátane skúšky,
+assessmentov a réžie. Pythontrainingzero1548.1392s,FD1589.9547s.
+PeakCUDA16885553152B/16885527040B.20GPUkontrolprešlo.
+
+SÚBORY A ĎALŠÍ POSTUP
+Perun:results/fpo_pinn_spatial_20261031_v10/training/139993/.
+Lokálne:vysledky_139993/ malé pôvodnéJSON/logy vrátane histories,
+samplingtrace,selectedper_frame,config/summary,freeze a účtovania.
+24súborov274475B, overenýSHA256archívu:
+d9e7d3253e3b5a779cdb52335c83940140b86da0336adfb39e39a2368932b9f1.
+Veľké polia a checkpointy zostávajúPerun; staré výsledky zachované.
+Fronta pri kontrole prázdna. Nový tréning vtomto kroku nespustený.
+Ďalší krok má byť zásadnejšie overenie reprezentácie dynamiky a úlohy,
+nie iba ďalšie opakovanie rovnakého učenia. V10 hypotéza priniesla malé
+zlepšenie; doterajší základ stále nespĺňa presnosť ani na známomprípade.
+Žiadny novýCFD/download/mainTest, hlavnýLLMexperiment stále nezačal.

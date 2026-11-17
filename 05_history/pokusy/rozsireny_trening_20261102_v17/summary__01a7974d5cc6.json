@@ -1,0 +1,122 @@
+{
+  "status": "SMOKE_COMPLETE",
+  "results": [
+    {
+      "status": "MULTICASE_DIRECT_REPRESENTATION_EVALUATED",
+      "config": {
+        "name": "multicase_primitive",
+        "representation": "primitive",
+        "train_count": 69,
+        "state_conditioning": true,
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 20261102,
+        "updates": 3,
+        "lr": 0.0003,
+        "warmup": 0,
+        "batch": 2048,
+        "collocation": 256,
+        "assess_every": 3
+      },
+      "accuracy": [
+        {
+          "failure": false,
+          "predicted_frames": 238,
+          "path": "FPO_NS_2D_1024x256/harmonics/87/Re_292.npz",
+          "scope": "validation",
+          "mean_errors": {
+            "velocity_relative_l2": 0.7572001601689166,
+            "pressure_relative_l2": 1.1013752373320926
+          },
+          "score": 0.9292876987505045,
+          "persistence_mean_errors": {
+            "velocity_relative_l2": 0.7575628273851636,
+            "pressure_relative_l2": 1.1019513357435289
+          },
+          "interior_div_rms": 0.012440533306794007,
+          "prefix_div_rms": 0.012262583710253239,
+          "mass_limit": 0.036787751130759716,
+          "mass_pass": true,
+          "direct_query_gpu_ms": {
+            "p50": 3.4095040559768677,
+            "p95": 3.4791823387145997,
+            "p99": 3.5601306295394894
+          },
+          "causal_step_latency": false,
+          "mean_fd_momentum_loss": 1.4289484209373218,
+          "mean_reference_fd_momentum_loss": 0.005376385450519684,
+          "accuracy_pass": false,
+          "latency_pass": true
+        }
+      ],
+      "training_monitor": [
+        {
+          "failure": false,
+          "predicted_frames": 238,
+          "path": "FPO_NS_2D_1024x256/harmonics/1/Re_382.npz",
+          "scope": "train",
+          "mean_errors": {
+            "velocity_relative_l2": 0.5695530876757828,
+            "pressure_relative_l2": 0.9740632609763025
+          },
+          "score": 0.7718081743260427,
+          "persistence_mean_errors": {
+            "velocity_relative_l2": 0.5698721496859207,
+            "pressure_relative_l2": 0.9745848419801173
+          },
+          "interior_div_rms": 0.014197478403470345,
+          "prefix_div_rms": 0.014042905531823635,
+          "mass_limit": 0.04353891288570392,
+          "mass_pass": true,
+          "direct_query_gpu_ms": {
+            "p50": 3.4015198945999146,
+            "p95": 3.474635112285614,
+            "p99": 3.498032343387604
+          },
+          "causal_step_latency": false,
+          "mean_fd_momentum_loss": 1.7594749812318498,
+          "mean_reference_fd_momentum_loss": 0.006401343275049404,
+          "accuracy_pass": false,
+          "latency_pass": true
+        }
+      ],
+      "selected_update": 3,
+      "all238_training_frames_visited": false,
+      "training_seconds": 57.491448589000356,
+      "peak_cuda_allocated_bytes": 1370725888,
+      "checkpoint_sha256": "3e04d9663778dc031c87cabe7f5e64adb05d0f2d31dcb841c3dee920600722d8",
+      "independent_validation": false,
+      "causal_stepper": false,
+      "llm_ready": false,
+      "train_scenarios": 1,
+      "validation_scenarios": 1,
+      "train_selection_scenarios": 0,
+      "training_case_updates": [
+        3
+      ],
+      "case_frame_schedule_sha256": "adb32b87214bfa371e54d85937d1329a77f171051b2a585b3a9bcadaa02fde99",
+      "working_gate": {
+        "accuracy_pass": false,
+        "mass_pass": true,
+        "direct_query_latency_pass": true
+      },
+      "limitations": [
+        "69TRAIN and6geometry-disjoint developmentVAL; VAL checkpoint selection only, no backprop/future input; not final independent test",
+        "Same trunk/CNN but final primitive3 versus streamfunction-pressure2 head differs",
+        "Curl increment preserves initial discrete div only on eroded fluid interior after masking",
+        "Absolute time query, no recurrent own states; not directly comparable causal latency",
+        "Direct time query, continuous-autograd PDE versus matching FD-data/grid output"
+      ]
+    }
+  ],
+  "causal_stepper": false,
+  "independent_final_test": false
+}

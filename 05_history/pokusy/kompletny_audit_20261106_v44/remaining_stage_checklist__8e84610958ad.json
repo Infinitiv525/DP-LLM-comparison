@@ -1,0 +1,32 @@
+[
+  {
+    "stage": "Finish existing training",
+    "scope": "395 immutable attempts:240search+150selected-retrain+5fixed",
+    "status": "IN_PROGRESS"
+  },
+  {
+    "stage": "Freeze final checkpoint manifest",
+    "scope": "All30selected configurations x5seeds +5fixed =155final models, include failures",
+    "status": "PENDING_TRAINING"
+  },
+  {
+    "stage": "Freeze final TEST evaluator and analysis",
+    "scope": "Separate future stage; exact split/gauge/scales/metric/seed nesting/timing/resources before opening targets",
+    "status": "REQUIRED_BEFORE_TEST"
+  },
+  {
+    "stage": "Evaluate sealed TEST",
+    "scope": "200cases per frozen selected/fixed seed; never tune or pick best final seed using TEST",
+    "status": "SEALED_NOT_RUN"
+  },
+  {
+    "stage": "Archive final artifacts",
+    "scope": "Weights, numeric results, proposal reasons/resources, closure/hashes/accounting directly Perun->GitHub; no raw arrays on PC",
+    "status": "FINAL_SNAPSHOT_PENDING"
+  },
+  {
+    "stage": "No further larger-network experiments",
+    "scope": "Existing V39 results preserved; zero new capacity jobs",
+    "status": "CLOSED"
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "at": "2026-11-07T18:37:38.508615+01:00",
+  "old_group": {
+    "id": "group_000",
+    "jobs": [
+      "143342",
+      "143656",
+      "143684",
+      "144649",
+      "145176"
+    ],
+    "collectors": [
+      "143685",
+      "143805",
+      "143807",
+      "144648",
+      "145175"
+    ],
+    "status": "ACTIVE_MAIN_GROUP_CPU_ACCOUNTING",
+    "capacity_collector": "143807",
+    "active_collector": "145175",
+    "budget_rebalance_v43": {
+      "old_capacity_collector": "143807",
+      "cpu_collector": "144648",
+      "added_main_job": "144649",
+      "intent_sha256": "f2b8acd781f12ba6ec12e24d3404529ef3e635d838d2b0152cae3801ddcfe35e",
+      "no_new_capacity_runs": true
+    },
+    "refill_v46": {
+      "old_cpu": "144648",
+      "cpu": "145175",
+      "added_main_job": "145176",
+      "added_gpus": 16,
+      "intent_sha256": "4ee669deb269416a077e25aa7d78fe03abc9f4f18649ea26b06bafd6cef68cb3"
+    }
+  },
+  "old_index": {
+    "group": "group_000",
+    "jobs": [
+      "143342",
+      "143656",
+      "143684",
+      "144649",
+      "145176"
+    ],
+    "collector": "145175",
+    "target_gpus": 24,
+    "status": "ACTIVE_CPU_ACCOUNTING",
+    "updated_at": "2026-11-06T17:22:53.562166+01:00",
+    "migration_receipt": "/mnt/project/perun2601449/dp_llm_cfd/results/ldc_main_refill_20261106_v46/progress.json",
+    "verified_at": "2026-11-06T17:28:39.126093+01:00"
+  },
+  "counts": {
+    "DONE": 355,
+    "RUNNING": 16,
+    "PENDING": 24
+  },
+  "ready_tasks": [
+    "tpe_r04_k01",
+    "qwen3_8b_r04_k02",
+    "ministral3_8b_r04_k02",
+    "phi4_mini_r04_k02",
+    "granite33_8b_r04_k02",
+    "random_r04_k02",
+    "tpe_r04_k02",
+    "qwen3_8b_r04_k03",
+    "ministral3_8b_r04_k03",
+    "phi4_mini_r04_k03",
+    "granite33_8b_r04_k03",
+    "random_r04_k03",
+    "tpe_r04_k03",
+    "qwen3_8b_r04_k04",
+    "ministral3_8b_r04_k04",
+    "phi4_mini_r04_k04",
+    "granite33_8b_r04_k04",
+    "random_r04_k04",
+    "tpe_r04_k04",
+    "fixed_k00",
+    "fixed_k01",
+    "fixed_k02",
+    "fixed_k03",
+    "fixed_k04"
+  ],
+  "target_gpus": 24,
+  "original_395_attempts_unchanged": true,
+  "TEST_opened": false
+}

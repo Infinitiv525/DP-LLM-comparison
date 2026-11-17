@@ -1,0 +1,64 @@
+PRIAMY ČASOVÝ PINN S PRÚDOVOU FUNKCIOU – V15, 02.11.2026
+
+AKTUALIZÁCIA: 140949 dokončená, exit0:0, freeze overený.
+Nový psi/p: priemer U1,116 % / p3,313 %, kontrola hmoty 3/3,
+p99max3,529ms. Pôvodný u/v/p: U1,792 % / p4,014 %, hmota0/3.
+Iba tri známe TRAIN simulácie, žiadny nezávislý test/generalizácia.
+Hybnosť stále menej presná než referencia. Podrobnosti a hranice
+merania: VYSLEDKY_140949.txt. Historický opis štartu je nižšie.
+
+GPU úloha 140949, účtovanie 140950. Používateľ odsúhlasil skúšku.
+Porovnávame priamy časový PINN s tromi výstupmi u/v/p a jeho verziu
+s dvoma výstupmi psi/p. Nejde o starý reťazený model: každé pole
+vypočítame priamo pre zadaný čas zo známych úvodných snímok 2,3.
+
+Nový výpočet:
+u=u0+(1-exp(-t))*psi_y, v=v0-(1-exp(-t))*psi_x,
+p=p0+(1-exp(-t))*delta_p.
+Vnútorná FD divergencia curlprírastku sa ruší. Zostáva pôvodná malá
+divergencia úvodných CFD dát. Solidmask môže narušiť vlastnosť pri
+prekážke; tvrdenie platí na pôvodnej stenčenej fluidnej maske.
+Nie záruka správnej hybnosti, polí alebo celej hranice prekážky.
+Žiadny nový taper ani vonkajšie wall/periodic BC na cropokrajoch.
+
+FÉROVÉ POROVNANIE
+Obe siete: trunk192x4, CNNlatent32, Fourier1/2/4/8/16. Tréning od
+začiatku, seed20261102, rovnaké počiatočné trunk/CNN, posledná vrstva
+nulová v oboch, takže počiatočné predikcie sú rovnaká perzistencia.
+Nedávať neférovú výhodu predtrénovanému uvphead oproti novému psihead.
+Parametercount poslednej vrstvy sa líši, ide o porovnanie reprezentácie.
+Tri pôvodné TRAIN prípady: har1/Re382,nurbs11/Re107,skel57/Re168.
+150kaktualizácií/vetvu,50k/case,Adam3e-4cosine1.5e-5,clip1,
+data/trainStd,PDE.01,BC.01,warm1000+ramp1000,batch2048/PDE256/BC128.
+Neskoršie TRAIN polia iba cieľmi loss; žiadnyVAL/test/nováCFD/download.
+
+Pri dátovom tréningu sa psi vzorkuje v susedných bodoch tak, aby
+FDvelocity presne zodpovedala plnej mriežke vrátane jej rohov.
+Kontinuálna PDE používa autograd vrátane tretích derivácií psi
+a priestorových derivácií interpolovaných úvodných polí. Obe
+diskretizácie explicitne odlišujeme. Celý gridquery má jeden čas.
+
+VÝSLEDKY A KONTROLY
+Každých15k+first/last všetkých238časov všetkých3TRAINcases.
+Výbercheckpointu meanEu/Ep rovnaký preobe vetvy, mass/accuracy/5ms
+brány reportované osobitne. FDmomentumloss aj referenčnýfloor,
+FDdiv, chyby polí, PDEparts,latencie,casecounts/coverage zachované.
+Žiadny dôkazgeneralizácie/štatistickejvýznamnosti aleboLLMready.
+Po skončení sa 69/6 nespustí automaticky.
+
+Predfreeze prešli3testy0.597s: sparse/gridzhoda v rohoch pričasoch
+0/.05/11.9,hardIC,maskovanýcurl zachová vnútornúdivergenciu,
+spojitáidentita a finiteNSthirdgradienty doCNN. AST/bash-nOK,
+staréfreezeoverené,novýfreeze predsubmission. GPU9+3unit, potom
+3updatefunkčnáskúška obochvetiev s aktívnouPDE a238fitqueries,
+ažpotom2plnébehy. Výslednápresnosť zatiaľneznáma.
+Perun:/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_direct_curl_20261102_v15
+Veľképolia/váhyibaPerun,lokálneiba maléJSON/texty,starévýsledkyzachované.
+
+OVERENÝ ŠTART
+140949RUNNINGgpu25. GPU9+3kontrol prešlo(nové3testy1.033s),
+všetky3TRAINcases načítané. Pôvodnávetva krátkejskúšky dokončila
+update1/3 a238querieskaždéhocase bezguardfail,prebieha zvyšokskúšky.
+Po úspechu oboch vetiev skript automaticky začneplné150k+150k.
+Výsledky3updates nie sú dôkazpresnosti alebo finálnehomasspass.
+Maléprotocol/freeze/prepared/submission lokálne vzaznamy/.

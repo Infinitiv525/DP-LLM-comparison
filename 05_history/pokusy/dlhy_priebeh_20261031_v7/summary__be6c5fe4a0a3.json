@@ -1,0 +1,406 @@
+{
+  "status": "KNOWN_CASE_LONG_ROLLOUT_COMPLETE",
+  "results": [
+    {
+      "status": "KNOWN_CASE_LONG_ROLLOUT_EVALUATED",
+      "config": {
+        "seed": 20261031,
+        "state_conditioning": true,
+        "width": 96,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "state_update": "first_order",
+        "collocation": 256,
+        "pde_weight": 0.01,
+        "bc_weight": 0.01,
+        "data_loss_scale": 0.05,
+        "own_momentum_weight": 0.1,
+        "own_divergence_weight": 0.1,
+        "divergence_limit": 1000.0,
+        "divergence_score_penalty": 1000000.0,
+        "name": "C_long_rollout",
+        "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_stabilization_20261031_v6/training/139784/C_first_order_own_physics/last.pt",
+        "warm_start_sha256": "6c5f4880e8d59cb515db00417ad43094a907b98e4219d178e28ebbe026c2f4fd",
+        "lr": 3e-05,
+        "gradient_clip": 0.25,
+        "chunk_length": 8,
+        "assess_every_epochs": 10,
+        "stages": [
+          {
+            "horizon": 32,
+            "epochs": 50
+          },
+          {
+            "horizon": 64,
+            "epochs": 50
+          },
+          {
+            "horizon": 128,
+            "epochs": 75
+          },
+          {
+            "horizon": 238,
+            "epochs": 125
+          }
+        ]
+      },
+      "accuracy": {
+        "score": 0.5235480637951808,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.36702375942531495,
+              "pressure_relative_l2": 0.6800723681650467
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5698721496859207,
+              "pressure_relative_l2": 0.9745848419801173
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.06944266986887945,
+              "pressure_relative_l2": 0.14483317885728958
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.1383124573116147,
+              "pressure_relative_l2": 0.26184009682653586
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.23456406541642025,
+              "pressure_relative_l2": 0.48965444429678684
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5169503865428401,
+              "pressure_relative_l2": 0.973268673396553
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.34291360676339777,
+              "pressure_relative_l2": 0.667102279960673
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5923710946347213,
+              "pressure_relative_l2": 1.0378516572149905
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.4422645554319639,
+              "pressure_relative_l2": 0.7826362382114472
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6046461685175428,
+              "pressure_relative_l2": 0.992428802067006
+            }
+          }
+        },
+        "divergence": null,
+        "predicted_steps": 238,
+        "mass": {
+          "initial_rms": 0.014042903669178486,
+          "mean_model_rms": 1.0922142258618308,
+          "mean_reference_rms": 0.014512970961901307,
+          "prospective_limit": 0.04353891288570392,
+          "pass_gate": false
+        },
+        "gpu_step_ms": {
+          "p50": 1.8036319613456726,
+          "p95": 1.8192943930625916,
+          "p99": 1.8284393751621246
+        },
+        "gpu_step_plus_fd_monitor_ms": {
+          "p50": 2.2730239629745483,
+          "p95": 2.290339195728302,
+          "p99": 2.304649901390076
+        },
+        "reference_future_as_input": false,
+        "scope": "KNOWN_TRAINING_SCENARIO_POSITIVE_CONTROL"
+      },
+      "latency": {
+        "grid": [
+          1024,
+          256
+        ],
+        "whole_gpu_step_rounds_ms": [
+          {
+            "p50": 1.3418560028076172,
+            "p95": 1.3493919670581818,
+            "p99": 1.3531244492530823
+          },
+          {
+            "p50": 1.3398079872131348,
+            "p95": 1.3456016063690186,
+            "p99": 1.3485391867160796
+          },
+          {
+            "p50": 1.3399199843406677,
+            "p95": 1.3457167744636536,
+            "p99": 1.3514399790763856
+          }
+        ],
+        "step_plus_fd_monitor_rounds_ms": [
+          {
+            "p50": 1.7605760097503662,
+            "p95": 1.7691072285175324,
+            "p99": 1.7763578069210053
+          },
+          {
+            "p50": 1.7584159970283508,
+            "p95": 1.7652175903320313,
+            "p99": 1.7696124470233916
+          },
+          {
+            "p50": 1.7585439682006836,
+            "p95": 1.765564751625061,
+            "p99": 1.7730694699287415
+          }
+        ],
+        "samples_per_round": 200,
+        "rendering_included": false,
+        "initial_tensors_gpu": true
+      },
+      "selected_phase": "horizon_238",
+      "selected_epoch": 125,
+      "actual_optimizer_updates": 5550,
+      "expected_optimizer_updates": 5550,
+      "all238_training_targets_visited": true,
+      "completed_episode_counts": {
+        "32": 50,
+        "64": 50,
+        "128": 75,
+        "238": 125
+      },
+      "training_seconds": 667.3476534709334,
+      "peak_cuda_allocated_bytes": 4894313984,
+      "gpu": "NVIDIA H200",
+      "working_gate": {
+        "accuracy_pass": false,
+        "latency_pass": true,
+        "mass_growth_pass": false
+      },
+      "checkpoint_sha256": "15b6e1e12bdb3ff1066c034aa6ebee4527b191d681e4132ecdade124e8944bc5",
+      "training_failure": null,
+      "independent_validation": false,
+      "main_test_opened": false,
+      "llm_comparison_ready": false,
+      "limitations": [
+        "Known TRAIN positive control only; same trajectory used for checkpoint selection",
+        "Rollouts reach238 but gradients truncate every8 steps; not full238 backpropagation",
+        "Weights update between chunks while own numerical states carry onward",
+        "Only interior curl increment has divergence identity; not global NS stability"
+      ]
+    },
+    {
+      "status": "KNOWN_CASE_LONG_ROLLOUT_EVALUATED",
+      "config": {
+        "seed": 20261031,
+        "state_conditioning": true,
+        "width": 96,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "state_update": "curl",
+        "collocation": 256,
+        "pde_weight": 0.01,
+        "bc_weight": 0.01,
+        "data_loss_scale": 0.05,
+        "own_momentum_weight": 0.1,
+        "own_divergence_weight": 0.1,
+        "divergence_limit": 1000.0,
+        "divergence_score_penalty": 1000000.0,
+        "name": "D_long_rollout",
+        "warm_start": "/mnt/project/perun2601449/dp_llm_cfd/results/fpo_pinn_stabilization_20261031_v6/training/139784/D_curl_own_physics/last.pt",
+        "warm_start_sha256": "5c2841c3f97fd8508f29af93f08d32385a5e4b021d50cbcdd9e1e0e049c617b4",
+        "lr": 3e-05,
+        "gradient_clip": 0.25,
+        "chunk_length": 8,
+        "assess_every_epochs": 10,
+        "stages": [
+          {
+            "horizon": 32,
+            "epochs": 50
+          },
+          {
+            "horizon": 64,
+            "epochs": 50
+          },
+          {
+            "horizon": 128,
+            "epochs": 75
+          },
+          {
+            "horizon": 238,
+            "epochs": 125
+          }
+        ]
+      },
+      "accuracy": {
+        "score": 0.6034376562014445,
+        "scores": {
+          "all_future": {
+            "model": {
+              "velocity_relative_l2": 0.5234558743647602,
+              "pressure_relative_l2": 0.6834194380381289
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5698721496859207,
+              "pressure_relative_l2": 0.9745848419801173
+            }
+          },
+          "steps_1_10": {
+            "model": {
+              "velocity_relative_l2": 0.08776062113680201,
+              "pressure_relative_l2": 0.12893255677208829
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.1383124573116147,
+              "pressure_relative_l2": 0.26184009682653586
+            }
+          },
+          "steps_11_40": {
+            "model": {
+              "velocity_relative_l2": 0.36723173219906724,
+              "pressure_relative_l2": 0.39596337360260675
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5169503865428401,
+              "pressure_relative_l2": 0.973268673396553
+            }
+          },
+          "steps_41_120": {
+            "model": {
+              "velocity_relative_l2": 0.6021119516102976,
+              "pressure_relative_l2": 0.7393438511460028
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.5923710946347213,
+              "pressure_relative_l2": 1.0378516572149905
+            }
+          },
+          "steps_121_238": {
+            "model": {
+              "velocity_relative_l2": 0.5467710490902461,
+              "pressure_relative_l2": 0.7655770456406387
+            },
+            "persistence": {
+              "velocity_relative_l2": 0.6046461685175428,
+              "pressure_relative_l2": 0.992428802067006
+            }
+          }
+        },
+        "divergence": null,
+        "predicted_steps": 238,
+        "mass": {
+          "initial_rms": 0.014042903669178486,
+          "mean_model_rms": 0.014042903857008248,
+          "mean_reference_rms": 0.014512970961901307,
+          "prospective_limit": 0.04353891288570392,
+          "pass_gate": true
+        },
+        "gpu_step_ms": {
+          "p50": 1.9178400039672852,
+          "p95": 1.9311648190021515,
+          "p99": 1.9379939031600952
+        },
+        "gpu_step_plus_fd_monitor_ms": {
+          "p50": 2.3893120288848877,
+          "p95": 2.4064751148223875,
+          "p99": 2.417604525089264
+        },
+        "reference_future_as_input": false,
+        "scope": "KNOWN_TRAINING_SCENARIO_POSITIVE_CONTROL"
+      },
+      "latency": {
+        "grid": [
+          1024,
+          256
+        ],
+        "whole_gpu_step_rounds_ms": [
+          {
+            "p50": 1.439695954322815,
+            "p95": 1.4481696486473083,
+            "p99": 1.4520182621479034
+          },
+          {
+            "p50": 1.438975989818573,
+            "p95": 1.4452255427837373,
+            "p99": 1.4481183695793152
+          },
+          {
+            "p50": 1.4386079907417297,
+            "p95": 1.4466304361820221,
+            "p99": 1.4483349895477293
+          }
+        ],
+        "step_plus_fd_monitor_rounds_ms": [
+          {
+            "p50": 1.8619199991226196,
+            "p95": 1.8708271920680999,
+            "p99": 1.8757523572444916
+          },
+          {
+            "p50": 1.8609440326690674,
+            "p95": 1.868614399433136,
+            "p99": 1.87292928814888
+          },
+          {
+            "p50": 1.8610720038414001,
+            "p95": 1.869444763660431,
+            "p99": 1.8736367905139921
+          }
+        ],
+        "samples_per_round": 200,
+        "rendering_included": false,
+        "initial_tensors_gpu": true
+      },
+      "selected_phase": "horizon_238",
+      "selected_epoch": 125,
+      "actual_optimizer_updates": 5550,
+      "expected_optimizer_updates": 5550,
+      "all238_training_targets_visited": true,
+      "completed_episode_counts": {
+        "32": 50,
+        "64": 50,
+        "128": 75,
+        "238": 125
+      },
+      "training_seconds": 1343.4376814961433,
+      "peak_cuda_allocated_bytes": 4895315456,
+      "gpu": "NVIDIA H200",
+      "working_gate": {
+        "accuracy_pass": false,
+        "latency_pass": true,
+        "mass_growth_pass": true
+      },
+      "checkpoint_sha256": "6d33eb1df6e7ba16fc88e917d0c357392240bf3de616feafa668f507f2a52b8c",
+      "training_failure": null,
+      "independent_validation": false,
+      "main_test_opened": false,
+      "llm_comparison_ready": false,
+      "limitations": [
+        "Known TRAIN positive control only; same trajectory used for checkpoint selection",
+        "Rollouts reach238 but gradients truncate every8 steps; not full238 backpropagation",
+        "Weights update between chunks while own numerical states carry onward",
+        "Only interior curl increment has divergence identity; not global NS stability"
+      ]
+    }
+  ],
+  "independent_validation": false
+}

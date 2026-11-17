@@ -1,0 +1,46 @@
+DOKONČENIE PÔVODNÝCH TRÉNINGOV — JEDNORAZOVÁ 8-GPU DÁVKA
+07.11.2026
+
+Úloha144649 skončila úspešne. Všetkých240 vyhľadávacích pokusov je
+dokončených; overených je30výberov konfigurácie zo6metód x5hľadaní.
+Pri kontrole bolo355/395hotových,16bežalo a24čakalo. Ostávajú finálne
+opakované tréningy a fixed baseline. TEST ostáva uzavretý.
+
+Nových136 výsledkov oproti V44/V45 auditu prešlo5722/5722 kontrolami.
+Záznam je v results/ldc_status_20261107_v47 a samostatnom lokálnom STAV.txt.
+
+Na doplnenie súbehu bola registrovaná8GPU dávka145597. Vykoná najviac
+jeden pôvodne naplánovaný pokus na každého z8pracovníkov. Ide vždy o plný
+400epochový tréning s rovnakým seedom, dátami a konfiguráciou; nie o skrátené
+učenie. Pracovník potom skončí, takže táto doplnková dávka nečaká s GPU
+na dokončenie ostatných úloh. Ak by nebola dostupná pripravená úloha,
+pracovník skončí bez vymýšľania alebo náhrady pokusu.
+
+Použitá pôvodná worker.run(), run_task(), claim/finish, tréning, meranie
+a kontrola výsledkov. Nový procesový obal upravuje iba počet prevzatých
+úloh na pracovníka. Jeho lokálny signál ukončenia ALL_DONE nemení globálny
+stav experimentu: úplnosť395úloh ďalej určuje pôvodný reviewer zo state.json.
+Všetky pôvodné zmrazené vedecké aj prevádzkové súbory ostali nezmenené.
+
+Nový obal, jeho4CPU testy,8hodinový maximálny Slurm skript a launcher majú
+vlastný doplnkový SHA manifest.8hodín umožňuje pôvodný6hodinový limit
+jedného pokusu vrátane štartu a kontroly. Všetky4testy obalu prešli;
+GPU job navyše vykonáva pôvodných14úvodných kontrol a pôvodný GPU probe.
+Nejde o nový vedecký pokus alebo odhadovací pilot spotreby.
+
+Pôvodná16GPU dávka145176 pokračuje bez prerušenia. Nový CPU zberač145596
+nahradil CPU145175, aby od svojho štartu poznal aj novú GPU dávku.
+CPU náhrada sa najprv zaregistrovala držaná, starý CPU sa ukončil a jeho
+presné účtovanie ostalo uložené. Potom sa držaná8GPU dávka pridala do
+autoritatívnej skupiny, CPU sa spustil a až po overení sledovaných úloh
+sa uvoľnil GPU job. Maximálne4rezervovanéuzly a24hlavnýchH200.
+
+V tomto doplnení nevzniká ďalšie hľadanie konfigurácií, väčšia sieť,
+opakovaný neúspešný pokus ani nový TEST prístup. Celkový plán395 ostáva.
+Po dokončení tréningov nasleduje kontrola a zmrazenie finálnych modelov
+a TEST postupu, potom vyhodnotenie. Samostatný pilot odhadu spotreby
+je podľa používateľa vynechaný; povinné merania presnosti/fyziky/5ms ostávajú.
+
+Doklady: intent.json, freeze.json, progress.json, old_cpu_accounting.json,
+closeout.json a policy_tests.txt. Váhy a veľké polia ostávajú na Perune.
+Na Perune: results/ldc_tail_20261107_v47.
