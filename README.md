@@ -37,3 +37,7 @@ Verejný vedecký export oddeľuje tieto podklady od súkromnej rozpracovanej di
 ## Doplnkové vedecké dáta
 
 Ďalšie surové merania a podklady na reprodukciu sú v [doplnkovom balíku](01_results/doplnkove_data/README.md).
+
+## Historické numerické výstupy
+
+Pôvodné polia a diagnostika starších pokusov sú v [samostatnom balíku](01_results/historicke_numericke_vystupy/README.md).
