@@ -1,5 +1,9 @@
 # Porovnanie LLM pri konfigurácii PINN
 
+## Úplný prehľad dostupných dát
+
+**[Katalóg výsledkov, váh a numerických polí](01_results/DOSTUPNE_DATA.md)** uvádza všetky publikované balíky, priame odkazy a aj výnimky z archivácie. Veľké súbory sú v Releases a nevyžadujú stiahnutie celého repozitára.
+
 Qwen3 8B, Ministral3 8B, Phi4 mini a Granite3.3 8B navrhovali nastavenie jednej spoločnej PINN. Porovnávali sa s náhodným hľadaním, TPE a pevnou konfiguráciou. LLM sa netrénovali; trénovali sa siete PINN s 134 922 parametrami.
 
 Hotových je **395 hlavných tréningov a finálny TEST 155 sietí na 200 prípadoch**. Každá vyhľadávacia metóda mala päť hľadaní, zvolená konfigurácia päť záverečných tréningov. Počet nezávislých hľadaní sa nezamieňa s počtom modelov alebo časovacích opakovaní.
