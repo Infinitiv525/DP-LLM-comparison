@@ -10,6 +10,7 @@ V tomto repozitári: **1557 checkpointových súborov** a **155 vybraných model
 | [Doplnené vedecké záznamy a merania](https://github.com/Infinitiv525/DP-LLM-comparison/releases/tag/scientific-data-supplement-20261118) | 919 | 0.013 GB |
 | [Historické numerické výstupy](https://github.com/Infinitiv525/DP-LLM-comparison/releases/tag/historical-numerical-outputs-20261118) | 122 | 0.141 GB |
 | [Ďalšie pôvodné diagnostiky a zdroje](https://github.com/Infinitiv525/DP-LLM-comparison/releases/tag/research-records-completion-20261118) | 4801 | 0.074 GB |
+| [Pôvodné stdout a stderr úloh Slurm](https://github.com/Infinitiv525/DP-LLM-comparison/releases/tag/scheduler-logs-20261118) | 242 | 0.000 GB |
 
 Veľké váhy a numerické polia sú **v Releases**, aby sa pri práci so zdrojovým kódom nemuseli automaticky sťahovať. [Zoznam všetkých priamych odkazov a SHA256](PUBLIC_DOWNLOADS.json). Archívy sú členené podľa modelov alebo pôvodných pokusov. Každý balík má manifest s pôvodnými cestami; historické a neúspešné pokusy zostávajú oddelené od finálneho porovnania. V starších nemenných manifestoch sa pôvodné vylúčenia vzťahujú iba na daný balík; dodatočné vydania ich rozširujú podľa tejto tabuľky.
 
