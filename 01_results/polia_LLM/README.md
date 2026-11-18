@@ -8,6 +8,8 @@ Polia boli dodatočne rekonštruované z uzavretých váh pôvodnou funkciou V49
 
 ## Obsah jedného modelového balíka
 
+Každý modelový balík rozbaľ do samostatného priečinka podľa jeho názvu. Spoločné dátové balíky majú vlastné jedinečné podpriečinky.
+
 - predictions.npy: float32 [200,512,512,3], osi prípad/y/x/pole, kanály u,v,p. Poradie prípadov je vo verification/reconstruction.json.
 - model/best.pt, aliases.json a normalization.json: pôvodné váhy a všetky ekvivalentné modelové záznamy.
 - original_evaluation/: pôvodné súhrny a surové časovania každého modelového ID v skupine.
