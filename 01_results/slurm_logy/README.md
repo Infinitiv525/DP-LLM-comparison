@@ -1,0 +1,3 @@
+# Pôvodné záznamy úloh Slurm
+
+[Stiahnuť pôvodné stdout a stderr](https://github.com/Infinitiv525/DP-LLM-comparison/releases/tag/scheduler-logs-20261118). Súborov: 242, nezbalených 1187571 B. Zachované sú aj prípravné, neúspešné a prerušené úlohy; tieto logy nenahrádzajú finálne výsledkové tabuľky. Priradenie je podľa názvu úlohy: architektúrne prefixy patria architektúram, fpo/pinn/ldc/v4 patria 2D PINN a LLM, ostatné staršej 3D etape a príprave prostredia. Pôvodné názvy a SHA256 sú v manifeste. Overené je rozbalenie, serverový digest aj úplné spätné čítanie na Perune. Dáta neprechádzali cez PC.
