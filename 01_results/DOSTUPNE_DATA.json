@@ -1,13 +1,13 @@
 {
   "status": "PUBLIC_DATA_CATALOG_VERIFIED",
-  "checked_UTC": "2026-11-18T21:50:38.138787+00:00",
+  "checked_UTC": "2026-11-18T22:58:34.411376+00:00",
   "repository": "Infinitiv525/DP-LLM-comparison",
   "checkpoint_files": 1557,
   "selected_models": 155,
-  "published_unique_source_files": 30650,
-  "published_unique_source_bytes": 8139963639,
-  "release_asset_bytes": 2789140930,
-  "release_assets": 76,
+  "published_unique_source_files": 31273,
+  "published_unique_source_bytes": 76173060556,
+  "release_asset_bytes": 55032926550,
+  "release_assets": 191,
   "releases": [
     {
       "label": "Modely a základné výsledky",
@@ -53,14 +53,22 @@
       "asset_count": 3,
       "archive_bytes": 302073,
       "extra_assets_not_in_receipt": []
+    },
+    {
+      "label": "Úplné polia 155 PINN a všetky použité vstupy/referencie",
+      "tag": "native-llm-test-fields-20261118",
+      "url": "https://github.com/Infinitiv525/DP-LLM-comparison/releases/tag/native-llm-test-fields-20261118",
+      "asset_count": 115,
+      "archive_bytes": 52243785620,
+      "original_files": 1034
     }
   ],
   "not_full_filesystem_backup": true,
   "no_new_training": true,
   "no_new_inference": true,
   "model_archive_payload_bytes_through_PC": 0,
-  "context_SK": "Zachované sú vybrané aj priebežné PINN checkpointy, návrhy konfigurácií od LLM a ich zdôvodnenia, tréningové histórie, výsledky po prípadoch a náklady konfigurácie. Doplnok obsahuje 155 pôvodných polí časovaní (spolu 6 200 000 hodnôt v ms) a bootstrapové výsledky. Úplné priestorové predikcie všetkých 155 finálnych modelov neboli počas pôvodného vyhodnotenia uložené; dostupné metriky sa nemenia a polia sa dajú z checkpointov znovu vypočítať. V architektúrnom archíve je uložených päť pomocných PINN referencií.",
-  "exclusions_SK": "Toto je archív vlastných výskumných artefaktov, nie úplná kópia súborového systému Perunu. Neduplikujú sa verejné vstupné FlowBench dáta, obnoviteľné tréningové a vstupné cache, stiahnuté základné LLM váhy ani softvérové prostredia. Nezverejňujú sa prístupové údaje, autentifikačné pomocné súbory ani rozpracovaná dizertácia. Staré surové paralelné/reštartovacie CFD adresáre nie sú úplne zrkadlené; spracované referenčné exporty a diagnostiky sú zahrnuté. Pri čítaní starej reštartovacej metadátovej vetvy sa pozorovalo čakanie na NFS; túto výnimku audit uvádza otvorene. Pôvodné výskumné dáta na Perune neboli zmazané.",
+  "context_SK": "Zachované sú vybrané aj priebežné PINN checkpointy, návrhy konfigurácií od LLM a ich zdôvodnenia, tréningové histórie, výsledky po prípadoch a náklady konfigurácie. Doplnok obsahuje 155 pôvodných polí časovaní (spolu 6 200 000 hodnôt v ms) a bootstrapové výsledky. Úplné priestorové predikcie všetkých 155 finálnych modelov boli dodatočne rekonštruované z uzavretých váh a overené voči pôvodným metrikám. [Doplnené polia aj všetkých 1000 použitých vstupných a referenčných prípadov](polia_LLM/README.md) sú verejne archivované. V architektúrnom archíve je uložených päť pomocných PINN referencií.",
+  "exclusions_SK": "Toto je archív vlastných výskumných artefaktov, nie úplná kópia súborového systému Perunu. Všetkých 1000 použitých prípadov s pôvodnými vstupmi, kanonickými referenciami a splitmi je zachovaných v novom spoločnom balíku. Celá externá kolekcia FlowBench, nepoužité cache, stiahnuté základné LLM váhy a binárne softvérové prostredia sa nezrkadlia. Nezverejňujú sa prístupové údaje, autentifikačné pomocné súbory ani rozpracovaná dizertácia. Staré surové paralelné/reštartovacie CFD adresáre nie sú úplne zrkadlené; spracované referenčné exporty a diagnostiky sú zahrnuté. Pri čítaní starej reštartovacej metadátovej vetvy sa pozorovalo čakanie na NFS; túto výnimku audit uvádza otvorene. Pôvodné výskumné dáta na Perune neboli zmazané.",
   "source_files_unchanged": true,
   "checks": [
     "Source file SHA256",
@@ -68,5 +76,21 @@
     "GitHub asset SHA256 and size",
     "Complete release asset readback into RAM on Perun",
     "Anonymous HEAD for every recorded public release asset"
-  ]
+  ],
+  "native_LLM_fields": {
+    "logical_models": 155,
+    "unique_arrays": 101,
+    "logical_case_fields": 31000,
+    "cases_per_model": 200,
+    "shape": [
+      200,
+      512,
+      512,
+      3
+    ],
+    "release_url": "https://github.com/Infinitiv525/DP-LLM-comparison/releases/tag/native-llm-test-fields-20261118",
+    "shared_dataset_cases": 1000,
+    "original_metrics_unchanged": true
+  },
+  "generated_native_field_arrays_added": 101
 }

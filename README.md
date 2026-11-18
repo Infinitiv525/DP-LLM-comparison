@@ -1,5 +1,9 @@
 # Porovnanie LLM pri konfigurácii PINN
 
+## Úplné polia všetkých 155 PINN z experimentu s LLM
+
+[Kompletné TEST polia, váhy, vstupy a referencie](01_results/polia_LLM/README.md) sú už doplnené a overené.
+
 ## Úplný prehľad dostupných dát
 
 **[Katalóg výsledkov, váh a numerických polí](01_results/DOSTUPNE_DATA.md)** uvádza všetky publikované balíky, priame odkazy a aj výnimky z archivácie. Veľké súbory sú v Releases a nevyžadujú stiahnutie celého repozitára.
