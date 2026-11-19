@@ -1,0 +1,373 @@
+{
+  "status": "ALL4_TECHNICAL_TRIALS_COMPLETE_MAIN_STARTED",
+  "scope": "Technical two-epoch smoke/integration only, not main accuracy results",
+  "gate": {
+    "status": "LLAMA_ACTUAL_INTEGRATION_PASS",
+    "actual_trainings": 4,
+    "paired_initialization_and_samples_verified": true,
+    "main_training_unchanged": true,
+    "TEST_read": false,
+    "job": "167158",
+    "UTC": 1795081617.145063
+  },
+  "trials": [
+    {
+      "id": "Llama31_8B_r00_c00",
+      "task": {
+        "id": "Llama31_8B_r00_c00",
+        "kind": "search",
+        "method": "Llama31_8B",
+        "run": 0,
+        "candidate": 0,
+        "seed": 320001,
+        "dependencies": []
+      },
+      "status": "COMPLETE",
+      "parameters": {
+        "learning_rate": 0.001,
+        "pressure_weight": 1.0,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup_fraction": 0.03125
+      },
+      "validation": 0.02228318402559943,
+      "training_seconds": 106.21592578408308,
+      "epochs": 2,
+      "case_visit_counts": [
+        2
+      ],
+      "train_cases": 640,
+      "validation_cases": 160,
+      "paired_proof": "qwen3_8b_r00_c00",
+      "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+      "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+      "speed": {
+        "cases": [
+          {
+            "sample": 341,
+            "p50": 2.895359992980957,
+            "p95": 2.9080734968185427,
+            "p99": 2.915363495349884
+          },
+          {
+            "sample": 952,
+            "p50": 2.8946399688720703,
+            "p95": 2.905323255062103,
+            "p99": 2.911524164676666
+          }
+        ],
+        "pass_5ms": true,
+        "fullfield": [
+          512,
+          512
+        ],
+        "warmup": 30,
+        "repeats": 200,
+        "inputs_gpu": true,
+        "includes": "Native geometry pooling,encoder,MLP,spatial interpolation,curl,gauge,mask; no input-dependent cache",
+        "excludes": "Host transfer,rendering,input-independent stencil setup"
+      },
+      "checkpoint_sha256": "1547686e8a4b9fbcbd173bffe73bbe1aa774e9e1e049fa8ef18cf72ce3cfc683",
+      "trial_summary_sha256": "8920d39a6433884d39edda6774e1cc8f464b9cb6724ba56b6816186485174612"
+    },
+    {
+      "id": "Llama31_8B_r00_c01",
+      "task": {
+        "id": "Llama31_8B_r00_c01",
+        "kind": "search",
+        "method": "Llama31_8B",
+        "run": 0,
+        "candidate": 1,
+        "seed": 320001,
+        "dependencies": [
+          "Llama31_8B_r00_c00"
+        ]
+      },
+      "status": "COMPLETE",
+      "parameters": {
+        "learning_rate": 0.001,
+        "pressure_weight": 1.0,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup_fraction": 0.03125
+      },
+      "validation": 0.02228318402559943,
+      "training_seconds": 102.47071535792202,
+      "epochs": 2,
+      "case_visit_counts": [
+        2
+      ],
+      "train_cases": 640,
+      "validation_cases": 160,
+      "paired_proof": "qwen3_8b_r00_c00",
+      "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+      "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+      "speed": {
+        "cases": [
+          {
+            "sample": 341,
+            "p50": 2.88864004611969,
+            "p95": 2.9000176906585695,
+            "p99": 2.9046227836608884
+          },
+          {
+            "sample": 952,
+            "p50": 2.8923040628433228,
+            "p95": 2.903148818016052,
+            "p99": 2.9063785767555235
+          }
+        ],
+        "pass_5ms": true,
+        "fullfield": [
+          512,
+          512
+        ],
+        "warmup": 30,
+        "repeats": 200,
+        "inputs_gpu": true,
+        "includes": "Native geometry pooling,encoder,MLP,spatial interpolation,curl,gauge,mask; no input-dependent cache",
+        "excludes": "Host transfer,rendering,input-independent stencil setup"
+      },
+      "checkpoint_sha256": "1547686e8a4b9fbcbd173bffe73bbe1aa774e9e1e049fa8ef18cf72ce3cfc683",
+      "trial_summary_sha256": "12bfe092c6f013bd4682d0db82ca282d676bee8d7fc9b7d0163b1726cec66ce4",
+      "proposal": {
+        "model": {
+          "label": "Llama31_8B",
+          "repo": "meta-llama/Llama-3.1-8B-Instruct",
+          "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+          "license": "llama3.1",
+          "loader": "causal"
+        },
+        "configuration": {
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "reason": "Current best-performing set of hyperparameters",
+          "evidence_ids": [
+            "Llama31_8B_r00_c00"
+          ],
+          "expected_effect": "Minimizes mean unweighted validation all-cell u/v/p MSE",
+          "risk": "Low risk of overfitting due to large candidate budget"
+        },
+        "load_seconds": 3.834183916915208,
+        "elapsed_seconds": 14.638177271001041,
+        "parameter_count": 8030261248,
+        "peak_torch_allocated_bytes": 16265050624,
+        "peak_sampled_rss_bytes": 15525888000,
+        "peak_sampled_nvml_gpu_bytes": 17041457152,
+        "attempts": [
+          {
+            "repair": 0,
+            "raw_output": "{\n  \"parameters\": {\n    \"learning_rate\": 0.001,\n    \"pressure_weight\": 1.0,\n    \"physics_weight\": 0.001,\n    \"bc_weight\": 0.01,\n    \"warmup_fraction\": 0.03125\n  },\n  \"reason\": \"Current best-performing set of hyperparameters\",\n  \"evidence_ids\": [\"Llama31_8B_r00_c00\"],\n  \"expected_effect\": \"Minimizes mean unweighted validation all-cell u/v/p MSE\",\n  \"risk\": \"Low risk of overfitting due to large candidate budget\"\n}",
+            "parsed": {
+              "parameters": {
+                "learning_rate": 0.001,
+                "pressure_weight": 1.0,
+                "physics_weight": 0.001,
+                "bc_weight": 0.01,
+                "warmup_fraction": 0.03125
+              },
+              "reason": "Current best-performing set of hyperparameters",
+              "evidence_ids": [
+                "Llama31_8B_r00_c00"
+              ],
+              "expected_effect": "Minimizes mean unweighted validation all-cell u/v/p MSE",
+              "risk": "Low risk of overfitting due to large candidate budget"
+            },
+            "errors": [],
+            "transport": "strict_json",
+            "generation_seconds": 8.800521078053862,
+            "first_token_seconds": 2.581547678215429,
+            "input_tokens": 668,
+            "output_tokens": 130
+          }
+        ]
+      }
+    },
+    {
+      "id": "Llama31_8B_r00_c02",
+      "task": {
+        "id": "Llama31_8B_r00_c02",
+        "kind": "search",
+        "method": "Llama31_8B",
+        "run": 0,
+        "candidate": 2,
+        "seed": 320001,
+        "dependencies": [
+          "Llama31_8B_r00_c01"
+        ]
+      },
+      "status": "COMPLETE",
+      "parameters": {
+        "learning_rate": 0.001,
+        "pressure_weight": 2.0,
+        "physics_weight": 0.003,
+        "bc_weight": 0.01,
+        "warmup_fraction": 0.03125
+      },
+      "validation": 0.022720083257825402,
+      "training_seconds": 104.11455671908334,
+      "epochs": 2,
+      "case_visit_counts": [
+        2
+      ],
+      "train_cases": 640,
+      "validation_cases": 160,
+      "paired_proof": "qwen3_8b_r00_c00",
+      "initial_weight_sha256": "47d6e347d5ad34fcb63624ff1041e717cb01510484acac402cfbb2f695ccebe6",
+      "sample_sha256": "34ec5f7f4e175ba733100d2fc037ba007069bba6dab57eb4a56d86f8a5d95968",
+      "speed": {
+        "cases": [
+          {
+            "sample": 341,
+            "p50": 2.8945119380950928,
+            "p95": 2.907430422306061,
+            "p99": 2.913803734779358
+          },
+          {
+            "sample": 952,
+            "p50": 2.893231987953186,
+            "p95": 2.904742443561554,
+            "p99": 2.90666850566864
+          }
+        ],
+        "pass_5ms": true,
+        "fullfield": [
+          512,
+          512
+        ],
+        "warmup": 30,
+        "repeats": 200,
+        "inputs_gpu": true,
+        "includes": "Native geometry pooling,encoder,MLP,spatial interpolation,curl,gauge,mask; no input-dependent cache",
+        "excludes": "Host transfer,rendering,input-independent stencil setup"
+      },
+      "checkpoint_sha256": "c73b59f460c97a68afc470a219b30d19cd0f1630c9fd021409ccaac7830bdbce",
+      "trial_summary_sha256": "a0f3cc46c7d916bda817b9f0629fb9e1af21ccd741b793e6b00d90f28ff596b0",
+      "proposal": {
+        "model": {
+          "label": "Llama31_8B",
+          "repo": "meta-llama/Llama-3.1-8B-Instruct",
+          "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+          "license": "llama3.1",
+          "loader": "causal"
+        },
+        "configuration": {
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.003,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "reason": "Increase pressure weight to prioritize accuracy over stability",
+          "expected_effect": "Improved pressure error reduction",
+          "risk": "Potential increase in divergence or momentum rms",
+          "evidence_ids": [
+            "Llama31_8B_r00_c01"
+          ]
+        },
+        "load_seconds": 2.595511217135936,
+        "elapsed_seconds": 9.974263160023838,
+        "parameter_count": 8030261248,
+        "peak_torch_allocated_bytes": 16302858752,
+        "peak_sampled_rss_bytes": 17007525888,
+        "peak_sampled_nvml_gpu_bytes": 17087594496,
+        "attempts": [
+          {
+            "repair": 0,
+            "raw_output": "{\n    \"parameters\": {\n        \"learning_rate\": 0.001,\n        \"pressure_weight\": 2.0,\n        \"physics_weight\": 0.003,\n        \"bc_weight\": 0.01,\n        \"warmup_fraction\": 0.03125\n    },\n    \"reason\": \"Increase pressure weight to prioritize accuracy over stability\",\n    \"expected_effect\": \"Improved pressure error reduction\",\n    \"risk\": \"Potential increase in divergence or momentum rms\",\n    \"evidence_ids\": [\"Llama31_8B_r00_c01\"]\n}",
+            "parsed": {
+              "parameters": {
+                "learning_rate": 0.001,
+                "pressure_weight": 2.0,
+                "physics_weight": 0.003,
+                "bc_weight": 0.01,
+                "warmup_fraction": 0.03125
+              },
+              "reason": "Increase pressure weight to prioritize accuracy over stability",
+              "expected_effect": "Improved pressure error reduction",
+              "risk": "Potential increase in divergence or momentum rms",
+              "evidence_ids": [
+                "Llama31_8B_r00_c01"
+              ]
+            },
+            "errors": [],
+            "transport": "strict_json",
+            "generation_seconds": 5.3854462071321905,
+            "first_token_seconds": 0.3199704249855131,
+            "input_tokens": 827,
+            "output_tokens": 117
+          }
+        ]
+      }
+    },
+    {
+      "id": "Llama31_8B_r00_k00",
+      "task": {
+        "id": "Llama31_8B_r00_k00",
+        "kind": "retrain",
+        "method": "Llama31_8B",
+        "run": 0,
+        "repeat": 0,
+        "seed": 330001,
+        "dependencies": [
+          "Llama31_8B_r00_c00",
+          "Llama31_8B_r00_c01",
+          "Llama31_8B_r00_c02"
+        ]
+      },
+      "status": "COMPLETE",
+      "parameters": {
+        "learning_rate": 0.001,
+        "pressure_weight": 1.0,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup_fraction": 0.03125
+      },
+      "validation": 0.02223742791330357,
+      "training_seconds": 103.14560663397424,
+      "epochs": 2,
+      "case_visit_counts": [
+        2
+      ],
+      "train_cases": 640,
+      "validation_cases": 160,
+      "paired_proof": "qwen3_8b_r00_k00",
+      "initial_weight_sha256": "ca550c543f7f25f756aaa6254c2a1c2c6eff1f1273f2e051a4519ad9054989eb",
+      "sample_sha256": "d2556c686432c77778cc717f3d2a415dd9924f6de403153fe3648cbf8d6d722d",
+      "speed": {
+        "cases": [
+          {
+            "sample": 341,
+            "p50": 2.8861759901046753,
+            "p95": 2.898476767539978,
+            "p99": 2.9014733695983885
+          },
+          {
+            "sample": 952,
+            "p50": 2.890064001083374,
+            "p95": 2.901279926300049,
+            "p99": 2.905925147533417
+          }
+        ],
+        "pass_5ms": true,
+        "fullfield": [
+          512,
+          512
+        ],
+        "warmup": 30,
+        "repeats": 200,
+        "inputs_gpu": true,
+        "includes": "Native geometry pooling,encoder,MLP,spatial interpolation,curl,gauge,mask; no input-dependent cache",
+        "excludes": "Host transfer,rendering,input-independent stencil setup"
+      },
+      "checkpoint_sha256": "39eb40482edd548eb7e6fd3962b45821d2e9a80b559c12f5d86f2af20d16152d",
+      "trial_summary_sha256": "f2808ee9bd417dcc860a64c588a5834b841326fd6535f1db4d2d38fbaf3e6090"
+    }
+  ]
+}

@@ -64,3 +64,14 @@ Pôvodné výstupné a chybové záznamy jednotlivých úloh Slurm sú v [samost
 - [Rozbor všetkých 240 kandidátov a 140 návrhov LLM](01_results/analyza_navrhov_20261119/README.md)
 
 Doplnenia zachovávajú pôvodné váhy a výsledky. Rozbory pracujú s pôvodnými TRAIN/VAL záznamami alebo so samostatnými diagnostickými kontrolami.
+
+## Plné dodatočné porovnanie Llamy
+
+Built with Llama. **Llama‑3.1‑8B‑Instruct** (pridaná 19. 11. 2026): technická kontrola prešla4/4 a bolo spustené hlavné porovnanie40+25 tréningov s rovnakým protokolom a najviac8GPU súčasne. Pôvodné výsledky štyroch rodín zostávajú zachované; nová kohorta má skutočné vlastné dátumy.
+
+- [Protokol, rozsah a chronológia](03_methodology/Llama_extension_20261119/protokol_Llama.txt)
+- [Výsledok technickej kontroly](01_results/Llama_extension_20261119/overenie_pilota.json)
+- [Dátovaný stav pri spustení](01_results/Llama_extension_20261119/stav_pri_spusteni.json)
+- [Zdrojové kódy rozšírenia](04_source/Llama_extension_20261119)
+
+Nové hlavné výsledky a TEST hodnotenie budú doplnené po skončení a zmrazení všetkých25 finálnych modelov. Váhy Meta sa tu nešíria; ich presná verzia a hashy sú v metodike.
