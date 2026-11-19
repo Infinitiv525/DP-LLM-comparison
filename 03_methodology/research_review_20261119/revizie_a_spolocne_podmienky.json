@@ -1,0 +1,125 @@
+{
+  "models": [
+    {
+      "label": "qwen3_8b",
+      "repo": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "license": "apache-2.0",
+      "loader": "causal",
+      "disable_thinking": true
+    },
+    {
+      "label": "ministral3_8b",
+      "repo": "mistralai/Ministral-3-8B-Instruct-2512",
+      "revision": "5b26027e7b19eeb4b7352e1fed3926375dd2cb4d",
+      "license": "apache-2.0",
+      "loader": "mistral3_dequantize_fp8"
+    },
+    {
+      "label": "phi4_mini",
+      "repo": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "license": "mit",
+      "loader": "causal"
+    },
+    {
+      "label": "granite33_8b",
+      "repo": "ibm-granite/granite-3.3-8b-instruct",
+      "revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+      "license": "apache-2.0",
+      "loader": "causal",
+      "disable_thinking": true
+    }
+  ],
+  "llm_runtime": {
+    "torch": "2.12.0+cu130",
+    "transformers": "5.20.2",
+    "accelerate": "1.15.0",
+    "huggingface_hub": "2.2.0",
+    "mistral-common": "1.12.0",
+    "optuna": "5.0.0",
+    "lm-format-enforcer": "0.11.3",
+    "interegular": "0.3.3"
+  },
+  "generation": {
+    "max_input_tokens": 8192,
+    "max_new_tokens": 512,
+    "max_time_seconds": 120,
+    "max_repairs": 1,
+    "do_sample": true,
+    "temperature": 0.6,
+    "top_p": 0.9,
+    "top_k": 40,
+    "repetition_penalty": 1.1,
+    "seed_policy": "120001+100*run+candidate for main;350001+candidate for integration"
+  },
+  "search_space": {
+    "learning_rate": {
+      "min": 0.0001,
+      "max": 0.002,
+      "log": true
+    },
+    "categories": {
+      "pressure_weight": [
+        0.5,
+        1.0,
+        2.0
+      ],
+      "physics_weight": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01
+      ],
+      "bc_weight": [
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1
+      ],
+      "warmup_fraction": [
+        0.0,
+        0.03125,
+        0.0625
+      ]
+    }
+  },
+  "baseline_parameters": {
+    "learning_rate": 0.001,
+    "pressure_weight": 1.0,
+    "physics_weight": 0.001,
+    "bc_weight": 0.01,
+    "warmup_fraction": 0.03125
+  },
+  "design": "Main:6methods x5independent searches x(8candidates+5fresh retrains) +5fixed baseline=395planned trainings. Candidate0 is the same baseline, freshly executed/charged for each method/search;7adaptive proposals. No pilot checkpoints or technical scores transferred.",
+  "seeds": {
+    "search_training": [
+      140001,
+      140002,
+      140003,
+      140004,
+      140005
+    ],
+    "final_training": [
+      150001,
+      150002,
+      150003,
+      150004,
+      150005
+    ],
+    "search_sampler": [
+      130001,
+      130002,
+      130003,
+      130004,
+      130005
+    ],
+    "llm_generation": "120001+100*run+candidate; same across families",
+    "integration": "search320001,final330001,sampler340001,generation350001+candidate"
+  },
+  "model_policy": "Pinned local checkpoints with full compute-node SHA checks before use; no network/API. Qwen/Granite thinking disabled. Ministral published FP8 is dequantized to BF16; not recovered original BF16. Public brief explanation is logged, not a hidden reasoning trace.",
+  "protocol_sha256": "454131bd73dca9b86ced7d2ef0d057072a7ed7a2f3fa4df596e4f382feb117cc",
+  "scope": "Selection/provenance audit of original four models; Llama later approved as additive full comparison"
+}

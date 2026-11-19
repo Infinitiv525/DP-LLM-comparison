@@ -1,0 +1,26 @@
+PREČO SME VYBRALI TIETO ŠTYRI LOKÁLNE LLM
+Kontrola k 19. 11. 2026; pôvodný uzavretý experiment sa nemení. Tieto štyri modely patria do pôvodného experimentu. Llama bola neskôr používateľom schválená ako dodatočné plné porovnanie s rovnakými pravidlami; záznamy a dátumy zostávajú oddelené.
+
+Úloha LLM bola navrhovať päť parametrov učenia spoločného PINN z histórie TRAIN/VAL výsledkov. Váhy LLM sa nemenili, LLM nesimulovalo prúdenie a nedostávalo TEST. Porovnávame konkrétne konfigurátory, nie všeobecnú inteligenciu rodín modelov.
+
+Výber vychádzal z predexperimentového návrhu NAVRH_MODELOV_A_OPAKOVANI.txt a technických skúšok: lokálne dostupné váhy, bez plateného API, možnosť opakovateľného nasadenia na Perune, prijateľná veľkosť a odlišné modelové rodiny. Bola to zámerná praktická vzorka, nie náhodná vzorka trhu, zoznam všetkých súčasných modelov ani výber podľa neskoršieho skóre. Nebolo vytvorené predbežné numerické skórovanie kvality, preto ho spätne nevymýšľame.
+
+Qwen3-8B (Qwen, Apache-2.0): približne 8B model; samostatná dostupná rodina s možnosťou vypnúť thinking. V experimente bolo thinking vypnuté. Vybrali sme ho ako jeden z porovnateľne veľkých lokálnych textových konfigurátorov, nie preto, že by jeho model card garantoval návrh fyzikálnych sietí.
+https://huggingface.co/Qwen/Qwen3-8B
+
+Ministral-3-8B-Instruct-2512 (Mistral AI, Apache-2.0): inštrukčne ladená odlišná rodina, v karte 8.4B jazyková časť a 0.4B obrazový encoder. Používali sme iba text. Publikovaný checkpoint je FP8; náš loader ho dekvantoval do BF16. Tým sa neobnovia pôvodné informácie pred kvantovaním, takže presnosť formátu je priznaný rozdiel medzi konfigurátormi.
+https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512
+
+Phi-4-mini-instruct (Microsoft, MIT): približne 3.8B parametrov; menší lokálny inštrukčný model ako skúška úspornejšieho konfigurátora. Nie je veľkostne dorovnaný na 8B, takže rozdiel výsledku nemožno pripísať výlučne modelovej rodine. Veľkosť aj pamäť/čas sa uvádzajú ako súčasť konfigurátora.
+https://huggingface.co/microsoft/Phi-4-mini-instruct
+
+Granite-3.3-8B-instruct (IBM, Apache-2.0): ďalšia nezávislá dostupná 8B rodina s inštrukčným rozhraním a lokálnym prevádzkovaním. Thinking bolo vypnuté. Dôvodom je rozšírenie porovnania rodín pri podobnej veľkostnej triede; nie marketingové tvrdenie karty o vhodnosti na našu úlohu.
+https://huggingface.co/ibm-granite/granite-3.3-8b-instruct
+
+Presné repozitáre, revízie a loader sú uložené v revizie_a_spolocne_podmienky.json a v pôvodnom protokole; porovnanie sa netýka neurčitej najnovšej verzie týchto názvov. Ide o bezplatne dostupné modelové váhy s konkrétnymi licenciami; „zadarmo“ neznamená bez licenčných podmienok.
+
+Spoločné podmienky: rovnaký text zadania a schéma, rovnakých päť nastavovaných parametrov a priestor hodnôt, rovnaký pevný úvodný kandidát, päť hľadaní po osem kandidátov, sedem adaptívnych návrhov v každom hľadaní, 400 epoch kandidátskeho PINN a párované semená. Každý nový návrh viedol k novému tréningu, aj keď sa konfigurácia opakovala. Rozpočet je rovnaký v počte príležitostí; skutočný čas, pamäť a tokeny sa merali. Nie je to porovnanie pri presne rovnakých jouloch, FLOPs alebo počte parametrov.
+
+Generovanie bolo stochastické: temperature .6, top_p .9, top_k 40, repetition_penalty 1.1, najviac 8192 vstupných a 512 nových tokenov, jedna povolená oprava, JSON obmedzenie. Spoločné nastavenie zjednodušuje porovnanie, ale nie je individuálne optimalizovaným odporúčaným nastavením každého výrobcu. Závery preto platia pre túto úlohu, tento prompt a tieto konkrétne runtime/generačné nastavenia.
+
+Random a TPE kontrolujú, či sa cena LLM vyplatí oproti bezjazykovému hľadaniu. Pevný štart odlišuje prínos adaptácie od už dobrej pôvodnej konfigurácie. Zdôvodnenia LLM sú uložené ako jeho deklarované dôvody, nie ako dôkaz skrytého vnútorného uvažovania. História aj evidence_ids boli skontrolované v osobitnej analýze; príčinný účinok histórie by vyžadoval novú abláciu bez spätnej väzby, ktorá sa tu nevykonáva.

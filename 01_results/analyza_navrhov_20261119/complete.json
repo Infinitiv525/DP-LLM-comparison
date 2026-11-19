@@ -1,0 +1,392 @@
+{
+  "status": "ALL_240_SEARCH_TRIALS_AND_140_LLM_PROPOSALS_AUDITED",
+  "methods": [
+    {
+      "method": "qwen3_8b",
+      "search_runs": 5,
+      "candidate_trainings": 40,
+      "adaptive_proposals": 35,
+      "mean_unique_exact_per_run": 3.4,
+      "mean_unique_LR_binned_per_run": 3.4,
+      "mean_pairwise_scaled_parameter_distance": 0.1287872292790964,
+      "runs_won_by_fixed_start": 5,
+      "runs_without_adaptive_improvement_above_tolerance": 5,
+      "mean_best_validation_MSE": 0.00042245094158254213,
+      "mean_relative_improvement_over_start": 0.0,
+      "repeated_earlier": 23,
+      "improved_latest": 10,
+      "improved_best": 0,
+      "last_worse_than_best": 30,
+      "returned_to_best_when_last_worse": 0,
+      "proposal_process_wall_seconds": 1910.8753371322236,
+      "training_seconds": 544128.5139678667,
+      "generation_seconds": 1417.3898063302622,
+      "input_tokens": 54485,
+      "output_tokens": 4998,
+      "repairs": 0,
+      "peak_sampled_GPU_bytes": 17800626176,
+      "distinct_declared_reasons": 24,
+      "parameter_frequencies": {
+        "learning_rate": {
+          "0.001": 35
+        },
+        "pressure_weight": {
+          "1.0": 25,
+          "2.0": 10
+        },
+        "physics_weight": {
+          "0.003": 35
+        },
+        "bc_weight": {
+          "0.03": 28,
+          "0.01": 7
+        },
+        "warmup_fraction": {
+          "0.03125": 35
+        }
+      }
+    },
+    {
+      "method": "ministral3_8b",
+      "search_runs": 5,
+      "candidate_trainings": 40,
+      "adaptive_proposals": 35,
+      "mean_unique_exact_per_run": 8,
+      "mean_unique_LR_binned_per_run": 8,
+      "mean_pairwise_scaled_parameter_distance": 0.38189542766911855,
+      "runs_won_by_fixed_start": 1,
+      "runs_without_adaptive_improvement_above_tolerance": 1,
+      "mean_best_validation_MSE": 0.0004050783574688719,
+      "mean_relative_improvement_over_start": 0.04136521883204987,
+      "repeated_earlier": 0,
+      "improved_latest": 16,
+      "improved_best": 5,
+      "last_worse_than_best": 26,
+      "returned_to_best_when_last_worse": 0,
+      "proposal_process_wall_seconds": 2192.6314011737995,
+      "training_seconds": 549096.2677343341,
+      "generation_seconds": 1723.9365998973954,
+      "input_tokens": 56147,
+      "output_tokens": 6144,
+      "repairs": 0,
+      "peak_sampled_GPU_bytes": 20935868416,
+      "distinct_declared_reasons": 35,
+      "parameter_frequencies": {
+        "learning_rate": {
+          "0.0005": 7,
+          "0.0008": 18,
+          "0.0003": 5,
+          "0.001": 5
+        },
+        "pressure_weight": {
+          "0.5": 21,
+          "1.0": 8,
+          "2.0": 6
+        },
+        "physics_weight": {
+          "0.003": 13,
+          "0.0003": 10,
+          "0.01": 4,
+          "0.0001": 3,
+          "0.001": 5
+        },
+        "bc_weight": {
+          "0.03": 7,
+          "0.003": 13,
+          "0.001": 11,
+          "0.01": 4
+        },
+        "warmup_fraction": {
+          "0.0625": 9,
+          "0.03125": 22,
+          "0.0": 4
+        }
+      }
+    },
+    {
+      "method": "phi4_mini",
+      "search_runs": 5,
+      "candidate_trainings": 40,
+      "adaptive_proposals": 35,
+      "mean_unique_exact_per_run": 1,
+      "mean_unique_LR_binned_per_run": 1,
+      "mean_pairwise_scaled_parameter_distance": 0.0,
+      "runs_won_by_fixed_start": 2,
+      "runs_without_adaptive_improvement_above_tolerance": 5,
+      "mean_best_validation_MSE": 0.00042245094145461706,
+      "mean_relative_improvement_over_start": 1.3994712052050757e-10,
+      "repeated_earlier": 35,
+      "improved_latest": 0,
+      "improved_best": 0,
+      "last_worse_than_best": 12,
+      "returned_to_best_when_last_worse": 12,
+      "proposal_process_wall_seconds": 1689.2385840654897,
+      "training_seconds": 552732.7074261022,
+      "generation_seconds": 1236.4988361552241,
+      "input_tokens": 38879,
+      "output_tokens": 4328,
+      "repairs": 0,
+      "peak_sampled_GPU_bytes": 8835301376,
+      "distinct_declared_reasons": 34,
+      "parameter_frequencies": {
+        "learning_rate": {
+          "0.001": 35
+        },
+        "pressure_weight": {
+          "1.0": 35
+        },
+        "physics_weight": {
+          "0.001": 35
+        },
+        "bc_weight": {
+          "0.01": 35
+        },
+        "warmup_fraction": {
+          "0.03125": 35
+        }
+      }
+    },
+    {
+      "method": "granite33_8b",
+      "search_runs": 5,
+      "candidate_trainings": 40,
+      "adaptive_proposals": 35,
+      "mean_unique_exact_per_run": 1,
+      "mean_unique_LR_binned_per_run": 1,
+      "mean_pairwise_scaled_parameter_distance": 0.0,
+      "runs_won_by_fixed_start": 2,
+      "runs_without_adaptive_improvement_above_tolerance": 5,
+      "mean_best_validation_MSE": 0.0004224509414920384,
+      "mean_relative_improvement_over_start": 1.468498284969269e-11,
+      "repeated_earlier": 35,
+      "improved_latest": 0,
+      "improved_best": 0,
+      "last_worse_than_best": 6,
+      "returned_to_best_when_last_worse": 6,
+      "proposal_process_wall_seconds": 1997.8988664231729,
+      "training_seconds": 552211.7677477512,
+      "generation_seconds": 1552.3729687379673,
+      "input_tokens": 57460,
+      "output_tokens": 5600,
+      "repairs": 0,
+      "peak_sampled_GPU_bytes": 17926455296,
+      "distinct_declared_reasons": 35,
+      "parameter_frequencies": {
+        "learning_rate": {
+          "0.001": 35
+        },
+        "pressure_weight": {
+          "1.0": 35
+        },
+        "physics_weight": {
+          "0.001": 35
+        },
+        "bc_weight": {
+          "0.01": 35
+        },
+        "warmup_fraction": {
+          "0.03125": 35
+        }
+      }
+    },
+    {
+      "method": "random",
+      "search_runs": 5,
+      "candidate_trainings": 40,
+      "adaptive_proposals": 35,
+      "mean_unique_exact_per_run": 8,
+      "mean_unique_LR_binned_per_run": 8,
+      "mean_pairwise_scaled_parameter_distance": 0.4790365422705516,
+      "runs_won_by_fixed_start": 0,
+      "runs_without_adaptive_improvement_above_tolerance": 0,
+      "mean_best_validation_MSE": 0.0003833435829340756,
+      "mean_relative_improvement_over_start": 0.09308511603122704,
+      "repeated_earlier": 0,
+      "improved_latest": 19,
+      "improved_best": 6,
+      "last_worse_than_best": 25,
+      "returned_to_best_when_last_worse": 0,
+      "proposal_process_wall_seconds": 0.0,
+      "training_seconds": 539494.979116769,
+      "generation_seconds": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "repairs": null,
+      "peak_sampled_GPU_bytes": null,
+      "distinct_declared_reasons": null,
+      "parameter_frequencies": {
+        "learning_rate": {
+          "0.0010181402425957083": 1,
+          "0.0002305600107875106": 1,
+          "0.0009003871842100956": 1,
+          "0.00118186403444796": 1,
+          "0.0007134630202867075": 1,
+          "0.00019592095761554253": 1,
+          "0.0001707184796823": 1,
+          "0.00030015825109402667": 1,
+          "0.0009602044363133795": 1,
+          "0.0008800912580432467": 1,
+          "0.0001734631690119212": 1,
+          "0.0012843896633700485": 1,
+          "0.0015074648927464699": 1,
+          "0.0008314076915208392": 1,
+          "0.00016620960276038794": 1,
+          "0.0004546995424873748": 1,
+          "0.00010576291585737144": 1,
+          "0.0019331601185091883": 1,
+          "0.0011679070428875287": 1,
+          "0.0004983507624367004": 1,
+          "0.0011823711630090975": 1,
+          "0.00017644544536513158": 1,
+          "0.0012983083665791928": 1,
+          "0.0011498130878311549": 1,
+          "0.0011085769374776678": 1,
+          "0.00014049152105299897": 1,
+          "0.0003647702379366001": 1,
+          "0.0005725013324307694": 1,
+          "0.0002133040032755207": 1,
+          "0.0005956078122544908": 1,
+          "0.0009946954219416566": 1,
+          "0.0011240019232415148": 1,
+          "0.0002004264556144195": 1,
+          "0.001163353501274807": 1,
+          "0.00011814842327384772": 1
+        },
+        "pressure_weight": {
+          "0.5": 15,
+          "2.0": 11,
+          "1.0": 9
+        },
+        "physics_weight": {
+          "0.0003": 5,
+          "0.01": 10,
+          "0.001": 6,
+          "0.0001": 8,
+          "0.003": 6
+        },
+        "bc_weight": {
+          "0.001": 5,
+          "0.003": 9,
+          "0.03": 9,
+          "0.01": 9,
+          "0.1": 3
+        },
+        "warmup_fraction": {
+          "0.0625": 15,
+          "0.03125": 12,
+          "0.0": 8
+        }
+      }
+    },
+    {
+      "method": "tpe",
+      "search_runs": 5,
+      "candidate_trainings": 40,
+      "adaptive_proposals": 35,
+      "mean_unique_exact_per_run": 8,
+      "mean_unique_LR_binned_per_run": 8,
+      "mean_pairwise_scaled_parameter_distance": 0.419757416461196,
+      "runs_won_by_fixed_start": 0,
+      "runs_without_adaptive_improvement_above_tolerance": 0,
+      "mean_best_validation_MSE": 0.00034720984118968525,
+      "mean_relative_improvement_over_start": 0.17849957652088136,
+      "repeated_earlier": 0,
+      "improved_latest": 15,
+      "improved_best": 8,
+      "last_worse_than_best": 23,
+      "returned_to_best_when_last_worse": 0,
+      "proposal_process_wall_seconds": 0.0,
+      "training_seconds": 550076.5116785023,
+      "generation_seconds": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "repairs": null,
+      "peak_sampled_GPU_bytes": null,
+      "distinct_declared_reasons": null,
+      "parameter_frequencies": {
+        "learning_rate": {
+          "0.0005292924096526126": 1,
+          "0.0009010579231843179": 1,
+          "0.00012055487182276937": 1,
+          "0.0016672359745577054": 1,
+          "0.00019014238539197546": 1,
+          "0.00030804267817600934": 1,
+          "0.0012137198403250726": 1,
+          "0.0007340995664662858": 1,
+          "0.0009252206020388773": 1,
+          "0.00012113614000244857": 1,
+          "0.00010645390394941618": 1,
+          "0.00023251805534266594": 1,
+          "0.0015605828995544845": 1,
+          "0.0019036265456226877": 1,
+          "0.0003199780763639874": 1,
+          "0.0018467211198279637": 1,
+          "0.00010420567388542538": 1,
+          "0.0014988925140331172": 1,
+          "0.0003076485319383138": 1,
+          "0.001989162962958365": 1,
+          "0.00035050255053774705": 1,
+          "0.0003979233829322789": 1,
+          "0.0018833010299522392": 1,
+          "0.001879772097725748": 1,
+          "0.0001245846032551539": 1,
+          "0.0010452174815462861": 1,
+          "0.0010057239267437477": 1,
+          "0.0003569223807767008": 1,
+          "0.000249157511758586": 1,
+          "0.0014289191957120276": 1,
+          "0.0018287851158066857": 1,
+          "0.00027746289384284915": 1,
+          "0.0005869224296885853": 1,
+          "0.00010135724943657532": 1,
+          "0.0019305849761515263": 1
+        },
+        "pressure_weight": {
+          "1.0": 16,
+          "2.0": 13,
+          "0.5": 6
+        },
+        "physics_weight": {
+          "0.001": 13,
+          "0.003": 8,
+          "0.0001": 6,
+          "0.01": 2,
+          "0.0003": 6
+        },
+        "bc_weight": {
+          "0.003": 4,
+          "0.01": 15,
+          "0.1": 7,
+          "0.001": 8,
+          "0.03": 1
+        },
+        "warmup_fraction": {
+          "0.03125": 16,
+          "0.0625": 10,
+          "0.0": 9
+        }
+      }
+    }
+  ],
+  "training_targets_read": false,
+  "TEST_targets_or_TEST_scores_read": false,
+  "new_training": false,
+  "new_LLM_calls": false,
+  "limits": [
+    "Descriptive analysis after the primary experiment; no changed selections or hypotheses.",
+    "Five search runs per method; proposals within a run are dependent.",
+    "Evidence ID is grammar constrained and history presence is verified; neither establishes causal use of feedback or internal reasoning.",
+    "Exact duplicates depend partly on numerical precision of continuous LR proposals; five log-LR bins and scaled distances are also reported.",
+    "Process wall seconds are measured process costs, not the full Slurm billed allocation.",
+    "No-feedback counterfactual was not run; benefits specifically caused by feedback cannot be isolated."
+  ],
+  "learning_rate_log_bin_edges": [
+    0.0001,
+    0.00018205642030260803,
+    0.00033144540173399875,
+    0.0006034176336545163,
+    0.001098560543306118,
+    0.002
+  ],
+  "improvement_numerical_tolerance_absolute_MSE": 1e-12
+}

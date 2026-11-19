@@ -57,3 +57,10 @@ Doplnené pôvodné diagnostiky, protokoly, obrázky a zdroje sú v [samostatnom
 ## Pôvodné Slurm logy
 
 Pôvodné výstupné a chybové záznamy jednotlivých úloh Slurm sú v [samostatnom balíku](01_results/slurm_logy/README.md); zahŕňajú aj prípravné a neúspešné pokusy.
+
+## Doplnenia z 19. novembra 2026
+
+- [Prečo tieto štyri LLM](03_methodology/research_review_20261119/preco_tieto_LLM.txt)
+- [Rozbor všetkých 240 kandidátov a 140 návrhov LLM](01_results/analyza_navrhov_20261119/README.md)
+
+Doplnenia zachovávajú pôvodné váhy a výsledky. Rozbory pracujú s pôvodnými TRAIN/VAL záznamami alebo so samostatnými diagnostickými kontrolami.
