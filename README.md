@@ -96,3 +96,7 @@ Ukladajú sa aj všetky5000predikované celé polia priamo naPerune. Výsledkov�
 - [Všetkých5000nových výsledkov po prípadoch](01_results/Llama_final_test_20261123/case_metrics.csv)
 
 Pôvodné kontrasty sa nemenia. Llama zostáva označená ako dodatočná kohorta; párové porovnania s ďalšímiLLM sú explicitne posthoc a exploratívne.
+
+## Kompletný verejný archív Llamy
+
+**Všetkých65tréningov,25finálnych modelov a5000celých TEST polí je verejne zachovaných.** [Zrozumiteľný katalóg a odkazy](01_results/Llama_final_test_20261123/ARCHIV.md). Iba SHA256-identické polia zdieľajú súbor; modelové identity a všetky váhy zostávajú samostatné. Priamy prenos Perun→GitHub, bez kopírovania doPC.
