@@ -1,0 +1,62 @@
+{
+  "status": "POSTHOC_LLAMA_VS_OTHER_FOUR_LLMS",
+  "at_UTC": "2026-11-23T16:34:24.823532+00:00",
+  "analysis_was_specified_after_TEST": true,
+  "scope": "Exploratory comparisons derived from existing paired crossed-bootstrap draws, no new inference/training, no changes to original predeclared contrasts",
+  "multiplicity": "Four new pairwise contrasts, Bonferroni98.75%intervals; approximate bootstrap coverage with five searches",
+  "source_draws_sha256": "e584a266569da6a03aa2575bd3226fdeed0a12c701a17259a239e331cf16747f",
+  "comparisons": [
+    {
+      "method": "Llama31_8B",
+      "other": "qwen3_8b",
+      "delta_test_MSE": 3.887255101142628e-14,
+      "relative_delta_percent": 1.3206060645554738e-08,
+      "posthoc_family_interval_percent": 98.75,
+      "interval": [
+        -1.0089938900939651e-13,
+        1.5512904342714947e-13
+      ],
+      "interval_excludes_zero": false,
+      "numerical_scale_note": "Differences around1e-14MSE between identical selected configurations are computational roundoff, not a substantive performance gain"
+    },
+    {
+      "method": "Llama31_8B",
+      "other": "ministral3_8b",
+      "delta_test_MSE": 9.661681623633243e-06,
+      "relative_delta_percent": 3.3937290544444005,
+      "posthoc_family_interval_percent": 98.75,
+      "interval": [
+        -2.7477939755015897e-06,
+        2.732842405205738e-05
+      ],
+      "interval_excludes_zero": false,
+      "numerical_scale_note": "Descriptive mean ranking needs its paired uncertainty interval"
+    },
+    {
+      "method": "Llama31_8B",
+      "other": "phi4_mini",
+      "delta_test_MSE": 3.802844541003769e-14,
+      "relative_delta_percent": 1.2919295062268123e-08,
+      "posthoc_family_interval_percent": 98.75,
+      "interval": [
+        -1.0075177081785447e-13,
+        1.5364404152705583e-13
+      ],
+      "interval_excludes_zero": false,
+      "numerical_scale_note": "Differences around1e-14MSE between identical selected configurations are computational roundoff, not a substantive performance gain"
+    },
+    {
+      "method": "Llama31_8B",
+      "other": "granite33_8b",
+      "delta_test_MSE": 3.803473378263811e-14,
+      "relative_delta_percent": 1.2921431393117853e-08,
+      "posthoc_family_interval_percent": 98.75,
+      "interval": [
+        -9.908901397158182e-14,
+        1.5677414302460374e-13
+      ],
+      "interval_excludes_zero": false,
+      "numerical_scale_note": "Differences around1e-14MSE between identical selected configurations are computational roundoff, not a substantive performance gain"
+    }
+  ]
+}

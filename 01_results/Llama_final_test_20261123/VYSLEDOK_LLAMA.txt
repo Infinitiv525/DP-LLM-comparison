@@ -1,0 +1,29 @@
+VÝSLEDOK PLNÉHO POROVNANIA LLAMY
+
+Všetkých25 finálnych modelov a5000 dvojíc model/prípad bolo úspešne vyhodnotených.5000/5000 zaznamenaných natívnych polí prešlo samostatnou CPU kontrolou proti referenčným metrikám.65 hlavných tréningov bolo kompletných, každý400epoch cez640TRAIN prípadov.
+
+Llama dosiahla prakticky rovnakú MSE ako Qwen/Phi/Granite. Ministral má opisne najnižšiu priemernú MSE spomedzi LLM (o3.2823%nižšiu než Llama), ale párový interval Llama−Ministral zahŕňa nulu. V tomto experimente sme teda nepreukázali rozdiel Llamy oproti ostatným LLM. Nejde o formálny dôkaz štatistickej ekvivalencie.
+
+Konfigurátor | TEST MSE | relatívna L2 chyba rýchlosti [%] | relatívna L2 chyba tlaku [%] | najhoršie per-case p99 PINN [ms] | modelov pod5ms
+Ministral3 8B | 0.000284692191646 | 2.43214 | 8.36612 | 2.91919 | 25/25
+Llama3.1 8B | 0.00029435387327 | 2.40665 | 8.60098 | 3.96415 | 25/25
+Qwen3 8B | 0.000294353873231 | 2.40665 | 8.60098 | 3.01577 | 25/25
+Phi4 mini | 0.000294353873232 | 2.40665 | 8.60098 | 2.9457 | 25/25
+Granite3.3 8B | 0.000294353873232 | 2.40665 | 8.60098 | 2.91719 | 25/25
+Nahodne hladanie | 0.000263917315259 | 2.23146 | 8.40885 | 2.96039 | 25/25
+TPE | 0.00024307851225 | 2.45956 | 7.97617 | 2.9195 | 25/25
+Pevna konfiguracia | 0.000294353873229 | 2.40665 | 8.60098 | 2.91624 | 5/5
+
+Čím nižšia MSE, tým lepšie. Päť finálnych semien sa priemeruje v každom z5nezávislých hľadaní. Nesmie sa tvrdiť25nezávislých hľadaní.
+
+Dodatočný párový interval Llama−Ministral (98.75%, Bonferroni pre4porovnania Llamy s ostatnými LLM): [-2.7477939755e-06, 2.73284240521e-05]. Aj ostatné tri intervaly zahŕňajú nulu; ich rozdiely sú navyše len na úrovni numerického zaokrúhlenia. Tieto štyri porovnania boli zvolené po TESTe, preto sú explicitne exploratívne a nemenia pôvodné preddefinované kontrasty.
+
+Vo všetkých5hľadaniach bola nakoniec vybraná rovnaká konfigurácia ako pevný štart: learning_rate=.001, pressure_weight=1, physics_weight=.001, bc_weight=.01, warmup_fraction=.03125. V jednom hľadaní vyhralo opakovanie tej istej konfigurácie pri nepatrne odlišnom skóre; nejde o vecné zlepšenie nastavenia.35adaptívnych návrhov Llamy bolo platných bez opravy. Výsledok teda nevznikol náhradným nastavením po zlyhaní konfigurátora.
+
+Llama nezlepšila presnosť pevného baseline. Proti TPE mala o21.0942%vyššiu MSE; samostatný95%interval aj99%interval v dodatočnej rodine piatich LLM sú v prospech TPE. Pôvodné štyri98.75%intervaly zostávajú bez zmeny a pôvodné bootstrap stĺpce sa reprodukovali presne.
+
+Všetkých25 modelov Llamy spĺňa limit5ms na každom z200TEST prípadov; najhoršie per-case p99 je3.964146ms. Je to čas celej predikcie PINN so vstupmi naGPU, nie čas generovania návrhu LLM. Rozdiel maxima p99 oproti starším rodinám nevykladáme ako efekt LLM rodiny: merania boli v odlišných dátumoch a vybrané architektúry sú rovnaké.
+
+Obmedzenia: Llama bola pridaná po znalosti pôvodného TEST; skutočné dátumy sa zachovávajú. Len5nezávislých hľadaní a približné crossed-bootstrap pokrytie. Ide o známe geometrie, ustálené polia a konkrétny spoločný prompt/rozpočet. Nevyvodzujeme, že LLM všeobecne nemôžu pomôcť.
+
+Presné čísla: combined_report/summary.json. Dodatočné porovnania: completion/pairwise_Llama_posthoc.json. Čísla po každom z5000nových prípadov: report/case_metrics.csv. Celé polia aj modely sú naPerune; doPC sa nesťahovali.

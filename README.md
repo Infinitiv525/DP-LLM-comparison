@@ -85,3 +85,14 @@ Všetkých **65 tréningov Llamy je dokončených a overených**: každý400epoc
 - [Kontrola4GPU pred otvorením TEST](01_results/Llama_final_test_20261123/GPU_validation_preflight.json)
 
 Ukladajú sa aj všetky5000predikované celé polia priamo naPerune. Výsledkové tabuľky a archív pribudnú po dokončení a kontrole TESTu; pôvodné štyri porovnania zostávajú zachované.
+
+## Výsledok Llamy — TEST dokončený
+
+**TEST prešiel25/25modelov, všetkých5000uložených polí bolo nezávisle skontrolovaných.** Llama je v presnosti prakticky zhodná sQwen/Phi/Granite. Ministral má opisne o3.28%nižšiu MSE, ale dodatočný párový interval rozdielu zahŕňa nulu. Llama teda nepreukázala zlepšenie oproti ostatnýmLLM ani pevnej konfigurácii. TPE má otestovanú nižšiu MSE (Llama+21.09%); všetkyLlamaPINN spĺňajú per-case p99≤5ms.
+
+- [Ľudsky čitateľný výsledok a obmedzenia](01_results/Llama_final_test_20261123/VYSLEDOK_LLAMA.txt)
+- [Spoločné presné výsledky všetkých metód](01_results/Llama_final_test_20261123/combined_summary.json)
+- [Doplnkové párové porovnania Llamy s ostatnýmiLLM](01_results/Llama_final_test_20261123/pairwise_Llama_posthoc.json)
+- [Všetkých5000nových výsledkov po prípadoch](01_results/Llama_final_test_20261123/case_metrics.csv)
+
+Pôvodné kontrasty sa nemenia. Llama zostáva označená ako dodatočná kohorta; párové porovnania s ďalšímiLLM sú explicitne posthoc a exploratívne.
