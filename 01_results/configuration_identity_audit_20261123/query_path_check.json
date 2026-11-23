@@ -1,0 +1,8 @@
+{
+  "query_source": "def query(model,known,qgrid):\n    context=conditioning(model,known)\n    return project_known_constraints(model.grid_prediction(qgrid,context),known['fluid'])",
+  "query_file": "/mnt/project/perun2601449/dp_llm_cfd/test/training/ldc_store_v26.py",
+  "query_file_sha256": "c8eacb212a82959778390f3c3e6550773daaa29ae6383d19172023707755dc4e",
+  "model_source_file": "/mnt/project/perun2601449/dp_llm_cfd/test/training/ldc_shared_pinn_v26.py",
+  "model_file_sha256": "18120b2eb54910877589ef8edd54bc38ef8511bab7858c185181d46722e5da07",
+  "conclusion": "query uses its supplied model argument, recomputes geometry conditioning and full native prediction; coordinate interpolation matrices are an instance-local geometric cache, not cached predictions or weights"
+}

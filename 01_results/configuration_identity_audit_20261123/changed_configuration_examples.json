@@ -1,0 +1,41 @@
+[
+  {
+    "id": "qwen3_8b_r00_c01",
+    "parameters": {
+      "learning_rate": 0.001,
+      "pressure_weight": 1.0,
+      "physics_weight": 0.003,
+      "bc_weight": 0.03,
+      "warmup_fraction": 0.03125
+    },
+    "VAL_MSE": 0.00045195195413495515,
+    "fixed_start_VAL_MSE": 0.0004193983479775074,
+    "relative_VAL_worsening_percent": 7.761977679319232
+  },
+  {
+    "id": "Llama31_8B_r00_c01",
+    "parameters": {
+      "learning_rate": 0.0005,
+      "pressure_weight": 2.0,
+      "physics_weight": 0.0003,
+      "bc_weight": 0.003,
+      "warmup_fraction": 0.03125
+    },
+    "VAL_MSE": 0.000497472627783936,
+    "fixed_start_VAL_MSE": 0.000419398347574033,
+    "relative_VAL_worsening_percent": 18.615781550288823
+  },
+  {
+    "id": "ministral3_8b_r00_c04",
+    "parameters": {
+      "learning_rate": 0.0008,
+      "pressure_weight": 2.0,
+      "physics_weight": 0.0001,
+      "bc_weight": 0.001,
+      "warmup_fraction": 0.03125
+    },
+    "VAL_MSE": 0.00038366444142050614,
+    "fixed_start_VAL_MSE": 0.0004193983479775074,
+    "relative_VAL_worsening_percent": -8.520278329498264
+  }
+]

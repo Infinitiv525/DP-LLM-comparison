@@ -1,0 +1,267 @@
+{
+  "status": "ALL_FIVE_NATIVE_TOKENIZER_SCHEMA_PROBES_COMPLETE",
+  "job": "172358",
+  "models": [
+    {
+      "method": "qwen3_8b",
+      "model_repo": "Qwen/Qwen3-8B",
+      "tokenizer_model_path": "/mnt/project/perun2601449/dp_llm_cfd/public_models/llm_feasibility/qwen3_8b/b968826d9c46dd6066d109eabc6255188de91218",
+      "tests": [
+        {
+          "probe": "fixed_start",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_low",
+          "parameters": {
+            "learning_rate": 0.0001,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.0001,
+            "bc_weight": 0.001,
+            "warmup_fraction": 0.0
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_high",
+          "parameters": {
+            "learning_rate": 0.002,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.01,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.0625
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        }
+      ],
+      "elapsed_seconds": 2.5710726771503687,
+      "no_model_weights_loaded": true,
+      "no_LLM_generation": true
+    },
+    {
+      "method": "phi4_mini",
+      "model_repo": "microsoft/Phi-4-mini-instruct",
+      "tokenizer_model_path": "/mnt/project/perun2601449/dp_llm_cfd/public_models/llm_feasibility/phi4_mini/cfbefacb99257ffa30c83adab238a50856ac3083",
+      "tests": [
+        {
+          "probe": "fixed_start",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_low",
+          "parameters": {
+            "learning_rate": 0.0001,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.0001,
+            "bc_weight": 0.001,
+            "warmup_fraction": 0.0
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_high",
+          "parameters": {
+            "learning_rate": 0.002,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.01,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.0625
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        }
+      ],
+      "elapsed_seconds": 4.1838174420408905,
+      "no_model_weights_loaded": true,
+      "no_LLM_generation": true
+    },
+    {
+      "method": "granite33_8b",
+      "model_repo": "ibm-granite/granite-3.3-8b-instruct",
+      "tokenizer_model_path": "/mnt/project/perun2601449/dp_llm_cfd/public_models/llm_feasibility/granite33_8b/51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+      "tests": [
+        {
+          "probe": "fixed_start",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_low",
+          "parameters": {
+            "learning_rate": 0.0001,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.0001,
+            "bc_weight": 0.001,
+            "warmup_fraction": 0.0
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_high",
+          "parameters": {
+            "learning_rate": 0.002,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.01,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.0625
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        }
+      ],
+      "elapsed_seconds": 0.9950391941238195,
+      "no_model_weights_loaded": true,
+      "no_LLM_generation": true
+    },
+    {
+      "method": "Llama31_8B",
+      "model_repo": "meta-llama/Llama-3.1-8B-Instruct",
+      "tokenizer_model_path": "/mnt/project/perun2601449/dp_llm_cfd/public_models/llm_feasibility/Llama-3.1-8B-Instruct/0e9e39f249a16976918f6564b8830bc894c89659",
+      "tests": [
+        {
+          "probe": "fixed_start",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_low",
+          "parameters": {
+            "learning_rate": 0.0001,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.0001,
+            "bc_weight": 0.001,
+            "warmup_fraction": 0.0
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_high",
+          "parameters": {
+            "learning_rate": 0.002,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.01,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.0625
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        }
+      ],
+      "elapsed_seconds": 3.0089413330424577,
+      "no_model_weights_loaded": true,
+      "no_LLM_generation": true
+    },
+    {
+      "method": "ministral3_8b",
+      "model_repo": "mistralai/Ministral-3-8B-Instruct-2512",
+      "tokenizer_model_path": "/mnt/project/perun2601449/dp_llm_cfd/public_models/llm_feasibility/ministral3_8b/5b26027e7b19eeb4b7352e1fed3926375dd2cb4d",
+      "tests": [
+        {
+          "probe": "fixed_start",
+          "parameters": {
+            "learning_rate": 0.001,
+            "pressure_weight": 1.0,
+            "physics_weight": 0.001,
+            "bc_weight": 0.01,
+            "warmup_fraction": 0.03125
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_low",
+          "parameters": {
+            "learning_rate": 0.0001,
+            "pressure_weight": 0.5,
+            "physics_weight": 0.0001,
+            "bc_weight": 0.001,
+            "warmup_fraction": 0.0
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        },
+        {
+          "probe": "all_parameters_high",
+          "parameters": {
+            "learning_rate": 0.002,
+            "pressure_weight": 2.0,
+            "physics_weight": 0.01,
+            "bc_weight": 0.1,
+            "warmup_fraction": 0.0625
+          },
+          "independent_parser_accepts": true,
+          "character_schema_accepts": true,
+          "canonical_token_path_accepts": true,
+          "canonical_token_path_failure": null
+        }
+      ],
+      "elapsed_seconds": 4.88136377511546,
+      "no_model_weights_loaded": true,
+      "no_LLM_generation": true
+    }
+  ],
+  "scope": "CPU tokenizer/grammar validation only. Deliberately valid alternative vectors test whether constraints force fixed defaults; no LLM sampling or retraining."
+}

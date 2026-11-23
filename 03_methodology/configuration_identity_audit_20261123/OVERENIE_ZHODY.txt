@@ -1,0 +1,37 @@
+OVERENIE ZHODY KONFIGURÁCIÍ A VÝSLEDKOV — 23.11.2026
+
+Záver: nenašla sa zámena LLM alebo PINN checkpointov, prepísanie parametrov na default ani opätovné použitie jedného súboru namiesto rôznych tréningových výstupov. Rovnaké finálne konfigurácie sú skutočné. Musíme však odlíšiť to, čo vygenerovalo LLM, od výsledku automatického výberu podľa VAL.
+
+ČO SA OVERILO
+175 pôvodných JSON odpovedí piatich LLM sa znovu parsovalo nezávisle; čísla sú zhodné so zaznamenanými parsed výstupmi, požiadavkou tréneru a skutočným config.json.325 tréningov (5metód ×65) má správne parametre,400epoch,640TRAIN prípadov, pokrytie a fyzikálny rozvrh.125 finálnych modelov sa skontrolovalo proti TEST manifestu, výsledkom a pôvodnej funkcii load_model vykonanej naCPU so zmeneným iba prenosom zariadenia. Súhlasia načítané tenzory, checkpoint hash a priemery200TEST prípadov.
+Overené sú odlišné repozitáre/revízie LLM, modelové typy a skutočné počty parametrov.35 odpovedí každej rodiny má vlastný text; pri Phi/Granite sa menili dôvody, ale nie číselné hodnoty.
+
+LLM | Návrhy zhodné so štartom /35 | Rôznych numerických nastavení v40kandidátoch vrátane5pevných štartov | Výber pôvodnej konfigurácie podľa VAL /5
+Qwen3-8B | 0/35 | 5 | 5/5
+Phi-4-mini | 35/35 | 1 | 5/5
+Granite3.3-8B | 35/35 | 1 | 5/5
+Llama3.1-8B | 6/35 | 10 | 5/5
+Ministral3-8B | 0/35 | 35 | 1/5
+
+Spoločný štartovací kandidát c00 bol vložený nami, nezávisle od LLM. Každé hľadanie potom dostalo7 skutočných návrhov LLM. Víťaza vybral program podľa najnižšej nameranej VAL chyby; slovné zdôvodnenie nevstupuje do trénera ani do tohto výberu. Pri veľmi malých numerických rozdieloch mohol vyhrať iný pokus s tou istou konfiguráciou.
+Qwen nenavrhol pôvodné nastavenie ani raz. Jeho iné návrhy však neprekonali spoločný pevný štart, ktorý preto vyhral5/5. Llama vygenerovala aj iné nastavenia, ale opäť vyhral štartovací variant5/5. Phi a Granite priamo v pôvodných JSON opakovane uvádzali rovnaké štartovacie čísla35/35. Formulácia „všetky LLM samy vybrali rovnaké parametre“ je preto nepresná. Správne je „validačný výber skončil rovnakou konfiguráciou“.
+
+SKUTOČNÁ FINÁLNA KONFIGURÁCIA TÝCHTO ŠTYROCH METÓD
+learning_rate=0.001; pressure_weight=1; physics_weight=0.001; bc_weight=0.01; warmup_fraction=0.03125. Architektúra, dáta, normovanie a rozpočet boli rovnaké. Päť finálnych semien150001–150005 bolo zámerne párovaných medzi metódami. Označenie konfigurátora samo nemení matematiku tréningu PINN.
+
+KONTROLA VÁH A SÚBOROV
+325 tréningových checkpointov má325 odlišných pôvodných ciest a325 odlišných inode: nejde o jednu cestu alebo hardlink znovu priradený rôznym úlohám. Pri rovnakom finálnom semene majú Qwen/Phi/Granite/Llama presne rovnaké tenzorové váhy; pri rôznych semenách sú váhy odlišné.100 logických modelov týchto4metód sa teda rozdelilo na5 tenzorových stavov podľa semena. Ministral ako pozitívna kontrola vybral iné konfigurácie v4/5hľadaniach a má25 rôznych finálnych tenzorových stavov.
+Rozdiely jednotlivých per-seed TEST MSE medzi prvými4metódami sú len približne1e-13 a súvisia s numerickým vyhodnotením rovnakých váh. Úložná deduplikácia sa robila až po pôvodnom TESTe podľa kontrolných súčtov; nezúčastňuje sa výberu ani načítavania modelu pri TESTe.
+
+SCHÉMA ODPOVEDE NEPRIKAZOVALA DEFAULT
+Overenie troch platných vektorov (štart, dolné a horné alternatívne hodnoty) pre všetkých5 natívnych tokenizerov:15/15 prešlo nezávislým parserom, charakterovou gramatikou aj skutočným tokenovým filtrom. Hodnoty learning_rate0.0001/0.002, pressure0.5/2, physics0.0001/0.01, bc0.001/0.1 a warmup0/0.0625 boli prípustné. Nešlo o nový LLM výstup ani nové trénovanie; test iba preveroval dosiahnuteľnosť číselných možností.
+Technický detail zachovaný v audite: prvý kontrolný zápis warmup_fraction=0 narazil na lexikálne enum pravidlo, ktoré očakáva0.0. Rovnaká číselná hodnota zapísaná0.0 prešla. Ide o obmedzenie zápisu použitej gramatiky, nie vynútenie pôvodnej hodnoty0.03125. Pôvodné výsledky ani generačný kód sa nemenili.
+
+KONKRÉTNE NÁVRHY BOLI SKUTOČNE POUŽITÉ
+qwen3_8b_r00_c01: {"bc_weight": 0.03, "learning_rate": 0.001, "physics_weight": 0.003, "pressure_weight": 1.0, "warmup_fraction": 0.03125}; VAL MSE=0.000451951954135; oproti štartu zmena=+7.761978% (kladná znamená horšie).
+Llama31_8B_r00_c01: {"bc_weight": 0.003, "learning_rate": 0.0005, "physics_weight": 0.0003, "pressure_weight": 2.0, "warmup_fraction": 0.03125}; VAL MSE=0.000497472627784; oproti štartu zmena=+18.615782% (kladná znamená horšie).
+ministral3_8b_r00_c04: {"bc_weight": 0.001, "learning_rate": 0.0008, "physics_weight": 0.0001, "pressure_weight": 2.0, "warmup_fraction": 0.03125}; VAL MSE=0.000383664441421; oproti štartu zmena=-8.520278% (kladná znamená horšie).
+
+Funkcia query dostáva práve načítaný model a znovu počíta kontext geometrie aj predikciu. Kontrola zdroja nenašla cache hotových predikcií; ukladá sa iba geometrická interpolačná matica v rámci konkrétnej inštancie modelu.
+
+Hranice kontroly: CPU overenie načítania váh nepredstiera nový GPU TEST. Opiera sa aj o už dokončené kontroly VAL naGPU a celých predikovaných polí. Kontrola nepreukazuje príčinné vysvetlenie, prečo konkrétne LLM opakovali čísla, ani univerzálnu nevhodnosť LLM. Preukazuje sled od pôvodných číselných odpovedí cez skutočný tréning a validačný výber k správne načítaným váham. Žiadny experiment sa neupravoval, netrénoval ani znovu negeneroval.

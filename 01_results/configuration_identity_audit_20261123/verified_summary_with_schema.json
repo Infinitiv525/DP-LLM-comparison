@@ -1,0 +1,123 @@
+{
+  "status": "ALL_RAW_PROPOSALS_TRAINING_CONFIGURATIONS_SELECTIONS_AND_TEST_LOADERS_AUDITED",
+  "at_UTC": "2026-11-23T17:36:43.394684+00:00",
+  "trials_verified": 325,
+  "raw_proposals_verified": 175,
+  "final_models_verified": 125,
+  "distinct_original_checkpoint_paths": 325,
+  "distinct_checkpoint_inodes": 325,
+  "summary": [
+    {
+      "method": "qwen3_8b",
+      "adaptive_proposals": 35,
+      "adaptive_proposals_equal_fixed": 0,
+      "unique_parameters_all40candidates": 5,
+      "searches_selected_fixed": 5,
+      "unique_final_tensor_states": 5,
+      "actual_LLM_parameter_counts": [
+        8190735360
+      ],
+      "distinct_raw_outputs": 35,
+      "numerically_distinct_configurations_all40candidates": 5
+    },
+    {
+      "method": "phi4_mini",
+      "adaptive_proposals": 35,
+      "adaptive_proposals_equal_fixed": 35,
+      "unique_parameters_all40candidates": 1,
+      "searches_selected_fixed": 5,
+      "unique_final_tensor_states": 5,
+      "actual_LLM_parameter_counts": [
+        3836021760
+      ],
+      "distinct_raw_outputs": 35,
+      "numerically_distinct_configurations_all40candidates": 1
+    },
+    {
+      "method": "granite33_8b",
+      "adaptive_proposals": 35,
+      "adaptive_proposals_equal_fixed": 35,
+      "unique_parameters_all40candidates": 1,
+      "searches_selected_fixed": 5,
+      "unique_final_tensor_states": 5,
+      "actual_LLM_parameter_counts": [
+        8170864640
+      ],
+      "distinct_raw_outputs": 35,
+      "numerically_distinct_configurations_all40candidates": 1
+    },
+    {
+      "method": "Llama31_8B",
+      "adaptive_proposals": 35,
+      "adaptive_proposals_equal_fixed": 6,
+      "unique_parameters_all40candidates": 10,
+      "searches_selected_fixed": 5,
+      "unique_final_tensor_states": 5,
+      "actual_LLM_parameter_counts": [
+        8030261248
+      ],
+      "distinct_raw_outputs": 35,
+      "numerically_distinct_configurations_all40candidates": 10
+    },
+    {
+      "method": "ministral3_8b",
+      "adaptive_proposals": 35,
+      "adaptive_proposals_equal_fixed": 0,
+      "unique_parameters_all40candidates": 35,
+      "searches_selected_fixed": 1,
+      "unique_final_tensor_states": 25,
+      "actual_LLM_parameter_counts": [
+        8918026240
+      ],
+      "distinct_raw_outputs": 35,
+      "numerically_distinct_configurations_all40candidates": 35
+    }
+  ],
+  "per_seed_comparison": [
+    {
+      "seed": 150001,
+      "logical_models": 20,
+      "unique_tensor_states": 1,
+      "max_minus_min_TEST_MSE": 3.5538607646989906e-13
+    },
+    {
+      "seed": 150002,
+      "logical_models": 20,
+      "unique_tensor_states": 1,
+      "max_minus_min_TEST_MSE": 8.75596253488431e-14
+    },
+    {
+      "seed": 150003,
+      "logical_models": 20,
+      "unique_tensor_states": 1,
+      "max_minus_min_TEST_MSE": 2.9042073650467626e-13
+    },
+    {
+      "seed": 150004,
+      "logical_models": 20,
+      "unique_tensor_states": 1,
+      "max_minus_min_TEST_MSE": 3.662044083772853e-13
+    },
+    {
+      "seed": 150005,
+      "logical_models": 20,
+      "unique_tensor_states": 1,
+      "max_minus_min_TEST_MSE": 3.609607187801678e-13
+    }
+  ],
+  "checks": [
+    "Raw JSON parsed independently and matches stored parsed output, request and actual training configuration.",
+    "All five hyperparameters mapped by unchanged training_config; recorded physics schedule and warmup count agree.",
+    "Each final selection independently recomputed from all eight measured VAL outcomes.",
+    "TEST manifest links to each original independently executed training; original load_model code loads the exact tensor state on CPU.",
+    "Per-case TEST metrics aggregate back to stored method/model summaries."
+  ],
+  "limits": [
+    "CPU loader audit patches only device transfer; it does not re-run GPU inference. Existing whole-field audits and GPU VAL preflights remain additional evidence.",
+    "Matching seed and hyperparameters intentionally match initialization and sample order, so independently trained weights may be identical.",
+    "A low-error common fixed start winning validation is a result of the search procedure, not a configuration directly proposed by every LLM."
+  ],
+  "schema_token_probes": 15,
+  "all_tested_alternative_vectors_accepted": true,
+  "parameter_numeric_equivalence_normalized": true
+}

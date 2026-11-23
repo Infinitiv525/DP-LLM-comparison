@@ -100,3 +100,9 @@ Pôvodné kontrasty sa nemenia. Llama zostáva označená ako dodatočná kohort
 ## Kompletný verejný archív Llamy
 
 **Všetkých65tréningov,25finálnych modelov a5000celých TEST polí je verejne zachovaných.** [Zrozumiteľný katalóg a odkazy](01_results/Llama_final_test_20261123/ARCHIV.md). Iba SHA256-identické polia zdieľajú súbor; modelové identity a všetky váhy zostávajú samostatné. Priamy prenos Perun→GitHub, bez kopírovania doPC.
+
+## Prečo majú štyri konfigurátory rovnaký výsledok
+
+Dodatočný audit skontroloval175 pôvodných LLM odpovedí,325 tréningových výstupov,125 finálnych checkpointov a15 natívnych tokenizerových/gramatických skúšok. Nenašla sa zámena modelov ani prepísanie parametrov. **Rovnakú konfiguráciu vybral validačný program; Qwen/Llama pritom skúšali aj iné návrhy, Phi/Granite opakovali štart.** Párované semená a rovnaký postup viedli k rovnakým váham podľa semena.
+
+[Čitateľný výsledok auditu](03_methodology/configuration_identity_audit_20261123/OVERENIE_ZHODY.txt) · [Podrobné číselné dôkazy](01_results/configuration_identity_audit_20261123)
