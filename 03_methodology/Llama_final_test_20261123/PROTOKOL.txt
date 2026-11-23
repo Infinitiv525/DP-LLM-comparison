@@ -1,0 +1,9 @@
+ZÁVEREČNÝ TEST LLAMY — 23.11.2026
+
+Audit potvrdil65 úspešných tréningov, každý400epoch cez všetkých640TRAIN prípadov. Zmrazených je25 finálnych sietí (5hľadaní ×5nových semien), vybraných výlučne podľa160VAL prípadov. TEST nemení váhy ani konfigurácie.
+Použije sa rovnakých200TEST prípadov a85geometrických zhlukov ako v pôvodnom porovnaní. Rovnaký zostáva model, normalizácia, predikcia celého512×512 poľa, tlakový gauge, maska, výpočet chýb aj fyzikálnych a okrajových rezíduí.
+Na každom modeli/prípade sa zachová30zahriatí a200meraní celej GPU predikcie; p50/p95/p99 a prah5ms majú pôvodný rozsah (vstupy už na GPU, bez prenosu/vykreslenia/statickej mriežky). Pred otvorením TEST musia všetky4nezávisle pridelené H200 prejsť kontrolou správnosti na uloženom VAL výsledku.
+Nové je iba ukladanie už vypočítaných predikcií:25×200 polí float32 do súborov predicted_fields.npy na Perune, spolu približne15.7GB bez kompresie. Ide presne o výstupy použité na metriky, bez ďalšej inferencie. Zápis polí je mimo GPU merania. Do PC sa polia nesťahujú.
+Spoločná tabuľka obsahuje pôvodných155 a nových25 modelov. Pôvodné dáta, výsledky aj štyri98.75%bootstrap intervaly sa nemenia; kontrola musí presne reprodukovať ich uložené bootstrap stĺpce. Pre Llamu sa uvedie samostatný exploratívny95%interval protiTPE a navyše osobitná doplnená rodina piatich LLM s99%Bonferroni intervalmi.
+Vzorkovanie neistoty zostáva párové a crossed: najprv priemer5finálnych semien, potom5hľadaní a85geometrických zhlukov,10000opakovaní,seed510001. Dodatočné zaradenie Llamy po znalosti pôvodného TEST a skutočné dátumy sa priznávajú. Z nových tabuliek sa nevytvára spätne údajná pôvodná predregistrácia. Známe geometrie a ustálené polia nepreukazujú časový rollout ani generalizáciu na úplne nevidené geometrie.
+Neúspech alebo neúplný výsledok sa zachová na kontrolu; nevyberie sa iný seed, nezmení konfigurácia a nevykoná skryté opakovanie.

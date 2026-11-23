@@ -75,3 +75,13 @@ Built with Llama. **Llama‑3.1‑8B‑Instruct** (pridaná 19. 11. 2026): techn
 - [Zdrojové kódy rozšírenia](04_source/Llama_extension_20261119)
 
 Nové hlavné výsledky a TEST hodnotenie budú doplnené po skončení a zmrazení všetkých25 finálnych modelov. Váhy Meta sa tu nešíria; ich presná verzia a hashy sú v metodike.
+
+## Dokončenie tréningov a TEST — 23. novembra 2026
+
+Všetkých **65 tréningov Llamy je dokončených a overených**: každý400epoch cez640TRAIN prípadov. Zmrazených je25 finálnych modelov. Záverečný TEST na200prípadoch bol spustený na4H200 po úspešných kontrolách všetkých4GPU. Ďalšie tréningy sa nespúšťajú.
+
+- [Audit všetkých65 tréningov](01_results/Llama_extension_20261119/all65_completed_training_audit.json)
+- [Protokol záverečného TESTu](03_methodology/Llama_final_test_20261123/PROTOKOL.txt)
+- [Kontrola4GPU pred otvorením TEST](01_results/Llama_final_test_20261123/GPU_validation_preflight.json)
+
+Ukladajú sa aj všetky5000predikované celé polia priamo naPerune. Výsledkové tabuľky a archív pribudnú po dokončení a kontrole TESTu; pôvodné štyri porovnania zostávajú zachované.

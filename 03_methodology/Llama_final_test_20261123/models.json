@@ -1,0 +1,1303 @@
+{
+  "models": [
+    {
+      "id": "Llama31_8B_r00_k00",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 0,
+      "repeat": 0,
+      "seed": 150001,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k00/167199/training/best.pt",
+      "checkpoint_sha256": "c50ceac4f717ca477c44ccf55f13d7b2277f415b0dad331acc20a61778808c45",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k00/167199/training/summary.json",
+      "training_summary_sha256": "41289b73d1e7045901b876aab5924323f8de38af00440b1b978d402593dbb75a",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150001,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r00_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.000419398347574033,
+        "trial_summary_sha256": "0295cd02a2a34e7a61b2c17685f0cbefaedde1f3f394ed3dcbe032e37fee01b8"
+      }
+    },
+    {
+      "id": "Llama31_8B_r01_k00",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 1,
+      "repeat": 0,
+      "seed": 150001,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k00/167200/training/best.pt",
+      "checkpoint_sha256": "18e75e3497f726dc45df189ccce59c70de4c09befe4b0b77e663d46aa66da964",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k00/167200/training/summary.json",
+      "training_summary_sha256": "e5d9437f82c56cf9d0adb4ec1feb337b187ffb946d392e8e7e3f59a83892e823",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150001,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r01_c01",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004293906806788154,
+        "trial_summary_sha256": "3f73c6e4a3b481b25473880f41139728f9d9823b323d1955c34f8060a08e6215"
+      }
+    },
+    {
+      "id": "Llama31_8B_r02_k00",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 2,
+      "repeat": 0,
+      "seed": 150001,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k00/167201/training/best.pt",
+      "checkpoint_sha256": "c50ceac4f717ca477c44ccf55f13d7b2277f415b0dad331acc20a61778808c45",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k00/167201/training/summary.json",
+      "training_summary_sha256": "b18a6236f69c469c71c8df49dd04a284252dc407b31171d140a1c875a2d35351",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150001,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r02_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00042010801816239827,
+        "trial_summary_sha256": "2347d4f53b5602b64f470e3388c1b244ed1d2a0dcf0b0316b6286c2022dc661a"
+      }
+    },
+    {
+      "id": "Llama31_8B_r03_k00",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 3,
+      "repeat": 0,
+      "seed": 150001,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k00/167202/training/best.pt",
+      "checkpoint_sha256": "18e75e3497f726dc45df189ccce59c70de4c09befe4b0b77e663d46aa66da964",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k00/167202/training/summary.json",
+      "training_summary_sha256": "fd707f257e0a79e8757de7eeb51fe82acb3989d881098688e41c9a4a54e8a33a",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150001,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r03_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004129836426246409,
+        "trial_summary_sha256": "52381b846068dc64aa89c52b674b42d44f521725c9512f3f0e427a2670fb5d42"
+      }
+    },
+    {
+      "id": "Llama31_8B_r04_k00",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 4,
+      "repeat": 0,
+      "seed": 150001,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k00/167203/training/best.pt",
+      "checkpoint_sha256": "73ab91b89fa09882ed66f3da9c6d2d82d69ef1b86c8371bb481f47f2eacc40cf",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k00/167203/training/summary.json",
+      "training_summary_sha256": "e6f40b23e5369c9e6e94523dff377c5c230d94ffbbe1af5cea75ca958138efe6",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150001,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r04_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00043037401854620637,
+        "trial_summary_sha256": "e875fa9f1234428eec74ab4e2e96b87ffdf30425a8c4535c6943bfb3fb026516"
+      }
+    },
+    {
+      "id": "Llama31_8B_r00_k01",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 0,
+      "repeat": 1,
+      "seed": 150002,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k01/167204/training/best.pt",
+      "checkpoint_sha256": "b4e11b3bacbbe87da2cb78724fa142abfc57a0794d5c7ebfe6aff83e39045e91",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k01/167204/training/summary.json",
+      "training_summary_sha256": "9fae47310a1a082e1a5b81421d9f2fd875d7b9ca6350f289780b354c7abf9388",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150002,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r00_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.000419398347574033,
+        "trial_summary_sha256": "0295cd02a2a34e7a61b2c17685f0cbefaedde1f3f394ed3dcbe032e37fee01b8"
+      }
+    },
+    {
+      "id": "Llama31_8B_r01_k01",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 1,
+      "repeat": 1,
+      "seed": 150002,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k01/167205/training/best.pt",
+      "checkpoint_sha256": "1376c73a358bbad5cffe8fd4209426305c698f3bd2c59d6051b7093bf3bbfdc6",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k01/167205/training/summary.json",
+      "training_summary_sha256": "21d0266d9ab0d4a9e1d457dbc7ca3044ff2fc9e3cac29c206c43e40769166eb2",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150002,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r01_c01",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004293906806788154,
+        "trial_summary_sha256": "3f73c6e4a3b481b25473880f41139728f9d9823b323d1955c34f8060a08e6215"
+      }
+    },
+    {
+      "id": "Llama31_8B_r02_k01",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 2,
+      "repeat": 1,
+      "seed": 150002,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k01/167206/training/best.pt",
+      "checkpoint_sha256": "b4e11b3bacbbe87da2cb78724fa142abfc57a0794d5c7ebfe6aff83e39045e91",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k01/167206/training/summary.json",
+      "training_summary_sha256": "cccc6559ef33204abb76dcc41fbae45a2fd695e8b9c477aaa0c5aaeedd20a2ec",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150002,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r02_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00042010801816239827,
+        "trial_summary_sha256": "2347d4f53b5602b64f470e3388c1b244ed1d2a0dcf0b0316b6286c2022dc661a"
+      }
+    },
+    {
+      "id": "Llama31_8B_r03_k01",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 3,
+      "repeat": 1,
+      "seed": 150002,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k01/167209/training/best.pt",
+      "checkpoint_sha256": "b4e11b3bacbbe87da2cb78724fa142abfc57a0794d5c7ebfe6aff83e39045e91",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k01/167209/training/summary.json",
+      "training_summary_sha256": "cd099f784f011a9026808953d4ce2999177c92c831c038638d9c390de0b75ec5",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150002,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r03_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004129836426246409,
+        "trial_summary_sha256": "52381b846068dc64aa89c52b674b42d44f521725c9512f3f0e427a2670fb5d42"
+      }
+    },
+    {
+      "id": "Llama31_8B_r04_k01",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 4,
+      "repeat": 1,
+      "seed": 150002,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k01/167302/training/best.pt",
+      "checkpoint_sha256": "b4e11b3bacbbe87da2cb78724fa142abfc57a0794d5c7ebfe6aff83e39045e91",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k01/167302/training/summary.json",
+      "training_summary_sha256": "31eb59ac4cfc8b8a6e70e48f5815504b5a14d8d2979bdc664a50c9288dcb7eb1",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150002,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r04_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00043037401854620637,
+        "trial_summary_sha256": "e875fa9f1234428eec74ab4e2e96b87ffdf30425a8c4535c6943bfb3fb026516"
+      }
+    },
+    {
+      "id": "Llama31_8B_r00_k02",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 0,
+      "repeat": 2,
+      "seed": 150003,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k02/167308/training/best.pt",
+      "checkpoint_sha256": "870db3bc67f3d68ee23bdac18692d2e9d40b99613790264ed3f2d370b99a72ff",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k02/167308/training/summary.json",
+      "training_summary_sha256": "296593ec82450a929c6c60af191794c23e0737e711f31e4db93d2c02d843236a",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150003,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r00_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.000419398347574033,
+        "trial_summary_sha256": "0295cd02a2a34e7a61b2c17685f0cbefaedde1f3f394ed3dcbe032e37fee01b8"
+      }
+    },
+    {
+      "id": "Llama31_8B_r01_k02",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 1,
+      "repeat": 2,
+      "seed": 150003,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k02/167316/training/best.pt",
+      "checkpoint_sha256": "a67e07197c8ca0bf7c339d88f34b21e2a36b93eb901ec7897a2519557994fb3a",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k02/167316/training/summary.json",
+      "training_summary_sha256": "77aae5206fa3a2af5a67d0a64536aa9a802cb7ce6fba08899e7e29fbdba317cc",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150003,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r01_c01",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004293906806788154,
+        "trial_summary_sha256": "3f73c6e4a3b481b25473880f41139728f9d9823b323d1955c34f8060a08e6215"
+      }
+    },
+    {
+      "id": "Llama31_8B_r02_k02",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 2,
+      "repeat": 2,
+      "seed": 150003,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k02/167322/training/best.pt",
+      "checkpoint_sha256": "870db3bc67f3d68ee23bdac18692d2e9d40b99613790264ed3f2d370b99a72ff",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k02/167322/training/summary.json",
+      "training_summary_sha256": "a6d633ba575d02241ff6316be9ece9e1331b8ea4b83eacc841ddaa404b8fb167",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150003,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r02_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00042010801816239827,
+        "trial_summary_sha256": "2347d4f53b5602b64f470e3388c1b244ed1d2a0dcf0b0316b6286c2022dc661a"
+      }
+    },
+    {
+      "id": "Llama31_8B_r03_k02",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 3,
+      "repeat": 2,
+      "seed": 150003,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k02/167323/training/best.pt",
+      "checkpoint_sha256": "870db3bc67f3d68ee23bdac18692d2e9d40b99613790264ed3f2d370b99a72ff",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k02/167323/training/summary.json",
+      "training_summary_sha256": "6116b3a2ca19dcc8746ab6fdaf25588d000d3124dd7c9dd6c1ef6811c59b87c5",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150003,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r03_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004129836426246409,
+        "trial_summary_sha256": "52381b846068dc64aa89c52b674b42d44f521725c9512f3f0e427a2670fb5d42"
+      }
+    },
+    {
+      "id": "Llama31_8B_r04_k02",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 4,
+      "repeat": 2,
+      "seed": 150003,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k02/167408/training/best.pt",
+      "checkpoint_sha256": "870db3bc67f3d68ee23bdac18692d2e9d40b99613790264ed3f2d370b99a72ff",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k02/167408/training/summary.json",
+      "training_summary_sha256": "024b25a17e352f443b4c7b5d4d8184549e8dd3a3f302337615cf59f49c647e51",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150003,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r04_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00043037401854620637,
+        "trial_summary_sha256": "e875fa9f1234428eec74ab4e2e96b87ffdf30425a8c4535c6943bfb3fb026516"
+      }
+    },
+    {
+      "id": "Llama31_8B_r00_k03",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 0,
+      "repeat": 3,
+      "seed": 150004,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k03/167411/training/best.pt",
+      "checkpoint_sha256": "db4e24035594d4a3f3af3f4dd4c02bca0a9cd259424a4033b64c3d062e82f143",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k03/167411/training/summary.json",
+      "training_summary_sha256": "3afd6c9b1a54a61d4409a89da33977828102bdb47fd9a7650062bb9551bee397",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150004,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r00_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.000419398347574033,
+        "trial_summary_sha256": "0295cd02a2a34e7a61b2c17685f0cbefaedde1f3f394ed3dcbe032e37fee01b8"
+      }
+    },
+    {
+      "id": "Llama31_8B_r01_k03",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 1,
+      "repeat": 3,
+      "seed": 150004,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k03/167416/training/best.pt",
+      "checkpoint_sha256": "992de2be850b3a9d40bff374e77f8c22bd22eb641d7a70c554b9e59b400e04de",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k03/167416/training/summary.json",
+      "training_summary_sha256": "717ad9e5ad6a0c016c94b3ddb897c51a97effa38a4d3e18aecd61db2369dcd8f",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150004,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r01_c01",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004293906806788154,
+        "trial_summary_sha256": "3f73c6e4a3b481b25473880f41139728f9d9823b323d1955c34f8060a08e6215"
+      }
+    },
+    {
+      "id": "Llama31_8B_r02_k03",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 2,
+      "repeat": 3,
+      "seed": 150004,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k03/167419/training/best.pt",
+      "checkpoint_sha256": "88fca7e6bf8c8916291bdcf0f547436549824347e6ca9fae2dc2e59063a24f79",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k03/167419/training/summary.json",
+      "training_summary_sha256": "13f9215d8106e95691b4ef90c42fbe1b0f8872b7a9f81222e33f7e0f0da20c5b",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150004,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r02_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00042010801816239827,
+        "trial_summary_sha256": "2347d4f53b5602b64f470e3388c1b244ed1d2a0dcf0b0316b6286c2022dc661a"
+      }
+    },
+    {
+      "id": "Llama31_8B_r03_k03",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 3,
+      "repeat": 3,
+      "seed": 150004,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k03/167421/training/best.pt",
+      "checkpoint_sha256": "992de2be850b3a9d40bff374e77f8c22bd22eb641d7a70c554b9e59b400e04de",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k03/167421/training/summary.json",
+      "training_summary_sha256": "2e29b8bfebfbbb1067fd4a219c65cca28bf2fbe8c869fce927d2de89aa5dd631",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150004,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r03_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004129836426246409,
+        "trial_summary_sha256": "52381b846068dc64aa89c52b674b42d44f521725c9512f3f0e427a2670fb5d42"
+      }
+    },
+    {
+      "id": "Llama31_8B_r04_k03",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 4,
+      "repeat": 3,
+      "seed": 150004,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k03/167648/training/best.pt",
+      "checkpoint_sha256": "331895772554a0332749c4e294bdafa550eab849c5fb44f1c92211943ae4aba5",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k03/167648/training/summary.json",
+      "training_summary_sha256": "3e0ae66ff8515d04b0ef11665ed994484df2735486d035e14d560773890940f6",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150004,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r04_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00043037401854620637,
+        "trial_summary_sha256": "e875fa9f1234428eec74ab4e2e96b87ffdf30425a8c4535c6943bfb3fb026516"
+      }
+    },
+    {
+      "id": "Llama31_8B_r00_k04",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 0,
+      "repeat": 4,
+      "seed": 150005,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k04/167655/training/best.pt",
+      "checkpoint_sha256": "06effb59c8cabbc262bbe6ab7ec873751ed9f20c5145d749dddf44236c9351b4",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r00_k04/167655/training/summary.json",
+      "training_summary_sha256": "6e9b69e3878c8e9ae4f79e522df39df098dfd55883f598f0dcb84b1a5e7f2829",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150005,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r00_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.000419398347574033,
+        "trial_summary_sha256": "0295cd02a2a34e7a61b2c17685f0cbefaedde1f3f394ed3dcbe032e37fee01b8"
+      }
+    },
+    {
+      "id": "Llama31_8B_r01_k04",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 1,
+      "repeat": 4,
+      "seed": 150005,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k04/167656/training/best.pt",
+      "checkpoint_sha256": "06effb59c8cabbc262bbe6ab7ec873751ed9f20c5145d749dddf44236c9351b4",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r01_k04/167656/training/summary.json",
+      "training_summary_sha256": "57c8d1c7b27e3a806d29b0fd340cdf0e8313a2c2929759380593ee18016a00ee",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150005,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r01_c01",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004293906806788154,
+        "trial_summary_sha256": "3f73c6e4a3b481b25473880f41139728f9d9823b323d1955c34f8060a08e6215"
+      }
+    },
+    {
+      "id": "Llama31_8B_r02_k04",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 2,
+      "repeat": 4,
+      "seed": 150005,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k04/167657/training/best.pt",
+      "checkpoint_sha256": "48abb88fb84c76ce2a63cbe9ced07519227eb08255cb52f815c2eaefd8fd40d7",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r02_k04/167657/training/summary.json",
+      "training_summary_sha256": "5d2900aa0d9d9cdb4c4496963d08020590e70dcfb53df3c1c72dd82988b82c52",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150005,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r02_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00042010801816239827,
+        "trial_summary_sha256": "2347d4f53b5602b64f470e3388c1b244ed1d2a0dcf0b0316b6286c2022dc661a"
+      }
+    },
+    {
+      "id": "Llama31_8B_r03_k04",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 3,
+      "repeat": 4,
+      "seed": 150005,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k04/167659/training/best.pt",
+      "checkpoint_sha256": "06effb59c8cabbc262bbe6ab7ec873751ed9f20c5145d749dddf44236c9351b4",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r03_k04/167659/training/summary.json",
+      "training_summary_sha256": "821d240d6a8d7103e1d907d0ff856273e319a85999a5d983fbd0ad188e84df13",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150005,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r03_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.0004129836426246409,
+        "trial_summary_sha256": "52381b846068dc64aa89c52b674b42d44f521725c9512f3f0e427a2670fb5d42"
+      }
+    },
+    {
+      "id": "Llama31_8B_r04_k04",
+      "kind": "retrain",
+      "method": "Llama31_8B",
+      "search_run": 4,
+      "repeat": 4,
+      "seed": 150005,
+      "checkpoint": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k04/168042/training/best.pt",
+      "checkpoint_sha256": "48abb88fb84c76ce2a63cbe9ced07519227eb08255cb52f815c2eaefd8fd40d7",
+      "training_summary": "/mnt/project/perun2601449/dp_llm_cfd/results/llama_extension_20261119_v1/main/executions/Llama31_8B_r04_k04/168042/training/summary.json",
+      "training_summary_sha256": "5e8afc4bda7fb23012f6e7bd6022ca9a824905f6e1922fb2b4c225d214472430",
+      "config": {
+        "width": 192,
+        "depth": 4,
+        "latent": 32,
+        "frequencies": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ],
+        "seed": 150005,
+        "epochs": 400,
+        "batch_cases": 4,
+        "lr": 0.001,
+        "data_points": 2048,
+        "physics_points": 64,
+        "wall_points_per_side": 16,
+        "body_points": 64,
+        "physics_weight": 0.001,
+        "bc_weight": 0.01,
+        "warmup": 2000,
+        "ramp": 2000,
+        "assess_epochs": 10,
+        "pressure_weight": 1.0
+      },
+      "normalization_sha256": "fdf0026e4fcd8770c80df5c24da95d5a51a9919d01c5835420fd2d3e825ab400",
+      "selected_by_VAL": {
+        "source_task": "Llama31_8B_r04_c00",
+        "parameters": {
+          "learning_rate": 0.001,
+          "pressure_weight": 1.0,
+          "physics_weight": 0.001,
+          "bc_weight": 0.01,
+          "warmup_fraction": 0.03125
+        },
+        "score": 0.00043037401854620637,
+        "trial_summary_sha256": "e875fa9f1234428eec74ab4e2e96b87ffdf30425a8c4535c6943bfb3fb026516"
+      }
+    }
+  ],
+  "normalization": {
+    "target_mean": [
+      0.001105676085176367,
+      -0.0008026961615262943,
+      2.487567464712493e-11
+    ],
+    "target_std": [
+      0.19154282465036498,
+      0.1350667922297031,
+      0.2857597197454343
+    ],
+    "target_fluid_points": 148754654,
+    "geometry_mean": [
+      0.886646831035614,
+      0.36494894616530166
+    ],
+    "geometry_std": [
+      0.31075343595726984,
+      0.2738975038115574
+    ],
+    "source": "TRAIN only; pressuregauge fluid mean per sample; no TESTtargets"
+  },
+  "main_state_sha256": "ecb2d45c6ddb8373bf92bbde727917b10d81d406b89c9d127e52cf3225fcf80b",
+  "training_frozen_manifest_sha256": "5bc73a11b92ddb6abd4754fdffe5fc055b6a225aa5892bdc2eeb1aaa04ad41c2"
+}
