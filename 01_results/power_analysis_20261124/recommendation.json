@@ -1,0 +1,279 @@
+{
+  "primary_point_10percent_90power": {
+    "design": "five_LLM_vs_TPE_MSE",
+    "family_size": 5,
+    "target_relative_difference_vs_TPE": 0.1,
+    "target_power": 0.9,
+    "sd_scenario": "fresh_independent_blocks_point_proxy",
+    "balanced_search_blocks": 11,
+    "required_searches_each_LLM": {
+      "qwen3_8b": 11,
+      "ministral3_8b": 9,
+      "phi4_mini": 11,
+      "granite33_8b": 11,
+      "Llama31_8B": 11
+    },
+    "limiting_contrasts": [
+      {
+        "method": "qwen3_8b",
+        "metric": "mse_all"
+      },
+      {
+        "method": "phi4_mini",
+        "metric": "mse_all"
+      },
+      {
+        "method": "granite33_8b",
+        "metric": "mse_all"
+      },
+      {
+        "method": "Llama31_8B",
+        "metric": "mse_all"
+      }
+    ],
+    "minimum_exact_two_sided_signflip_resolution_n": 8,
+    "balanced_all_new": {
+      "new_searches_by_method": {
+        "qwen3_8b": 11,
+        "ministral3_8b": 11,
+        "phi4_mini": 11,
+        "granite33_8b": 11,
+        "Llama31_8B": 11,
+        "tpe": 11
+      },
+      "new_independent_searches_total": 66,
+      "candidate_trainings": 528,
+      "selected_PINN_refits": 330,
+      "total_PINN_trainings": 858,
+      "expected_active_search_and_refits_GPU_h": 3297.698258874602,
+      "expected_proposal_GPU_h_included": 5.302306810295402,
+      "expected_active_TEST_GPU_h": 13.126085515785212,
+      "expected_reserved_total_GPU_h": 3484.0984440287325,
+      "proposed_6h30_per_training_job_cap_plus_TEST_reserve_GPU_h": 5610.0,
+      "cap_is_proposal_not_enqueued": true
+    },
+    "unequal_all_new_shared_TPE": {
+      "new_searches_by_method": {
+        "qwen3_8b": 11,
+        "ministral3_8b": 9,
+        "phi4_mini": 11,
+        "granite33_8b": 11,
+        "Llama31_8B": 11,
+        "tpe": 11
+      },
+      "new_independent_searches_total": 64,
+      "candidate_trainings": 512,
+      "selected_PINN_refits": 320,
+      "total_PINN_trainings": 832,
+      "expected_active_search_and_refits_GPU_h": 3197.8515684965455,
+      "expected_proposal_GPU_h_included": 5.058681099053868,
+      "expected_active_TEST_GPU_h": 12.729366400391225,
+      "expected_reserved_total_GPU_h": 3378.6177304291477,
+      "proposed_6h30_per_training_job_cap_plus_TEST_reserve_GPU_h": 5440.0,
+      "cap_is_proposal_not_enqueued": true
+    },
+    "scope": "All NEW independent search blocks. Five fresh refit seeds per block, paired across methods but not reused across blocks. Old five not pooled into primary confirmation."
+  },
+  "primary_cautious_10percent_90power": {
+    "design": "five_LLM_vs_TPE_MSE",
+    "family_size": 5,
+    "target_relative_difference_vs_TPE": 0.1,
+    "target_power": 0.9,
+    "sd_scenario": "fresh_independent_blocks_upper95_SD",
+    "balanced_search_blocks": 58,
+    "required_searches_each_LLM": {
+      "qwen3_8b": 58,
+      "ministral3_8b": 43,
+      "phi4_mini": 58,
+      "granite33_8b": 58,
+      "Llama31_8B": 58
+    },
+    "limiting_contrasts": [
+      {
+        "method": "qwen3_8b",
+        "metric": "mse_all"
+      },
+      {
+        "method": "phi4_mini",
+        "metric": "mse_all"
+      },
+      {
+        "method": "granite33_8b",
+        "metric": "mse_all"
+      },
+      {
+        "method": "Llama31_8B",
+        "metric": "mse_all"
+      }
+    ],
+    "minimum_exact_two_sided_signflip_resolution_n": 8,
+    "balanced_all_new": {
+      "new_searches_by_method": {
+        "qwen3_8b": 58,
+        "ministral3_8b": 58,
+        "phi4_mini": 58,
+        "granite33_8b": 58,
+        "Llama31_8B": 58,
+        "tpe": 58
+      },
+      "new_independent_searches_total": 348,
+      "candidate_trainings": 2784,
+      "selected_PINN_refits": 1740,
+      "total_PINN_trainings": 4524,
+      "expected_active_search_and_refits_GPU_h": 17387.863546793356,
+      "expected_proposal_GPU_h_included": 27.957617727012117,
+      "expected_active_TEST_GPU_h": 69.21026908323111,
+      "expected_reserved_total_GPU_h": 18370.700886696955,
+      "proposed_6h30_per_training_job_cap_plus_TEST_reserve_GPU_h": 29580.0,
+      "cap_is_proposal_not_enqueued": true
+    },
+    "unequal_all_new_shared_TPE": {
+      "new_searches_by_method": {
+        "qwen3_8b": 58,
+        "ministral3_8b": 43,
+        "phi4_mini": 58,
+        "granite33_8b": 58,
+        "Llama31_8B": 58,
+        "tpe": 58
+      },
+      "new_independent_searches_total": 333,
+      "candidate_trainings": 2664,
+      "selected_PINN_refits": 1665,
+      "total_PINN_trainings": 4329,
+      "expected_active_search_and_refits_GPU_h": 16639.01336895793,
+      "expected_proposal_GPU_h_included": 26.130424892700617,
+      "expected_active_TEST_GPU_h": 66.23487571777622,
+      "expected_reserved_total_GPU_h": 17579.595534700067,
+      "proposed_6h30_per_training_job_cap_plus_TEST_reserve_GPU_h": 28305.0,
+      "cap_is_proposal_not_enqueued": true
+    },
+    "scope": "All NEW independent search blocks. Five fresh refit seeds per block, paired across methods but not reused across blocks. Old five not pooled into primary confirmation."
+  },
+  "primary_point_20percent_90power": {
+    "design": "five_LLM_vs_TPE_MSE",
+    "family_size": 5,
+    "target_relative_difference_vs_TPE": 0.2,
+    "target_power": 0.9,
+    "sd_scenario": "fresh_independent_blocks_point_proxy",
+    "balanced_search_blocks": 6,
+    "required_searches_each_LLM": {
+      "qwen3_8b": 6,
+      "ministral3_8b": 5,
+      "phi4_mini": 6,
+      "granite33_8b": 6,
+      "Llama31_8B": 6
+    },
+    "limiting_contrasts": [
+      {
+        "method": "qwen3_8b",
+        "metric": "mse_all"
+      },
+      {
+        "method": "phi4_mini",
+        "metric": "mse_all"
+      },
+      {
+        "method": "granite33_8b",
+        "metric": "mse_all"
+      },
+      {
+        "method": "Llama31_8B",
+        "metric": "mse_all"
+      }
+    ],
+    "minimum_exact_two_sided_signflip_resolution_n": 8,
+    "balanced_all_new": {
+      "new_searches_by_method": {
+        "qwen3_8b": 6,
+        "ministral3_8b": 6,
+        "phi4_mini": 6,
+        "granite33_8b": 6,
+        "Llama31_8B": 6,
+        "tpe": 6
+      },
+      "new_independent_searches_total": 36,
+      "candidate_trainings": 288,
+      "selected_PINN_refits": 180,
+      "total_PINN_trainings": 468,
+      "expected_active_search_and_refits_GPU_h": 1798.7445048406921,
+      "expected_proposal_GPU_h_included": 2.892167351070219,
+      "expected_active_TEST_GPU_h": 7.159683008610116,
+      "expected_reserved_total_GPU_h": 1900.4173331065813,
+      "proposed_6h30_per_training_job_cap_plus_TEST_reserve_GPU_h": 3060.0,
+      "cap_is_proposal_not_enqueued": true
+    },
+    "unequal_all_new_shared_TPE": {
+      "new_searches_by_method": {
+        "qwen3_8b": 6,
+        "ministral3_8b": 5,
+        "phi4_mini": 6,
+        "granite33_8b": 6,
+        "Llama31_8B": 6,
+        "tpe": 6
+      },
+      "new_independent_searches_total": 35,
+      "candidate_trainings": 280,
+      "selected_PINN_refits": 175,
+      "total_PINN_trainings": 455,
+      "expected_active_search_and_refits_GPU_h": 1748.8211596516637,
+      "expected_proposal_GPU_h_included": 2.7703544954494523,
+      "expected_active_TEST_GPU_h": 6.961323450913122,
+      "expected_reserved_total_GPU_h": 1847.6769763067891,
+      "proposed_6h30_per_training_job_cap_plus_TEST_reserve_GPU_h": 2975.0,
+      "cap_is_proposal_not_enqueued": true
+    },
+    "scope": "All NEW independent search blocks. Five fresh refit seeds per block, paired across methods but not reused across blocks. Old five not pooled into primary confirmation."
+  },
+  "targeted_Ministral_10percent_90power": {
+    "design": "Ministral_vs_TPE_MSE_exploratory_targeted",
+    "family_size": 1,
+    "target_relative_difference_vs_TPE": 0.1,
+    "target_power": 0.9,
+    "sd_scenario": "fresh_independent_blocks_point_proxy",
+    "balanced_search_blocks": 6,
+    "required_searches_each_LLM": {
+      "ministral3_8b": 6
+    },
+    "limiting_contrasts": [
+      {
+        "method": "ministral3_8b",
+        "metric": "mse_all"
+      }
+    ],
+    "minimum_exact_two_sided_signflip_resolution_n": 6,
+    "balanced_all_new": {
+      "new_searches_by_method": {
+        "ministral3_8b": 6,
+        "tpe": 6
+      },
+      "new_independent_searches_total": 12,
+      "candidate_trainings": 96,
+      "selected_PINN_refits": 60,
+      "total_PINN_trainings": 156,
+      "expected_active_search_and_refits_GPU_h": 598.5948821526368,
+      "expected_proposal_GPU_h_included": 0.7308771337245998,
+      "expected_active_TEST_GPU_h": 2.3802285244279773,
+      "expected_reserved_total_GPU_h": 632.3735126206536,
+      "proposed_6h30_per_training_job_cap_plus_TEST_reserve_GPU_h": 1020.0,
+      "cap_is_proposal_not_enqueued": true
+    },
+    "unequal_all_new_shared_TPE": {
+      "new_searches_by_method": {
+        "ministral3_8b": 6,
+        "tpe": 6
+      },
+      "new_independent_searches_total": 12,
+      "candidate_trainings": 96,
+      "selected_PINN_refits": 60,
+      "total_PINN_trainings": 156,
+      "expected_active_search_and_refits_GPU_h": 598.5948821526368,
+      "expected_proposal_GPU_h_included": 0.7308771337245998,
+      "expected_active_TEST_GPU_h": 2.3802285244279773,
+      "expected_reserved_total_GPU_h": 632.3735126206536,
+      "proposed_6h30_per_training_job_cap_plus_TEST_reserve_GPU_h": 1020.0,
+      "cap_is_proposal_not_enqueued": true
+    },
+    "scope": "All NEW independent search blocks. Five fresh refit seeds per block, paired across methods but not reused across blocks. Old five not pooled into primary confirmation."
+  },
+  "no_new_GPU_training_launched": true
+}

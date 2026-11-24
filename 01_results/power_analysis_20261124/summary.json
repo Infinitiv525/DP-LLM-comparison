@@ -1,0 +1,51 @@
+{
+  "status": "LLM_PROSPECTIVE_POWER_AND_GPU_COST_ANALYSIS_COMPLETE",
+  "methods": [
+    "qwen3_8b",
+    "ministral3_8b",
+    "phi4_mini",
+    "granite33_8b",
+    "Llama31_8B",
+    "tpe",
+    "random"
+  ],
+  "primary_family": "five_LLM_vs_TPE_MSE",
+  "independent_pilot_search_blocks": 5,
+  "final_refits_per_selected_configuration": 5,
+  "audited_main_training_records": 460,
+  "audited_search_method_final_models": 175,
+  "fixed_final_models_excluded_from_power": 5,
+  "primary_relative_effects_vs_TPE": [
+    0.05,
+    0.1,
+    0.2
+  ],
+  "target_power": [
+    0.8,
+    0.9
+  ],
+  "design_scenarios": 72,
+  "numeric_contrast_rows": 450,
+  "new_GPU_jobs_launched": false,
+  "GPU_used_for_analysis": false,
+  "variance_upper95_multiplier": 2.873555634078219,
+  "environment": {
+    "python": "3.12.15 (main, Oct 13 2026, 16:52:04) [GCC 15.3.0]",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "elapsed_seconds": 85.48129610414617,
+  "finished_at": "2026-11-24T19:36:28.964143+01:00",
+  "caveats": [
+    "Prospective planning for hypothetical 5/10/20% effects, never observed post-hoc power.",
+    "Only five search blocks and five shared final seeds: variance and required N uncertain.",
+    "Four LLM families repeatedly selected the common fixed candidate; future changes in selection behaviour are not identified by these data.",
+    "Gaussian crossed random effects assumed for variance planning; independent paired t power assumes Gaussian new block means.",
+    "95% variance bounds are per contrast only, not simultaneous assurance for five or fifteen contrasts.",
+    "90% target is marginal power per contrast, not 90% probability all comparisons reject.",
+    "Known fixed 200-case benchmark. More searches do not add unseen geometries.",
+    "No power guarantee that LLM is superior. More runs can confirm it is worse.",
+    "New independent confirmation does not pool the five old searches; N-5 applies only to explicitly conditional exploratory extension.",
+    "Costs are measured-runtime projections, not quotation or guaranteed final portal billing."
+  ]
+}

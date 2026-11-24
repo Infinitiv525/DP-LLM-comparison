@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/mnt/project/perun2601449/dp_llm_cfd/test/llm_power_20261124_v1/verify_power_v2.py", line 44, in <module>
+    assert power(n)>=v['target_power']-1e-10,(v,power(n))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ({'design': 'five_LLM_vs_TPE_MSE', 'method': 'ministral3_8b', 'metric': 'mse_all', 'family_size': 5, 'alpha_per_contrast': 0.01, 'target_relative_difference_vs_TPE': 0.2, 'absolute_target_difference': 4.8615702449986255e-05, 'target_power': 0.8, 'sd_scenario': 'old_final_seed_panel_conditional', 'assumed_sd': 1.3653558161625161e-05, 'required_search_pairs': 5, 'estimated_power_at_n': 0.9681897061872625, 'power_at_n_minus_1': 0.7658475407880285}, nan)

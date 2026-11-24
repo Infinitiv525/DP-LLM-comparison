@@ -1,0 +1,44 @@
+ANALÝZA ŠTATISTICKEJ SILY POROVNANIA LOKÁLNYCH LLM – 24. 11. 2026
+
+Účel
+Odhadnúť rozsah nových hľadaní konfigurácií a ich GPU cenu. Nejde o nové trénovanie, spätné prepisovanie pôvodných hypotéz ani dôkaz dosiahnutej sily. Pôvodné výsledky ostávajú bezo zmeny. Analýza používa iba CPU, uložené číselné výsledky a časové záznamy.
+
+Čo je jedno hľadanie
+Pre jednu metódu: osem kandidátov vrátane spoločného štartu, výber pomocou VAL, päť nových tréningov vybranej konfigurácie a ich TEST vyhodnotenie. Teda 13 tréningov PINN, nie jeden. LLM sa netrénuje. Jeho generovanie, načítanie a opravy sú zahrnuté v uloženom čase návrhov. Každý tréning má pôvodných 400 epoch cez všetkých 640 TRAIN prípadov. VAL 160, TEST 200.
+
+Porovnania a hypotetické efekty
+Hlavný plán: päť LLM rodín proti TPE, hlavná metrika pôvodná priemerná all-cell MSE. Dvojstranné testy, rodinná chyba 0,05, konzervatívne alpha 0,05/5 na kontrast. To je postačujúca plánovacia hranica aj pre neskorší Holm postup.
+Zvažované rozdiely 5 %, 10 % a 20 % priemernej chyby TPE; nepoužívajú sa pozorované rozdiely ako plánovaný efekt. Sila 80 % a 90 % na jednotlivé porovnanie, nie pravdepodobnosť spoločného zamietnutia všetkých hypotéz.
+Samostatné citlivosti: všetky tri chybové metriky (15 kontrastov), pôvodné štyri rodiny (4 kontrasty), samostatný Ministral proti TPE (dodatočne vybraná možnosť, nie pôvodná primárna hypotéza). Čas pod 5 ms zostáva samostatný meraný výsledok; túto analýzu nechápeme ako silu testu latencie.
+
+Nezávislé jednotky a záverečné semená
+V pôvodnom experimente bolo päť hľadaní a tá istá päťčlenná sada finálnych tréningových semien použitá pri každom hľadaní aj metóde. Preto 25 checkpointov nie je 25 nezávislých hľadaní a ani päť riadkových priemerov neobsahuje celú neistotu nových tréningových semien.
+Plán nezávislého potvrdenia používa úplne nové hľadania. Každý blok má päť čerstvých finálnych semien, spoločných pre porovnávané metódy v bloku, ale odlišných medzi blokmi; nové generovacie, vyhľadávacie a tréningové semená. Pôvodných päť hľadaní je pilot a do primárneho nového potvrdenia sa nepočíta. Spoločná nová sada TPE sa zdieľa medzi piatimi porovnaniami a platí iba raz.
+
+Model variability
+D[r,k] = priemerná TEST chyba LLM mínus TPE pri hľadaní r a finálnom semene k; najprv priemer 200 prípadov.
+Pracovný krížený model: D = mu + A_r + B_k + E_rk s nezávislými normálnymi náhodnými zložkami. Pri R=K=5 je rozptyl riadkových priemerov V_R odhadom A + E/5, rozptyl stĺpcových priemerov V_C odhadom B + E/5. Nový nezávislý blok s piatimi semienkami má rozptyl A + B/5 + E/5.
+Použitá bodová plánovacia aproximácia V_R + V_C/5 má očakávanie A + B/5 + E/5 + E/25; nevyhlasuje sa za exaktný nezaujatý odhad ani za garantovanú hornú hranicu zo vzorky. Výstup obsahuje aj ANOVA momentové zložky vrátane záporných surových odhadov.
+Opatrnejšia citlivosť nahradí V_R aj V_C ich jednostrannou 97,5 % hornou normálnou chí-kvadrát hranicou; Bonferroni dá aspoň 95 % spoločné pokrytie týchto dvoch rozptylov pre jeden kontrast za daného normálneho modelu. Nejde o simultánne 95 % pokrytie všetkých kontrastov ani záruku sily z reálnych dát. Päť hľadaní a diskrétne vyberané konfigurácie tento model spoľahlivo neoveria.
+
+Výpočet N
+Pre zvolený hypotetický rozdiel a plánovacie SD sa používa necentrálne t rozdelenie: df=N-1, necentralita=delta*sqrt(N)/SD, obojstranná kritická hodnota. Hľadá sa najmenšie celé N dosahujúce cieľ. Nezávislá numerická integrácia definičnej normálnej/chí-kvadrát zmesi kontroluje N aj N-1; Monte Carlo overuje normálny model a samostatne diagnostikuje citlivosť na šikmosť a ťažké chvosty.
+Aj N potrebné iba na rozlíšenie exaktného znamienkového/permutation p sa uvádza oddelene; nie je to záruka sily a znamienkové permutácie vyžadujú príslušnú symetriu.
+
+Pôvodné semená a rozšírenie
+Osobitný lacnejší výpočet N-5 platí výlučne pri zachovaní presne pôvodnej päťčlennej sady finálnych semien a podmienenom závere o nej. Také doplnenie je exploratívne a nenahrádza nový nezávislý experiment s neistotou tréningu. Nedá sa automaticky odpočítať starých päť od nezávislého plánu a tvrdiť rovnakú silu.
+
+Scenáre a geometrie
+Hlavná sila je podmienená tým istým pevným TEST benchmarkom. Uvádza sa diagnostický model search×geometry s 85 geometriami, s pôvodným panelom tréningových semien pevným; viac hľadaní nevyrobí nové geometrie. Z toho nevyplýva tvrdenie o nevidených geometriách. Pôvodné krížené bootstrap intervaly sa nemenia.
+
+Cena
+Kontrola všetkých 460 hlavných tréningov, ich časov, pokrytia 640 TRAIN a 160 VAL, a 175 relevantných finálnych TEST modelov (ďalších 5 fixed modelov sa používa len na úplnosť TEST rezervácií). Presné vstupné súbory a SHA sú v input_manifest.json.
+Očakávaná cena vychádza z aktívnych GPU okien úloh vrátane návrhov, z nameranej pooled rezervácie šiestich pôvodných Slurm úloh a z TEST rezervácií. Rozdiel nečinných koncov spoločných úloh nemožno presne priradiť k rodine; spoločný pomer je transparentná kalibrácia. Llama používala samostatné úlohy; uplatnenie pôvodného pool pomeru je len plánovacia rezerva, nie jej skutočné účtovanie.
+Uvádza sa aj návrh maximálneho rozpočtu: 13 individuálnych úloh po 6,5 GPU-h + 0,5 GPU-h rezerva TEST na hľadanie = 85 GPU-h. Je to navrhnutý limit prípadných nových úloh, žiadne neboli odoslané. Výpočet nie je garancia konečného účtovania portálom.
+Ak sa zmení prompt, priestor parametrov, počet kandidátov, počet finálnych tréningov alebo PINN, ide o odlišný experiment a tento odhad variability sa naň automaticky neprenáša. Výsledok nesľubuje, že viac hľadaní prinesie výhodu LLM; môže potvrdiť horší výsledok.
+
+Zdroje metodiky
+https://www.statsmodels.org/stable/generated/statsmodels.stats.power.TTestPower.solve_power.html
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nct.html
+https://www.itl.nist.gov/div898/handbook/ppc/section2/ppc232.htm
+https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/sdconfli.htm

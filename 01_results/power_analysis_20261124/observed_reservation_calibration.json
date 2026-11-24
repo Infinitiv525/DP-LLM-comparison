@@ -1,0 +1,92 @@
+{
+  "old395_reserved_GPU_h": 1588.1266666666666,
+  "old395_active_task_GPU_h": 1509.071181614465,
+  "old_pool_overhead_factor": 1.0523868496167454,
+  "old6_jobs": [
+    {
+      "job": "143342",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "runtime_seconds": 114100,
+      "cpu_count": 32,
+      "gpu_count": 8,
+      "allocated_core_seconds": 3651200,
+      "allocated_gpu_seconds": 912800,
+      "peak_memory_unknown": true,
+      "raw_query_sha256": "1bd9f69796b678853708820592e48b2e2785a1760833d5fca301ea09e21e42b4"
+    },
+    {
+      "job": "143656",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "runtime_seconds": 119882,
+      "cpu_count": 32,
+      "gpu_count": 8,
+      "allocated_core_seconds": 3836224,
+      "allocated_gpu_seconds": 959056,
+      "peak_memory_unknown": true,
+      "raw_query_sha256": "1b3e4816e202bf8b9a0fd325373015219ef55d1f80855727cb433097eb320fb2"
+    },
+    {
+      "job": "143684",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "runtime_seconds": 119137,
+      "cpu_count": 32,
+      "gpu_count": 8,
+      "allocated_core_seconds": 3812384,
+      "allocated_gpu_seconds": 953096,
+      "peak_memory_unknown": true,
+      "raw_query_sha256": "2266d7991542a068c63641dea5fe379d5e7a7c5f8a82d520e1418f4bc3f33d35"
+    },
+    {
+      "job": "144649",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "runtime_seconds": 119699,
+      "cpu_count": 32,
+      "gpu_count": 8,
+      "allocated_core_seconds": 3830368,
+      "allocated_gpu_seconds": 957592,
+      "peak_memory_unknown": true,
+      "raw_query_sha256": "451c6800751bb71f47b94a306a290bb6975dcf354a9948df9a9354b675b48102"
+    },
+    {
+      "job": "145176",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "runtime_seconds": 113580,
+      "cpu_count": 64,
+      "gpu_count": 16,
+      "allocated_core_seconds": 7269120,
+      "allocated_gpu_seconds": 1817280,
+      "peak_memory_unknown": true,
+      "raw_query_sha256": "4cc36d0186a17ff0c53d623f08fbd05f0c164f68963a307a09e72fdda21d549b"
+    },
+    {
+      "job": "145597",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "runtime_seconds": 14679,
+      "cpu_count": 32,
+      "gpu_count": 8,
+      "allocated_core_seconds": 469728,
+      "allocated_gpu_seconds": 117432,
+      "peak_memory_unknown": true,
+      "raw_query_sha256": "b68ac7933c446a78636df387b4005d6af78597b2fa826c7ab5a4f01bf413fde3"
+    }
+  ],
+  "TEST": {
+    "original": {
+      "reserved_GPU_h": 6.2444444444444445,
+      "active_model_GPU_h": 6.141489241461516,
+      "scheduler_overhead_factor": 1.01676388233132
+    },
+    "llama": {
+      "reserved_GPU_h": 1.1644444444444444,
+      "active_model_GPU_h": 1.0120098145314518,
+      "scheduler_overhead_factor": 1.1506256438664757
+    }
+  },
+  "note": "No direct per-method allocation billing in pooled jobs; active GPU windows assigned by task and idle calibration shared. New individual jobs avoid old idle pool tails."
+}

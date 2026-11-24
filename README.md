@@ -106,3 +106,9 @@ Pôvodné kontrasty sa nemenia. Llama zostáva označená ako dodatočná kohort
 Dodatočný audit skontroloval175 pôvodných LLM odpovedí,325 tréningových výstupov,125 finálnych checkpointov a15 natívnych tokenizerových/gramatických skúšok. Nenašla sa zámena modelov ani prepísanie parametrov. **Rovnakú konfiguráciu vybral validačný program; Qwen/Llama pritom skúšali aj iné návrhy, Phi/Granite opakovali štart.** Párované semená a rovnaký postup viedli k rovnakým váham podľa semena.
 
 [Čitateľný výsledok auditu](03_methodology/configuration_identity_audit_20261123/OVERENIE_ZHODY.txt) · [Podrobné číselné dôkazy](01_results/configuration_identity_audit_20261123)
+
+## Analýza sily ďalších LLM hľadaní — 24. novembra 2026
+
+[Čitateľný výsledok a GPU náklady](01_results/power_analysis_20261124/VYSLEDKY.txt) · [Úplné číselné varianty](01_results/power_analysis_20261124/sample_size_designs.json) · [Protokol](03_methodology/power_analysis_20261124/protokol.txt).
+
+Doplňujúca CPU analýza plánuje nové nezávislé hľadania piatich LLM proti TPE. Rozlišuje neistotu výberu konfigurácie a finálnych tréningových semien; starých päť hľadaní nepočíta do nového potvrdenia. Uvádza modelový odhad aj opatrnejšiu rozptylovú citlivosť. Žiadne nové GPU experimenty sa týmto nespustili.

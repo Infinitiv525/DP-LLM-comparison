@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/mnt/project/perun2601449/dp_llm_cfd/test/llm_power_20261124_v1/power_analysis.py", line 311, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);main(p.parse_args().output)
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/project/perun2601449/dp_llm_cfd/test/llm_power_20261124_v1/power_analysis.py", line 185, in main
+    c,costs,geometry=collect(out);means=c.mean((1,2,3));m=c.mean(3);ti=METHODS.index('tpe')
+                     ^^^^^^^^^^^^
+  File "/mnt/project/perun2601449/dp_llm_cfd/test/llm_power_20261124_v1/power_analysis.py", line 92, in collect
+    assert query['returncode']==0 and hashlib.sha256(query['stdout'].encode()).hexdigest()==d['raw_query_sha256']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
